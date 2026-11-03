@@ -1,349 +1,1136 @@
 {
-  "assets": {
-    "captured": [
-      {
-        "classification": "optional",
-        "local_path": "assets/f532925fb08da239.gif",
-        "sha256": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
-        "source": "https://analytics.ietf.org/matomo.php?idsite=7"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/87884d342e123681.woff",
-        "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.019ba25e.woff"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/6ab390d979ae3711.woff2",
-        "sha256": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.dc6e4a26.woff2"
-      },
-      {
-        "classification": "critical",
-        "local_path": "assets/039e6b96a3ff7285.css",
-        "sha256": "1774a4f2afe751b1b1d1448112fb693f6fec0cf498e610cde75996013b6a757c",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/css/ietf.css"
-      },
-      {
-        "classification": "critical",
-        "local_path": "assets/1883f653a6f5a08b.css",
-        "sha256": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/css/select2.css"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/4213d31c0bd25b11.png",
-        "sha256": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-16.png"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/8d512a6ac3db2665.png",
-        "sha256": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-180.png"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/df64f6065a47862f.png",
-        "sha256": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-32.png"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/1be32e0be699d849.svg",
-        "sha256": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-mask.svg"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/74bc946c84c8cf4b.svg",
-        "sha256": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-white.svg"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/d4963924b6b4256e.svg",
-        "sha256": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
-        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor.svg"
-      },
-      {
-        "classification": "critical",
-        "local_path": "assets/291c297d6baad8bf.css",
-        "sha256": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
-        "source": "https://static.ietf.org/fonts/inter/import.css"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/014af5d11684e452.woff2",
-        "sha256": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
-        "source": "https://static.ietf.org/fonts/inter/inter-cyrillic-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/d3a725cb4810d0e7.woff2",
-        "sha256": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
-        "source": "https://static.ietf.org/fonts/inter/inter-cyrillic.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/b37e2da88d7283b5.woff2",
-        "sha256": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
-        "source": "https://static.ietf.org/fonts/inter/inter-greek-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/27f6b4e2c219be75.woff2",
-        "sha256": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
-        "source": "https://static.ietf.org/fonts/inter/inter-greek.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/93e8c6293d2f7670.woff2",
-        "sha256": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
-        "source": "https://static.ietf.org/fonts/inter/inter-latin-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/7f6da73d531784d3.woff2",
-        "sha256": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
-        "source": "https://static.ietf.org/fonts/inter/inter-latin.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/b65651088b1c8cd1.woff2",
-        "sha256": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
-        "source": "https://static.ietf.org/fonts/inter/inter-vietnamese.woff2"
-      },
-      {
-        "classification": "critical",
-        "local_path": "assets/d3dff33b5b11f2a5.css",
-        "sha256": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/import.css"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/16a945e4301b94df.woff2",
-        "sha256": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/a2eee5530bf32ed5.woff2",
-        "sha256": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/3a24e04966bec07d.woff2",
-        "sha256": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/bdc7a9c237186021.woff2",
-        "sha256": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/80921d3f0743cbb6.woff2",
-        "sha256": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin-ext.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/a0e410c0f7e3dc19.woff2",
-        "sha256": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin.woff2"
-      },
-      {
-        "classification": "optional",
-        "local_path": "assets/5e3727118774e143.woff2",
-        "sha256": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
-        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-vietnamese.woff2"
-      }
-    ],
-    "missing_optional": []
-  },
-  "browser_metrics": {
-    "desktop-1440x900": {
-      "brokenImages": [],
-      "clippedText": 0,
-      "horizontalOverflow": false
-    },
-    "narrow-390x844": {
-      "brokenImages": [],
-      "clippedText": 0,
-      "horizontalOverflow": false
-    }
-  },
-  "capture": {
-    "captured_at": "2026-10-31T06:21:32Z",
-    "final_url": "https://datatracker.ietf.org/doc/rfc6749/",
-    "requested_url": "https://datatracker.ietf.org/doc/rfc6749/"
-  },
-  "capture_metadata": {
-    "asset_map": {
-      "https://analytics.ietf.org/matomo.php?idsite=7": "assets/f532925fb08da239.gif",
-      "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.019ba25e.woff": "assets/87884d342e123681.woff",
-      "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.dc6e4a26.woff2": "assets/6ab390d979ae3711.woff2",
-      "https://static.ietf.org/dt/12.82.1/ietf/css/ietf.css": "assets/039e6b96a3ff7285.css",
-      "https://static.ietf.org/dt/12.82.1/ietf/css/select2.css": "assets/1883f653a6f5a08b.css",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-16.png": "assets/4213d31c0bd25b11.png",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-180.png": "assets/8d512a6ac3db2665.png",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-32.png": "assets/df64f6065a47862f.png",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-mask.svg": "assets/1be32e0be699d849.svg",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-white.svg": "assets/74bc946c84c8cf4b.svg",
-      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor.svg": "assets/d4963924b6b4256e.svg",
-      "https://static.ietf.org/fonts/inter/import.css": "assets/291c297d6baad8bf.css",
-      "https://static.ietf.org/fonts/inter/inter-cyrillic-ext.woff2": "assets/014af5d11684e452.woff2",
-      "https://static.ietf.org/fonts/inter/inter-cyrillic.woff2": "assets/d3a725cb4810d0e7.woff2",
-      "https://static.ietf.org/fonts/inter/inter-greek-ext.woff2": "assets/b37e2da88d7283b5.woff2",
-      "https://static.ietf.org/fonts/inter/inter-greek.woff2": "assets/27f6b4e2c219be75.woff2",
-      "https://static.ietf.org/fonts/inter/inter-latin-ext.woff2": "assets/93e8c6293d2f7670.woff2",
-      "https://static.ietf.org/fonts/inter/inter-latin.woff2": "assets/7f6da73d531784d3.woff2",
-      "https://static.ietf.org/fonts/inter/inter-vietnamese.woff2": "assets/b65651088b1c8cd1.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/import.css": "assets/d3dff33b5b11f2a5.css",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic-ext.woff2": "assets/16a945e4301b94df.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic.woff2": "assets/a2eee5530bf32ed5.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek-ext.woff2": "assets/3a24e04966bec07d.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek.woff2": "assets/bdc7a9c237186021.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin-ext.woff2": "assets/80921d3f0743cbb6.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin.woff2": "assets/a0e410c0f7e3dc19.woff2",
-      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-vietnamese.woff2": "assets/5e3727118774e143.woff2"
-    },
-    "captured_at": "2026-10-31T06:21:32Z",
-    "critical_assets": [
-      "assets/039e6b96a3ff7285.css",
-      "assets/1883f653a6f5a08b.css",
-      "assets/291c297d6baad8bf.css",
-      "assets/d3dff33b5b11f2a5.css"
-    ],
-    "final_url": "https://datatracker.ietf.org/doc/rfc6749/",
-    "fingerprints": {
-      "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
-      "assets/039e6b96a3ff7285.css": "1774a4f2afe751b1b1d1448112fb693f6fec0cf498e610cde75996013b6a757c",
-      "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
-      "assets/1883f653a6f5a08b.css": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
-      "assets/1be32e0be699d849.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
-      "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
-      "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
-      "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
-      "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
-      "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
-      "assets/6ab390d979ae3711.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
-      "assets/74bc946c84c8cf4b.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
-      "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
-      "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
-      "assets/87884d342e123681.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
-      "assets/8d512a6ac3db2665.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
-      "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
-      "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
-      "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
-      "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
-      "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
-      "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
-      "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
-      "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
-      "assets/d4963924b6b4256e.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
-      "assets/df64f6065a47862f.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
-      "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
-      "source.html": "6cc7a0e87791ca5837c97c1017572a5f6604a48f318b3edbcfb9d9f23d52dd72"
-    },
-    "missing_optional_assets": [],
-    "optional_assets": [
-      "assets/014af5d11684e452.woff2",
-      "assets/16a945e4301b94df.woff2",
-      "assets/1be32e0be699d849.svg",
-      "assets/27f6b4e2c219be75.woff2",
-      "assets/3a24e04966bec07d.woff2",
-      "assets/4213d31c0bd25b11.png",
-      "assets/5e3727118774e143.woff2",
-      "assets/6ab390d979ae3711.woff2",
-      "assets/74bc946c84c8cf4b.svg",
-      "assets/7f6da73d531784d3.woff2",
-      "assets/80921d3f0743cbb6.woff2",
-      "assets/87884d342e123681.woff",
-      "assets/8d512a6ac3db2665.png",
-      "assets/93e8c6293d2f7670.woff2",
-      "assets/a0e410c0f7e3dc19.woff2",
-      "assets/a2eee5530bf32ed5.woff2",
-      "assets/b37e2da88d7283b5.woff2",
-      "assets/b65651088b1c8cd1.woff2",
-      "assets/bdc7a9c237186021.woff2",
-      "assets/d3a725cb4810d0e7.woff2",
-      "assets/d4963924b6b4256e.svg",
-      "assets/df64f6065a47862f.png",
-      "assets/f532925fb08da239.gif"
-    ],
-    "requested_url": "https://datatracker.ietf.org/doc/rfc6749/"
-  },
-  "coverage": {
-    "segments": 977,
-    "target_segments": 977,
-    "translated_segments": 977,
-    "zones": 13
-  },
-  "languages": {
-    "source": "en",
-    "target": "ko"
-  },
-  "normalization": {
-    "generated_assets": [
-      {
-        "path": "assets/wt-preformatted-14edac915a1f0158.css",
-        "sha256": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072"
-      }
-    ],
-    "policy": "prose-reflow-literals-preserved",
-    "preserved_blocks": 1010,
-    "preserved_reasons": {
-      "blank": 806,
-      "literal-code": 46,
-      "literal-diagram": 6,
-      "literal-layout": 152
-    },
-    "projection_sha256": "b9556c990f0450ff5589e1a86f7b15e70cea8c73118b71eee41613d1804f2b19",
-    "review_sha256": "7d05c14db294951b32605357caacfa494682ee7cacc7950f0b6f4db8997ff260",
-    "schema_version": "1.0",
-    "source_sha256": "6cc7a0e87791ca5837c97c1017572a5f6604a48f318b3edbcfb9d9f23d52dd72",
-    "translated_blocks": 839,
-    "unknown_blocks": 0
-  },
-  "qa_status": "passed",
-  "required_findings": [],
-  "retries": {
-    "zone-001": 2,
-    "zone-002": 0,
-    "zone-003": 0,
-    "zone-004": 0,
-    "zone-005": 0,
-    "zone-006": 0,
-    "zone-007": 1,
-    "zone-008": 0,
-    "zone-009": 1,
-    "zone-010": 1,
-    "zone-011": 1,
-    "zone-012": 0,
-    "zone-013": 2
-  },
   "schema_version": "1.0",
-  "screenshots": [],
-  "source_url": "https://datatracker.ietf.org/doc/rfc6749/",
-  "terminology_policy": {
-    "id": "english-technical-first-use-ko-gloss",
-    "version": "1.0"
-  },
+  "format": "reviewed-reading-edition",
   "tool": {
     "name": "supertranslator",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
-  "warnings": [],
+  "source_url": "https://datatracker.ietf.org/doc/rfc6749/",
+  "qa_status": "passed",
+  "input_html_sha256": "66e8eeabf5a2b37191a41acbc7dcddd225309d2d1cfc5a8b241487ebed7dc044",
+  "input_manifest_sha256": "67d36e95de7aa83f700471bfc7fe8e556e01c7dce5432e3b44897648065f9e33",
+  "reader_review_sha256": "08ea229e742bc5af78b66eacd5c655f4ed60c1f41b9db2a3f765002371047030",
+  "html_sha256": "b65125b57daa8cfce5037d88b07a2b88a484363b97e4e663b3b8971f019f437d",
+  "article_sha256": "64a7b5c0d8e40913b5e8d3a65046d585c87227a25ede9e2b58b487318aeb8a43",
+  "stylesheet_sha256": "f790490ac93c2fbc771ce2c958cb60d2145fcd82c6aa64c531bbd2fc5ddcebaf",
+  "asset_sha256": {
+    "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+    "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+    "assets/d4963924b6b4256e.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+    "assets/1883f653a6f5a08b.css": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
+    "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+    "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+    "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+    "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+    "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+    "assets/039e6b96a3ff7285.css": "1774a4f2afe751b1b1d1448112fb693f6fec0cf498e610cde75996013b6a757c",
+    "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+    "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+    "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+    "assets/reader.css": "f790490ac93c2fbc771ce2c958cb60d2145fcd82c6aa64c531bbd2fc5ddcebaf",
+    "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+    "assets/1be32e0be699d849.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+    "assets/wt-preformatted-14edac915a1f0158.css": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072",
+    "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+    "assets/8d512a6ac3db2665.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+    "assets/87884d342e123681.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
+    "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+    "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+    "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+    "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+    "assets/df64f6065a47862f.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+    "assets/6ab390d979ae3711.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+    "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+    "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+    "assets/74bc946c84c8cf4b.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024"
+  },
+  "transformations": {
+    "removals": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+        "text_sha256": "b4499ee56ff9fd83c67a3ebde9b536b1ae7a2445ddad08c45ba6f3c1232750b6",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000023\"]",
+        "text_sha256": "8fb7d2fd38b1afc5ae7f0624c17ebf8961aabeaf06b6d2f8f18bf34e3dbea489",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000024\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000075\"]",
+        "text_sha256": "b76dbf4e30d06305f69ad271beb8e82de5ed7dd9083ab87c7092f89c38aa41c2",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000076\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000124\"]",
+        "text_sha256": "9e29d6e98d4b596e3b4974481b01feb3bc8ab3857dd1678810b322d8bdc7a480",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000125\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000161\"]",
+        "text_sha256": "836d591ea0489f12922e30958a68211a35a9a80b9e572e87208d6e562edb519c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000162\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000176\"]",
+        "text_sha256": "ae5ead11b30cac6d2e9abd65cc9df2c5e4b0dde40fe5c6cd4827912f2a46a277",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000177\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000193\"]",
+        "text_sha256": "ea8d18d8e636ce0b9ab70ca8973541784671252a0ad860240b541c86897fbfb6",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000194\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000212\"]",
+        "text_sha256": "7c5192e08c69a9efb379ee556873fefe84a4528db7acb8667a8d0a6513de627b",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000213\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000237\"]",
+        "text_sha256": "689e400199ab8e4e035222f4a307973472f49ddcbcbefd1cc4545cf15088430d",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000238\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000256\"]",
+        "text_sha256": "5ec63edd9d71d8931a95c627e040613777c9270b8ad4b0326011bba7d4f6e3d8",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000257\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000275\"]",
+        "text_sha256": "e1a82242d8c6bef2dcbdd9f36dd526f22cb4b18751f4a2af596538788283e815",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000276\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000298\"]",
+        "text_sha256": "d02bae92334acc89d4aa36db1adecd07ec53c7e0543ca0efb9452eca4103029e",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000299\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000323\"]",
+        "text_sha256": "8f012795d634a3b6035f6d663b71d6bed04d49a51740f60a5a0747a3769808eb",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000324\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000346\"]",
+        "text_sha256": "eece243690255275e603c3420b1f260fb73457f3bd6d6a2471a86bde5d80dc42",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000347\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000369\"]",
+        "text_sha256": "fb89fed0a68c5bbf3d566a42503a9450da5e137064b5a79105903e4987c30fff",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000370\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000386\"]",
+        "text_sha256": "e6074af74d87c48d2a38ec89fa4b779fe6d5baddc1c9b7d529b02a2534b1af71",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000387\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000413\"]",
+        "text_sha256": "48ed3c96203eedbb562f26836c645b93105c1f10c0fda87907d2ecc08374155b",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000414\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000434\"]",
+        "text_sha256": "d1b74bbf6a630a6f985a74077ad458cdf77b8267af30a74b87c9fc4605544621",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000435\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000463\"]",
+        "text_sha256": "23331fe32ac51479b674de8c759a7a8d289a542a75c6cfad87576f3fe4e9e6f0",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000464\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000484\"]",
+        "text_sha256": "c475f7a65d4da67f8e81e38f50fd4e4d8298faae4f552f6646758b466465dc05",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000485\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000509\"]",
+        "text_sha256": "b650107dc42689aa5237e247421babbeee8d664c82749cbed134ce264524480f",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000510\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000532\"]",
+        "text_sha256": "16f3b87c6abeaff8c29b2d5dfedf8813f6d637649b142c5134076e047559e3e3",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000533\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000555\"]",
+        "text_sha256": "9e882a4ebbb8c2e068f3fffdae5828f432b8762b4dc74b09143d10b1d4cecb9e",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000556\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000576\"]",
+        "text_sha256": "1054166d803f315a7d3adc48fc1ca74625435181b7de3458c48a0c1b81697c11",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000577\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000589\"]",
+        "text_sha256": "02166a0232341c8b4ffc59f5afa405eee7f2b254b1374e345c429b2701ae0fd5",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000590\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000614\"]",
+        "text_sha256": "df420234beed9ad5850026e5d5b96af5e1f8e06fb726d24f2dff440c52671fd8",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000615\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000637\"]",
+        "text_sha256": "befee9b93adf03ce7f61f17bb3ae54549749e4357944577e81ea2969a63eac29",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000638\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000660\"]",
+        "text_sha256": "286f0d800441329c701266c4492bdd927dba663177072b402f0f5872d111eecb",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000661\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000681\"]",
+        "text_sha256": "7d6394f3b2b186197f55b1ed5ecb4cd5b9f446a685247b34685625a84f3d56a8",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000682\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000704\"]",
+        "text_sha256": "d2cd1cd974e8833ac3680b36b8de03dba9d87d7dcb0fbff2bd87d100119f57fb",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000705\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000727\"]",
+        "text_sha256": "7e2d0f15e15c3e6ceb780ac57c41b1c70f40cb4dd6b4df6679cccb9ec5fc2365",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000728\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000744\"]",
+        "text_sha256": "8db78cd33008c1778910aa3866c1030ab85576a87678875227787c9c7f222c91",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000745\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000753\"]",
+        "text_sha256": "a89853f5758a4c8e4d2fc2c5048a20f5197a0a7f5d3619a147b571892e006140",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000754\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000782\"]",
+        "text_sha256": "da9ef0554d33c33fc19a907c63014096c06161634d0a6e3c67196aa94d9b5844",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000783\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000803\"]",
+        "text_sha256": "9966af1dbfba9f80055b3f44739d18c462f54714b1ebd280f8c54dc9dcc0228c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000804\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000828\"]",
+        "text_sha256": "0e9d131869bfa1373be99c4afb4787bdb7bae4f19238be11c2ced8b4fb651121",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000829\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000851\"]",
+        "text_sha256": "d2628ce5a410f3f3ebe75fb0d9ebbb91f7f1942bdac1079b42d3e8b7a17af437",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000852\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000874\"]",
+        "text_sha256": "d9e177cd30e846d1255e0e687bcc36d2c603f05ad2bcbc600811cf21f92cc764",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000875\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000893\"]",
+        "text_sha256": "3b86b76fc1c71afb28ed56442503b0723407b51415a1027592f1641fbc2e8a2b",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000894\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000918\"]",
+        "text_sha256": "81a6377fd64b7438a1375418e0ef66d9b7b51354f445f7680cf9cde03b5caeba",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000919\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000943\"]",
+        "text_sha256": "ef0d3aaa7482a91aabfb07c48457720d58890c34b3b2983e147f18cb659416ff",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000944\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000972\"]",
+        "text_sha256": "baab53cc9fa35925cfc699db6bba3c78d472a4f8625cbe47b1a18e3b7347bd71",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000973\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000993\"]",
+        "text_sha256": "597673d9455f097803786b4c9d0b6acebd648a4775e0542fde9928668ad1beb4",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000994\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001016\"]",
+        "text_sha256": "96841408cba0d7db82183669666ab0a30e4f97ee83c55715d841c418d111af6e",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001017\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001033\"]",
+        "text_sha256": "ac24cfe62ab0c0fc6da6f887cd6720f462113002151eb1c0499472c4d5785490",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001034\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001052\"]",
+        "text_sha256": "4992fe5897002c67e17db5631621bad8ae8383a3c731a7185b70702481415ffa",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001053\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001069\"]",
+        "text_sha256": "2b2b02a48ae21d8be057b21859ce4bbb9ce1a9c106402b60ffae920df43c2aee",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001070\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001089\"]",
+        "text_sha256": "b8b67ddad426dad73c5cacf94c20328621e8207e50a30aeedffd7f06c6f88220",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001090\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001110\"]",
+        "text_sha256": "9e08d61d182906babad5de4deafdafbb9cfb07488c4aa7b3143d20ecda21a364",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001111\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001135\"]",
+        "text_sha256": "e335ee6de444bb63c69d2075c26fe982b6bd39b5f70dbb94f45388c61fd54c41",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001136\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001164\"]",
+        "text_sha256": "69f4cf1d5aaeaa83fbf0f65dc5e2280510361813371b04d3c282e64543c6f72f",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001165\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001187\"]",
+        "text_sha256": "5393dedff5c927d376e0cf964b346e1c0e49910e0c54bb65059df957e9549350",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001188\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001210\"]",
+        "text_sha256": "c8bbdb01df0fc40621e9854d4b21d13b26c9fa729d5cb8104b9f91ca0a6c879c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001211\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001235\"]",
+        "text_sha256": "4198f2888fb3f368088fa10efde0c606ced1df93073c48a36e4c8e6578d278f2",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001236\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001254\"]",
+        "text_sha256": "dd45bfe83b82d06f219225b2c6b268f6de2d24fe6b77d5c4660431eee2be5b54",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001255\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001279\"]",
+        "text_sha256": "3cd784783cc41dd8d08bb727e9d0688f58ecc05e2764dd0e706120dc48138bdd",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001280\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001302\"]",
+        "text_sha256": "04e718521f5610cbda14add54d3986ef4a9ae4ef8d2dd2ff95c5e4c26053910c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001303\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001321\"]",
+        "text_sha256": "bd2b4ec4daf08f85a10010eb138a027383da9b3476a364ad8d25d9c70b0b6508",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001322\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001348\"]",
+        "text_sha256": "7ef287655dc4f404e0f29951722530c1cbb070d9d6b0e691099782e628c5a504",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001349\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001367\"]",
+        "text_sha256": "4478b2c940c108e45cdee25a7a8ad87a6cd9f2c598002891d350dad32bc3282d",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001368\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001388\"]",
+        "text_sha256": "bb1959ba167b8c2836a201c8f6d14af10b2922dca7129bc59f6c0bb800687b76",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001389\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001409\"]",
+        "text_sha256": "7b470e6d8be39a12fd73febe5caf852a29a3ceb9796661080d27022f7ae23f7a",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001410\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001436\"]",
+        "text_sha256": "80441fb84eef0c0f5d6d6c374ece65b63fdcc138db5b5063fdb2352c44d1a7d0",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001437\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001461\"]",
+        "text_sha256": "702b4db2383c7655c3755e999fceb9b2236ecdfb8672b9c16b06ba29f194366f",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001462\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001505\"]",
+        "text_sha256": "1b85f2bd99a12fc16627ea825ed8b541055665a499d81a0f9daac32f13fa6bed",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001506\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001553\"]",
+        "text_sha256": "2c59a4cfc138915dc9d5cf16c1f69c6867d3f442554d6a688333f8cf67c87614",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001554\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001576\"]",
+        "text_sha256": "5d3cee1f1a2ca742c72b134088095f535291149be452a76f3ec97caea506969c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001577\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001603\"]",
+        "text_sha256": "1b31e1049f5657f44778c92025e56e37d0fe2bcc0709e8181ca86566b322d09e",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001604\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001630\"]",
+        "text_sha256": "cbdcc6266932368708927f152058d5fe15e47d5dd7fa4205fd90bc94452c59ef",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001631\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001657\"]",
+        "text_sha256": "cba482e9ba28e1d7f042f64d5fc9e94ac4b8b7298d4a08107ac5513e0d39b6b8",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001658\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001674\"]",
+        "text_sha256": "743b1e011412478b60fe499b14a758291fbfe52a240cc3ba280d18e75dfacf45",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001675\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001707\"]",
+        "text_sha256": "808b2080cb86ccc867dc51a56a9ef1d3aa22a3f6c70a4d0da61df41f92ca372b",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001708\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001746\"]",
+        "text_sha256": "9d9a9eddebfedd7f87d315061b6171ac3db3a26b72d4ef708b366ee5385c1a8f",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001747\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001791\"]",
+        "text_sha256": "919ba4ec7446e8b615a1a8a227194994fa475554aa5c0e999868428fba7aeb5c",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001792\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001822\"]",
+        "text_sha256": "f08d3ee79759e043f56f5f0a556a812dd167a7a18a393969dafcd8db4c10e509",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001823\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001837\"]",
+        "text_sha256": "907ebeb8a436424527775831e02913b368af8220888962d125a59869b31f5446",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001838\"]",
+        "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-001848\"]",
+        "text_sha256": "b8f89c512c141f67c1d2d1cda818df265091f198856a3e622003bd9cd711fd85",
+        "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+      }
+    ],
+    "joins": [
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000235\"]",
+          "[data-wt-preformatted-block=\"block-000240\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000273\"]",
+          "[data-wt-preformatted-block=\"block-000278\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000321\"]",
+          "[data-wt-preformatted-block=\"block-000326\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000635\"]",
+          "[data-wt-preformatted-block=\"block-000640\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000872\"]",
+          "[data-wt-preformatted-block=\"block-000877\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-001208\"]",
+          "[data-wt-preformatted-block=\"block-001213\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-001277\"]",
+          "[data-wt-preformatted-block=\"block-001282\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-001300\"]",
+          "[data-wt-preformatted-block=\"block-001305\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-001386\"]",
+          "[data-wt-preformatted-block=\"block-001391\"]"
+        ]
+      }
+    ],
+    "heading_levels": {
+      "[data-wt-preformatted-block=\"block-000003\"]": 1,
+      "[data-wt-preformatted-block=\"block-000005\"]": 2,
+      "[data-wt-preformatted-block=\"block-000009\"]": 2,
+      "[data-wt-preformatted-block=\"block-000017\"]": 2,
+      "[data-wt-preformatted-block=\"block-000026\"]": 2,
+      "[data-wt-preformatted-block=\"block-000149\"]": 2,
+      "[data-wt-preformatted-block=\"block-000179\"]": 3,
+      "[data-wt-preformatted-block=\"block-000196\"]": 3,
+      "[data-wt-preformatted-block=\"block-000221\"]": 3,
+      "[data-wt-preformatted-block=\"block-000225\"]": 4,
+      "[data-wt-preformatted-block=\"block-000233\"]": 4,
+      "[data-wt-preformatted-block=\"block-000246\"]": 4,
+      "[data-wt-preformatted-block=\"block-000252\"]": 4,
+      "[data-wt-preformatted-block=\"block-000259\"]": 3,
+      "[data-wt-preformatted-block=\"block-000269\"]": 3,
+      "[data-wt-preformatted-block=\"block-000307\"]": 3,
+      "[data-wt-preformatted-block=\"block-000313\"]": 3,
+      "[data-wt-preformatted-block=\"block-000317\"]": 3,
+      "[data-wt-preformatted-block=\"block-000330\"]": 3,
+      "[data-wt-preformatted-block=\"block-000340\"]": 2,
+      "[data-wt-preformatted-block=\"block-000357\"]": 3,
+      "[data-wt-preformatted-block=\"block-000380\"]": 3,
+      "[data-wt-preformatted-block=\"block-000389\"]": 3,
+      "[data-wt-preformatted-block=\"block-000399\"]": 4,
+      "[data-wt-preformatted-block=\"block-000426\"]": 4,
+      "[data-wt-preformatted-block=\"block-000430\"]": 3,
+      "[data-wt-preformatted-block=\"block-000437\"]": 2,
+      "[data-wt-preformatted-block=\"block-000451\"]": 3,
+      "[data-wt-preformatted-block=\"block-000468\"]": 4,
+      "[data-wt-preformatted-block=\"block-000478\"]": 4,
+      "[data-wt-preformatted-block=\"block-000487\"]": 5,
+      "[data-wt-preformatted-block=\"block-000493\"]": 5,
+      "[data-wt-preformatted-block=\"block-000512\"]": 5,
+      "[data-wt-preformatted-block=\"block-000518\"]": 5,
+      "[data-wt-preformatted-block=\"block-000522\"]": 5,
+      "[data-wt-preformatted-block=\"block-000528\"]": 3,
+      "[data-wt-preformatted-block=\"block-000545\"]": 4,
+      "[data-wt-preformatted-block=\"block-000560\"]": 3,
+      "[data-wt-preformatted-block=\"block-000572\"]": 2,
+      "[data-wt-preformatted-block=\"block-000579\"]": 3,
+      "[data-wt-preformatted-block=\"block-000604\"]": 4,
+      "[data-wt-preformatted-block=\"block-000631\"]": 4,
+      "[data-wt-preformatted-block=\"block-000650\"]": 5,
+      "[data-wt-preformatted-block=\"block-000690\"]": 4,
+      "[data-wt-preformatted-block=\"block-000723\"]": 4,
+      "[data-wt-preformatted-block=\"block-000734\"]": 3,
+      "[data-wt-preformatted-block=\"block-000774\"]": 4,
+      "[data-wt-preformatted-block=\"block-000806\"]": 4,
+      "[data-wt-preformatted-block=\"block-000833\"]": 5,
+      "[data-wt-preformatted-block=\"block-000870\"]": 3,
+      "[data-wt-preformatted-block=\"block-000896\"]": 4,
+      "[data-wt-preformatted-block=\"block-000900\"]": 4,
+      "[data-wt-preformatted-block=\"block-000931\"]": 4,
+      "[data-wt-preformatted-block=\"block-000939\"]": 3,
+      "[data-wt-preformatted-block=\"block-000958\"]": 4,
+      "[data-wt-preformatted-block=\"block-000962\"]": 4,
+      "[data-wt-preformatted-block=\"block-000981\"]": 4,
+      "[data-wt-preformatted-block=\"block-000989\"]": 3,
+      "[data-wt-preformatted-block=\"block-001002\"]": 2,
+      "[data-wt-preformatted-block=\"block-001006\"]": 3,
+      "[data-wt-preformatted-block=\"block-001036\"]": 3,
+      "[data-wt-preformatted-block=\"block-001072\"]": 2,
+      "[data-wt-preformatted-block=\"block-001104\"]": 2,
+      "[data-wt-preformatted-block=\"block-001113\"]": 3,
+      "[data-wt-preformatted-block=\"block-001129\"]": 3,
+      "[data-wt-preformatted-block=\"block-001144\"]": 2,
+      "[data-wt-preformatted-block=\"block-001146\"]": 3,
+      "[data-wt-preformatted-block=\"block-001156\"]": 3,
+      "[data-wt-preformatted-block=\"block-001169\"]": 3,
+      "[data-wt-preformatted-block=\"block-001173\"]": 3,
+      "[data-wt-preformatted-block=\"block-001183\"]": 3,
+      "[data-wt-preformatted-block=\"block-001196\"]": 2,
+      "[data-wt-preformatted-block=\"block-001225\"]": 2,
+      "[data-wt-preformatted-block=\"block-001231\"]": 3,
+      "[data-wt-preformatted-block=\"block-001244\"]": 3,
+      "[data-wt-preformatted-block=\"block-001257\"]": 3,
+      "[data-wt-preformatted-block=\"block-001269\"]": 3,
+      "[data-wt-preformatted-block=\"block-001286\"]": 3,
+      "[data-wt-preformatted-block=\"block-001296\"]": 3,
+      "[data-wt-preformatted-block=\"block-001311\"]": 3,
+      "[data-wt-preformatted-block=\"block-001324\"]": 3,
+      "[data-wt-preformatted-block=\"block-001330\"]": 3,
+      "[data-wt-preformatted-block=\"block-001334\"]": 3,
+      "[data-wt-preformatted-block=\"block-001342\"]": 3,
+      "[data-wt-preformatted-block=\"block-001353\"]": 3,
+      "[data-wt-preformatted-block=\"block-001370\"]": 3,
+      "[data-wt-preformatted-block=\"block-001376\"]": 3,
+      "[data-wt-preformatted-block=\"block-001382\"]": 3,
+      "[data-wt-preformatted-block=\"block-001393\"]": 3,
+      "[data-wt-preformatted-block=\"block-001412\"]": 2,
+      "[data-wt-preformatted-block=\"block-001414\"]": 3,
+      "[data-wt-preformatted-block=\"block-001426\"]": 4,
+      "[data-wt-preformatted-block=\"block-001441\"]": 3,
+      "[data-wt-preformatted-block=\"block-001453\"]": 4,
+      "[data-wt-preformatted-block=\"block-001466\"]": 4,
+      "[data-wt-preformatted-block=\"block-001556\"]": 3,
+      "[data-wt-preformatted-block=\"block-001568\"]": 4,
+      "[data-wt-preformatted-block=\"block-001579\"]": 4,
+      "[data-wt-preformatted-block=\"block-001591\"]": 3,
+      "[data-wt-preformatted-block=\"block-001606\"]": 4,
+      "[data-wt-preformatted-block=\"block-001618\"]": 2,
+      "[data-wt-preformatted-block=\"block-001620\"]": 3,
+      "[data-wt-preformatted-block=\"block-001660\"]": 3,
+      "[data-wt-preformatted-block=\"block-001677\"]": 2,
+      "[data-wt-preformatted-block=\"block-001689\"]": 3,
+      "[data-wt-preformatted-block=\"block-001695\"]": 3,
+      "[data-wt-preformatted-block=\"block-001701\"]": 3,
+      "[data-wt-preformatted-block=\"block-001710\"]": 3,
+      "[data-wt-preformatted-block=\"block-001716\"]": 3,
+      "[data-wt-preformatted-block=\"block-001722\"]": 3,
+      "[data-wt-preformatted-block=\"block-001728\"]": 3,
+      "[data-wt-preformatted-block=\"block-001734\"]": 3,
+      "[data-wt-preformatted-block=\"block-001740\"]": 3,
+      "[data-wt-preformatted-block=\"block-001749\"]": 3,
+      "[data-wt-preformatted-block=\"block-001755\"]": 3,
+      "[data-wt-preformatted-block=\"block-001761\"]": 3,
+      "[data-wt-preformatted-block=\"block-001767\"]": 3,
+      "[data-wt-preformatted-block=\"block-001773\"]": 3,
+      "[data-wt-preformatted-block=\"block-001779\"]": 3,
+      "[data-wt-preformatted-block=\"block-001785\"]": 3,
+      "[data-wt-preformatted-block=\"block-001794\"]": 3,
+      "[data-wt-preformatted-block=\"block-001800\"]": 3,
+      "[data-wt-preformatted-block=\"block-001806\"]": 2,
+      "[data-wt-preformatted-block=\"block-001825\"]": 2,
+      "[data-wt-preformatted-block=\"block-001842\"]": 2
+    },
+    "list_items": [
+      "[data-wt-preformatted-block=\"block-000153\"]",
+      "[data-wt-preformatted-block=\"block-000155\"]",
+      "[data-wt-preformatted-block=\"block-000157\"]",
+      "[data-wt-preformatted-block=\"block-000159\"]",
+      "[data-wt-preformatted-block=\"block-000164\"]",
+      "[data-wt-preformatted-block=\"block-000204\"]",
+      "[data-wt-preformatted-block=\"block-000206\"]",
+      "[data-wt-preformatted-block=\"block-000208\"]",
+      "[data-wt-preformatted-block=\"block-000210\"]",
+      "[data-wt-preformatted-block=\"block-000215\"]",
+      "[data-wt-preformatted-block=\"block-000217\"]",
+      "[data-wt-preformatted-block=\"block-000286\"]",
+      "[data-wt-preformatted-block=\"block-000288\"]",
+      "[data-wt-preformatted-block=\"block-000290\"]",
+      "[data-wt-preformatted-block=\"block-000292\"]",
+      "[data-wt-preformatted-block=\"block-000294\"]",
+      "[data-wt-preformatted-block=\"block-000296\"]",
+      "[data-wt-preformatted-block=\"block-000301\"]",
+      "[data-wt-preformatted-block=\"block-000303\"]",
+      "[data-wt-preformatted-block=\"block-000351\"]",
+      "[data-wt-preformatted-block=\"block-000353\"]",
+      "[data-wt-preformatted-block=\"block-000355\"]",
+      "[data-wt-preformatted-block=\"block-000441\"]",
+      "[data-wt-preformatted-block=\"block-000443\"]",
+      "[data-wt-preformatted-block=\"block-000447\"]",
+      "[data-wt-preformatted-block=\"block-000497\"]",
+      "[data-wt-preformatted-block=\"block-000499\"]",
+      "[data-wt-preformatted-block=\"block-000549\"]",
+      "[data-wt-preformatted-block=\"block-000551\"]",
+      "[data-wt-preformatted-block=\"block-000553\"]",
+      "[data-wt-preformatted-block=\"block-000594\"]",
+      "[data-wt-preformatted-block=\"block-000596\"]",
+      "[data-wt-preformatted-block=\"block-000598\"]",
+      "[data-wt-preformatted-block=\"block-000600\"]",
+      "[data-wt-preformatted-block=\"block-000602\"]",
+      "[data-wt-preformatted-block=\"block-000713\"]",
+      "[data-wt-preformatted-block=\"block-000715\"]",
+      "[data-wt-preformatted-block=\"block-000717\"]",
+      "[data-wt-preformatted-block=\"block-000719\"]",
+      "[data-wt-preformatted-block=\"block-000721\"]",
+      "[data-wt-preformatted-block=\"block-000758\"]",
+      "[data-wt-preformatted-block=\"block-000760\"]",
+      "[data-wt-preformatted-block=\"block-000762\"]",
+      "[data-wt-preformatted-block=\"block-000764\"]",
+      "[data-wt-preformatted-block=\"block-000766\"]",
+      "[data-wt-preformatted-block=\"block-000768\"]",
+      "[data-wt-preformatted-block=\"block-000770\"]",
+      "[data-wt-preformatted-block=\"block-000887\"]",
+      "[data-wt-preformatted-block=\"block-000889\"]",
+      "[data-wt-preformatted-block=\"block-000891\"]",
+      "[data-wt-preformatted-block=\"block-000923\"]",
+      "[data-wt-preformatted-block=\"block-000925\"]",
+      "[data-wt-preformatted-block=\"block-000927\"]",
+      "[data-wt-preformatted-block=\"block-000954\"]",
+      "[data-wt-preformatted-block=\"block-000956\"]",
+      "[data-wt-preformatted-block=\"block-001094\"]",
+      "[data-wt-preformatted-block=\"block-001096\"]",
+      "[data-wt-preformatted-block=\"block-001098\"]",
+      "[data-wt-preformatted-block=\"block-001202\"]",
+      "[data-wt-preformatted-block=\"block-001204\"]",
+      "[data-wt-preformatted-block=\"block-001208\"]",
+      "[data-wt-preformatted-block=\"block-001215\"]",
+      "[data-wt-preformatted-block=\"block-001217\"]",
+      "[data-wt-preformatted-block=\"block-001221\"]",
+      "[data-wt-preformatted-block=\"block-001223\"]",
+      "[data-wt-preformatted-block=\"block-001470\"]",
+      "[data-wt-preformatted-block=\"block-001471\"]",
+      "[data-wt-preformatted-block=\"block-001472\"]",
+      "[data-wt-preformatted-block=\"block-001473\"]",
+      "[data-wt-preformatted-block=\"block-001475\"]",
+      "[data-wt-preformatted-block=\"block-001476\"]",
+      "[data-wt-preformatted-block=\"block-001477\"]",
+      "[data-wt-preformatted-block=\"block-001478\"]",
+      "[data-wt-preformatted-block=\"block-001480\"]",
+      "[data-wt-preformatted-block=\"block-001481\"]",
+      "[data-wt-preformatted-block=\"block-001482\"]",
+      "[data-wt-preformatted-block=\"block-001483\"]",
+      "[data-wt-preformatted-block=\"block-001485\"]",
+      "[data-wt-preformatted-block=\"block-001486\"]",
+      "[data-wt-preformatted-block=\"block-001487\"]",
+      "[data-wt-preformatted-block=\"block-001488\"]",
+      "[data-wt-preformatted-block=\"block-001490\"]",
+      "[data-wt-preformatted-block=\"block-001491\"]",
+      "[data-wt-preformatted-block=\"block-001492\"]",
+      "[data-wt-preformatted-block=\"block-001493\"]",
+      "[data-wt-preformatted-block=\"block-001495\"]",
+      "[data-wt-preformatted-block=\"block-001496\"]",
+      "[data-wt-preformatted-block=\"block-001497\"]",
+      "[data-wt-preformatted-block=\"block-001498\"]",
+      "[data-wt-preformatted-block=\"block-001500\"]",
+      "[data-wt-preformatted-block=\"block-001501\"]",
+      "[data-wt-preformatted-block=\"block-001502\"]",
+      "[data-wt-preformatted-block=\"block-001503\"]",
+      "[data-wt-preformatted-block=\"block-001508\"]",
+      "[data-wt-preformatted-block=\"block-001509\"]",
+      "[data-wt-preformatted-block=\"block-001510\"]",
+      "[data-wt-preformatted-block=\"block-001511\"]",
+      "[data-wt-preformatted-block=\"block-001513\"]",
+      "[data-wt-preformatted-block=\"block-001514\"]",
+      "[data-wt-preformatted-block=\"block-001515\"]",
+      "[data-wt-preformatted-block=\"block-001516\"]",
+      "[data-wt-preformatted-block=\"block-001518\"]",
+      "[data-wt-preformatted-block=\"block-001519\"]",
+      "[data-wt-preformatted-block=\"block-001520\"]",
+      "[data-wt-preformatted-block=\"block-001521\"]",
+      "[data-wt-preformatted-block=\"block-001523\"]",
+      "[data-wt-preformatted-block=\"block-001524\"]",
+      "[data-wt-preformatted-block=\"block-001525\"]",
+      "[data-wt-preformatted-block=\"block-001526\"]",
+      "[data-wt-preformatted-block=\"block-001528\"]",
+      "[data-wt-preformatted-block=\"block-001529\"]",
+      "[data-wt-preformatted-block=\"block-001530\"]",
+      "[data-wt-preformatted-block=\"block-001531\"]",
+      "[data-wt-preformatted-block=\"block-001533\"]",
+      "[data-wt-preformatted-block=\"block-001534\"]",
+      "[data-wt-preformatted-block=\"block-001535\"]",
+      "[data-wt-preformatted-block=\"block-001536\"]",
+      "[data-wt-preformatted-block=\"block-001538\"]",
+      "[data-wt-preformatted-block=\"block-001539\"]",
+      "[data-wt-preformatted-block=\"block-001540\"]",
+      "[data-wt-preformatted-block=\"block-001541\"]",
+      "[data-wt-preformatted-block=\"block-001543\"]",
+      "[data-wt-preformatted-block=\"block-001544\"]",
+      "[data-wt-preformatted-block=\"block-001545\"]",
+      "[data-wt-preformatted-block=\"block-001546\"]",
+      "[data-wt-preformatted-block=\"block-001548\"]",
+      "[data-wt-preformatted-block=\"block-001549\"]",
+      "[data-wt-preformatted-block=\"block-001550\"]",
+      "[data-wt-preformatted-block=\"block-001551\"]",
+      "[data-wt-preformatted-block=\"block-001583\"]",
+      "[data-wt-preformatted-block=\"block-001584\"]",
+      "[data-wt-preformatted-block=\"block-001585\"]",
+      "[data-wt-preformatted-block=\"block-001587\"]",
+      "[data-wt-preformatted-block=\"block-001588\"]",
+      "[data-wt-preformatted-block=\"block-001589\"]"
+    ]
+  },
+  "render_input_sha256": "69370b8739fbc74962e8b5d69eb6f9a84124b3b54c05f8599364d1a2f651e2f0",
+  "browser_qa_sha256": "4541e228c9422c44434910a1ffb4499ca07992d9bee95ae66cadc7ff498a3e1d",
   "publication": {
-    "note": "Local QA screenshot paths omitted for public distribution. Original QA evidence remains local; this copy does not include screenshots.",
-    "omitted_screenshot_count": 2,
-    "verified_html_sha256": "66e8eeabf5a2b37191a41acbc7dcddd225309d2d1cfc5a8b241487ebed7dc044",
-    "original_manifest_sha256": "805a8fc6ef0cb11750c9b566f827a33f6411f8c8402836b2d1ae0da229939cd8"
+    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval."
   }
 }

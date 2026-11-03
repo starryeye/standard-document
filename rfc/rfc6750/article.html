@@ -1,0 +1,216 @@
+<article class="st-reader" lang="ko"><div><span></span><h1>OAuth 2.0 Authorization Framework: Bearer Token 사용
+</h1><span></span><h2><span>초록</span>
+</h2><span></span><p>   이 명세는 OAuth 2.0 protected resource(보호된 리소스)에 접근하기 위해 HTTP 요청에서 bearer token(베어러 토큰)을 사용하는 방법을 설명합니다. bearer token을 소유한 당사자("bearer")라면 누구나 암호학적 키의 소유를 입증하지 않고도 해당 token을 사용하여 관련 리소스에 접근할 수 있습니다. 오용을 방지하려면 저장 및 전송 과정에서 bearer token이 노출되지 않도록 보호해야 합니다.
+</p><span></span><h2><span>이 메모의 지위</span>
+</h2><span></span><p>   이 문서는 인터넷 표준 트랙 문서입니다.
+</p><span></span><p>   이 문서는 Internet Engineering Task Force (IETF)의 산출물이며, IETF 커뮤니티의 합의를 나타냅니다. 공개 검토를 거쳤으며 Internet Engineering Steering Group (IESG)의 발행 승인을 받았습니다. 인터넷 표준에 관한 자세한 정보는 RFC 5741의 2절에서 확인할 수 있습니다.
+</p><span></span><p>   이 문서의 현재 지위, 정오표, 의견을 제출하는 방법에 관한 정보는 http://www.rfc-editor.org/info/rfc6750에서 확인할 수 있습니다.
+</p><span></span><h2><span>저작권 고지</span>
+</h2><span></span><p>   Copyright (c) 2012 IETF Trust 및 이 문서의 저자로 명시된 사람들. 모든 권리를 보유합니다.
+</p><span></span><p>   이 문서에는 발행일에 유효한 BCP 78 및 IETF Trust의 IETF 문서 관련 법률 조항이 적용됩니다(http://trustee.ietf.org/license-info). 이들 문서는 이 문서에 관한 귀하의 권리와 제한 사항을 설명하므로 주의 깊게 검토하시기 바랍니다. 이 문서에서 추출한 코드 구성 요소에는 Trust 법률 조항의 4.e절에 명시된 Simplified BSD License 문구를 포함해야 하며, 해당 구성 요소는 Simplified BSD License에 명시된 바와 같이 어떠한 보증도 없이 제공됩니다.
+</p><span></span><span></span><h2><span>목차</span>
+</h2><span></span><p>   1. 소개 ....................................................2
+</p><p>      1.1. 표기 규칙 .....................................3
+</p><p>      1.2. 용어 ................................................3
+</p><p>      1.3. 개요 ...................................................3
+</p><p>   2. 인증된 요청 ..........................................4
+</p><p>      2.1. Authorization 요청 헤더 필드 .........................5
+</p><p>      2.2. Form 인코딩 본문 매개변수 ................................5
+</p><p>      2.3. URI 쿼리 매개변수 ........................................6
+</p><p>   3. WWW-Authenticate 응답 헤더 필드 ......................7
+</p><p>      3.1. 오류 코드 ................................................9
+</p><p>   4. Access Token 응답 예시 ..................................10
+</p><p>   5. 보안 고려 사항 ........................................10
+</p><p>      5.1. 보안 위협 ..........................................10
+</p><p>      5.2. 위협 완화 .........................................11
+</p><p>      5.3. 권고 사항 요약 ................................13
+</p><p>   6. IANA 고려 사항 ............................................14
+</p><p>      6.1. OAuth Access Token 유형 등록 ......................14
+</p><p>           6.1.1. "Bearer" OAuth Access Token 유형 ...............14
+</p><p>      6.2. OAuth 확장 오류 등록 .......................14
+</p><p>           6.2.1. "invalid_request" 오류 값 ..................14
+</p><p>           6.2.2. "invalid_token" 오류 값 ....................15
+</p><p>           6.2.3. "insufficient_scope" 오류 값 ...............15
+</p><p>   7. 참고 문헌 .....................................................15
+</p><p>      7.1. 규범적 참고 문헌 ......................................15
+</p><p>      7.2. 정보성 참고 문헌 ....................................17
+</p><p>   부록 A. 감사의 글 ......................................18
+</p><span></span><h2>1.  서론
+</h2><span></span><p>   OAuth는 client(클라이언트)가 resource owner(리소스 소유자)의 자격 증명을 직접 사용하는 대신 access token(액세스 토큰)을 얻어 protected resource에 접근할 수 있게 합니다. "The OAuth 2.0 Authorization Framework" [RFC6749]는 access token을 "client에 발급된 접근 인가를 나타내는 문자열"로 정의합니다.
+</p><span></span><p>   authorization server(인가 서버)는 resource owner의 승인을 받아 client에 token을 발급합니다. client는 access token을 사용하여 resource server(리소스 서버)가 호스팅하는 protected resource에 접근합니다. 이 명세는 OAuth access token이 bearer token인 경우 protected resource 요청을 수행하는 방법을 설명합니다.
+</p><span></span><p>   이 명세는 Transport Layer Security (TLS) [RFC5246]를 사용하는 HTTP/1.1 [RFC2616]을 통해 bearer token으로 protected resource에 접근하는 방법을 정의합니다. 이 명세에서는 TLS의 구현과 사용이 필수입니다. 다른 명세는 다른 protocol과 함께 사용할 수 있도록 이 명세를 확장할 수 있습니다. 이 명세는 access token을 사용하도록 설계되었으며,
+ <span></span>   이러한 token은 OAuth protected resource에 접근하기 위한 OAuth 2.0 인가 [RFC6749] 흐름에서 얻습니다. 그러나 이 명세가 실제로 정의하는 것은 출처에 관계없이 bearer token을 사용하여 해당 bearer token으로 보호되는 모든 resource에 접근할 수 있는 일반적인 HTTP 인가 방법입니다. Bearer 인증 방식은 주로 WWW-Authenticate 및 Authorization HTTP header를 사용하는 서버 인증을 위한 것이지만, proxy 인증에 사용하는 것을 배제하지는 않습니다.
+</p><span></span><span></span><span></span><h3>1.1.  표기 규칙
+</h3><span></span><p>   이 문서의 핵심어 "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", "OPTIONAL"는 "Key words for use in RFCs to Indicate Requirement Levels" [RFC2119]에 설명된 대로 해석합니다.
+</p><span></span><p>   이 문서는 [RFC5234]의 Augmented Backus-Naur Form (ABNF) 표기법을 사용합니다. 또한 HTTP/1.1 [RFC2617]의 auth-param 및 auth-scheme 규칙과 "Uniform Resource Identifier (URI): Generic Syntax" [RFC3986]의 URI-reference 규칙을 포함합니다.
+</p><span></span><p>   달리 명시하지 않는 한, 모든 protocol parameter의 이름과 값은 대소문자를 구분합니다.
+</p><span></span><h3>1.2.  용어
+</h3><span></span><p>   Bearer Token
+      token을 소지한 당사자("bearer")라면 누구나 그 token을 소지한 다른 당사자가 사용할 수 있는 모든 방식으로 사용할 수 있다는 특성을 지닌 security token입니다. bearer token을 사용할 때 bearer가 암호학적 키 자료의 소유를 증명할 필요는 없습니다(proof-of-possession(소유 증명)).
+</p><span></span><p>   다른 모든 용어는 "The OAuth 2.0 Authorization Framework" [RFC6749]의 정의를 따릅니다.
+</p><span></span><h3>1.3.  개요
+</h3><span></span><p>   OAuth는 client가 resource owner를 대신하여 protected resource에 접근하는 방법을 제공합니다. 일반적으로 client가 protected resource에 접근하려면 먼저 resource owner로부터 authorization grant(권한 부여)를 얻은 다음, 이를 access token으로 교환해야 합니다. access token은 authorization grant가 부여한 scope(접근 범위), 기간 및 기타 속성을 나타냅니다. client는 resource server에 access token을 제시하여 protected resource에 접근합니다. 경우에 따라 client는 resource owner로부터 먼저 authorization grant를 얻지 않고도 자신의 자격 증명을 authorization server에 직접 제시하여 access token을 얻을 수 있습니다.
+</p><span></span><span></span><p>   access token은 서로 다른 인가 수단(예: 사용자 이름과 비밀번호, assertion)을 resource server가 이해하는 단일 token으로 대체하는 추상화를 제공합니다. 이 추상화를 통해 짧은 기간 동안 유효한 access token을 발급할 수 있으며, resource server가 다양한 인증 방식을 이해할 필요도 없어집니다.
+</p><span></span><pre>     +--------+                               +---------------+
+     |        |--(A)- Authorization Request -&gt;|   Resource    |
+     |        |                               |     Owner     |
+     |        |&lt;-(B)-- Authorization Grant ---|               |
+     |        |                               +---------------+
+     |        |
+     |        |                               +---------------+
+     |        |--(C)-- Authorization Grant --&gt;| Authorization |
+     | Client |                               |     Server    |
+     |        |&lt;-(D)----- Access Token -------|               |
+     |        |                               +---------------+
+     |        |
+     |        |                               +---------------+
+     |        |--(E)----- Access Token ------&gt;|    Resource   |
+     |        |                               |     Server    |
+     |        |&lt;-(F)--- Protected Resource ---|               |
+     +--------+                               +---------------+
+</pre><span></span><figcaption>                     그림 1: 추상적인 protocol 흐름
+</figcaption><span></span><p>   그림 1에 나타낸 추상적인 OAuth 2.0 흐름은 client, resource owner, authorization server 및 resource server 간의 상호 작용을 설명합니다([RFC6749]에 기술되어 있습니다). 이 문서는 다음 두 단계를 명세합니다.
+</p><span></span><p class="st-list-item" role="listitem">   (E)  client는 resource server에 protected resource를 요청하고, access token을 제시하여 인증합니다.
+</p><span></span><p class="st-list-item" role="listitem">   (F)  resource server는 access token을 검증하고, 유효하면 요청을 처리합니다.
+</p><span></span><p>   이 문서는 단계 (D)에서 반환하는 access token에 대해서도 의미상의 요구 사항을 부과합니다.
+</p><span></span><h2>2.  인증된 요청
+</h2><span></span><p>   이 절은 resource server에 보내는 resource 요청에 bearer access token을 전송하는 세 가지 방법을 정의합니다. client는 각 요청에서 token을 전송하는 방법을 둘 이상 사용해서는 안 됩니다(MUST NOT).
+</p><span></span><span></span><h3>2.1.  Authorization 요청 header field
+</h3><span></span><p>   HTTP/1.1 [RFC2617]에서 정의한 "Authorization" 요청 header field로 access token을 보낼 때 client는 "Bearer" 인증 방식을 사용하여 access token을 전송합니다.
+</p><span></span><p>   예를 들면 다음과 같습니다.
+</p><span></span><pre>     GET /resource HTTP/1.1
+     Host: server.example.com
+     Authorization: Bearer mF_9.B5f-4.1JqM
+</pre><span></span><p>   이 방식의 "Authorization" header field 구문은 [RFC2617]의 2절에 정의된 Basic 방식의 사용법을 따릅니다. Basic과 마찬가지로 [RFC2617]의 1.2절에 정의된 일반 구문을 따르지는 않지만, HTTP 1.1을 위해 개발 중인 일반 인증 framework [HTTP-AUTH]와 호환됩니다. 다만 기존 배포 환경을 반영하기 위해 그 framework에서 제시하는 권장 관행을 따르지는 않는다는 점에 유의하십시오. Bearer 자격 증명의 구문은 다음과 같습니다.
+</p><span></span><pre>     b64token    = 1*( ALPHA / DIGIT /
+                       "-" / "." / "_" / "~" / "+" / "/" ) *"="
+     credentials = "Bearer" 1*SP b64token
+</pre><span></span><p>   client는 "Bearer" HTTP 인가 방식과 함께 "Authorization" 요청 header field를 사용하여 bearer token으로 인증된 요청을 수행하는 것이 좋습니다(SHOULD). resource server는 이 방법을 지원해야 합니다(MUST).
+</p><span></span><h3>2.2.  Form으로 인코딩된 body parameter
+</h3><span></span><p>   HTTP 요청 entity-body로 access token을 보낼 때 client는 "access_token" parameter를 사용하여 request-body에 access token을 추가합니다. 다음 조건이 모두 충족되지 않으면 client는 이 방법을 사용해서는 안 됩니다(MUST NOT).
+</p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 entity-header에 "application/x-www-form-urlencoded"로 설정된 "Content-Type" header field가 포함됩니다.
+</p><span></span><p class="st-list-item" role="listitem">   o  entity-body가 HTML 4.01 [W3C.REC-html401-19991224]에 정의된 "application/x-www-form-urlencoded" content-type의 인코딩 요구 사항을 따릅니다.
+</p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 entity-body가 single-part입니다.
+</p><span></span><span></span><p class="st-list-item" role="listitem">   o  entity-body에 인코딩할 내용은 전부 ASCII [USASCII] 문자로 구성되어야 합니다(MUST).
+</p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 method는 request-body의 의미가 정의된 method입니다. 특히 이는 "GET" method를 사용해서는 안 된다는 뜻입니다(MUST NOT).
+</p><span></span><p>   entity-body에는 다른 요청별 parameter를 포함할 수 있습니다(MAY). 이 경우 "access_token" parameter는 "&amp;" 문자(ASCII 코드 38)를 하나 이상 사용하여 요청별 parameter와 올바르게 구분해야 합니다(MUST).
+</p><span></span><p>   예를 들어 client는 transport-layer security를 사용하여 다음 HTTP 요청을 수행합니다.
+</p><span></span><pre>     POST /resource HTTP/1.1
+     Host: server.example.com
+     Content-Type: application/x-www-form-urlencoded
+
+     access_token=mF_9.B5f-4.1JqM
+</pre><span></span><p>   참여하는 browser가 "Authorization" 요청 header field에 접근할 수 없는 application 환경을 제외하고는 "application/x-www-form-urlencoded" 방법을 사용하지 않는 것이 좋습니다(SHOULD NOT). resource server는 이 방법을 지원할 수 있습니다(MAY).
+</p><span></span><h3>2.3.  URI query parameter
+</h3><span></span><p>   HTTP 요청 URI로 access token을 보낼 때 client는 "access_token" parameter를 사용하여 "Uniform Resource Identifier (URI): Generic Syntax" [RFC3986]에 정의된 요청 URI의 query 구성 요소에 access token을 추가합니다.
+</p><span></span><p>   예를 들어 client는 transport-layer security를 사용하여 다음 HTTP 요청을 수행합니다.
+</p><span></span><pre>     GET /resource?access_token=mF_9.B5f-4.1JqM HTTP/1.1
+     Host: server.example.com
+</pre><span></span><p>   HTTP 요청 URI의 query에는 다른 요청별 parameter가 포함될 수 있습니다. 이 경우 "access_token" parameter는 "&amp;" 문자(ASCII 코드 38)를 하나 이상 사용하여 요청별 parameter와 올바르게 구분해야 합니다(MUST).
+</p><span></span><span></span><p>   예를 들면 다음과 같습니다.
+</p><span></span><pre>    https://server.example.com/resource?access_token=mF_9.B5f-4.1JqM&amp;p=q
+</pre><span></span><p>   URI Query Parameter 방법을 사용하는 client는 "no-store" option을 포함한 Cache-Control header도 보내는 것이 좋습니다(SHOULD). 이러한 요청에 대한 서버의 성공 응답(2XX 상태)에는 "private" option이 있는 Cache-Control header를 포함하는 것이 좋습니다(SHOULD).
+</p><span></span><p>   access token을 포함한 URL이 로그에 기록될 가능성이 높다는 점을 비롯하여 URI 방법에는 보안상 취약점이 있으므로(5절 참조), "Authorization" 요청 header field 또는 HTTP 요청 entity-body로 access token을 전송하는 것이 불가능한 경우가 아니라면 이 방법을 사용하지 않는 것이 좋습니다(SHOULD NOT). resource server는 이 방법을 지원할 수 있습니다(MAY).
+</p><span></span><p>   이 방법은 현재의 사용 현황을 문서화하기 위해 포함되었습니다. 보안상의 결함(5절 참조)이 있고, 예약된 query parameter 이름을 사용한다는 점이 "Architecture of the World Wide Web, Volume One" [W3C.REC-webarch-20041215]에 따른 URI namespace 모범 관행에도 어긋나므로 사용을 권장하지 않습니다.
+</p><span></span><h2>3.  WWW-Authenticate 응답 header field
+</h2><span></span><p>   protected resource 요청에 인증 자격 증명이 포함되어 있지 않거나, 해당 protected resource에 접근할 수 있게 하는 access token이 포함되어 있지 않으면 resource server는 HTTP "WWW-Authenticate" 응답 header field를 포함해야 합니다(MUST). 다른 조건에 대한 응답에도 이를 포함할 수 있습니다(MAY). "WWW-Authenticate" header field는 HTTP/1.1 [RFC2617]에서 정의한 framework를 사용합니다.
+</p><span></span><p>   이 명세에서 정의하는 모든 challenge는 auth-scheme 값으로 "Bearer"를 사용해야 합니다(MUST). 이 scheme 뒤에는 하나 이상의 auth-param 값이 와야 합니다(MUST). 이 명세에서 사용하거나 정의하는 auth-param 속성은 다음과 같습니다. 다른 auth-param 속성도 사용할 수 있습니다(MAY).
+</p><span></span><p>   HTTP/1.1 [RFC2617]에 설명된 방식으로 보호 범위를 나타내기 위해 "realm" 속성을 포함할 수 있습니다(MAY). "realm" 속성이 두 번 이상 나타나서는 안 됩니다(MUST NOT).
+</p><span></span><p>   "scope" 속성은 [RFC6749]의 3.3절에 정의되어 있습니다. "scope" 속성은 요청한 resource에 접근하기 위해 access token에 필요한 scope를 나타내며, 대소문자를 구분하는 scope 값들을 공백으로 구분한 목록입니다. "scope" 값은 구현에 따라 정의되며, 중앙화된 registry는 없습니다. 허용되는 값은 authorization server가 정의합니다. "scope" 값의 순서는 중요하지 않습니다. 경우에 따라 "scope" 값은
+ <span></span>   protected resource를 이용하기에 충분한 접근 scope를 가진 새 access token을 요청할 때 사용됩니다. "scope" 속성의 사용은 선택 사항입니다(OPTIONAL). "scope" 속성이 두 번 이상 나타나서는 안 됩니다(MUST NOT). "scope" 값은 프로그램에서 사용하기 위한 것이며, 최종 사용자에게 표시하기 위한 것이 아닙니다.
+</p><span></span><span></span><span></span><p>   다음은 두 가지 scope 값의 예입니다. 각각 OpenID Connect [OpenID.Messages]와 Open Authentication Technology Committee (OATC)의 Online Multimedia Authorization Protocol [OMAP] OAuth 2.0 사용 사례에서 가져왔습니다.
+</p><span></span><pre>     scope="openid profile email"
+     scope="urn:example:channel=HBO&amp;urn:example:rating=G,PG-13"
+</pre><span></span><p>protected resource 요청에 access token이 포함되어 있고 인증에 실패한 경우, resource server는 접근 요청이 거부된 이유를 client에 알리기 위해 "error" 속성을 포함하는 것이 좋습니다(SHOULD). 이 매개변수의 값은 3.1절에 설명되어 있습니다. 또한 resource server는 최종 사용자에게 표시하기 위한 것이 아닌, 개발자를 위한 사람이 읽을 수 있는 설명을 제공하도록 "error_description" 속성을 포함할 수 있습니다(MAY). 오류를 설명하는 사람이 읽을 수 있는 웹 페이지를 식별하는 절대 URI와 함께 "error_uri" 속성을 포함할 수도 있습니다(MAY). "error", "error_description", "error_uri" 속성은 각각 두 번 이상 나타나서는 안 됩니다(MUST NOT).</p><span></span><p>"scope" 속성의 값([RFC6749] 부록 A.4에 명시됨)에는 scope 값을 나타내는 문자 집합 %x21 / %x23-5B / %x5D-7E와 scope 값 사이의 구분자인 %x20 이외의 문자가 포함되어서는 안 됩니다(MUST NOT). "error" 및 "error_description" 속성의 값([RFC6749] 부록 A.7 및 A.8에 명시됨)에는 문자 집합 %x20-21 / %x23-5B / %x5D-7E 이외의 문자가 포함되어서는 안 됩니다(MUST
+   NOT). "error_uri" 속성의 값([RFC6749] 부록 A.9에 명시됨)은 URI-reference 구문을 따라야 하며(MUST), 따라서 문자 집합 %x21 / %x23-5B / %x5D-7E 이외의 문자가 포함되어서는 안 됩니다(MUST NOT).</p><span></span><p>예를 들어, 인증 정보가 없는 protected resource 요청에 대한 응답은 다음과 같습니다.</p><span></span><pre>     HTTP/1.1 401 Unauthorized
+     WWW-Authenticate: Bearer realm="example"
+</pre><span></span><span></span><p>그리고 만료된 access token으로 인증을 시도한 protected resource 요청에 대한 응답은 다음과 같습니다.</p><span></span><pre>     HTTP/1.1 401 Unauthorized
+     WWW-Authenticate: Bearer realm="example",
+                       error="invalid_token",
+                       error_description="The access token expired"
+</pre><span></span><h3>3.1. 오류 코드</h3><span></span><p>요청이 실패하면 resource server는 적절한 HTTP 상태 코드(일반적으로 400, 401, 403 또는 405)로 응답하고, 다음 오류 코드 중 하나를 응답에 포함합니다.</p><span></span><p>invalid_request
+요청에 필수 매개변수가 누락되어 있거나, 지원하지 않는 매개변수 또는 매개변수 값이 포함되어 있거나, 같은 매개변수가 반복되거나, access token을 포함하는 데 둘 이상의 방법을 사용하거나, 그 밖의 형식 오류가 있습니다. resource server는 HTTP 400 (Bad Request) 상태 코드로 응답하는 것이 좋습니다(SHOULD).</p><span></span><p>invalid_token
+제공된 access token이 만료되었거나, 폐기되었거나, 형식이 잘못되었거나, 그 밖의 이유로 유효하지 않습니다. resource는 HTTP 401 (Unauthorized) 상태 코드로 응답하는 것이 좋습니다(SHOULD). client는 새 access token을 요청하고 protected resource 요청을 재시도할 수 있습니다(MAY).</p><span></span><p>insufficient_scope
+요청에는 access token이 제공하는 것보다 높은 권한이 필요합니다. resource server는 HTTP 403 (Forbidden) 상태 코드로 응답하는 것이 좋으며(SHOULD), protected resource에 접근하는 데 필요한 scope를 담은 "scope" 속성을 포함할 수 있습니다(MAY).</p><span></span><p>요청에 인증 정보가 전혀 없는 경우(예를 들어 client가 인증이 필요하다는 사실을 몰랐거나 지원하지 않는 인증 방법을 사용하려고 시도한 경우), resource server는 오류 코드나 그 밖의 오류 정보를 포함하지 않는 것이 좋습니다(SHOULD NOT).</p><span></span><p>예를 들면 다음과 같습니다.</p><span></span><pre>     HTTP/1.1 401 Unauthorized
+     WWW-Authenticate: Bearer realm="example"
+</pre><span></span><span></span><h2>4. access token 응답 예시</h2><span></span><p>일반적으로 bearer token은 OAuth 2.0 [RFC6749] access token 응답의 일부로 client에 반환됩니다. 이러한 응답의 예시는 다음과 같습니다.</p><span></span><pre>     HTTP/1.1 200 OK
+     Content-Type: application/json;charset=UTF-8
+     Cache-Control: no-store
+     Pragma: no-cache
+
+     {
+       "access_token":"mF_9.B5f-4.1JqM",
+       "token_type":"Bearer",
+       "expires_in":3600,
+       "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA"
+     }
+</pre><span></span><h2>5. 보안 고려 사항</h2><span></span><p>이 절에서는 bearer token 사용 시 token 처리와 관련된 보안 위협과 이러한 위협을 완화하는 방법을 설명합니다.</p><span></span><h3>5.1. 보안 위협</h3><span></span><p>다음 목록은 어떤 형태로든 token을 사용하는 프로토콜에 대한 몇 가지 일반적인 위협을 제시합니다. 이 위협 목록은 NIST Special Publication 800-63 [NIST800-63]을 기반으로 합니다. 이 문서는 OAuth 2.0 Authorization 명세 [RFC6749]를 기반으로 하므로, 해당 명세나 관련 문서에 설명된 위협은 논의에서 제외합니다.</p><span></span><p>Token manufacture/modification: 공격자가 가짜 token을 생성하거나 기존 token의 내용(인증 또는 속성 statement 등)을 수정하여, resource server가 client에 부적절한 접근 권한을 부여하도록 만들 수 있습니다. 예를 들어 공격자는 유효 기간을 연장하기 위해 token을 수정할 수 있으며, 악의적인 client는 자신이 볼 수 없어야 하는 정보에 접근하기 위해 assertion을 수정할 수 있습니다.</p><span></span><p>Token disclosure: token에는 민감한 정보를 담은 인증 및 속성 statement가 포함될 수 있습니다.</p><span></span><span></span><p>Token redirect: 공격자는 한 resource server에서 사용하도록 생성된 token을 사용하여, 해당 token이 자신을 위한 것이라고 잘못 판단하는 다른 resource server에 접근합니다.</p><span></span><p>Token replay: 공격자는 과거에 해당 resource server에서 이미 사용된 token을 다시 사용하려고 시도합니다.</p><span></span><h3>5.2. 위협 완화</h3><span></span><p>digital signature 또는 Message Authentication Code (MAC)를 사용하여 token의 내용을 보호하면 광범위한 위협을 완화할 수 있습니다. 또는 bearer token이 인가 정보를 직접 인코딩하는 대신 해당 정보에 대한 참조를 담을 수도 있습니다. 이러한 참조는 공격자가 추측하는 것이 현실적으로 불가능해야 합니다(MUST). 참조를 사용하는 경우, 참조로부터 인가 정보를 알아내기 위해 서버와 token 발급자 사이에 추가 상호작용이 필요할 수 있습니다. 이 명세에서는 그러한 상호작용의 구체적인 방식을 정의하지 않습니다.</p><span></span><p>이 문서는 token의 인코딩이나 내용을 명시하지 않으므로, token의 integrity(무결성) 보호를 보장하는 수단에 대한 상세한 권고 사항은 이 문서의 범위를 벗어납니다. token의 integrity 보호는 token이 수정되는 것을 막기에 충분해야 합니다(MUST).</p><span></span><p>token redirect에 대응하려면 authorization server가 의도한 수신자(audience(수신 대상))의 식별 정보를 token에 포함하는 것이 중요합니다. 수신자는 일반적으로 하나의 resource server(또는 resource server 목록)입니다. token 사용을 특정 scope로 제한하는 것도 권장됩니다(RECOMMENDED).</p><span></span><p>authorization server는 TLS를 구현해야 합니다(MUST). 구현하는 것이 바람직한 버전은 시간에 따라 달라지며, 구현 당시의 보급 현황과 알려진 보안 취약점에 따라 결정됩니다. 이 문서를 작성하는 시점에는 TLS 버전 1.2 [RFC5246]가 최신 버전이지만, 실제로 배포된 사례는 매우 제한적이며 구현 toolkit에서 바로 사용할 수 없을 수도 있습니다. TLS 버전 1.0 [RFC2246]은 가장 널리 배포된 버전으로, 가장 폭넓은 상호운용성을 제공합니다.</p><span></span><p>token 유출을 방지하려면 confidentiality(기밀성)와 integrity 보호를 제공하는 ciphersuite와 함께 TLS [RFC5246]를 사용하여 confidentiality 보호를 적용해야 합니다(MUST). 이는 client와 authorization server 간의 통신 상호작용뿐 아니라 client와 resource server 간의 상호작용에도 confidentiality와 integrity 보호를 사용해야 함을 의미합니다. 이 명세에서는 TLS의 구현과 사용이 필수이므로, TLS는 통신 채널을 통한 token <span></span>유출을 방지하는 데 우선적으로 선택하는 방법입니다. client가 token의 내용을 볼 수 없도록 해야 하는 경우에는 TLS 보호에 더하여 token 암호화를 적용해야 합니다(MUST). token 유출에 대한 추가 방어 수단으로, client는 protected resource에 요청을 보낼 때 Certificate Revocation List (CRL) [RFC5280] 확인을 포함하여 TLS certificate chain을 검증해야 합니다(MUST).</p><span></span><span></span><span></span><p>cookie는 일반적으로 평문으로 전송됩니다. 따라서 cookie에 포함된 모든 정보는 유출 위험에 노출됩니다. 그러므로 bearer token을 평문으로 전송될 수 있는 cookie에 저장해서는 안 됩니다(MUST NOT). cookie에 대한 보안 고려 사항은 "HTTP State Management Mechanism" [RFC6265]을 참조하십시오.</p><span></span><p>load balancer를 사용하는 배포 환경을 비롯한 일부 배포 환경에서는 resource server로 향하는 TLS 연결이 실제로 resource를 제공하는 서버에 도달하기 전에 종료됩니다. 이 경우 TLS 연결이 종료되는 front-end 서버와 resource를 제공하는 back-end 서버 사이에서 token이 보호되지 않을 수 있습니다. 이러한 배포 환경에서는 front-end 서버와 back-end 서버 사이에서 token의 confidentiality를 보장하기 위한 충분한 조치를 취해야 합니다(MUST). token 암호화는 가능한 조치 중 하나입니다.</p><span></span><p>token 탈취와 재사용에 대응하기 위해 다음과 같이 권고합니다. 첫째, token의 수명을 제한해야 합니다(MUST). 이를 달성하는 한 가지 방법은 token의 보호되는 부분에 유효 시간 필드를 넣는 것입니다. 수명이 짧은(1시간 이하인) token을 사용하면 유출 시의 영향을 줄일 수 있다는 점에 유의하십시오. 둘째, client와 authorization server 사이 및 client와 resource server 사이의 교환에 confidentiality 보호를 적용해야 합니다(MUST). 그러면 통신 경로의 도청자는 token 교환을 관찰할 수 없습니다. 따라서 이러한 경로상의 공격자는 token을 재사용할 수 없습니다. 또한 client는 resource server에 token을 제시할 때 "HTTP Over TLS" [RFC2818]의 3.1절에 따라 해당 resource server의 신원을 검증해야 합니다(MUST). client는 protected resource에 이러한 요청을 보낼 때 TLS certificate chain을 검증해야 한다는 점에 유의하십시오(MUST). 인증되지 않고 인가되지 않은 resource server에 token을 제시하거나 certificate chain을 검증하지 않으면, 공격자가 token을 탈취하여 protected resource에 무단으로 접근할 수 있게 됩니다.</p><span></span><span></span><h3>5.3. 권고 사항 요약</h3><span></span><p>bearer token 보호: client 구현은 bearer token이 의도하지 않은 당사자에게 유출되지 않도록 보장해야 합니다(MUST). 이들은 해당 token을 사용하여 protected resource에 접근할 수 있기 때문입니다. 이는 bearer token 사용 시 가장 중요한 보안 고려 사항이며, 뒤이어 나오는 모든 세부 권고 사항의 바탕이 됩니다.</p><span></span><p>TLS certificate chain 검증: client는 protected resource에 요청을 보낼 때 TLS certificate chain을 검증해야 합니다(MUST). 그렇게 하지 않으면 DNS hijacking 공격으로 token이 탈취되고 의도하지 않은 접근이 이루어질 수 있습니다.</p><span></span><p>항상 TLS (https) 사용: client는 bearer token을 사용하여 요청을 보낼 때 항상 TLS [RFC5246] (https) 또는 동등한 전송 보안을 사용해야 합니다(MUST). 그렇게 하지 않으면 token이 수많은 공격에 노출되어 공격자에게 의도하지 않은 접근 권한을 줄 수 있습니다.</p><span></span><p>bearer token을 cookie에 저장하지 않기: 구현은 평문으로 전송될 수 있는 cookie에 bearer token을 저장해서는 안 됩니다(MUST NOT). 평문 전송은 cookie의 기본 전송 방식입니다. bearer token을 cookie에 저장하는 구현은 cross-site request forgery에 대한 예방 조치를 취해야 합니다(MUST).</p><span></span><p>수명이 짧은 bearer token 발급: token 서버는 수명이 짧은(1시간 이하인) bearer token을 발급하는 것이 좋습니다(SHOULD). 특히 웹 브라우저나 정보 유출이 발생할 수 있는 그 밖의 환경에서 실행되는 client에 token을 발급할 때 그러합니다. 수명이 짧은 bearer token을 사용하면 유출 시의 영향을 줄일 수 있습니다.</p><span></span><p>사용 범위가 제한된 bearer token 발급: token 서버는 audience 제한이 포함된 bearer token을 발급하여, 의도한 relying party 또는 relying party 집합에서만 사용되도록 범위를 제한하는 것이 좋습니다(SHOULD).</p><span></span><p>페이지 URL로 bearer token을 전달하지 않습니다: bearer token을 페이지 URL로 전달하지 않는 것이 권장됩니다(SHOULD NOT). 예를 들어 query string parameter로 전달하지 않는 것이 권장됩니다. 대신 confidentiality 조치가 적용된 HTTP message header나 message body로 bearer token을 전달하는 것이 권장됩니다(SHOULD). Browser, web server 및 기타 소프트웨어는 browser 방문 기록, web server 로그 및 기타 데이터 구조에 있는 URL을 충분히 보호하지 못할 수 있습니다. 페이지 URL로 bearer token을 전달하면 공격자가 방문 기록 데이터, 로그 또는 그 밖의 보호되지 않은 위치에서 이를 탈취할 수 있습니다.</p><span></span><span></span><h2>6. IANA 고려 사항</h2><span></span><h3>6.1. OAuth Access Token Type 등록</h3><span></span><p>이 명세는 [RFC6749]에 정의된 OAuth Access Token Types registry에 다음 access token type을 등록합니다.</p><span></span><h4>6.1.1. "Bearer" OAuth Access Token Type</h4><span></span><p>Type 이름:
+   Bearer</p><span></span><p>추가 Token Endpoint 응답 parameter:
+   (없음)</p><span></span><p>HTTP Authentication Scheme:
+   Bearer</p><span></span><p>변경 관리 주체:
+   IETF</p><span></span><p>명세 문서:
+   RFC 6750</p><span></span><h3>6.2. OAuth Extensions Error 등록</h3><span></span><p>이 명세는 [RFC6749]에 정의된 OAuth Extensions Error registry에 다음 error 값을 등록합니다.</p><span></span><h4>6.2.1. "invalid_request" Error 값</h4><span></span><p>Error 이름:
+   invalid_request</p><span></span><p>Error 사용 위치:
+   Resource 접근 error 응답</p><span></span><p>관련 protocol 확장:
+   Bearer access token type</p><span></span><p>변경 관리 주체:
+   IETF</p><span></span><p>명세 문서:
+   RFC 6750</p><span></span><span></span><h4>6.2.2. "invalid_token" Error 값</h4><span></span><p>Error 이름:
+   invalid_token</p><span></span><p>Error 사용 위치:
+   Resource 접근 error 응답</p><span></span><p>관련 protocol 확장:
+   Bearer access token type</p><span></span><p>변경 관리 주체:
+   IETF</p><span></span><p>명세 문서:
+   RFC 6750</p><span></span><h4>6.2.3. "insufficient_scope" Error 값</h4><span></span><p>Error 이름:
+   insufficient_scope</p><span></span><p>Error 사용 위치:
+   Resource 접근 error 응답</p><span></span><p>관련 protocol 확장:
+   Bearer access token type</p><span></span><p>변경 관리 주체:
+   IETF</p><span></span><p>명세 문서:
+   RFC 6750</p><span></span><h2>7. 참고 문헌</h2><span></span><h3>7.1. 규범적 참고 문헌</h3><span></span><p>[RFC2119] Bradner, S., "RFC에서 요구 수준을 나타내는 데 사용하는 핵심 단어", BCP 14, RFC 2119, 1997년 3월.</p><span></span><p>[RFC2246] Dierks, T. 및 C. Allen, "TLS Protocol 버전 1.0", RFC 2246, 1999년 1월.</p><span></span><p>[RFC2616] Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P. 및 T. Berners-Lee, "Hypertext Transfer Protocol -- HTTP/1.1", RFC 2616, 1999년 6월.</p><span></span><span></span><p>[RFC2617] Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A. 및 L. Stewart, "HTTP Authentication: Basic 및 Digest Access Authentication", RFC 2617, 1999년 6월.</p><span></span><p>[RFC2818] Rescorla, E., "TLS를 통한 HTTP", RFC 2818, 2000년 5월.</p><span></span><p>[RFC3986] Berners-Lee, T., Fielding, R. 및 L. Masinter, "Uniform Resource Identifier (URI): 일반 구문", STD 66, RFC 3986, 2005년 1월.</p><span></span><p>[RFC5234] Crocker, D. 및 P. Overell, "구문 명세를 위한 Augmented BNF: ABNF", STD 68, RFC 5234, 2008년 1월.</p><span></span><p>[RFC5246] Dierks, T. 및 E. Rescorla, "Transport Layer Security (TLS) Protocol 버전 1.2", RFC 5246, 2008년 8월.</p><span></span><p>[RFC5280] Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R. 및 W. Polk, "Internet X.509 Public Key Infrastructure의 Certificate 및 Certificate Revocation List (CRL) Profile", RFC 5280, 2008년 5월.</p><span></span><p>[RFC6265] Barth, A., "HTTP 상태 관리 메커니즘", RFC 6265, 2011년 4월.</p><span></span><p>[RFC6749] Hardt, D., 편집, "OAuth 2.0 Authorization Framework", RFC 6749, 2012년 10월.</p><span></span><p>[USASCII] American National Standards Institute, "부호화 문자 집합 -- 정보 교환을 위한 7-bit 미국 표준 코드", ANSI X3.4, 1986년.</p><span></span><p>[W3C.REC-html401-19991224] Raggett, D., Le Hors, A. 및 I. Jacobs, "HTML 4.01 명세", World Wide Web Consortium 권고안 REC-html401-19991224, 1999년 12월, &lt;http://www.w3.org/TR/1999/REC-html401-19991224&gt;.</p><span></span><p>[W3C.REC-webarch-20041215] Jacobs, I. 및 N. Walsh, "World Wide Web의 아키텍처, 제1권", World Wide Web Consortium 권고안 REC-webarch-20041215, 2004년 12월, &lt;http://www.w3.org/TR/2004/REC-webarch-20041215&gt;.</p><span></span><span></span><h3>7.2. 정보성 참고 문헌</h3><span></span><p>[HTTP-AUTH] Fielding, R., 편집 및 J. Reschke, 편집, "Hypertext Transfer Protocol (HTTP/1.1): Authentication", 작성 중인 문서, 2012년 10월.</p><span></span><p>[NIST800-63] Burr, W., Dodson, D., Newton, E., Perlner, R., Polk, T., Gupta, S. 및 E. Nabbus, "NIST 특별 간행물 800-63-1, 정보 보안", 2011년 12월, &lt;http://csrc.nist.gov/publications/&gt;.</p><span></span><p>[OMAP] Huff, J., Schlacht, D., Nadalin, A., Simmons, J., Rosenberg, P., Madsen, P., Ace, T., Rickelton-Abdi, C. 및 B. Boyer, "Online Multimedia Authorization Protocol: 인터넷 멀티미디어 Resource에 대한 인가된 접근을 위한 산업 표준", 2012년 4월, &lt;http://www.oatc.us/Standards/Download.aspx&gt;.</p><span></span><p>[OpenID.Messages] Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., Mortimore, C. 및 E. Jay, "OpenID Connect Messages 1.0", 2012년 6월, <code>&lt;http://openid.net/specs/
+                openid-connect-messages-1_0.html&gt;</code>.</p><span></span><span></span><h2><span>부록 A. 감사의 말</span></h2><span></span><p>이 문서의 예비 버전에 기여한 분들은 Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook), Raffi Krikorian (Twitter), Luke Shepard (Facebook), Allen Tom (Yahoo!)입니다. 이 문서의 내용과 개념은 OAuth 커뮤니티, Web Resource Authorization Profiles (WRAP) 커뮤니티, OAuth Working Group이 함께 만들어 낸 결과물입니다. David Recordon은 이후 OAuth 2.0 [RFC6749]으로 발전한 명세의 초기 초안을 바탕으로 이 명세의 예비 버전을 작성했습니다. 이어서 Michael B. Jones는 David의 예비 문서 일부를 사용하여 이 명세의 첫 번째 버전(00)을 작성했으며, 이후의 모든 버전을 편집했습니다.</p><span></span><p>OAuth Working Group에는 이 문서를 위한 아이디어와 문구를 제안한 매우 활발한 기여자가 수십 명 있습니다. 여기에는 Michael Adams, Amanda Anganes, Andrew Arnott, Derek Atkins, Dirk Balfanz, John Bradley, Brian Campbell, Francisco Corella, Leah Culver, Bill de hOra, Breno de Medeiros, Brian Ellin, Stephen Farrell, Igor Faynberg, George Fletcher, Tim Freeman, Evan Gilbert, Yaron Y. Goland, Eran Hammer, Thomas Hardjono, Dick Hardt, Justin Hart, Phil Hunt, John Kemp, Chasen Le Hara, Barry Leiba, Amos Jeffries, Michael B. Jones, Torsten Lodderstedt, Paul Madsen, Eve Maler, James Manger, Laurence Miao, William J. Mills, Chuck Mortimore, Anthony Nadalin, Axel Nennker, Mark Nottingham, David Recordon, Julian Reschke, Rob Richards, Justin Richer, Peter Saint-Andre, Nat Sakimura, Rob Sayre, Marius Scurtescu, Naitik Shah, Justin Smith, Christian Stuebner, Jeremy Suriel, Doug Tangren, Paul Tarjan, Hannes Tschofenig, Franklin Tse, Sean Turner, Paul Walker, Shane Weeden, Skylar Woodward, Zachary Zeltsan이 포함됩니다.</p><span></span><h2><span>저자 주소</span></h2><span></span><pre>   Michael B. Jones
+   Microsoft
+</pre><span></span><pre>   EMail: mbj@microsoft.com
+   URI:   http://self-issued.info/
+</pre><span></span><pre>   Dick Hardt
+   Independent
+</pre><span></span><pre>   EMail: dick.hardt@gmail.com
+   URI:   http://dickhardt.org/
+</pre><span></span><span></span></div><details class="st-source-notes"><summary>원문 페이지 표기</summary><pre>Internet Engineering Task Force (IETF)                          M. Jones
+Request for Comments: 6750                                     Microsoft
+Category: Standards Track                                       D. Hardt
+ISSN: 2070-1721                                              Independent
+                                                            October 2012
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 1]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 2]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 3]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 4]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 5]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 6]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 7]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 8]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                    [Page 9]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 10]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 11]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 12]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 13]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 14]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 15]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 16]</span>
+<span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 17]</span>
+</pre><pre><span>RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012</span>
+</pre><pre><span>Jones &amp; Hardt                Standards Track                   [Page 18]</span>
+</pre></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/rfc6750/">공식 원문</a></footer></article>

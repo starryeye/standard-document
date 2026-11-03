@@ -1,0 +1,682 @@
+{
+  "html_sha256": "a1dd81221b090c2e0289e00105ec6df2104999a3eb9a4fa53b21b0882ff4354a",
+  "render_input_sha256": "a77c534f531cecc09cf1494df13a48d63af42cdf507041420f784b38e6c6e89c",
+  "automated_status": "passed",
+  "visual_status": "passed",
+  "viewports": {
+    "1440": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 18852
+    },
+    "768": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 18852
+    },
+    "390": {
+      "minFont": 16,
+      "minLineRatio": 1.75,
+      "articleWidth": 390,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 23549
+    }
+  },
+  "screenshot_tiles": {
+    "1440": [
+      {
+        "path": "reader-screenshots/1440-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0004.png",
+        "y": 9000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0005.png",
+        "y": 12000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0006.png",
+        "y": 15000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0007.png",
+        "y": 15852,
+        "height": 3000
+      }
+    ],
+    "768": [
+      {
+        "path": "reader-screenshots/768-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0004.png",
+        "y": 9000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0005.png",
+        "y": 12000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0006.png",
+        "y": 15000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0007.png",
+        "y": 15852,
+        "height": 3000
+      }
+    ],
+    "390": [
+      {
+        "path": "reader-screenshots/390-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0004.png",
+        "y": 9000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0005.png",
+        "y": 12000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0006.png",
+        "y": 15000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0007.png",
+        "y": 18000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0008.png",
+        "y": 20549,
+        "height": 3000
+      }
+    ]
+  },
+  "visual_review_sha256": "65b3373446b6c1d5fabfe78b812308660077af40c85d91ca4a4fb99a541d76fd"
+}

@@ -2,15 +2,21 @@
 
 원문과 대조·검토한 기술 표준의 비공식 한국어 번역본을 보관합니다. 번역에는 [supertranslator](https://github.com/starryeye/supertranslator)를 사용했습니다.
 
-**[웹에서 번역본 읽기](https://starryeye.github.io/standard-document/) · [GitHub 저장소](https://github.com/starryeye/standard-document)**
+**[블로그에서 읽기](https://starryeye.github.io/) · [독립 읽기용 보관본](https://starryeye.github.io/standard-document/) · [GitHub 저장소](https://github.com/starryeye/standard-document)**
 
 ## 번역 문서
 
-| 문서 | 번역본 | 검토 결과 | 원문 |
-| --- | --- | --- | --- |
-| RFC 6749 — OAuth 2.0 Authorization Framework | [읽기](https://starryeye.github.io/standard-document/rfc/rfc6749/) | [직접 검토](https://github.com/starryeye/standard-document/blob/main/rfc/rfc6749/controller-review.md) · [QA](https://github.com/starryeye/standard-document/blob/main/rfc/rfc6749/review-report.md) | [IETF](https://datatracker.ietf.org/doc/rfc6749/) |
-| RFC 6750 — OAuth 2.0 Bearer Token Usage | [읽기](https://starryeye.github.io/standard-document/rfc/rfc6750/) | [직접 검토](https://github.com/starryeye/standard-document/blob/main/rfc/rfc6750/controller-review.md) · [QA](https://github.com/starryeye/standard-document/blob/main/rfc/rfc6750/review-report.md) | [IETF](https://datatracker.ietf.org/doc/rfc6750/) |
-| RFC 9700 — Best Current Practice for OAuth 2.0 Security | [읽기](https://starryeye.github.io/standard-document/rfc/rfc9700/) | [직접 검토](https://github.com/starryeye/standard-document/blob/main/rfc/rfc9700/controller-review.md) · [QA](https://github.com/starryeye/standard-document/blob/main/rfc/rfc9700/review-report.md) | [IETF](https://datatracker.ietf.org/doc/html/rfc9700/) |
+### RFC 6749 — OAuth 2.0 Authorization Framework
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc6749/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc6749/) · [검토 기록](rfc/rfc6749/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc6749/)
+
+### RFC 6750 — OAuth 2.0 Bearer Token Usage
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc6750/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc6750/) · [검토 기록](rfc/rfc6750/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc6750/)
+
+### RFC 9700 — Best Current Practice for OAuth 2.0 Security
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
 
 AI가 직접 번역하고, 전체 원문·번역 대조와 구조·화면 검토를 거친 결과입니다. 코드·도식·URL·프로토콜 식별자는 원문을 유지합니다. 세부적인 보존 범위와 주의점은 문서별 직접 검토 기록을 확인하세요.
 
@@ -24,12 +30,13 @@ RFC 6749·6750의 설명은 2012년 발행본의 맥락을 유지합니다. 이�
 
 GitHub Pages는 `main` 브랜치의 루트에서 게시됩니다. 저장소에 변경 사항을 푸시하면 GitHub의 기본 Pages 빌드·배포가 실행됩니다. 별도 애플리케이션 서버나 사용자 정의 배포 워크플로는 사용하지 않습니다.
 
-원본 Datatracker의 RSS, 웹앱 manifest, 사이트 상태 표시 기능은 제공하지 않습니다. HTML을 그대로 보존했으므로 해당 원본 사이트 기능의 경로 참조는 남아 있습니다. 번역 본문과 필요한 스타일·글꼴·이미지는 포함되어 있습니다.
+현재 게시본은 supertranslator 0.9.0의 읽기용 파생본입니다. 원문 사이트 메뉴를 제거하고 본문 폭·글자 크기·문단 간격을 정돈했습니다. 검토한 문단만 연결했고, 원문 페이지 표기는 문서 말미의 접힌 영역에 보존했습니다. 코드·도식은 가로로 스크롤할 수 있습니다. 처음 생성한 원문 보존형 HTML은 이전 Git 이력과 로컬 실행 기록에 남아 있습니다.
 
 ## 공개 범위와 검증 기록
 
 - 완료된 세 RFC의 HTML, 필요한 정적 자산, 검토 보고서와 공개용 `manifest.json`만 포함합니다.
-- HTML·자산·검토 보고서는 검토가 끝난 로컬 산출물과 바이트가 동일합니다. 공개용 manifest에서는 로컬 스크린샷 경로만 제외하고 제외 사유를 표시했습니다. 원래 증거와 실행 기록은 로컬에 보존합니다.
+- HTML·본문 조각·스타일과 자산은 검토가 끝난 읽기용 산출물과 바이트가 동일합니다. 렌더링 승인은 HTML·CSS·그림 해시 전체에 결합됩니다. 큰 화면 타일은 저장소에 포함하지 않으며, 원래 증거와 실행 기록은 로컬에 보존합니다.
+- `input-*` 보고서는 이전 번역의 검토 기록입니다. 현재 편집 검토와 혼동하지 않도록 별도로 보존합니다. 이번 변경은 새 전면 번역이나 새 의미 검토가 아닙니다.
 - 작업 중인 번역, 실패한 실행, 로컬 환경·에이전트 기록, 상용 책 PDF는 포함하지 않습니다.
 - RFC 9700까지 번역한 뒤 작업을 중단한 상태입니다. 후속 문서를 자동으로 번역하거나 게시하지 않습니다.
 

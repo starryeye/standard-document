@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "cd633c54ace9b149048c21bbec88c5e1698d1157167083d5aa477403de3e2f10",
+  "verdict": "pass",
+  "evidence": "RFC 9700: controller personally compared original and retained Korean paragraph groups, reviewed the complete desktop/mobile blog article in numbered real-scroll contact sheets, and rechecked mobile long-label bibliography after stacking definitions. All retained source-region prose/literals match after whitespace normalization; IDs, links and literal text are preserved. Standalone native samples plus all-prose automated measurements confirm 18px desktop / 16px narrow, 1.75 line-height, bounded width and local literal scrolling. Blog remains Minimal Mistakes dark skin. This approves reading-layout transformations, not a new semantic translation review. Initial giant full-page screenshots with blank rasterized tails were rejected and replaced by bounded real-scroll tiles."
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "cdc0524261f058e9539df80677c4af4276c117d7f7b8b7f0ad6788bc133c9d36",
+  "content_selector": ".xml2rfc",
+  "title": "RFC 9700 — OAuth 2.0 보안을 위한 현행 모범 사례",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "c11d70c805123a6a04459338a2feeef5535b9cf56f5b9adddb50a504a6d36fe8",
+      "reason": "Controller inspected: print-only running header/footer table, not article prose."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": []
+}

@@ -1,0 +1,1088 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "66e8eeabf5a2b37191a41acbc7dcddd225309d2d1cfc5a8b241487ebed7dc044",
+  "content_selector": "[data-wt-preformatted-root]",
+  "title": "RFC 6749 — OAuth 2.0 Authorization Framework",
+  "removals": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+      "text_sha256": "b4499ee56ff9fd83c67a3ebde9b536b1ae7a2445ddad08c45ba6f3c1232750b6",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000023\"]",
+      "text_sha256": "8fb7d2fd38b1afc5ae7f0624c17ebf8961aabeaf06b6d2f8f18bf34e3dbea489",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000024\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000075\"]",
+      "text_sha256": "b76dbf4e30d06305f69ad271beb8e82de5ed7dd9083ab87c7092f89c38aa41c2",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000076\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000124\"]",
+      "text_sha256": "9e29d6e98d4b596e3b4974481b01feb3bc8ab3857dd1678810b322d8bdc7a480",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000125\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000161\"]",
+      "text_sha256": "836d591ea0489f12922e30958a68211a35a9a80b9e572e87208d6e562edb519c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000162\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000176\"]",
+      "text_sha256": "ae5ead11b30cac6d2e9abd65cc9df2c5e4b0dde40fe5c6cd4827912f2a46a277",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000177\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000193\"]",
+      "text_sha256": "ea8d18d8e636ce0b9ab70ca8973541784671252a0ad860240b541c86897fbfb6",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000194\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000212\"]",
+      "text_sha256": "7c5192e08c69a9efb379ee556873fefe84a4528db7acb8667a8d0a6513de627b",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000213\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000237\"]",
+      "text_sha256": "689e400199ab8e4e035222f4a307973472f49ddcbcbefd1cc4545cf15088430d",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000238\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000256\"]",
+      "text_sha256": "5ec63edd9d71d8931a95c627e040613777c9270b8ad4b0326011bba7d4f6e3d8",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000257\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000275\"]",
+      "text_sha256": "e1a82242d8c6bef2dcbdd9f36dd526f22cb4b18751f4a2af596538788283e815",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000276\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000298\"]",
+      "text_sha256": "d02bae92334acc89d4aa36db1adecd07ec53c7e0543ca0efb9452eca4103029e",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000299\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000323\"]",
+      "text_sha256": "8f012795d634a3b6035f6d663b71d6bed04d49a51740f60a5a0747a3769808eb",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000324\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000346\"]",
+      "text_sha256": "eece243690255275e603c3420b1f260fb73457f3bd6d6a2471a86bde5d80dc42",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000347\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000369\"]",
+      "text_sha256": "fb89fed0a68c5bbf3d566a42503a9450da5e137064b5a79105903e4987c30fff",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000370\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000386\"]",
+      "text_sha256": "e6074af74d87c48d2a38ec89fa4b779fe6d5baddc1c9b7d529b02a2534b1af71",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000387\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000413\"]",
+      "text_sha256": "48ed3c96203eedbb562f26836c645b93105c1f10c0fda87907d2ecc08374155b",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000414\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000434\"]",
+      "text_sha256": "d1b74bbf6a630a6f985a74077ad458cdf77b8267af30a74b87c9fc4605544621",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000435\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000463\"]",
+      "text_sha256": "23331fe32ac51479b674de8c759a7a8d289a542a75c6cfad87576f3fe4e9e6f0",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000464\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000484\"]",
+      "text_sha256": "c475f7a65d4da67f8e81e38f50fd4e4d8298faae4f552f6646758b466465dc05",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000485\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000509\"]",
+      "text_sha256": "b650107dc42689aa5237e247421babbeee8d664c82749cbed134ce264524480f",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000510\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000532\"]",
+      "text_sha256": "16f3b87c6abeaff8c29b2d5dfedf8813f6d637649b142c5134076e047559e3e3",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000533\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000555\"]",
+      "text_sha256": "9e882a4ebbb8c2e068f3fffdae5828f432b8762b4dc74b09143d10b1d4cecb9e",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000556\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000576\"]",
+      "text_sha256": "1054166d803f315a7d3adc48fc1ca74625435181b7de3458c48a0c1b81697c11",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000577\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000589\"]",
+      "text_sha256": "02166a0232341c8b4ffc59f5afa405eee7f2b254b1374e345c429b2701ae0fd5",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000590\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000614\"]",
+      "text_sha256": "df420234beed9ad5850026e5d5b96af5e1f8e06fb726d24f2dff440c52671fd8",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000615\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000637\"]",
+      "text_sha256": "befee9b93adf03ce7f61f17bb3ae54549749e4357944577e81ea2969a63eac29",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000638\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000660\"]",
+      "text_sha256": "286f0d800441329c701266c4492bdd927dba663177072b402f0f5872d111eecb",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000661\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000681\"]",
+      "text_sha256": "7d6394f3b2b186197f55b1ed5ecb4cd5b9f446a685247b34685625a84f3d56a8",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000682\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000704\"]",
+      "text_sha256": "d2cd1cd974e8833ac3680b36b8de03dba9d87d7dcb0fbff2bd87d100119f57fb",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000705\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000727\"]",
+      "text_sha256": "7e2d0f15e15c3e6ceb780ac57c41b1c70f40cb4dd6b4df6679cccb9ec5fc2365",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000728\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000744\"]",
+      "text_sha256": "8db78cd33008c1778910aa3866c1030ab85576a87678875227787c9c7f222c91",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000745\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000753\"]",
+      "text_sha256": "a89853f5758a4c8e4d2fc2c5048a20f5197a0a7f5d3619a147b571892e006140",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000754\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000782\"]",
+      "text_sha256": "da9ef0554d33c33fc19a907c63014096c06161634d0a6e3c67196aa94d9b5844",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000783\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000803\"]",
+      "text_sha256": "9966af1dbfba9f80055b3f44739d18c462f54714b1ebd280f8c54dc9dcc0228c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000804\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000828\"]",
+      "text_sha256": "0e9d131869bfa1373be99c4afb4787bdb7bae4f19238be11c2ced8b4fb651121",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000829\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000851\"]",
+      "text_sha256": "d2628ce5a410f3f3ebe75fb0d9ebbb91f7f1942bdac1079b42d3e8b7a17af437",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000852\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000874\"]",
+      "text_sha256": "d9e177cd30e846d1255e0e687bcc36d2c603f05ad2bcbc600811cf21f92cc764",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000875\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000893\"]",
+      "text_sha256": "3b86b76fc1c71afb28ed56442503b0723407b51415a1027592f1641fbc2e8a2b",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000894\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000918\"]",
+      "text_sha256": "81a6377fd64b7438a1375418e0ef66d9b7b51354f445f7680cf9cde03b5caeba",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000919\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000943\"]",
+      "text_sha256": "ef0d3aaa7482a91aabfb07c48457720d58890c34b3b2983e147f18cb659416ff",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000944\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000972\"]",
+      "text_sha256": "baab53cc9fa35925cfc699db6bba3c78d472a4f8625cbe47b1a18e3b7347bd71",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000973\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000993\"]",
+      "text_sha256": "597673d9455f097803786b4c9d0b6acebd648a4775e0542fde9928668ad1beb4",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000994\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001016\"]",
+      "text_sha256": "96841408cba0d7db82183669666ab0a30e4f97ee83c55715d841c418d111af6e",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001017\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001033\"]",
+      "text_sha256": "ac24cfe62ab0c0fc6da6f887cd6720f462113002151eb1c0499472c4d5785490",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001034\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001052\"]",
+      "text_sha256": "4992fe5897002c67e17db5631621bad8ae8383a3c731a7185b70702481415ffa",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001053\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001069\"]",
+      "text_sha256": "2b2b02a48ae21d8be057b21859ce4bbb9ce1a9c106402b60ffae920df43c2aee",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001070\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001089\"]",
+      "text_sha256": "b8b67ddad426dad73c5cacf94c20328621e8207e50a30aeedffd7f06c6f88220",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001090\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001110\"]",
+      "text_sha256": "9e08d61d182906babad5de4deafdafbb9cfb07488c4aa7b3143d20ecda21a364",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001111\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001135\"]",
+      "text_sha256": "e335ee6de444bb63c69d2075c26fe982b6bd39b5f70dbb94f45388c61fd54c41",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001136\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001164\"]",
+      "text_sha256": "69f4cf1d5aaeaa83fbf0f65dc5e2280510361813371b04d3c282e64543c6f72f",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001165\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001187\"]",
+      "text_sha256": "5393dedff5c927d376e0cf964b346e1c0e49910e0c54bb65059df957e9549350",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001188\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001210\"]",
+      "text_sha256": "c8bbdb01df0fc40621e9854d4b21d13b26c9fa729d5cb8104b9f91ca0a6c879c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001211\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001235\"]",
+      "text_sha256": "4198f2888fb3f368088fa10efde0c606ced1df93073c48a36e4c8e6578d278f2",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001236\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001254\"]",
+      "text_sha256": "dd45bfe83b82d06f219225b2c6b268f6de2d24fe6b77d5c4660431eee2be5b54",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001255\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001279\"]",
+      "text_sha256": "3cd784783cc41dd8d08bb727e9d0688f58ecc05e2764dd0e706120dc48138bdd",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001280\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001302\"]",
+      "text_sha256": "04e718521f5610cbda14add54d3986ef4a9ae4ef8d2dd2ff95c5e4c26053910c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001303\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001321\"]",
+      "text_sha256": "bd2b4ec4daf08f85a10010eb138a027383da9b3476a364ad8d25d9c70b0b6508",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001322\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001348\"]",
+      "text_sha256": "7ef287655dc4f404e0f29951722530c1cbb070d9d6b0e691099782e628c5a504",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001349\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001367\"]",
+      "text_sha256": "4478b2c940c108e45cdee25a7a8ad87a6cd9f2c598002891d350dad32bc3282d",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001368\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001388\"]",
+      "text_sha256": "bb1959ba167b8c2836a201c8f6d14af10b2922dca7129bc59f6c0bb800687b76",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001389\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001409\"]",
+      "text_sha256": "7b470e6d8be39a12fd73febe5caf852a29a3ceb9796661080d27022f7ae23f7a",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001410\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001436\"]",
+      "text_sha256": "80441fb84eef0c0f5d6d6c374ece65b63fdcc138db5b5063fdb2352c44d1a7d0",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001437\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001461\"]",
+      "text_sha256": "702b4db2383c7655c3755e999fceb9b2236ecdfb8672b9c16b06ba29f194366f",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001462\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001505\"]",
+      "text_sha256": "1b85f2bd99a12fc16627ea825ed8b541055665a499d81a0f9daac32f13fa6bed",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001506\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001553\"]",
+      "text_sha256": "2c59a4cfc138915dc9d5cf16c1f69c6867d3f442554d6a688333f8cf67c87614",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001554\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001576\"]",
+      "text_sha256": "5d3cee1f1a2ca742c72b134088095f535291149be452a76f3ec97caea506969c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001577\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001603\"]",
+      "text_sha256": "1b31e1049f5657f44778c92025e56e37d0fe2bcc0709e8181ca86566b322d09e",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001604\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001630\"]",
+      "text_sha256": "cbdcc6266932368708927f152058d5fe15e47d5dd7fa4205fd90bc94452c59ef",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001631\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001657\"]",
+      "text_sha256": "cba482e9ba28e1d7f042f64d5fc9e94ac4b8b7298d4a08107ac5513e0d39b6b8",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001658\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001674\"]",
+      "text_sha256": "743b1e011412478b60fe499b14a758291fbfe52a240cc3ba280d18e75dfacf45",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001675\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001707\"]",
+      "text_sha256": "808b2080cb86ccc867dc51a56a9ef1d3aa22a3f6c70a4d0da61df41f92ca372b",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001708\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001746\"]",
+      "text_sha256": "9d9a9eddebfedd7f87d315061b6171ac3db3a26b72d4ef708b366ee5385c1a8f",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001747\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001791\"]",
+      "text_sha256": "919ba4ec7446e8b615a1a8a227194994fa475554aa5c0e999868428fba7aeb5c",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001792\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001822\"]",
+      "text_sha256": "f08d3ee79759e043f56f5f0a556a812dd167a7a18a393969dafcd8db4c10e509",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001823\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001837\"]",
+      "text_sha256": "907ebeb8a436424527775831e02913b368af8220888962d125a59869b31f5446",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001838\"]",
+      "text_sha256": "c780fb2212e8c0412c23fabfb7748436573a8094d31f3c4fbddfdf46caba6fe1",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-001848\"]",
+      "text_sha256": "b8f89c512c141f67c1d2d1cda818df265091f198856a3e622003bd9cd711fd85",
+      "reason": "Controller inspected: source publication metadata or repeated running header/footer, retained in collapsed source notes."
+    }
+  ],
+  "joins": [
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000235\"]",
+        "[data-wt-preformatted-block=\"block-000240\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000273\"]",
+        "[data-wt-preformatted-block=\"block-000278\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000321\"]",
+        "[data-wt-preformatted-block=\"block-000326\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000635\"]",
+        "[data-wt-preformatted-block=\"block-000640\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000872\"]",
+        "[data-wt-preformatted-block=\"block-000877\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-001208\"]",
+        "[data-wt-preformatted-block=\"block-001213\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-001277\"]",
+        "[data-wt-preformatted-block=\"block-001282\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-001300\"]",
+        "[data-wt-preformatted-block=\"block-001305\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-001386\"]",
+        "[data-wt-preformatted-block=\"block-001391\"]"
+      ]
+    }
+  ],
+  "heading_levels": {
+    "[data-wt-preformatted-block=\"block-000003\"]": 1,
+    "[data-wt-preformatted-block=\"block-000005\"]": 2,
+    "[data-wt-preformatted-block=\"block-000009\"]": 2,
+    "[data-wt-preformatted-block=\"block-000017\"]": 2,
+    "[data-wt-preformatted-block=\"block-000026\"]": 2,
+    "[data-wt-preformatted-block=\"block-000149\"]": 2,
+    "[data-wt-preformatted-block=\"block-000179\"]": 3,
+    "[data-wt-preformatted-block=\"block-000196\"]": 3,
+    "[data-wt-preformatted-block=\"block-000221\"]": 3,
+    "[data-wt-preformatted-block=\"block-000225\"]": 4,
+    "[data-wt-preformatted-block=\"block-000233\"]": 4,
+    "[data-wt-preformatted-block=\"block-000246\"]": 4,
+    "[data-wt-preformatted-block=\"block-000252\"]": 4,
+    "[data-wt-preformatted-block=\"block-000259\"]": 3,
+    "[data-wt-preformatted-block=\"block-000269\"]": 3,
+    "[data-wt-preformatted-block=\"block-000307\"]": 3,
+    "[data-wt-preformatted-block=\"block-000313\"]": 3,
+    "[data-wt-preformatted-block=\"block-000317\"]": 3,
+    "[data-wt-preformatted-block=\"block-000330\"]": 3,
+    "[data-wt-preformatted-block=\"block-000340\"]": 2,
+    "[data-wt-preformatted-block=\"block-000357\"]": 3,
+    "[data-wt-preformatted-block=\"block-000380\"]": 3,
+    "[data-wt-preformatted-block=\"block-000389\"]": 3,
+    "[data-wt-preformatted-block=\"block-000399\"]": 4,
+    "[data-wt-preformatted-block=\"block-000426\"]": 4,
+    "[data-wt-preformatted-block=\"block-000430\"]": 3,
+    "[data-wt-preformatted-block=\"block-000437\"]": 2,
+    "[data-wt-preformatted-block=\"block-000451\"]": 3,
+    "[data-wt-preformatted-block=\"block-000468\"]": 4,
+    "[data-wt-preformatted-block=\"block-000478\"]": 4,
+    "[data-wt-preformatted-block=\"block-000487\"]": 5,
+    "[data-wt-preformatted-block=\"block-000493\"]": 5,
+    "[data-wt-preformatted-block=\"block-000512\"]": 5,
+    "[data-wt-preformatted-block=\"block-000518\"]": 5,
+    "[data-wt-preformatted-block=\"block-000522\"]": 5,
+    "[data-wt-preformatted-block=\"block-000528\"]": 3,
+    "[data-wt-preformatted-block=\"block-000545\"]": 4,
+    "[data-wt-preformatted-block=\"block-000560\"]": 3,
+    "[data-wt-preformatted-block=\"block-000572\"]": 2,
+    "[data-wt-preformatted-block=\"block-000579\"]": 3,
+    "[data-wt-preformatted-block=\"block-000604\"]": 4,
+    "[data-wt-preformatted-block=\"block-000631\"]": 4,
+    "[data-wt-preformatted-block=\"block-000650\"]": 5,
+    "[data-wt-preformatted-block=\"block-000690\"]": 4,
+    "[data-wt-preformatted-block=\"block-000723\"]": 4,
+    "[data-wt-preformatted-block=\"block-000734\"]": 3,
+    "[data-wt-preformatted-block=\"block-000774\"]": 4,
+    "[data-wt-preformatted-block=\"block-000806\"]": 4,
+    "[data-wt-preformatted-block=\"block-000833\"]": 5,
+    "[data-wt-preformatted-block=\"block-000870\"]": 3,
+    "[data-wt-preformatted-block=\"block-000896\"]": 4,
+    "[data-wt-preformatted-block=\"block-000900\"]": 4,
+    "[data-wt-preformatted-block=\"block-000931\"]": 4,
+    "[data-wt-preformatted-block=\"block-000939\"]": 3,
+    "[data-wt-preformatted-block=\"block-000958\"]": 4,
+    "[data-wt-preformatted-block=\"block-000962\"]": 4,
+    "[data-wt-preformatted-block=\"block-000981\"]": 4,
+    "[data-wt-preformatted-block=\"block-000989\"]": 3,
+    "[data-wt-preformatted-block=\"block-001002\"]": 2,
+    "[data-wt-preformatted-block=\"block-001006\"]": 3,
+    "[data-wt-preformatted-block=\"block-001036\"]": 3,
+    "[data-wt-preformatted-block=\"block-001072\"]": 2,
+    "[data-wt-preformatted-block=\"block-001104\"]": 2,
+    "[data-wt-preformatted-block=\"block-001113\"]": 3,
+    "[data-wt-preformatted-block=\"block-001129\"]": 3,
+    "[data-wt-preformatted-block=\"block-001144\"]": 2,
+    "[data-wt-preformatted-block=\"block-001146\"]": 3,
+    "[data-wt-preformatted-block=\"block-001156\"]": 3,
+    "[data-wt-preformatted-block=\"block-001169\"]": 3,
+    "[data-wt-preformatted-block=\"block-001173\"]": 3,
+    "[data-wt-preformatted-block=\"block-001183\"]": 3,
+    "[data-wt-preformatted-block=\"block-001196\"]": 2,
+    "[data-wt-preformatted-block=\"block-001225\"]": 2,
+    "[data-wt-preformatted-block=\"block-001231\"]": 3,
+    "[data-wt-preformatted-block=\"block-001244\"]": 3,
+    "[data-wt-preformatted-block=\"block-001257\"]": 3,
+    "[data-wt-preformatted-block=\"block-001269\"]": 3,
+    "[data-wt-preformatted-block=\"block-001286\"]": 3,
+    "[data-wt-preformatted-block=\"block-001296\"]": 3,
+    "[data-wt-preformatted-block=\"block-001311\"]": 3,
+    "[data-wt-preformatted-block=\"block-001324\"]": 3,
+    "[data-wt-preformatted-block=\"block-001330\"]": 3,
+    "[data-wt-preformatted-block=\"block-001334\"]": 3,
+    "[data-wt-preformatted-block=\"block-001342\"]": 3,
+    "[data-wt-preformatted-block=\"block-001353\"]": 3,
+    "[data-wt-preformatted-block=\"block-001370\"]": 3,
+    "[data-wt-preformatted-block=\"block-001376\"]": 3,
+    "[data-wt-preformatted-block=\"block-001382\"]": 3,
+    "[data-wt-preformatted-block=\"block-001393\"]": 3,
+    "[data-wt-preformatted-block=\"block-001412\"]": 2,
+    "[data-wt-preformatted-block=\"block-001414\"]": 3,
+    "[data-wt-preformatted-block=\"block-001426\"]": 4,
+    "[data-wt-preformatted-block=\"block-001441\"]": 3,
+    "[data-wt-preformatted-block=\"block-001453\"]": 4,
+    "[data-wt-preformatted-block=\"block-001466\"]": 4,
+    "[data-wt-preformatted-block=\"block-001556\"]": 3,
+    "[data-wt-preformatted-block=\"block-001568\"]": 4,
+    "[data-wt-preformatted-block=\"block-001579\"]": 4,
+    "[data-wt-preformatted-block=\"block-001591\"]": 3,
+    "[data-wt-preformatted-block=\"block-001606\"]": 4,
+    "[data-wt-preformatted-block=\"block-001618\"]": 2,
+    "[data-wt-preformatted-block=\"block-001620\"]": 3,
+    "[data-wt-preformatted-block=\"block-001660\"]": 3,
+    "[data-wt-preformatted-block=\"block-001677\"]": 2,
+    "[data-wt-preformatted-block=\"block-001689\"]": 3,
+    "[data-wt-preformatted-block=\"block-001695\"]": 3,
+    "[data-wt-preformatted-block=\"block-001701\"]": 3,
+    "[data-wt-preformatted-block=\"block-001710\"]": 3,
+    "[data-wt-preformatted-block=\"block-001716\"]": 3,
+    "[data-wt-preformatted-block=\"block-001722\"]": 3,
+    "[data-wt-preformatted-block=\"block-001728\"]": 3,
+    "[data-wt-preformatted-block=\"block-001734\"]": 3,
+    "[data-wt-preformatted-block=\"block-001740\"]": 3,
+    "[data-wt-preformatted-block=\"block-001749\"]": 3,
+    "[data-wt-preformatted-block=\"block-001755\"]": 3,
+    "[data-wt-preformatted-block=\"block-001761\"]": 3,
+    "[data-wt-preformatted-block=\"block-001767\"]": 3,
+    "[data-wt-preformatted-block=\"block-001773\"]": 3,
+    "[data-wt-preformatted-block=\"block-001779\"]": 3,
+    "[data-wt-preformatted-block=\"block-001785\"]": 3,
+    "[data-wt-preformatted-block=\"block-001794\"]": 3,
+    "[data-wt-preformatted-block=\"block-001800\"]": 3,
+    "[data-wt-preformatted-block=\"block-001806\"]": 2,
+    "[data-wt-preformatted-block=\"block-001825\"]": 2,
+    "[data-wt-preformatted-block=\"block-001842\"]": 2
+  },
+  "list_items": [
+    "[data-wt-preformatted-block=\"block-000153\"]",
+    "[data-wt-preformatted-block=\"block-000155\"]",
+    "[data-wt-preformatted-block=\"block-000157\"]",
+    "[data-wt-preformatted-block=\"block-000159\"]",
+    "[data-wt-preformatted-block=\"block-000164\"]",
+    "[data-wt-preformatted-block=\"block-000204\"]",
+    "[data-wt-preformatted-block=\"block-000206\"]",
+    "[data-wt-preformatted-block=\"block-000208\"]",
+    "[data-wt-preformatted-block=\"block-000210\"]",
+    "[data-wt-preformatted-block=\"block-000215\"]",
+    "[data-wt-preformatted-block=\"block-000217\"]",
+    "[data-wt-preformatted-block=\"block-000286\"]",
+    "[data-wt-preformatted-block=\"block-000288\"]",
+    "[data-wt-preformatted-block=\"block-000290\"]",
+    "[data-wt-preformatted-block=\"block-000292\"]",
+    "[data-wt-preformatted-block=\"block-000294\"]",
+    "[data-wt-preformatted-block=\"block-000296\"]",
+    "[data-wt-preformatted-block=\"block-000301\"]",
+    "[data-wt-preformatted-block=\"block-000303\"]",
+    "[data-wt-preformatted-block=\"block-000351\"]",
+    "[data-wt-preformatted-block=\"block-000353\"]",
+    "[data-wt-preformatted-block=\"block-000355\"]",
+    "[data-wt-preformatted-block=\"block-000441\"]",
+    "[data-wt-preformatted-block=\"block-000443\"]",
+    "[data-wt-preformatted-block=\"block-000447\"]",
+    "[data-wt-preformatted-block=\"block-000497\"]",
+    "[data-wt-preformatted-block=\"block-000499\"]",
+    "[data-wt-preformatted-block=\"block-000549\"]",
+    "[data-wt-preformatted-block=\"block-000551\"]",
+    "[data-wt-preformatted-block=\"block-000553\"]",
+    "[data-wt-preformatted-block=\"block-000594\"]",
+    "[data-wt-preformatted-block=\"block-000596\"]",
+    "[data-wt-preformatted-block=\"block-000598\"]",
+    "[data-wt-preformatted-block=\"block-000600\"]",
+    "[data-wt-preformatted-block=\"block-000602\"]",
+    "[data-wt-preformatted-block=\"block-000713\"]",
+    "[data-wt-preformatted-block=\"block-000715\"]",
+    "[data-wt-preformatted-block=\"block-000717\"]",
+    "[data-wt-preformatted-block=\"block-000719\"]",
+    "[data-wt-preformatted-block=\"block-000721\"]",
+    "[data-wt-preformatted-block=\"block-000758\"]",
+    "[data-wt-preformatted-block=\"block-000760\"]",
+    "[data-wt-preformatted-block=\"block-000762\"]",
+    "[data-wt-preformatted-block=\"block-000764\"]",
+    "[data-wt-preformatted-block=\"block-000766\"]",
+    "[data-wt-preformatted-block=\"block-000768\"]",
+    "[data-wt-preformatted-block=\"block-000770\"]",
+    "[data-wt-preformatted-block=\"block-000887\"]",
+    "[data-wt-preformatted-block=\"block-000889\"]",
+    "[data-wt-preformatted-block=\"block-000891\"]",
+    "[data-wt-preformatted-block=\"block-000923\"]",
+    "[data-wt-preformatted-block=\"block-000925\"]",
+    "[data-wt-preformatted-block=\"block-000927\"]",
+    "[data-wt-preformatted-block=\"block-000954\"]",
+    "[data-wt-preformatted-block=\"block-000956\"]",
+    "[data-wt-preformatted-block=\"block-001094\"]",
+    "[data-wt-preformatted-block=\"block-001096\"]",
+    "[data-wt-preformatted-block=\"block-001098\"]",
+    "[data-wt-preformatted-block=\"block-001202\"]",
+    "[data-wt-preformatted-block=\"block-001204\"]",
+    "[data-wt-preformatted-block=\"block-001208\"]",
+    "[data-wt-preformatted-block=\"block-001215\"]",
+    "[data-wt-preformatted-block=\"block-001217\"]",
+    "[data-wt-preformatted-block=\"block-001221\"]",
+    "[data-wt-preformatted-block=\"block-001223\"]",
+    "[data-wt-preformatted-block=\"block-001470\"]",
+    "[data-wt-preformatted-block=\"block-001471\"]",
+    "[data-wt-preformatted-block=\"block-001472\"]",
+    "[data-wt-preformatted-block=\"block-001473\"]",
+    "[data-wt-preformatted-block=\"block-001475\"]",
+    "[data-wt-preformatted-block=\"block-001476\"]",
+    "[data-wt-preformatted-block=\"block-001477\"]",
+    "[data-wt-preformatted-block=\"block-001478\"]",
+    "[data-wt-preformatted-block=\"block-001480\"]",
+    "[data-wt-preformatted-block=\"block-001481\"]",
+    "[data-wt-preformatted-block=\"block-001482\"]",
+    "[data-wt-preformatted-block=\"block-001483\"]",
+    "[data-wt-preformatted-block=\"block-001485\"]",
+    "[data-wt-preformatted-block=\"block-001486\"]",
+    "[data-wt-preformatted-block=\"block-001487\"]",
+    "[data-wt-preformatted-block=\"block-001488\"]",
+    "[data-wt-preformatted-block=\"block-001490\"]",
+    "[data-wt-preformatted-block=\"block-001491\"]",
+    "[data-wt-preformatted-block=\"block-001492\"]",
+    "[data-wt-preformatted-block=\"block-001493\"]",
+    "[data-wt-preformatted-block=\"block-001495\"]",
+    "[data-wt-preformatted-block=\"block-001496\"]",
+    "[data-wt-preformatted-block=\"block-001497\"]",
+    "[data-wt-preformatted-block=\"block-001498\"]",
+    "[data-wt-preformatted-block=\"block-001500\"]",
+    "[data-wt-preformatted-block=\"block-001501\"]",
+    "[data-wt-preformatted-block=\"block-001502\"]",
+    "[data-wt-preformatted-block=\"block-001503\"]",
+    "[data-wt-preformatted-block=\"block-001508\"]",
+    "[data-wt-preformatted-block=\"block-001509\"]",
+    "[data-wt-preformatted-block=\"block-001510\"]",
+    "[data-wt-preformatted-block=\"block-001511\"]",
+    "[data-wt-preformatted-block=\"block-001513\"]",
+    "[data-wt-preformatted-block=\"block-001514\"]",
+    "[data-wt-preformatted-block=\"block-001515\"]",
+    "[data-wt-preformatted-block=\"block-001516\"]",
+    "[data-wt-preformatted-block=\"block-001518\"]",
+    "[data-wt-preformatted-block=\"block-001519\"]",
+    "[data-wt-preformatted-block=\"block-001520\"]",
+    "[data-wt-preformatted-block=\"block-001521\"]",
+    "[data-wt-preformatted-block=\"block-001523\"]",
+    "[data-wt-preformatted-block=\"block-001524\"]",
+    "[data-wt-preformatted-block=\"block-001525\"]",
+    "[data-wt-preformatted-block=\"block-001526\"]",
+    "[data-wt-preformatted-block=\"block-001528\"]",
+    "[data-wt-preformatted-block=\"block-001529\"]",
+    "[data-wt-preformatted-block=\"block-001530\"]",
+    "[data-wt-preformatted-block=\"block-001531\"]",
+    "[data-wt-preformatted-block=\"block-001533\"]",
+    "[data-wt-preformatted-block=\"block-001534\"]",
+    "[data-wt-preformatted-block=\"block-001535\"]",
+    "[data-wt-preformatted-block=\"block-001536\"]",
+    "[data-wt-preformatted-block=\"block-001538\"]",
+    "[data-wt-preformatted-block=\"block-001539\"]",
+    "[data-wt-preformatted-block=\"block-001540\"]",
+    "[data-wt-preformatted-block=\"block-001541\"]",
+    "[data-wt-preformatted-block=\"block-001543\"]",
+    "[data-wt-preformatted-block=\"block-001544\"]",
+    "[data-wt-preformatted-block=\"block-001545\"]",
+    "[data-wt-preformatted-block=\"block-001546\"]",
+    "[data-wt-preformatted-block=\"block-001548\"]",
+    "[data-wt-preformatted-block=\"block-001549\"]",
+    "[data-wt-preformatted-block=\"block-001550\"]",
+    "[data-wt-preformatted-block=\"block-001551\"]",
+    "[data-wt-preformatted-block=\"block-001583\"]",
+    "[data-wt-preformatted-block=\"block-001584\"]",
+    "[data-wt-preformatted-block=\"block-001585\"]",
+    "[data-wt-preformatted-block=\"block-001587\"]",
+    "[data-wt-preformatted-block=\"block-001588\"]",
+    "[data-wt-preformatted-block=\"block-001589\"]"
+  ]
+}

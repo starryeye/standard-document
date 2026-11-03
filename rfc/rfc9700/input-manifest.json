@@ -1,0 +1,349 @@
+{
+  "assets": {
+    "captured": [
+      {
+        "classification": "optional",
+        "local_path": "assets/f532925fb08da239.gif",
+        "sha256": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+        "source": "https://analytics.ietf.org/matomo.php?idsite=7"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/87884d342e123681.woff",
+        "sha256": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.019ba25e.woff"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/6ab390d979ae3711.woff2",
+        "sha256": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.dc6e4a26.woff2"
+      },
+      {
+        "classification": "critical",
+        "local_path": "assets/cfaae006a92aa32b.css",
+        "sha256": "4bc8a8872e4ae82c2c699bc420b68cb29010245f22ac264cb767bdc39fd0e95c",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/css/document_html_referenced.css"
+      },
+      {
+        "classification": "critical",
+        "local_path": "assets/f1ba71920f06e22a.css",
+        "sha256": "bccfd58dbaf87c2646ead2e9ee615b7e01bd46a9c17efe643ba06c5af1438eb1",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/css/document_html_txt.css"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/4213d31c0bd25b11.png",
+        "sha256": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-16.png"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/8d512a6ac3db2665.png",
+        "sha256": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-180.png"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/df64f6065a47862f.png",
+        "sha256": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-32.png"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/1be32e0be699d849.svg",
+        "sha256": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-mask.svg"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/74bc946c84c8cf4b.svg",
+        "sha256": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-white.svg"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/d4963924b6b4256e.svg",
+        "sha256": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+        "source": "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor.svg"
+      },
+      {
+        "classification": "critical",
+        "local_path": "assets/291c297d6baad8bf.css",
+        "sha256": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+        "source": "https://static.ietf.org/fonts/inter/import.css"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/014af5d11684e452.woff2",
+        "sha256": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+        "source": "https://static.ietf.org/fonts/inter/inter-cyrillic-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/d3a725cb4810d0e7.woff2",
+        "sha256": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+        "source": "https://static.ietf.org/fonts/inter/inter-cyrillic.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/b37e2da88d7283b5.woff2",
+        "sha256": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+        "source": "https://static.ietf.org/fonts/inter/inter-greek-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/27f6b4e2c219be75.woff2",
+        "sha256": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+        "source": "https://static.ietf.org/fonts/inter/inter-greek.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/93e8c6293d2f7670.woff2",
+        "sha256": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+        "source": "https://static.ietf.org/fonts/inter/inter-latin-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/7f6da73d531784d3.woff2",
+        "sha256": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+        "source": "https://static.ietf.org/fonts/inter/inter-latin.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/b65651088b1c8cd1.woff2",
+        "sha256": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+        "source": "https://static.ietf.org/fonts/inter/inter-vietnamese.woff2"
+      },
+      {
+        "classification": "critical",
+        "local_path": "assets/d3dff33b5b11f2a5.css",
+        "sha256": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/import.css"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/16a945e4301b94df.woff2",
+        "sha256": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/a2eee5530bf32ed5.woff2",
+        "sha256": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/3a24e04966bec07d.woff2",
+        "sha256": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/bdc7a9c237186021.woff2",
+        "sha256": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/80921d3f0743cbb6.woff2",
+        "sha256": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin-ext.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/a0e410c0f7e3dc19.woff2",
+        "sha256": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin.woff2"
+      },
+      {
+        "classification": "optional",
+        "local_path": "assets/5e3727118774e143.woff2",
+        "sha256": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+        "source": "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-vietnamese.woff2"
+      }
+    ],
+    "missing_optional": []
+  },
+  "browser_metrics": {
+    "desktop-1440x900": {
+      "brokenImages": [],
+      "clippedText": 0,
+      "horizontalOverflow": false
+    },
+    "narrow-390x844": {
+      "brokenImages": [],
+      "clippedText": 0,
+      "horizontalOverflow": false
+    }
+  },
+  "capture": {
+    "captured_at": "2026-10-31T11:54:16Z",
+    "final_url": "https://datatracker.ietf.org/doc/html/rfc9700/",
+    "requested_url": "https://datatracker.ietf.org/doc/html/rfc9700/"
+  },
+  "capture_metadata": {
+    "asset_map": {
+      "https://analytics.ietf.org/matomo.php?idsite=7": "assets/f532925fb08da239.gif",
+      "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.019ba25e.woff": "assets/87884d342e123681.woff",
+      "https://static.ietf.org/dt/12.82.1/ietf/bootstrap-icons.dc6e4a26.woff2": "assets/6ab390d979ae3711.woff2",
+      "https://static.ietf.org/dt/12.82.1/ietf/css/document_html_referenced.css": "assets/cfaae006a92aa32b.css",
+      "https://static.ietf.org/dt/12.82.1/ietf/css/document_html_txt.css": "assets/f1ba71920f06e22a.css",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-16.png": "assets/4213d31c0bd25b11.png",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-180.png": "assets/8d512a6ac3db2665.png",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-32.png": "assets/df64f6065a47862f.png",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-mask.svg": "assets/1be32e0be699d849.svg",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor-white.svg": "assets/74bc946c84c8cf4b.svg",
+      "https://static.ietf.org/dt/12.82.1/ietf/images/ietf-logo-nor.svg": "assets/d4963924b6b4256e.svg",
+      "https://static.ietf.org/fonts/inter/import.css": "assets/291c297d6baad8bf.css",
+      "https://static.ietf.org/fonts/inter/inter-cyrillic-ext.woff2": "assets/014af5d11684e452.woff2",
+      "https://static.ietf.org/fonts/inter/inter-cyrillic.woff2": "assets/d3a725cb4810d0e7.woff2",
+      "https://static.ietf.org/fonts/inter/inter-greek-ext.woff2": "assets/b37e2da88d7283b5.woff2",
+      "https://static.ietf.org/fonts/inter/inter-greek.woff2": "assets/27f6b4e2c219be75.woff2",
+      "https://static.ietf.org/fonts/inter/inter-latin-ext.woff2": "assets/93e8c6293d2f7670.woff2",
+      "https://static.ietf.org/fonts/inter/inter-latin.woff2": "assets/7f6da73d531784d3.woff2",
+      "https://static.ietf.org/fonts/inter/inter-vietnamese.woff2": "assets/b65651088b1c8cd1.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/import.css": "assets/d3dff33b5b11f2a5.css",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic-ext.woff2": "assets/16a945e4301b94df.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-cyrillic.woff2": "assets/a2eee5530bf32ed5.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek-ext.woff2": "assets/3a24e04966bec07d.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-greek.woff2": "assets/bdc7a9c237186021.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin-ext.woff2": "assets/80921d3f0743cbb6.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-latin.woff2": "assets/a0e410c0f7e3dc19.woff2",
+      "https://static.ietf.org/fonts/noto-sans-mono/noto-sans-mono-vietnamese.woff2": "assets/5e3727118774e143.woff2"
+    },
+    "captured_at": "2026-10-31T11:54:16Z",
+    "critical_assets": [
+      "assets/291c297d6baad8bf.css",
+      "assets/cfaae006a92aa32b.css",
+      "assets/d3dff33b5b11f2a5.css",
+      "assets/f1ba71920f06e22a.css"
+    ],
+    "final_url": "https://datatracker.ietf.org/doc/html/rfc9700/",
+    "fingerprints": {
+      "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+      "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+      "assets/1be32e0be699d849.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+      "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+      "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+      "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+      "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+      "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+      "assets/6ab390d979ae3711.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+      "assets/74bc946c84c8cf4b.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
+      "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+      "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+      "assets/87884d342e123681.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15",
+      "assets/8d512a6ac3db2665.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+      "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+      "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+      "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+      "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+      "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+      "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+      "assets/cfaae006a92aa32b.css": "4bc8a8872e4ae82c2c699bc420b68cb29010245f22ac264cb767bdc39fd0e95c",
+      "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+      "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+      "assets/d4963924b6b4256e.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+      "assets/df64f6065a47862f.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+      "assets/f1ba71920f06e22a.css": "bccfd58dbaf87c2646ead2e9ee615b7e01bd46a9c17efe643ba06c5af1438eb1",
+      "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+      "source.html": "0acd058c7f13cdef94466cc25b26f1872c7dd969385b65011ce95b6d9c531fd9"
+    },
+    "missing_optional_assets": [],
+    "optional_assets": [
+      "assets/014af5d11684e452.woff2",
+      "assets/16a945e4301b94df.woff2",
+      "assets/1be32e0be699d849.svg",
+      "assets/27f6b4e2c219be75.woff2",
+      "assets/3a24e04966bec07d.woff2",
+      "assets/4213d31c0bd25b11.png",
+      "assets/5e3727118774e143.woff2",
+      "assets/6ab390d979ae3711.woff2",
+      "assets/74bc946c84c8cf4b.svg",
+      "assets/7f6da73d531784d3.woff2",
+      "assets/80921d3f0743cbb6.woff2",
+      "assets/87884d342e123681.woff",
+      "assets/8d512a6ac3db2665.png",
+      "assets/93e8c6293d2f7670.woff2",
+      "assets/a0e410c0f7e3dc19.woff2",
+      "assets/a2eee5530bf32ed5.woff2",
+      "assets/b37e2da88d7283b5.woff2",
+      "assets/b65651088b1c8cd1.woff2",
+      "assets/bdc7a9c237186021.woff2",
+      "assets/d3a725cb4810d0e7.woff2",
+      "assets/d4963924b6b4256e.svg",
+      "assets/df64f6065a47862f.png",
+      "assets/f532925fb08da239.gif"
+    ],
+    "requested_url": "https://datatracker.ietf.org/doc/html/rfc9700/"
+  },
+  "coverage": {
+    "segments": 825,
+    "target_segments": 825,
+    "translated_segments": 825,
+    "zones": 16
+  },
+  "languages": {
+    "source": "en",
+    "target": "ko"
+  },
+  "normalization": {
+    "generated_assets": [
+      {
+        "path": "assets/wt-preformatted-14edac915a1f0158.css",
+        "sha256": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072"
+      }
+    ],
+    "policy": "prose-reflow-literals-preserved",
+    "preserved_blocks": 12,
+    "preserved_reasons": {
+      "literal-code": 12
+    },
+    "projection_sha256": "e8d7b4dd88c6f4ad6514dae23f612b76ad309641c46bcc68956fe8551deb3ca6",
+    "review_sha256": "550593ef6ba9dfc3d1f4a56511768ab41778bb8a08632035ba30dee6a00f7979",
+    "schema_version": "1.0",
+    "source_sha256": "0acd058c7f13cdef94466cc25b26f1872c7dd969385b65011ce95b6d9c531fd9",
+    "translated_blocks": 0,
+    "unknown_blocks": 0
+  },
+  "qa_status": "passed",
+  "required_findings": [],
+  "retries": {
+    "zone-001": 0,
+    "zone-002": 0,
+    "zone-003": 0,
+    "zone-004": 0,
+    "zone-005": 0,
+    "zone-006": 0,
+    "zone-007": 0,
+    "zone-008": 1,
+    "zone-009": 0,
+    "zone-010": 0,
+    "zone-011": 0,
+    "zone-012": 0,
+    "zone-013": 0,
+    "zone-014": 0,
+    "zone-015": 0,
+    "zone-016": 0
+  },
+  "schema_version": "1.0",
+  "screenshots": [],
+  "source_url": "https://datatracker.ietf.org/doc/html/rfc9700/",
+  "terminology_policy": {
+    "id": "english-technical-first-use-ko-gloss",
+    "version": "1.0"
+  },
+  "tool": {
+    "name": "supertranslator",
+    "version": "0.8.0"
+  },
+  "warnings": [],
+  "publication": {
+    "note": "Local QA screenshot paths omitted for public distribution. Original QA evidence remains local; this copy does not include screenshots.",
+    "omitted_screenshot_count": 2,
+    "verified_html_sha256": "cdc0524261f058e9539df80677c4af4276c117d7f7b8b7f0ad6788bc133c9d36",
+    "original_manifest_sha256": "5132335d46b040a89b251c1444a5ec1455aa9558f27822ed7f97877ea9e3a61b"
+  }
+}
