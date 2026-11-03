@@ -1129,8 +1129,9 @@
     ]
   },
   "render_input_sha256": "69370b8739fbc74962e8b5d69eb6f9a84124b3b54c05f8599364d1a2f651e2f0",
-  "browser_qa_sha256": "4541e228c9422c44434910a1ffb4499ca07992d9bee95ae66cadc7ff498a3e1d",
+  "browser_qa_sha256": "92bf39d3d5bce1eec6e44c9a5622dc4a39f084d9569c25975a5c0fa5db631052",
   "publication": {
-    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval."
+    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval. Regenerated on 2026-11-04 with the updated installed plugin and runtime; see regeneration.json.",
+    "regeneration_record_sha256": "eadd7d85b98d5cdf6bb2bd3a1ad0fd8847c81be05a2d343347158c115d41ebd8"
   }
 }

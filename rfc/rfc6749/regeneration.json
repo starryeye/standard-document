@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-04",
+  "operation": "regeneration-not-retranslation",
+  "plugin_id": "supertranslator@starryeye",
+  "plugin_version": "0.9.0",
+  "plugin_commit": "be40d31e78375e01a6bbbe48dcccdf80767f2e60",
+  "runtime_package_files_match_installed_plugin": 43,
+  "input_snapshot_commit": "24e3258f25066d3efb313eb566524aa50505902b",
+  "input_html_sha256": "66e8eeabf5a2b37191a41acbc7dcddd225309d2d1cfc5a8b241487ebed7dc044",
+  "output_html_sha256": "b65125b57daa8cfce5037d88b07a2b88a484363b97e4e663b3b8971f019f437d",
+  "render_input_sha256": "69370b8739fbc74962e8b5d69eb6f9a84124b3b54c05f8599364d1a2f651e2f0",
+  "same_render_bytes_as_prior_reviewed_edition": true,
+  "retained_text_sha256": "149c4f116812d315d89ab233aad40cf491a8de4e8ed6dea3c549e51145bbc7ce",
+  "retained_text_matches_input": true,
+  "qa_status": "passed",
+  "commands": [
+    "python -I -m supertranslator export-reader --input-dir <completed-bundle> --review <reader-review.json> --output-dir <new-reader-directory>",
+    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory>",
+    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory> --visual-review <visual-review.json>"
+  ]
+}

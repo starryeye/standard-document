@@ -57,8 +57,9 @@
     "list_items": []
   },
   "render_input_sha256": "cd633c54ace9b149048c21bbec88c5e1698d1157167083d5aa477403de3e2f10",
-  "browser_qa_sha256": "d19eb6a916fc03af51488a1228b08229c9f4672a9cb6530dd0631af689da5ef5",
+  "browser_qa_sha256": "e35377a4183dbff57044eec595197bb4b5eedaeae7fed37ead50560fb56fb88c",
   "publication": {
-    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval."
+    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval. Regenerated on 2026-11-04 with the updated installed plugin and runtime; see regeneration.json.",
+    "regeneration_record_sha256": "f688d1225e6b61dce7e17f808b6babc5e4c2bca245d3f6c2cbe3090698557b7c"
   }
 }
