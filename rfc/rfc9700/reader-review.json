@@ -12,5 +12,27 @@
   ],
   "joins": [],
   "heading_levels": {},
-  "list_items": []
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "text_edits": [
+    {
+      "selector": "[id=\"section-4.4.2.1-4\"]",
+      "input_html_sha256": "2c2744aeaf592142c1b3e5aa6a8367d9553e64b17b8991ba59f22e19e3c2b35d",
+      "replacement_html": "두 경우 모두 <code>iss</code> 값을 <span>[<a class=\"cite xref\" href=\"#RFC9207\">RFC9207</a>]</span>에 따라 평가해야 합니다(<span class=\"bcp14\">MUST</span>).<a class=\"pilcrow\" href=\"#section-4.4.2.1-4\">¶</a>",
+      "source_text": "In both cases, the iss value MUST be evaluated according to [RFC9207].",
+      "evidence": "AI source comparison of RFC 9700 4.4.2.1: both issuer transport cases retain the identical mandatory evaluation under RFC9207. Moves intact reference and MUST spans into natural Korean order without changing iss, the reference, normative force or paragraph link."
+    }
+  ]
 }

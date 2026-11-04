@@ -167,5 +167,42 @@
     "[data-wt-preformatted-block=\"block-000128\"]",
     "[data-wt-preformatted-block=\"block-000132\"]",
     "[data-wt-preformatted-block=\"block-000134\"]"
-  ]
+  ],
+  "presentation": {
+    "toc_selectors": [
+      "[data-wt-preformatted-block=\"block-000025\"]",
+      "[data-wt-preformatted-block=\"block-000027\"]",
+      "[data-wt-preformatted-block=\"block-000028\"]",
+      "[data-wt-preformatted-block=\"block-000029\"]",
+      "[data-wt-preformatted-block=\"block-000030\"]",
+      "[data-wt-preformatted-block=\"block-000031\"]",
+      "[data-wt-preformatted-block=\"block-000032\"]",
+      "[data-wt-preformatted-block=\"block-000033\"]",
+      "[data-wt-preformatted-block=\"block-000034\"]",
+      "[data-wt-preformatted-block=\"block-000035\"]",
+      "[data-wt-preformatted-block=\"block-000036\"]",
+      "[data-wt-preformatted-block=\"block-000037\"]",
+      "[data-wt-preformatted-block=\"block-000038\"]",
+      "[data-wt-preformatted-block=\"block-000039\"]",
+      "[data-wt-preformatted-block=\"block-000040\"]",
+      "[data-wt-preformatted-block=\"block-000041\"]",
+      "[data-wt-preformatted-block=\"block-000042\"]",
+      "[data-wt-preformatted-block=\"block-000043\"]",
+      "[data-wt-preformatted-block=\"block-000044\"]",
+      "[data-wt-preformatted-block=\"block-000045\"]",
+      "[data-wt-preformatted-block=\"block-000046\"]",
+      "[data-wt-preformatted-block=\"block-000047\"]",
+      "[data-wt-preformatted-block=\"block-000048\"]",
+      "[data-wt-preformatted-block=\"block-000049\"]",
+      "[data-wt-preformatted-block=\"block-000050\"]",
+      "[data-wt-preformatted-block=\"block-000051\"]",
+      "[data-wt-preformatted-block=\"block-000052\"]"
+    ],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "text_edits": []
 }

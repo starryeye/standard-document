@@ -1,6 +1,6 @@
 {
-  "html_sha256": "09b0cff9343ba5542660e167d1d203ccc2599396dd0e5db8c89eb0b9149139f5",
-  "render_input_sha256": "cd633c54ace9b149048c21bbec88c5e1698d1157167083d5aa477403de3e2f10",
+  "html_sha256": "8354571d46e107c6e087ab4048577b9cb0dbecc01c3d67037e83f04dc03ed59c",
+  "render_input_sha256": "1cc44d50ec3b1b474a517351d3936680dfe4d13e12e2f7bd10944fed751357cf",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -72,7 +72,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 59797
+      "documentHeight": 55167
     },
     "768": {
       "minFont": 18,
@@ -142,7 +142,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 59797
+      "documentHeight": 55167
     },
     "390": {
       "minFont": 16,
@@ -212,7 +212,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 79781
+      "documentHeight": 75034
     }
   },
   "screenshot_tiles": {
@@ -309,12 +309,7 @@
       },
       {
         "path": "reader-screenshots/1440-0019.png",
-        "y": 54000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/1440-0020.png",
-        "y": 56797,
+        "y": 52167,
         "height": 3000
       }
     ],
@@ -411,12 +406,7 @@
       },
       {
         "path": "reader-screenshots/768-0019.png",
-        "y": 54000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/768-0020.png",
-        "y": 56797,
+        "y": 52167,
         "height": 3000
       }
     ],
@@ -548,15 +538,10 @@
       },
       {
         "path": "reader-screenshots/390-0026.png",
-        "y": 75000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/390-0027.png",
-        "y": 76781,
+        "y": 72034,
         "height": 3000
       }
     ]
   },
-  "visual_review_sha256": "f01174e2b0c0541faeabe0de85ae3902f307bfba7b014b02c35992e852d9a803"
+  "visual_review_sha256": "3c0790e3cba0b235547d835899dbe41289cd4b58012ab35957a442f55ad87413"
 }

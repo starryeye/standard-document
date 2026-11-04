@@ -1,6 +1,6 @@
 {
-  "html_sha256": "a1dd81221b090c2e0289e00105ec6df2104999a3eb9a4fa53b21b0882ff4354a",
-  "render_input_sha256": "a77c534f531cecc09cf1494df13a48d63af42cdf507041420f784b38e6c6e89c",
+  "html_sha256": "63ddf717020361f1e18a2e8de61b37f964632774e90e51dabfccdd168f645c62",
+  "render_input_sha256": "b9bd7958d8f4373bf7f8b6536d16e8f087ae18fba44ad4705898429a1593415d",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -187,7 +187,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 18852
+      "documentHeight": 17481
     },
     "768": {
       "minFont": 18,
@@ -372,7 +372,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 18852
+      "documentHeight": 17481
     },
     "390": {
       "minFont": 16,
@@ -557,7 +557,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 23549
+      "documentHeight": 22219
     }
   },
   "screenshot_tiles": {
@@ -589,12 +589,7 @@
       },
       {
         "path": "reader-screenshots/1440-0006.png",
-        "y": 15000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/1440-0007.png",
-        "y": 15852,
+        "y": 14481,
         "height": 3000
       }
     ],
@@ -626,12 +621,7 @@
       },
       {
         "path": "reader-screenshots/768-0006.png",
-        "y": 15000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/768-0007.png",
-        "y": 15852,
+        "y": 14481,
         "height": 3000
       }
     ],
@@ -673,10 +663,10 @@
       },
       {
         "path": "reader-screenshots/390-0008.png",
-        "y": 20549,
+        "y": 19219,
         "height": 3000
       }
     ]
   },
-  "visual_review_sha256": "efcf60ef67a6384f4077309b0b03befc1c018897860cc5d9f64a33d278d59743"
+  "visual_review_sha256": "9e6ed7b3e23e78dfb2d2ff772dcce1b094cac793a09f72f2a0de45b58649ff0c"
 }

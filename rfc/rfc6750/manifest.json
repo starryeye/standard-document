@@ -3,16 +3,16 @@
   "format": "reviewed-reading-edition",
   "tool": {
     "name": "supertranslator",
-    "version": "0.9.0"
+    "version": "0.10.1"
   },
   "source_url": "https://datatracker.ietf.org/doc/rfc6750/",
   "qa_status": "passed",
   "input_html_sha256": "a48f55cc5c2ca3da1e3cc0deb5cf96acf922f31b7e8d80953b0cf310c95d950b",
   "input_manifest_sha256": "024044945f97ddf6846c88b9473c568c70c2f606136a46ddb3e15afe4074fa6d",
-  "reader_review_sha256": "8bed8bd2e69d4f0eb929db4a9dd932144162ed304ce9d945084e36123157dc51",
-  "html_sha256": "a1dd81221b090c2e0289e00105ec6df2104999a3eb9a4fa53b21b0882ff4354a",
-  "article_sha256": "6320b956c11d15690ded7a7acb789474e474c5f8693e8d461479f7f5e74b5b92",
-  "stylesheet_sha256": "f790490ac93c2fbc771ce2c958cb60d2145fcd82c6aa64c531bbd2fc5ddcebaf",
+  "reader_review_sha256": "dea3f53cd4311c991c5562d4065321ff37998592d1612004e25df6d51d741e6a",
+  "html_sha256": "63ddf717020361f1e18a2e8de61b37f964632774e90e51dabfccdd168f645c62",
+  "article_sha256": "6e8ca2d7d2a2381f042cf9868e17a66c992d65aa07b8ab6d8acfc1149adb8120",
+  "stylesheet_sha256": "cf9a669c329fd94e2b6b82616112c80577eb886a19d6c9281b33976baaee471b",
   "asset_sha256": {
     "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
     "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
@@ -27,7 +27,7 @@
     "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
     "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
     "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
-    "assets/reader.css": "f790490ac93c2fbc771ce2c958cb60d2145fcd82c6aa64c531bbd2fc5ddcebaf",
+    "assets/reader.css": "cf9a669c329fd94e2b6b82616112c80577eb886a19d6c9281b33976baaee471b",
     "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
     "assets/1be32e0be699d849.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
     "assets/wt-preformatted-14edac915a1f0158.css": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072",
@@ -211,10 +211,47 @@
       "[data-wt-preformatted-block=\"block-000134\"]"
     ]
   },
-  "render_input_sha256": "a77c534f531cecc09cf1494df13a48d63af42cdf507041420f784b38e6c6e89c",
-  "browser_qa_sha256": "09481b3070c09e032b124085c5497fa95fc0cb88a2c627309bdc61bb56a23fbe",
+  "text_edits": [],
+  "presentation": {
+    "toc_selectors": [
+      "[data-wt-preformatted-block=\"block-000025\"]",
+      "[data-wt-preformatted-block=\"block-000027\"]",
+      "[data-wt-preformatted-block=\"block-000028\"]",
+      "[data-wt-preformatted-block=\"block-000029\"]",
+      "[data-wt-preformatted-block=\"block-000030\"]",
+      "[data-wt-preformatted-block=\"block-000031\"]",
+      "[data-wt-preformatted-block=\"block-000032\"]",
+      "[data-wt-preformatted-block=\"block-000033\"]",
+      "[data-wt-preformatted-block=\"block-000034\"]",
+      "[data-wt-preformatted-block=\"block-000035\"]",
+      "[data-wt-preformatted-block=\"block-000036\"]",
+      "[data-wt-preformatted-block=\"block-000037\"]",
+      "[data-wt-preformatted-block=\"block-000038\"]",
+      "[data-wt-preformatted-block=\"block-000039\"]",
+      "[data-wt-preformatted-block=\"block-000040\"]",
+      "[data-wt-preformatted-block=\"block-000041\"]",
+      "[data-wt-preformatted-block=\"block-000042\"]",
+      "[data-wt-preformatted-block=\"block-000043\"]",
+      "[data-wt-preformatted-block=\"block-000044\"]",
+      "[data-wt-preformatted-block=\"block-000045\"]",
+      "[data-wt-preformatted-block=\"block-000046\"]",
+      "[data-wt-preformatted-block=\"block-000047\"]",
+      "[data-wt-preformatted-block=\"block-000048\"]",
+      "[data-wt-preformatted-block=\"block-000049\"]",
+      "[data-wt-preformatted-block=\"block-000050\"]",
+      "[data-wt-preformatted-block=\"block-000051\"]",
+      "[data-wt-preformatted-block=\"block-000052\"]"
+    ],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "render_input_sha256": "b9bd7958d8f4373bf7f8b6536d16e8f087ae18fba44ad4705898429a1593415d",
+  "browser_qa_sha256": "97751518014bea0bc8c76ffebad1ea7ac05a7296c29fb7dc6c11bf6587b3d3a4",
   "publication": {
-    "note": "Exact reviewed HTML/article/CSS/assets; screenshot tiles omitted from public repository. Input review reports are historical, not new semantic approval. Regenerated on 2026-11-04 with the updated installed plugin and runtime; see regeneration.json.",
-    "regeneration_record_sha256": "b672ef72ba273787d497a931f3c87ea0dec6a9d1940b7dba07943db3321aa546"
+    "note": "Exact installed-plugin 0.10.1 export. Screenshot tiles retained locally, omitted from public repository. Historical whole-document semantic review remains separate from explicitly source-compared AI sentence edits.",
+    "regeneration_record_sha256": "9b945554724511c3fb96b195f2c8b8be72501c04d3147437a1f7ae521655beec"
   }
 }
