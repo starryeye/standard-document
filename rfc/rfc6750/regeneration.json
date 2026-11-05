@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "plugin_id": "supertranslator@starryeye",
-  "plugin_version": "0.10.1",
-  "plugin_commit": "95998afe574b3252dda26b826c5cfb416d9c2fd7",
+  "plugin_version": "0.10.2",
+  "plugin_commit": "f22e2537c57101d335fd11583b717ec54e451026",
   "runtime_package_files_match_installed_plugin": 45,
   "operation": "regeneration-with-bounded-source-reviewed-AI-edits",
-  "english_first_nouns_unchanged": true,
+  "english_first_cs_terms_unchanged": true,
   "approved_ai_edits": 0,
-  "input_snapshot_commit": "24e3258f25066d3efb313eb566524aa50505902b",
+  "new_ai_edits_this_followup": 0,
   "input_html_sha256": "a48f55cc5c2ca3da1e3cc0deb5cf96acf922f31b7e8d80953b0cf310c95d950b",
-  "output_html_sha256": "63ddf717020361f1e18a2e8de61b37f964632774e90e51dabfccdd168f645c62",
-  "render_input_sha256": "b9bd7958d8f4373bf7f8b6536d16e8f087ae18fba44ad4705898429a1593415d",
+  "output_html_sha256": "fbc0fc8d9881d64d82d6058141d12e6d237f52643751f8de4209d2a527cc8813",
+  "render_input_sha256": "6d680609082295f886139e66916ef7ee1b0ed6fcfb5531c2a2a42a2c246e24d3",
   "qa_status": "passed",
   "content_checks": {
     "rfc": "6750",
@@ -22,9 +22,11 @@
     "original_ids_retained": true,
     "original_links_and_labels_exact": true
   },
+  "deferred": [
+    "P3 general Section/Appendix reference-label consistency; exact token/link-label protections retained"
+  ],
   "commands": [
-    "python -I -m supertranslator export-reader --input-dir <completed-bundle> --review <reader-review.json> --output-dir <new-reader-directory>",
-    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory>",
-    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory> --visual-review <visual-review.json>"
+    "python -I -m supertranslator export-reader --input-dir <completed-bundle> --review <reader-review.json> --output-dir <new-directory>",
+    "python -I -m supertranslator qa-reader --output-dir <new-directory> --visual-review <fresh-review.json>"
   ]
 }

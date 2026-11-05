@@ -1,30 +1,32 @@
 {
   "schema_version": "1.0",
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "plugin_id": "supertranslator@starryeye",
-  "plugin_version": "0.10.1",
-  "plugin_commit": "95998afe574b3252dda26b826c5cfb416d9c2fd7",
+  "plugin_version": "0.10.2",
+  "plugin_commit": "f22e2537c57101d335fd11583b717ec54e451026",
   "runtime_package_files_match_installed_plugin": 45,
   "operation": "regeneration-with-bounded-source-reviewed-AI-edits",
-  "english_first_nouns_unchanged": true,
-  "approved_ai_edits": 1,
-  "input_snapshot_commit": "24e3258f25066d3efb313eb566524aa50505902b",
+  "english_first_cs_terms_unchanged": true,
+  "approved_ai_edits": 4,
+  "new_ai_edits_this_followup": 3,
   "input_html_sha256": "cdc0524261f058e9539df80677c4af4276c117d7f7b8b7f0ad6788bc133c9d36",
-  "output_html_sha256": "8354571d46e107c6e087ab4048577b9cb0dbecc01c3d67037e83f04dc03ed59c",
-  "render_input_sha256": "1cc44d50ec3b1b474a517351d3936680dfe4d13e12e2f7bd10944fed751357cf",
+  "output_html_sha256": "9a6e3d1233823f66fd6f7f68a1b86681cde1d48df6376bb3560cdfe28b85f537",
+  "render_input_sha256": "79fce8ce979e6cd8c359f2002f0864f270d77c645e6e5220cc9db38b3d3a5515",
   "qa_status": "passed",
   "content_checks": {
     "rfc": "9700",
     "original_block_count": 747,
-    "approved_ai_edits": 1,
+    "approved_ai_edits": 4,
     "retained_blocks_exact_after_explicit_joins_and_edits": true,
     "literals_exact": true,
     "original_ids_retained": true,
     "original_links_and_labels_exact": true
   },
+  "deferred": [
+    "P3 general Section/Appendix reference-label consistency; exact token/link-label protections retained"
+  ],
   "commands": [
-    "python -I -m supertranslator export-reader --input-dir <completed-bundle> --review <reader-review.json> --output-dir <new-reader-directory>",
-    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory>",
-    "python -I -m supertranslator qa-reader --output-dir <new-reader-directory> --visual-review <visual-review.json>"
+    "python -I -m supertranslator export-reader --input-dir <completed-bundle> --review <reader-review.json> --output-dir <new-directory>",
+    "python -I -m supertranslator qa-reader --output-dir <new-directory> --visual-review <fresh-review.json>"
   ]
 }

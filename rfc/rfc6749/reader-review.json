@@ -819,6 +819,12 @@
         "[data-wt-preformatted-block=\"block-001386\"]",
         "[data-wt-preformatted-block=\"block-001391\"]"
       ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-001082\"]",
+        "[data-wt-preformatted-block=\"block-001083\"]"
+      ]
     }
   ],
   "heading_levels": {

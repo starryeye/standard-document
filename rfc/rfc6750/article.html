@@ -43,9 +43,9 @@
      +--------+                               +---------------+
 </pre><span></span><figcaption>                     그림 1: 추상적인 protocol 흐름
 </figcaption><span></span><p>   그림 1에 나타낸 추상적인 OAuth 2.0 흐름은 client, resource owner, authorization server 및 resource server 간의 상호 작용을 설명합니다([RFC6749]에 기술되어 있습니다). 이 문서는 다음 두 단계를 명세합니다.
-</p><span></span><p class="st-list-item" role="listitem">   (E)  client는 resource server에 protected resource를 요청하고, access token을 제시하여 인증합니다.
+</p><span></span><div role="list"><p class="st-list-item" role="listitem">   (E)  client는 resource server에 protected resource를 요청하고, access token을 제시하여 인증합니다.
 </p><span></span><p class="st-list-item" role="listitem">   (F)  resource server는 access token을 검증하고, 유효하면 요청을 처리합니다.
-</p><span></span><p>   이 문서는 단계 (D)에서 반환하는 access token에 대해서도 의미상의 요구 사항을 부과합니다.
+</p></div><span></span><p>   이 문서는 단계 (D)에서 반환하는 access token에 대해서도 의미상의 요구 사항을 부과합니다.
 </p><span></span><h2 id="st-heading-0008">2.  인증된 요청
 </h2><span></span><p>   이 절은 resource server에 보내는 resource 요청에 bearer access token을 전송하는 세 가지 방법을 정의합니다. client는 각 요청에서 token을 전송하는 방법을 둘 이상 사용해서는 안 됩니다(MUST NOT).
 </p><span></span><span></span><h3 id="st-heading-0009">2.1.  Authorization 요청 header field
@@ -61,12 +61,12 @@
 </pre><span></span><p>   client는 "Bearer" HTTP 인가 방식과 함께 "Authorization" 요청 header field를 사용하여 bearer token으로 인증된 요청을 수행하는 것이 좋습니다(SHOULD). resource server는 이 방법을 지원해야 합니다(MUST).
 </p><span></span><h3 id="st-heading-0010">2.2.  Form으로 인코딩된 body parameter
 </h3><span></span><p>   HTTP 요청 entity-body로 access token을 보낼 때 client는 "access_token" parameter를 사용하여 request-body에 access token을 추가합니다. 다음 조건이 모두 충족되지 않으면 client는 이 방법을 사용해서는 안 됩니다(MUST NOT).
-</p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 entity-header에 "application/x-www-form-urlencoded"로 설정된 "Content-Type" header field가 포함됩니다.
+</p><span></span><div role="list"><p class="st-list-item" role="listitem">   o  HTTP 요청 entity-header에 "application/x-www-form-urlencoded"로 설정된 "Content-Type" header field가 포함됩니다.
 </p><span></span><p class="st-list-item" role="listitem">   o  entity-body가 HTML 4.01 [W3C.REC-html401-19991224]에 정의된 "application/x-www-form-urlencoded" content-type의 인코딩 요구 사항을 따릅니다.
 </p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 entity-body가 single-part입니다.
 </p><span></span><span></span><p class="st-list-item" role="listitem">   o  entity-body에 인코딩할 내용은 전부 ASCII [USASCII] 문자로 구성되어야 합니다(MUST).
 </p><span></span><p class="st-list-item" role="listitem">   o  HTTP 요청 method는 request-body의 의미가 정의된 method입니다. 특히 이는 "GET" method를 사용해서는 안 된다는 뜻입니다(MUST NOT).
-</p><span></span><p>   entity-body에는 다른 요청별 parameter를 포함할 수 있습니다(MAY). 이 경우 "access_token" parameter는 "&amp;" 문자(ASCII 코드 38)를 하나 이상 사용하여 요청별 parameter와 올바르게 구분해야 합니다(MUST).
+</p></div><span></span><p>   entity-body에는 다른 요청별 parameter를 포함할 수 있습니다(MAY). 이 경우 "access_token" parameter는 "&amp;" 문자(ASCII 코드 38)를 하나 이상 사용하여 요청별 parameter와 올바르게 구분해야 합니다(MUST).
 </p><span></span><p>   예를 들어 client는 transport-layer security를 사용하여 다음 HTTP 요청을 수행합니다.
 </p><span></span><pre>     POST /resource HTTP/1.1
      Host: server.example.com

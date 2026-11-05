@@ -3,15 +3,15 @@
   "format": "reviewed-reading-edition",
   "tool": {
     "name": "supertranslator",
-    "version": "0.10.1"
+    "version": "0.10.2"
   },
   "source_url": "https://datatracker.ietf.org/doc/rfc6749/",
   "qa_status": "passed",
   "input_html_sha256": "66e8eeabf5a2b37191a41acbc7dcddd225309d2d1cfc5a8b241487ebed7dc044",
   "input_manifest_sha256": "67d36e95de7aa83f700471bfc7fe8e556e01c7dce5432e3b44897648065f9e33",
-  "reader_review_sha256": "95fa1ba9fa41fdf36fc959cef7b385d8f2f108a4d2132d5a69b2fe16949aefd8",
-  "html_sha256": "dcc30bf2c61daa37a648dd8e5b3073fadc64838d877d6073217f467f9ba30cf4",
-  "article_sha256": "a80e10f86e7647d452a48145f6d9ad64664dec62623e0516158aab76e8387e47",
+  "reader_review_sha256": "d3159e984988336ce6de2c592611f7d5acc7563f5160a9a6da7edf66ec9d95dc",
+  "html_sha256": "c1761491cf11ddab0186a0ccaa2ef9c9354f7636203a444a5b004273367610f0",
+  "article_sha256": "fa3217ba0b4c71b8d031b929dcc36b204bdda1a8122fed93ea640584ec0d27af",
   "stylesheet_sha256": "cf9a669c329fd94e2b6b82616112c80577eb886a19d6c9281b33976baaee471b",
   "asset_sha256": {
     "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
@@ -861,6 +861,12 @@
           "[data-wt-preformatted-block=\"block-001386\"]",
           "[data-wt-preformatted-block=\"block-001391\"]"
         ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-001082\"]",
+          "[data-wt-preformatted-block=\"block-001083\"]"
+        ]
       }
     ],
     "heading_levels": {
@@ -1259,10 +1265,10 @@
     ],
     "navigation": true
   },
-  "render_input_sha256": "5ecd08b9707c09f221999c524fe76c5e9ba2be136f245d8140e6098be08a8697",
-  "browser_qa_sha256": "d3348a95c7360f10631c4a7e3e07496525d95e2f352edc316be911d4c868c269",
+  "render_input_sha256": "27dbf9d3f1342804b43d0cb3ef4c0ddd7f42b543a0d42332e54682076d04d052",
+  "browser_qa_sha256": "7db0f0a6ccf8df4b82c2341e4cdc35e6bc1c625c342c7b9f37267a13129653ad",
   "publication": {
-    "note": "Exact installed-plugin 0.10.1 export. Screenshot tiles retained locally, omitted from public repository. Historical whole-document semantic review remains separate from explicitly source-compared AI sentence edits.",
-    "regeneration_record_sha256": "95d4c340d9bb28d04100dc8ed5af8c105095bac3db8ff9e48c8927b2358bf8e8"
+    "note": "Exact installed-plugin0.10.2 export; unchanged original/source content except explicit reviewed paragraph joins and bounded AI edits. Local screenshots are not published.",
+    "regeneration_record_sha256": "2414df3fa6d1983af5e7f1de7c6e3a6d5151611c78d7e753bd60eb723141bd2b"
   }
 }

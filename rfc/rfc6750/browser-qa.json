@@ -1,6 +1,6 @@
 {
-  "html_sha256": "63ddf717020361f1e18a2e8de61b37f964632774e90e51dabfccdd168f645c62",
-  "render_input_sha256": "b9bd7958d8f4373bf7f8b6536d16e8f087ae18fba44ad4705898429a1593415d",
+  "html_sha256": "fbc0fc8d9881d64d82d6058141d12e6d237f52643751f8de4209d2a527cc8813",
+  "render_input_sha256": "6d680609082295f886139e66916ef7ee1b0ed6fcfb5531c2a2a42a2c246e24d3",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -668,5 +668,5 @@
       }
     ]
   },
-  "visual_review_sha256": "9e6ed7b3e23e78dfb2d2ff772dcce1b094cac793a09f72f2a0de45b58649ff0c"
+  "visual_review_sha256": "f4c565edd5e62b022304918389fb81ac7c4020fd2387d8c3cb49a611a4a34211"
 }

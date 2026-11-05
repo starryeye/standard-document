@@ -33,6 +33,27 @@
       "replacement_html": "두 경우 모두 <code>iss</code> 값을 <span>[<a class=\"cite xref\" href=\"#RFC9207\">RFC9207</a>]</span>에 따라 평가해야 합니다(<span class=\"bcp14\">MUST</span>).<a class=\"pilcrow\" href=\"#section-4.4.2.1-4\">¶</a>",
       "source_text": "In both cases, the iss value MUST be evaluated according to [RFC9207].",
       "evidence": "AI source comparison of RFC 9700 4.4.2.1: both issuer transport cases retain the identical mandatory evaluation under RFC9207. Moves intact reference and MUST spans into natural Korean order without changing iss, the reference, normative force or paragraph link."
+    },
+    {
+      "selector": "[id=\"section-2.6-6\"]",
+      "input_html_sha256": "d607bcc03766a93499f7a36fb1bd1fc0f3512aea167665165c221360611e4b4c",
+      "replacement_html": "인가 응답은 암호화되지 않은 네트워크 연결로 전송해서는 안 됩니다(<span class=\"bcp14\">MUST NOT</span>). 이를 위해 authorization server는 <code>http</code> scheme을 사용하는 redirection URI를 허용해서는 안 됩니다(<span class=\"bcp14\">MUST NOT</span>). 이 redirection URI 제한은 <span><a class=\"relref\" href=\"https://rfc-editor.org/rfc/rfc8252#section-7.3\">7.3절</a>([<a class=\"cite xref\" href=\"#RFC8252\">RFC8252</a>])</span>에서 설명하는 loopback interface redirection을 사용하는 native client에는 적용되지 않습니다.<a class=\"pilcrow\" href=\"#section-2.6-6\">¶</a>",
+      "source_text": "Authorization responses MUST NOT be transmitted over unencrypted network\nconnections. To this end, authorization servers MUST NOT allow redirection URIs that use the http scheme except for native clients that use loopback interface redirection as\ndescribed in Section 7.3 of [ RFC8252 ] . ¶",
+      "evidence": "AI source comparison: both MUST NOT requirements retain force; the prohibition explicitly applies to http-scheme redirection URIs, and only native clients using RFC8252 section 7.3 loopback interface redirection are excepted. All original English atoms, references and normative subtrees remain intact."
+    },
+    {
+      "selector": "[id=\"section-4.5.3.2-3.1\"]",
+      "input_html_sha256": "d87b7cb86ee1dbea7ae8a594a0826ed79a17f3e599678ffbfdb63fa671d78ff8",
+      "replacement_html": "token endpoint에서 얻은 ID Token의 <code>nonce</code>를 검증해야 합니다(<span class=\"bcp14\">MUST</span>). authorization response에서 다른 ID Token을 얻었더라도(예: <code>response_type=code+id_token</code>) 마찬가지입니다.<a class=\"pilcrow\" href=\"#section-4.5.3.2-3.1\">¶</a>",
+      "source_text": "MUST validate the nonce in the ID Token obtained from the token endpoint,\n even if another ID Token was obtained from the authorization response\n (e.g., response_type=code+id_token ), and ¶",
+      "evidence": "AI source comparison: the client MUST validate the nonce in the token-endpoint ID Token even when the authorization response also supplied an ID Token. The other-token exception is not introduced; English terms, example, normative force and link remain exact."
+    },
+    {
+      "selector": "[id=\"section-4.5.3.2-3.2\"]",
+      "input_html_sha256": "2450360e92f69723199747f8fa945bef29530318f0405d9b9089abb5a09c5704",
+      "replacement_html": "해당 검사가 성공할 때까지는 모든 token(ID Token과 access token)을 무시하고, 다른 어떤 목적으로도 사용해서는 안 됩니다(<span class=\"bcp14\">MUST</span>).<a class=\"pilcrow\" href=\"#section-4.5.3.2-3.2\">¶</a>",
+      "source_text": "MUST ensure that, unless and until that check succeeds, all tokens (ID\n Tokens and the access token) are disregarded and not used for any other\n purpose. ¶",
+      "evidence": "AI source comparison: unless and until the nonce check succeeds, all issued ID/access tokens must be disregarded and not used for any other purpose. A permanently failing check never permits use. The original MUST obligation and every English atom remain exact."
     }
   ]
 }

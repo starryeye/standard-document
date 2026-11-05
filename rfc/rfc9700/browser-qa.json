@@ -1,6 +1,6 @@
 {
-  "html_sha256": "8354571d46e107c6e087ab4048577b9cb0dbecc01c3d67037e83f04dc03ed59c",
-  "render_input_sha256": "1cc44d50ec3b1b474a517351d3936680dfe4d13e12e2f7bd10944fed751357cf",
+  "html_sha256": "9a6e3d1233823f66fd6f7f68a1b86681cde1d48df6376bb3560cdfe28b85f537",
+  "render_input_sha256": "79fce8ce979e6cd8c359f2002f0864f270d77c645e6e5220cc9db38b3d3a5515",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -212,7 +212,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 75034
+      "documentHeight": 74978
     }
   },
   "screenshot_tiles": {
@@ -533,15 +533,10 @@
       },
       {
         "path": "reader-screenshots/390-0025.png",
-        "y": 72000,
-        "height": 3000
-      },
-      {
-        "path": "reader-screenshots/390-0026.png",
-        "y": 72034,
+        "y": 71978,
         "height": 3000
       }
     ]
   },
-  "visual_review_sha256": "3c0790e3cba0b235547d835899dbe41289cd4b58012ab35957a442f55ad87413"
+  "visual_review_sha256": "61f680025a466d448a352dd3b7888c8fc30fb425972a9761f08c053dfb168d41"
 }

@@ -3,15 +3,15 @@
   "format": "reviewed-reading-edition",
   "tool": {
     "name": "supertranslator",
-    "version": "0.10.1"
+    "version": "0.10.2"
   },
   "source_url": "https://datatracker.ietf.org/doc/rfc6750/",
   "qa_status": "passed",
   "input_html_sha256": "a48f55cc5c2ca3da1e3cc0deb5cf96acf922f31b7e8d80953b0cf310c95d950b",
   "input_manifest_sha256": "024044945f97ddf6846c88b9473c568c70c2f606136a46ddb3e15afe4074fa6d",
   "reader_review_sha256": "dea3f53cd4311c991c5562d4065321ff37998592d1612004e25df6d51d741e6a",
-  "html_sha256": "63ddf717020361f1e18a2e8de61b37f964632774e90e51dabfccdd168f645c62",
-  "article_sha256": "6e8ca2d7d2a2381f042cf9868e17a66c992d65aa07b8ab6d8acfc1149adb8120",
+  "html_sha256": "fbc0fc8d9881d64d82d6058141d12e6d237f52643751f8de4209d2a527cc8813",
+  "article_sha256": "9c997d9102727be625b9a6b0b4c02ed5d1759c014459ab7c6f67819ca5de078a",
   "stylesheet_sha256": "cf9a669c329fd94e2b6b82616112c80577eb886a19d6c9281b33976baaee471b",
   "asset_sha256": {
     "assets/4213d31c0bd25b11.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
@@ -248,10 +248,10 @@
     ],
     "navigation": true
   },
-  "render_input_sha256": "b9bd7958d8f4373bf7f8b6536d16e8f087ae18fba44ad4705898429a1593415d",
-  "browser_qa_sha256": "97751518014bea0bc8c76ffebad1ea7ac05a7296c29fb7dc6c11bf6587b3d3a4",
+  "render_input_sha256": "6d680609082295f886139e66916ef7ee1b0ed6fcfb5531c2a2a42a2c246e24d3",
+  "browser_qa_sha256": "8f929dec5d002332447e4668b0009bc138d4207137887feb63c70d348d4dbce0",
   "publication": {
-    "note": "Exact installed-plugin 0.10.1 export. Screenshot tiles retained locally, omitted from public repository. Historical whole-document semantic review remains separate from explicitly source-compared AI sentence edits.",
-    "regeneration_record_sha256": "9b945554724511c3fb96b195f2c8b8be72501c04d3147437a1f7ae521655beec"
+    "note": "Exact installed-plugin0.10.2 export; unchanged original/source content except explicit reviewed paragraph joins and bounded AI edits. Local screenshots are not published.",
+    "regeneration_record_sha256": "41a92a6e41bd50d599641aea018ee4fe994e2f0245ee06009334819606d948d4"
   }
 }

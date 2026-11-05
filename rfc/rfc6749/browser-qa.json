@@ -1,6 +1,6 @@
 {
-  "html_sha256": "dcc30bf2c61daa37a648dd8e5b3073fadc64838d877d6073217f467f9ba30cf4",
-  "render_input_sha256": "5ecd08b9707c09f221999c524fe76c5e9ba2be136f245d8140e6098be08a8697",
+  "html_sha256": "c1761491cf11ddab0186a0ccaa2ef9c9354f7636203a444a5b004273367610f0",
+  "render_input_sha256": "27dbf9d3f1342804b43d0cb3ef4c0ddd7f42b543a0d42332e54682076d04d052",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -1032,7 +1032,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 71414
+      "documentHeight": 71396
     },
     "768": {
       "minFont": 18,
@@ -2062,7 +2062,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 71414
+      "documentHeight": 71396
     },
     "390": {
       "minFont": 16,
@@ -3092,7 +3092,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 91144
+      "documentHeight": 91128
     }
   },
   "screenshot_tiles": {
@@ -3214,7 +3214,7 @@
       },
       {
         "path": "reader-screenshots/1440-0024.png",
-        "y": 68414,
+        "y": 68396,
         "height": 3000
       }
     ],
@@ -3336,7 +3336,7 @@
       },
       {
         "path": "reader-screenshots/768-0024.png",
-        "y": 68414,
+        "y": 68396,
         "height": 3000
       }
     ],
@@ -3493,10 +3493,10 @@
       },
       {
         "path": "reader-screenshots/390-0031.png",
-        "y": 88144,
+        "y": 88128,
         "height": 3000
       }
     ]
   },
-  "visual_review_sha256": "2fb9ca099345ddd44c54ff81bcc81dd85bcbaaf4b3138f80da49f055d46c3ba5"
+  "visual_review_sha256": "dd02bab09fd25cef71b20f2735369d4c0582a9f895635e6a3929e2b9afd7d5f0"
 }
