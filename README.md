@@ -14,6 +14,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc6750/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc6750/) · [검토 기록](rfc/rfc6750/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc6750/)
 
+### RFC 7636 — Proof Key for Code Exchange (PKCE)
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc7636/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7636/) · [읽기판 검토 기록](rfc/rfc7636/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc7636/)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
@@ -30,14 +34,14 @@ RFC 6749·6750의 설명은 2012년 발행본의 맥락을 유지합니다. 이�
 
 GitHub Pages는 `main` 브랜치의 루트에서 게시됩니다. 저장소에 변경 사항을 푸시하면 GitHub의 기본 Pages 빌드·배포가 실행됩니다. 별도 애플리케이션 서버나 사용자 정의 배포 워크플로는 사용하지 않습니다.
 
-현재 게시본은 설치된 supertranslator 0.10.2로 생성한 읽기용 파생본입니다. 영어 CS·보안 전문용어를 유지하면서 원문과 대조해 누적 다섯 문장/항목만 AI가 교정했습니다. 이번 후속 편집에서는 RFC 9700의 세 문장/항목을 다듬고, RFC 6749 §6의 끊긴 조건 문단과 두 RFC의 목록 소유 구조를 복원했습니다. 접힌 계층형 목차에서 실제 절로 이동할 수 있으며, 출판 정보와 원래 인쇄 목차는 삭제하지 않고 펼쳐 볼 수 있게 보존했습니다. 본문은 PC 18px·모바일 16px이고, 코드·도식은 원래 줄바꿈과 가로 스크롤을 유지합니다. 새 전면 재번역이나 모든 문장의 새 의미 감수를 했다는 뜻은 아닙니다. 처음 생성한 원문 보존형 HTML과 이전 편집본은 Git 이력과 로컬 실행 기록에 남아 있습니다. 일반 Section/Appendix 참조 표기의 일부 혼용은 기존 토큰·링크 라벨 보호를 유지하기 위해 별도 과제로 남겼습니다.
+RFC 6749·6750·9700은 기존 supertranslator 0.10.2 읽기판을 유지합니다. RFC 7636은 기존 AI 번역을 재사용하고 supertranslator 0.10.3으로 별도 읽기판을 만들었습니다. 접힌 목차와 원문 페이지 표기, PC 18px·모바일 16px 본문, 코드·도식의 원래 줄바꿈과 블록 내부 가로 스크롤을 제공합니다. 읽기판 생성은 새 전면 재번역이나 새 의미 감수를 뜻하지 않습니다.
 
 ## 공개 범위와 검증 기록
 
-- 완료된 세 RFC의 HTML, 필요한 정적 자산, 검토 보고서와 공개용 `manifest.json`만 포함합니다.
+- 완료된 RFC의 HTML, 필요한 정적 자산, 검토 보고서와 공개용 `manifest.json`만 포함합니다.
 - HTML·본문 조각·스타일과 자산은 검토가 끝난 읽기용 산출물과 바이트가 동일합니다. 렌더링 승인은 HTML·CSS·그림 해시 전체에 결합됩니다. 큰 화면 타일은 저장소에 포함하지 않으며, 원래 증거와 실행 기록은 로컬에 보존합니다.
 - `input-*` 보고서는 이전 번역의 검토 기록입니다. 현재 편집 검토와 혼동하지 않도록 별도로 보존합니다. 이번 변경은 새 전면 번역이나 새 의미 검토가 아닙니다.
 - 작업 중인 번역, 실패한 실행, 로컬 환경·에이전트 기록, 상용 책 PDF는 포함하지 않습니다.
-- RFC 9700까지 번역한 뒤 작업을 중단한 상태입니다. 후속 문서를 자동으로 번역하거나 게시하지 않습니다.
+- 후속 문서를 자동으로 번역하거나 게시하지 않습니다.
 
 문서와 포함된 자산의 권리는 각각의 원 저작권자에게 있습니다. 이 저장소 전체에 별도 일괄 라이선스를 부여하지 않습니다. [원문 저작권 고지](https://github.com/starryeye/standard-document/blob/main/NOTICE.md)와 각 RFC의 고지를 참고하세요.

@@ -1,0 +1,472 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "0e6461a649b2d207b16b64184ec4f32b5e96de76f16f80ec5d93671d94dd6934",
+  "content_selector": "[data-wt-preformatted-root]",
+  "title": "RFC 7636 — OAuth PKCE",
+  "removals": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+      "text_sha256": "1da13497cb58b0ebfbd34548410374d70b0a7d4e6fce8c886aa5d9cb1b8bfd1e",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000023\"]",
+      "text_sha256": "41c7f886ddfebc4663029f1bbe8d90aae6465f56f601f96d2345b1673190ea53",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000024\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000061\"]",
+      "text_sha256": "811b74b326cd393b5efe578d8a7330e2b6e82eec155df0b4cb68e19f2719a905",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000062\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000076\"]",
+      "text_sha256": "7730c0875dd4a18ffbedb4cbb97e36ac1dcec836b03d16be79f21d396595ee84",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000077\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000095\"]",
+      "text_sha256": "9fa86b74ca4dfedcf9de9c20bf0f53a8f0d1ba8c307a2bfdbf419a7d8a0a3396",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000096\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000110\"]",
+      "text_sha256": "eecd5347ac3e01ad5997650a4bc0cf71ce17e9a1086607a8693d124c0ef1e8ec",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000111\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000139\"]",
+      "text_sha256": "0c1027ca611fd8c8b0aad38023c4f3df395cd3653516e71c9781dad51361c424",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000140\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000170\"]",
+      "text_sha256": "fdc9580805d987979135fd61600f57c290116bb8c8c44287c20a2b74686335ce",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000171\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000199\"]",
+      "text_sha256": "756d792245ec48938453d20b2df4a79ff229ee43367c53253aeca436d48c9a83",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000200\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000226\"]",
+      "text_sha256": "d2bd207e23cff8cffcfa2fba84c1ce6ea05f0594b107b8221db6a260d0135042",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000227\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000253\"]",
+      "text_sha256": "b4d72a20b2a111bc1f9ea5441ce266199f5abd91633ef9bce06d660569e59e43",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000254\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000291\"]",
+      "text_sha256": "e365763cb43384840b21b85c3b00bc192d4215704e668b1ad0f48506ae86d031",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000292\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000308\"]",
+      "text_sha256": "0ddbf438f83c7f329487214df5f9aecc06bbd7bf557b61b96b700554ba8ca941",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000309\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000339\"]",
+      "text_sha256": "7d98629cccb30eab9c5262dcaf2565057c8df903d675c12c5f7352aa7e5b4501",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000340\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000360\"]",
+      "text_sha256": "d234d9f8aca1a36a0373d6e253dd2c788eb9da9a97f157a50db2722b188fbf2c",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000361\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000385\"]",
+      "text_sha256": "16ad467bce229be49d8e9162955311405c54bcb32defb39dec7091b278993413",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000386\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000396\"]",
+      "text_sha256": "efdac64da963edcb29eea7fa865d17cbae5d060368e7f8bc0c9ceedc2c3b3eec",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000397\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000427\"]",
+      "text_sha256": "243d2621e98f6c38406cdb38c04b419638cc4075d3144d1c906794a143d8f1f3",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000428\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000454\"]",
+      "text_sha256": "a57ed3b8f13d158e9ebe6c6ec1e6a41ee40cb5e659fc1e5ad7e38bfe099755a0",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000455\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000487\"]",
+      "text_sha256": "1350c891a753d5da3725032897d6b0304ec88fcf0b55a54f2d7f8ccf73373179",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000488\"]",
+      "text_sha256": "d88e2df5bd9c5ce1372a63fe6d24014c14b112db13c0c707018e5a80ea2fe0ad",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000504\"]",
+      "text_sha256": "1db8d06fb1ec49625188faddbd6e09bda5a17d76bd6619639d4a2cfa86c01ce6",
+      "reason": "Personally inspected issuing metadata or original running header/footer; retain in collapsed source notes, not body prose."
+    }
+  ],
+  "joins": [
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000289\"]",
+        "[data-wt-preformatted-block=\"block-000294\"]"
+      ]
+    }
+  ],
+  "heading_levels": {},
+  "list_items": [
+    "[data-wt-preformatted-block=\"block-000115\"]",
+    "[data-wt-preformatted-block=\"block-000117\"]",
+    "[data-wt-preformatted-block=\"block-000119\"]",
+    "[data-wt-preformatted-block=\"block-000121\"]"
+  ],
+  "presentation": {
+    "toc_selectors": [
+      "[data-wt-preformatted-block=\"block-000026\"]",
+      "[data-wt-preformatted-block=\"block-000028\"]",
+      "[data-wt-preformatted-block=\"block-000029\"]",
+      "[data-wt-preformatted-block=\"block-000030\"]",
+      "[data-wt-preformatted-block=\"block-000031\"]",
+      "[data-wt-preformatted-block=\"block-000032\"]",
+      "[data-wt-preformatted-block=\"block-000033\"]",
+      "[data-wt-preformatted-block=\"block-000034\"]",
+      "[data-wt-preformatted-block=\"block-000035\"]",
+      "[data-wt-preformatted-block=\"block-000036\"]",
+      "[data-wt-preformatted-block=\"block-000037\"]",
+      "[data-wt-preformatted-block=\"block-000038\"]",
+      "[data-wt-preformatted-block=\"block-000039\"]",
+      "[data-wt-preformatted-block=\"block-000040\"]",
+      "[data-wt-preformatted-block=\"block-000041\"]",
+      "[data-wt-preformatted-block=\"block-000042\"]",
+      "[data-wt-preformatted-block=\"block-000043\"]",
+      "[data-wt-preformatted-block=\"block-000044\"]",
+      "[data-wt-preformatted-block=\"block-000045\"]",
+      "[data-wt-preformatted-block=\"block-000046\"]",
+      "[data-wt-preformatted-block=\"block-000047\"]",
+      "[data-wt-preformatted-block=\"block-000048\"]",
+      "[data-wt-preformatted-block=\"block-000049\"]",
+      "[data-wt-preformatted-block=\"block-000050\"]",
+      "[data-wt-preformatted-block=\"block-000051\"]",
+      "[data-wt-preformatted-block=\"block-000052\"]",
+      "[data-wt-preformatted-block=\"block-000053\"]",
+      "[data-wt-preformatted-block=\"block-000054\"]",
+      "[data-wt-preformatted-block=\"block-000055\"]",
+      "[data-wt-preformatted-block=\"block-000056\"]",
+      "[data-wt-preformatted-block=\"block-000057\"]",
+      "[data-wt-preformatted-block=\"block-000058\"]",
+      "[data-wt-preformatted-block=\"block-000059\"]"
+    ],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000150\"]",
+        "term_end": 16,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000152\"]",
+        "term_end": 17,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000154\"]",
+        "term_end": 35,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000156\"]",
+        "term_end": 21,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000160\"]",
+        "term_end": 7,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000162\"]",
+        "term_end": 8,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000164\"]",
+        "term_end": 7,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000166\"]",
+        "term_end": 7,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000168\"]",
+        "term_end": 6,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000210\"]",
+        "term_end": 17,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000212\"]",
+        "term_end": 24,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000235\"]",
+        "term_end": 13,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000302\"]",
+        "term_end": 30,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000304\"]",
+        "term_end": 9,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000306\"]",
+        "term_end": 6,
+        "evidence": "AI directly compared the source label/indented definition and this exact translated prefix. Keep English technical names and all original content."
+      }
+    ],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000085\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000087\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000089\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000091\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000093\"]",
+            "depth": 1
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000098\"]",
+            "depth": 1
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000270\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000271\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000272\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000273\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000275\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000276\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000277\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000278\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000280\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000281\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000282\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000283\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000315\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000316\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000317\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000319\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000320\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000321\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "AI compared source indentation and blank-line-separated records; preserve 4a/4b as children of 4, or one independent registration group."
+      }
+    ]
+  }
+}
