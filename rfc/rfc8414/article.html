@@ -1,0 +1,316 @@
+<article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title">                OAuth 2.0 Authorization Server Metadata
+</h1></header><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#st-heading-0001">초록</a></li><li><a href="#st-heading-0002">이 문서의 지위</a></li><li><a href="#st-heading-0003">저작권 고지</a></li><li><a href="#st-heading-0004">1.  소개</a><ol><li><a href="#st-heading-0005">1.1.  요구사항 표기와 규칙</a></li><li><a href="#st-heading-0006">1.2.  용어</a></li></ol></li><li><a href="#st-heading-0007">2.  Authorization Server Metadata</a><ol><li><a href="#st-heading-0008">2.1. 서명된 Authorization Server Metadata</a></li></ol></li><li><a href="#st-heading-0009">3. Authorization Server Metadata 가져오기</a><ol><li><a href="#st-heading-0010">3.1. Authorization Server Metadata 요청</a></li><li><a href="#st-heading-0011">3.2. Authorization Server Metadata 응답</a></li><li><a href="#st-heading-0012">3.3. Authorization Server Metadata 검증</a></li></ol></li><li><a href="#st-heading-0013">4. 문자열 연산</a></li><li><a href="#st-heading-0014">5. 호환성 참고 사항</a></li><li><a href="#st-heading-0015">6. 보안 고려 사항</a><ol><li><a href="#st-heading-0016">6.1. TLS 요구사항</a></li><li><a href="#st-heading-0017">6.2. 사칭 공격</a></li><li><a href="#st-heading-0018">6.3. 표준 형식으로 metadata 게시</a></li><li><a href="#st-heading-0019">6.4. protected resource(보호된 리소스)</a></li></ol></li><li><a href="#st-heading-0020">7. IANA 고려 사항</a><ol><li><a href="#st-heading-0021">7.1. OAuth Authorization Server Metadata Registry</a><ol><li><a href="#st-heading-0022">7.1.1. 등록 양식</a></li><li><a href="#st-heading-0023">7.1.2. registry 초기 내용</a></li></ol></li><li><a href="#st-heading-0024">7.2.  개정된 등록 지침</a></li><li><a href="#st-heading-0025">7.3.  Well-Known URI Registry</a><ol><li><a href="#st-heading-0026">7.3.1.  registry 내용</a></li></ol></li></ol></li><li><a href="#st-heading-0027">8.  참고 문헌</a><ol><li><a href="#st-heading-0028">8.1.  규범적 참고 문헌</a></li><li><a href="#st-heading-0029">8.2.  정보 제공용 참고 문헌</a></li></ol></li><li><a href="#st-heading-0030">감사의 말</a></li><li><a href="#st-heading-0031">저자 연락처</a></li></ol></nav></details><div><pre>Internet Engineering Task Force (IETF)                          M. Jones
+Request for Comments: 8414                                     Microsoft
+Category: Standards Track                                    N. Sakimura
+ISSN: 2070-1721                                                      NRI
+                                                              J. Bradley
+                                                                  Yubico
+                                                               June 2018
+</pre><span></span><span></span><h2 id="st-heading-0001"><span>초록</span>
+</h2><span></span><p>   이 명세는 OAuth 2.0 client가 OAuth 2.0 authorization server(인가 서버)와 상호작용하는 데 필요한 정보를 얻을 수 있도록 metadata(메타데이터) 형식을 정의합니다. 이 정보에는 endpoint의 위치와 authorization server의 기능이 포함됩니다.
+</p><span></span><h2 id="st-heading-0002"><span>이 문서의 지위</span>
+</h2><span></span><p>   이 문서는 인터넷 표준 트랙 문서입니다.
+</p><span></span><p>   이 문서는 Internet Engineering Task Force(IETF)의 산출물이며, IETF 커뮤니티의 합의를 나타냅니다. 공개 검토를 거쳤으며 Internet Engineering Steering Group(IESG)이 발행을 승인했습니다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 2절에서 확인할 수 있습니다.
+</p><span></span><p>   이 문서의 현재 상태, 정오표 및 의견 제출 방법에 관한 정보는 https://www.rfc-editor.org/info/rfc8414에서 확인할 수 있습니다.
+</p><span></span><h2 id="st-heading-0003"><span>저작권 고지</span>
+</h2><span></span><p>   Copyright (c) 2018 IETF Trust 및 이 문서의 저자로 명시된 사람들. 모든 권리는 유보됩니다.
+</p><span></span><p>   이 문서는 발행일에 유효한 BCP 78 및 IETF Trust의 Legal Provisions Relating to IETF Documents(https://trustee.ietf.org/license-info) 규정의 적용을 받습니다. 이 문서에 관한 권리와 제한 사항이 명시되어 있으므로 해당 문서들을 주의 깊게 검토하시기 바랍니다. 이 문서에서 발췌한 Code Components에는 Trust Legal Provisions 4.e절에 명시된 대로 Simplified BSD License의 문구를 포함해야 하며, 해당 구성요소는 Simplified BSD License에 명시된 대로 어떠한 보증도 없이 제공됩니다.
+</p><span></span><span></span><span></span><span></span><h2 id="st-heading-0004">1.  소개
+</h2><span></span><p>이 명세는 "OpenID Connect Discovery 1.0" [OpenID.Discovery]에서 정의한 metadata 형식을 일반화하여, OpenID Connect Discovery와의 호환성을 유지하면서 더 다양한 OAuth 2.0 사용 사례에 적용할 수 있게 합니다. 이는 "OAuth 2.0 Dynamic Client Registration(동적 클라이언트 등록) Protocol" [RFC7591]이 "OpenID Connect Dynamic Client Registration 1.0" [OpenID.Registration]에서 정의한 Dynamic Client Registration 메커니즘을 해당 명세와 호환되도록 일반화한 방식을 의도적으로 따릅니다.</p><span></span><p>authorization server의 metadata는 well-known 위치에서 JSON [RFC8259] 문서로 가져옵니다. 이 문서는 해당 authorization server의 endpoint 위치와 지원 기능을 명시합니다. 이 과정은 3절에서 설명합니다.</p><span></span><span></span><p>이 metadata는 서버 origin이 직접 진술하여 HTTPS로 전달하거나, JSON Web Token (JWT) [JWT]의 claim으로 표현한 서명된 metadata 값의 집합으로 전달할 수 있습니다. JWT를 사용하는 경우 issuer(발급자)가 해당 authorization server에 관한 데이터의 유효성을 보증합니다. 이는 OAuth Dynamic Client Registration [RFC7591]에서 Software Statement가 하는 역할과 유사합니다.</p><span></span><p>client가 authorization server를 선택하는 방법은 이 명세의 범위를 벗어납니다. 경우에 따라 해당 authorization server의 issuer 식별자를 client에 수동으로 설정할 수 있습니다. 다른 경우에는 "OpenID Connect Discovery 1.0" [OpenID.Discovery]의 2절에서 설명하듯, 예를 들어 WebFinger [RFC7033]를 사용해 동적으로 찾을 수 있습니다.</p><span></span><h3 id="st-heading-0005">1.1.  요구사항 표기와 규칙
+</h3><span></span><p>이 문서에서 키워드 "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", "OPTIONAL"은 여기에 보인 것처럼 모두 대문자로 표기된 경우에만 BCP 14 [RFC2119] [RFC8174]에 설명된 의미로 해석합니다.</p><span></span><p>이 명세에서 JSON Web Signature (JWS) [JWS] 및 JSON Web Encryption (JWE) [JWE] 데이터 구조를 사용하는 모든 경우에는 JWS Compact Serialization 또는 JWE Compact Serialization을 사용합니다. JWS JSON Serialization과 JWE JSON Serialization은 사용하지 않습니다.</p><span></span><h3 id="st-heading-0006">1.2.  용어
+</h3><span></span><p>이 명세는 OAuth 2.0 [RFC6749]에서 정의한 "Access Token", "Authorization Code", "Authorization Endpoint", "Authorization Grant", "Authorization Server", "Client", "Client Authentication", "Client Identifier", "Client Secret", "Grant Type", "Protected Resource", "Redirection URI", "Refresh Token", "Resource Owner", "Resource Server", "Response Type", "Token Endpoint"라는 용어를 사용합니다. 또한 JSON Web Token (JWT) [JWT]에서 정의한 "Claim Name", "Claim Value", "JSON Web Token (JWT)"와 "OAuth 2.0 Multiple Response Type Encoding Practices" [OAuth.Responses]에서 정의한 "Response Mode"라는 용어를 사용합니다.</p><span></span><span></span><h2 id="st-heading-0007">2.  Authorization Server Metadata
+</h2><span></span><p>authorization server에는 자체 구성을 설명하는 metadata가 있을 수 있습니다. 이 명세에서 사용하는 다음 authorization server metadata 값은 7.1절에서 신설하는 IANA의 "OAuth Authorization Server Metadata" 레지스트리에 등록됩니다.</p><span></span><div><dl class="st-definition"><dt class="st-definition-term">   issuer
+</dt><dd class="st-definition-description">      REQUIRED. authorization server의 issuer 식별자입니다. 이 식별자는 "https" 스킴을 사용하며 query 또는 fragment 구성 요소가 없는 URL입니다. 3절에서 설명하는 것처럼, authorization server metadata는 이 issuer 식별자로부터 도출한, RFC 5785 [RFC5785]에 따른 ".well-known" 위치에 게시됩니다. issuer 식별자는 "OAuth 2.0 Mix-Up Mitigation" [MIX-UP]에서 설명하는 authorization server mix-up 공격을 방지하는 데 사용됩니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   authorization_endpoint
+</dt><dd class="st-definition-description">      authorization server의 authorization endpoint(인가 엔드포인트) [RFC6749] URL입니다. authorization endpoint를 사용하는 grant type(인가 유형)을 하나도 지원하지 않는 경우를 제외하면 이 항목은 REQUIRED입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   token_endpoint
+</dt><dd class="st-definition-description">      authorization server의 token endpoint(토큰 엔드포인트) [RFC6749] URL입니다. implicit grant type만 지원하는 경우를 제외하면 이 항목은 REQUIRED입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   jwks_uri
+</dt><dd class="st-definition-description">      OPTIONAL. authorization server의 JWK Set [JWK] 문서 URL입니다. 이 문서에는 client가 authorization server의 서명을 검증하는 데 사용하는 서명 키가 하나 이상 들어 있습니다. 이 URL은 "https" 스킴을 사용해야 합니다(MUST). JWK Set에는 client가 서버로 보내는 요청을 암호화하는 데 사용하는 서버의 암호화 키가 하나 이상 포함될 수도 있습니다(MAY). 서명 키와 암호화 키를 모두 제공하는 경우, 각 키의 용도를 나타내도록 해당 JWK Set의 모든 키에 "use"(공개 키 용도) 매개변수 값이 REQUIRED입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   registration_endpoint
+</dt><dd class="st-definition-description">      OPTIONAL. authorization server의 OAuth 2.0 Dynamic Client Registration endpoint [RFC7591] URL입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   scopes_supported
+</dt><dd class="st-definition-description">      RECOMMENDED. 이 authorization server가 지원하는 OAuth 2.0 [RFC6749] "scope" 값 목록을 담은 JSON 배열입니다. 서버는 이 매개변수를 사용하더라도 지원하는 scope 값 중 일부를 공개하지 않을 수 있습니다(MAY).</dd></dl></div><span></span><span></span><div><dl class="st-definition"><dt class="st-definition-term">   response_types_supported
+</dt><dd class="st-definition-description">      REQUIRED. 이 authorization server가 지원하는 OAuth 2.0 "response_type" 값 목록을 담은 JSON 배열입니다. 이 배열에 사용하는 값은 "OAuth 2.0 Dynamic Client Registration Protocol" [RFC7591]에서 정의한 "response_types" 매개변수에 사용하는 값과 같습니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   response_modes_supported
+</dt><dd class="st-definition-description">      OPTIONAL. "OAuth 2.0 Multiple Response Type Encoding Practices" [OAuth.Responses]에 명시된 OAuth 2.0 "response_mode" 값 중 이 authorization server가 지원하는 값의 목록을 담은 JSON 배열입니다. 생략하면 기본값은 ["query", "fragment"]입니다. response mode 값 "form_post"도 "OAuth 2.0 Form Post Response Mode" [OAuth.Post]에서 정의합니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   grant_types_supported
+</dt><dd class="st-definition-description">      OPTIONAL. 이 authorization server가 지원하는 OAuth 2.0 grant type 값 목록을 담은 JSON 배열입니다. 이 배열에 사용하는 값은 "OAuth 2.0 Dynamic Client Registration Protocol" [RFC7591]에서 정의한 "grant_types" 매개변수에 사용하는 값과 같습니다. 생략하면 기본값은 ["authorization_code", "implicit"]입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   token_endpoint_auth_methods_supported
+</dt><dd class="st-definition-description">      OPTIONAL. 이 token endpoint가 지원하는 client authentication 방식의 목록을 담은 JSON 배열입니다. client authentication 방식의 값은 [RFC7591]의 2절에서 정의한 "token_endpoint_auth_method" 매개변수에 사용합니다. 생략하면 기본값은 "client_secret_basic"으로, OAuth 2.0 [RFC6749]의 2.3.1절에 명시된 HTTP Basic Authentication Scheme입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   token_endpoint_auth_signing_alg_values_supported
+</dt><dd class="st-definition-description">      OPTIONAL. "private_key_jwt" 및 "client_secret_jwt" 인증 방식에서 token endpoint가 client를 인증할 때 사용하는 JWT [JWT]의 서명에 대해, 이 endpoint가 지원하는 JWS 서명 알고리즘("alg" 값)의 목록을 담은 JSON 배열입니다. "token_endpoint_auth_methods_supported" 항목에 이 두 인증 방식 중 하나라도 명시된 경우에는 이 metadata 항목이 있어야 합니다(MUST). 이 항목을 생략하더라도 기본 알고리즘이 적용되는 것은 아닙니다. 서버는 "RS256"을 지원하는 것이 권장됩니다(SHOULD). "none" 값은 사용해서는 안 됩니다(MUST NOT).</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   service_documentation
+</dt><dd class="st-definition-description">      OPTIONAL. 개발자가 authorization server를 사용할 때 알고 싶거나 알아야 할 정보를 사람이 읽을 수 있는 형태로 제공하는 페이지의 URL입니다. 특히 authorization server가 <span></span>Dynamic Client Registration을 지원하지 않는 경우, 이 문서에서 client를 등록하는 방법을 안내해야 합니다.</dd></dl></div><span></span><span></span><span></span><div><dl class="st-definition"><dt class="st-definition-term">   ui_locales_supported
+</dt><dd class="st-definition-description">      OPTIONAL. 사용자 인터페이스에서 지원하는 언어와 문자 체계를 BCP 47 [RFC5646]의 언어 태그 값으로 구성된 JSON 배열로 나타냅니다. 생략하면 어떤 언어와 문자 체계를 지원하는지는 명시되지 않습니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   op_policy_uri
+</dt><dd class="st-definition-description">      OPTIONAL. client를 등록하는 사람이 authorization server가 제공한 데이터를 client가 어떻게 사용할 수 있는지에 관한 요구사항을 읽을 수 있도록, authorization server가 제공하는 URL입니다. 이 URL이 주어지면 등록 절차에서 client를 등록하는 사람에게 표시하는 것이 권장됩니다(SHOULD). 5절에서 설명하는 것처럼, "op_policy_uri"라는 식별자는 OpenID 전용처럼 보이지만 이 명세에서는 실제로 OpenID Connect에 한정되지 않는 일반적인 OAuth 2.0 기능을 가리킵니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   op_tos_uri
+</dt><dd class="st-definition-description">      OPTIONAL. client를 등록하는 사람이 authorization server의 서비스 이용약관을 읽을 수 있도록 authorization server가 제공하는 URL입니다. 이 URL이 주어지면 등록 절차에서 client를 등록하는 사람에게 표시하는 것이 권장됩니다(SHOULD). 5절에서 설명하는 것처럼, "op_tos_uri"라는 식별자는 OpenID 전용처럼 보이지만 이 명세에서는 실제로 OpenID Connect에 한정되지 않는 일반적인 OAuth 2.0 기능을 가리킵니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   revocation_endpoint
+</dt><dd class="st-definition-description">      OPTIONAL. authorization server의 OAuth 2.0 revocation endpoint(토큰 폐기 엔드포인트) [RFC7009] URL입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   revocation_endpoint_auth_methods_supported
+</dt><dd class="st-definition-description">      OPTIONAL. 이 revocation endpoint가 지원하는 client authentication 방식의 목록을 담은 JSON 배열입니다. 유효한 client authentication 방식의 값은 IANA의 "OAuth Token Endpoint Authentication Methods" 레지스트리 [IANA.OAuth.Parameters]에 등록된 값입니다. 생략하면 기본값은 "client_secret_basic"으로, OAuth 2.0 [RFC6749]의 2.3.1절에 명시된 HTTP Basic Authentication Scheme입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">   revocation_endpoint_auth_signing_alg_values_supported
+</dt><dd class="st-definition-description">      OPTIONAL. revocation endpoint가 client를 인증하는 데 사용하는 JWT [JWT]의 서명에 대해 지원하는 JWS 서명 알고리즘("alg" 값)의 목록을 담은 JSON 배열로, <span></span>"private_key_jwt" 및 "client_secret_jwt" 인증 방식에 적용됩니다. "revocation_endpoint_auth_methods_supported" 항목에 이 두 인증 방식 중 하나라도 명시된 경우에는 이 metadata 항목이 있어야 합니다(MUST). 이 항목을 생략하더라도 기본 알고리즘이 적용되는 것은 아닙니다. "none" 값은 사용해서는 안 됩니다(MUST NOT).</dd></dl></div><span></span><span></span><span></span><div><dl class="st-definition"><dt class="st-definition-term">   introspection_endpoint
+</dt><dd class="st-definition-description">      OPTIONAL. authorization server의 OAuth 2.0 introspection endpoint(토큰 인트로스펙션 엔드포인트) [RFC7662] URL입니다.</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">introspection_endpoint_auth_methods_supported
+</dt><dd class="st-definition-description">OPTIONAL. 이 introspection endpoint에서 지원하는 client authentication 방식 목록을 담은 JSON 배열입니다. 유효한 client authentication 방식 값은 IANA의 "OAuth Token Endpoint Authentication Methods" 레지스트리 [IANA.OAuth.Parameters] 또는 "OAuth Access Token Types" 레지스트리 [IANA.OAuth.Parameters]에 등록된 값입니다. (7.2절에 따라 두 레지스트리의 값은 서로 다르며 앞으로도 서로 다르게 유지됩니다.) 이 항목을 생략하면 다른 방법으로 지원되는 인증 방식 집합을 확인해야 합니다(MUST).</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">introspection_endpoint_auth_signing_alg_values_supported
+</dt><dd class="st-definition-description">OPTIONAL. "private_key_jwt" 및 "client_secret_jwt" 인증 방식에서 introspection endpoint가 client authentication에 사용하는 JWT [JWT]의 서명에 대해, 해당 endpoint가 지원하는 JWS 서명 알고리즘("alg" 값) 목록을 담은 JSON 배열입니다. 두 인증 방식 중 하나라도 "introspection_endpoint_auth_methods_supported" 항목에 명시되어 있으면 이 metadata 항목이 반드시 있어야 합니다(MUST). 이 항목이 생략되어도 기본 알고리즘이 있다고 간주하지 않습니다. "none" 값은 사용해서는 안 됩니다(MUST NOT).</dd></dl></div><span></span><div><dl class="st-definition"><dt class="st-definition-term">code_challenge_methods_supported
+</dt><dd class="st-definition-description">OPTIONAL. 이 authorization server에서 지원하는 Proof Key for Code Exchange (PKCE) [RFC7636] code challenge method(코드 챌린지 방식) 목록을 담은 JSON 배열입니다. Code challenge method 값은 [RFC7636] 4.3절에 정의된 "code_challenge_method" 매개변수에 사용됩니다. 유효한 code challenge method 값은 IANA의 "PKCE Code Challenge Methods" 레지스트리 [IANA.OAuth.Parameters]에 등록된 값입니다. 이 항목이 생략되면 authorization server는 PKCE를 지원하지 않습니다.</dd></dl></div><span></span><p>authorization server metadata 매개변수를 추가로 사용할 수도 있습니다(MAY). 이 중 일부는 OpenID Connect Discovery 1.0 [OpenID.Discovery] 등 다른 명세에서 정의합니다.</p><span></span><span></span><h3 id="st-heading-0008">2.1. 서명된 Authorization Server Metadata</h3><span></span><p>metadata 값은 JSON 요소뿐 아니라 "signed_metadata" 값으로도 제공할 수 있습니다(MAY). 이 값은 authorization server에 관한 metadata 값을 한데 묶어 진술하는 JSON Web Token (JWT) [JWT]입니다. 서명된 metadata에서 사용할 수 있는 claim 집합은 2절에 정의되어 있습니다. 서명된 metadata에는 JSON Web Signature (JWS) [JWS]를 사용해 디지털 서명이나 MAC을 적용해야 하며(MUST), 그 안의 claim을 증명하는 당사자를 나타내는 "iss"(issuer) claim이 포함되어야 합니다(MUST). metadata를 사용하는 쪽이 이 기능을 지원하지 않으면 서명된 metadata를 무시할 수 있습니다(MAY). 서명된 metadata를 지원한다면, 서명된 metadata로 전달된 값이 일반 JSON 요소로 전달된 대응 값보다 우선해야 합니다(MUST).</p><span></span><p>서명된 metadata는 다음 OPTIONAL 멤버를 통해 authorization server metadata JSON 객체에 포함됩니다.</p><span></span><div><dl class="st-definition"><dt class="st-definition-term">signed_metadata
+</dt><dd class="st-definition-description">authorization server에 관한 metadata 값을 claim으로 담은 JWT입니다. 이 값은 서명된 JWT 전체로 이루어진 문자열입니다. "signed_metadata" metadata 값은 이 JWT 안에 claim으로 나타나지 않는 것이 좋습니다(SHOULD NOT).</dd></dl></div><span></span><h2 id="st-heading-0009">3. Authorization Server Metadata 가져오기</h2><span></span><p>metadata를 지원하는 authorization server는 2절에 명시된 metadata를 담은 JSON 문서를 정해진 경로에서 제공해야 합니다(MUST). 이 경로는 authorization server의 issuer 식별자에서 호스트 구성 요소 뒤에 well-known URI 문자열을 삽입해 만들며, 경로 구성 요소가 있으면 그 앞에 삽입합니다. 기본 well-known URI 문자열은 "/.well-known/oauth-authorization-server"입니다. 이 경로에는 "https" 스킴을 사용해야 합니다(MUST). ".well-known"의 구문과 의미는 RFC 5785 [RFC5785]에 정의되어 있습니다. 사용하는 well-known URI 접미사는 IANA의 "Well-Known URIs" 레지스트리 [IANA.well-known]에 등록되어 있어야 합니다(MUST).</p><span></span><p>OAuth authorization server를 애플리케이션별 방식으로 활용하는 애플리케이션들은 저마다 사용하는 authorization server metadata를 게시하기 위해 서로 다른 well-known URI 접미사를 정의하고 등록할 수 있습니다. 예를 들어, 예시 애플리케이션이 OAuth authorization server를 고유한 방식으로 사용하고 게시해야 할 고유한 metadata 값이 있다면, "example-configuration" URI 접미사를 등록해 사용할 수 있습니다. 그러면 authorization server의 issuer 식별자에서 호스트 구성 요소와 경로 구성 요소 사이에 "/.well-known/example-configuration"을 삽입해 만든 경로에 metadata 문서를 게시할 수 있습니다. 반면 이런 애플리케이션 중 상당수는 기본 well-known <span></span>URI 문자열 "/.well-known/oauth-authorization-server"를 사용하고 애플리케이션 전용 접미사는 등록하지 않을 것입니다. 이 기본 문자열은 범용 OAuth authorization server에 적합한 선택입니다.</p><span></span><span></span><span></span><p>이 명세를 사용하는 OAuth 2.0 애플리케이션은 이 용도로 사용할 well-known URI 접미사를 명시해야 합니다(MUST). 동일한 authorization server는 자신의 issuer 식별자에서 파생된 여러 well-known 위치에 metadata를 게시할 수 있습니다(MAY). 예를 들어 "/.well-known/example-configuration"과 "/.well-known/oauth-authorization-server" 양쪽에 게시할 수 있습니다.</p><span></span><p>일부 OAuth 애플리케이션은 well-known URI 접미사로 "openid-configuration"을 선택할 것입니다. 5절에서 설명하듯이, "/.well-known/openid-configuration"이라는 식별자가 OpenID 전용처럼 보이지만 이 명세에서는 실제로 OpenID Connect에 한정되지 않는 일반적인 OAuth 2.0 기능을 가리킵니다.</p><span></span><h3 id="st-heading-0010">3.1. Authorization Server Metadata 요청</h3><span></span><p>authorization server metadata 문서는 앞서 명시한 경로에 HTTP "GET" 요청을 보내 조회해야 합니다(MUST).</p><span></span><p>issuer 식별자가 "https://example.com"이고 well-known URI 접미사가 "oauth-authorization-server"인 경우, issuer 식별자에 경로 구성 요소가 없으므로 client는 metadata를 얻기 위해 다음 요청을 보냅니다.</p><span></span><pre>     GET /.well-known/oauth-authorization-server HTTP/1.1
+     Host: example.com
+</pre><span></span><p>issuer 식별자 값에 경로 구성 요소가 있으면, 호스트 구성 요소와 경로 구성 요소 사이에 "/.well-known/"과 well-known URI 접미사를 삽입하기 전에 끝의 "/"를 제거해야 합니다(MUST). issuer 식별자가 "https://example.com/issuer1"이고 well-known URI 접미사가 "oauth-authorization-server"인 경우, issuer 식별자에 경로 구성 요소가 있으므로 client는 metadata를 얻기 위해 다음 요청을 보냅니다.</p><span></span><pre>     GET /.well-known/oauth-authorization-server/issuer1 HTTP/1.1
+     Host: example.com
+</pre><span></span><p>경로 구성 요소를 사용하면 호스트 하나에서 여러 issuer를 지원할 수 있습니다. 일부 멀티테넌트 호스팅 구성에서는 이 기능이 필요합니다. 이때 ".well-known"은 호스트 하나에서 여러 issuer를 지원하는 데 쓰이며, RFC 5785 [RFC5785]에서와 달리 호스트에 관한 일반 정보를 제공하지 않습니다.</p><span></span><span></span><h3 id="st-heading-0011">3.2. Authorization Server Metadata 응답</h3><span></span><p>응답은 필요한 모든 endpoint와 공개 키의 위치 정보를 비롯하여 authorization server의 구성에 관한 claim을 담습니다. 성공 응답은 HTTP 상태 코드 200 OK를 사용하고, 2절에 정의된 metadata 값의 부분집합에 해당하는 claim을 멤버로 담은 JSON 객체를 "application/json" 콘텐츠 유형으로 반환해야 합니다(MUST). 다른 claim을 함께 반환할 수도 있습니다(MAY).</p><span></span><p>여러 값을 반환하는 claim은 JSON 배열로 표현합니다. 요소가 하나도 없는 claim은 응답에서 생략해야 합니다(MUST).</p><span></span><p>오류 응답에는 해당 오류에 맞는 HTTP 상태 코드 값을 사용합니다.</p><span></span><p>다음은 규범적 요구사항이 아닌 응답 예시입니다.</p><span></span><pre>     HTTP/1.1 200 OK
+     Content-Type: application/json
+
+     {
+      "issuer":
+        "https://server.example.com",
+      "authorization_endpoint":
+        "https://server.example.com/authorize",
+      "token_endpoint":
+        "https://server.example.com/token",
+      "token_endpoint_auth_methods_supported":
+        ["client_secret_basic", "private_key_jwt"],
+      "token_endpoint_auth_signing_alg_values_supported":
+        ["RS256", "ES256"],
+      "userinfo_endpoint":
+        "https://server.example.com/userinfo",
+      "jwks_uri":
+        "https://server.example.com/jwks.json",
+      "registration_endpoint":
+        "https://server.example.com/register",
+      "scopes_supported":
+        ["openid", "profile", "email", "address",
+         "phone", "offline_access"],
+      "response_types_supported":
+        ["code", "code token"],
+      "service_documentation":
+        "http://server.example.com/service_documentation.html",
+      "ui_locales_supported":
+        ["en-US", "en-GB", "en-CA", "fr-FR", "fr-CA"]
+     }
+</pre><span></span><span></span><h3 id="st-heading-0012">3.3. Authorization Server Metadata 검증</h3><span></span><p>반환된 "issuer" 값은 metadata를 가져오는 데 사용한 URL을 만들 때 well-known URI 문자열을 삽입하기 전의 authorization server issuer 식별자 값과 동일해야 합니다(MUST). 두 값이 동일하지 않으면 응답에 포함된 데이터를 사용해서는 안 됩니다(MUST NOT).</p><span></span><h2 id="st-heading-0013">4. 문자열 연산</h2><span></span><p>일부 OAuth 2.0 메시지를 처리하려면 메시지에 포함된 값을 이미 알려진 값과 비교해야 합니다. 예를 들어 metadata 응답의 멤버 이름을 "issuer"와 같은 특정 멤버 이름과 비교할 수 있습니다. 다만 Unicode [UNICODE] 문자열을 비교하는 방식은 보안에 중대한 영향을 미칩니다.</p><span></span><p>따라서 JSON 문자열과 다른 Unicode 문자열은 아래에 명시된 방식으로 비교해야 합니다(MUST).</p><span></span><div class="st-list-item" role="listitem"><code>   1.</code> JSON에서 적용한 이스케이프 처리를 모두 되돌려 Unicode code point(유니코드 코드 포인트) 배열을 만듭니다.</div><span></span><div class="st-list-item" role="listitem"><code>   2.</code> JSON 문자열과 비교 대상 문자열 어느 쪽에도 어떤 단계에서든 Unicode Normalization [USA15]을 적용해서는 안 됩니다(MUST NOT).</div><span></span><div class="st-list-item" role="listitem"><code>   3.</code> 두 문자열을 비교할 때는 서로 대응하는 Unicode code point가 같은지 하나씩 비교해야 합니다(MUST).</div><span></span><p>이는 [RFC8259] 8.3절에 설명된 동등성 비교 절차와 동일합니다.</p><span></span><h2 id="st-heading-0014">5. 호환성 참고 사항</h2><span></span><p>"/.well-known/openid-configuration", "op_policy_uri", "op_tos_uri" 식별자는 OpenID Connect [OpenID.Core] 명세 계열을 가리키는 문자열을 포함하며, 이 식별자들은 원래 "OpenID Connect Discovery 1.0" [OpenID.Discovery]에서 정의되었습니다. OpenID 전용처럼 보이는 이 식별자들을 재사용하지만, 이 명세에서는 실제로 OpenID Connect에 한정되지 않는 일반적인 OAuth 2.0 기능을 가리킵니다.</p><span></span><p>3절에 정의된, issuer 식별자를 authorization server metadata 위치로 변환하는 알고리즘은 issuer 식별자에 경로 구성 요소가 없는 경우 "OpenID Connect Discovery 1.0" [OpenID.Discovery] 4절에 정의된 대응 변환과 동일합니다. 하지만 경로 구성 요소가 있으면 두 변환 방식이 다릅니다. <span></span>OpenID Connect Discovery 1.0은 well-known URI 문자열을 issuer 식별자 끝에 덧붙이도록 명시하는 반면(예: "https://example.com/issuer1/.well-known/openid-configuration"), 이 명세는 issuer 식별자의 경로 구성 요소 앞에 삽입하도록 명시하기 때문입니다(예: "https://example.com/.well-known/openid-configuration/issuer1").</p><span></span><span></span><span></span><p>앞으로 OAuth authorization server metadata 위치를 정할 때는 이 명세에서 정의한 변환을 사용하는 것이 좋습니다. 다만 OpenID Connect Discovery 1.0의 변환이 이미 사용 중인 레거시 환경에 배포하는 경우, 전환 기간에는 경로 구성 요소가 있는 issuer 식별자의 metadata를 두 위치에 모두 게시해야 할 수도 있습니다. 이 기간에 애플리케이션은 먼저 이 명세의 변환을 적용해 그 결과 위치에서 authorization server metadata를 가져오도록 시도하는 것이 좋습니다. 해당 위치에서 가져오지 못한 경우에만 OpenID Connect Discovery 1.0이 정의한 변환으로 얻은 대체 위치에서 다시 시도하는 것이 좋습니다. 이러한 하위 호환 동작은 애플리케이션이 사용하는 well-known URI 접미사가 "openid-configuration"인 경우에만 필요할 것으로 예상됩니다.</p><span></span><h2 id="st-heading-0015">6. 보안 고려 사항</h2><span></span><h3 id="st-heading-0016">6.1. TLS 요구사항</h3><span></span><p>구현체는 TLS를 지원해야 합니다(MUST). 어떤 버전을 구현하는 것이 적절한지는 시간이 지나면서 달라지며, 구현 시점의 보급 현황과 알려진 보안 취약점에 따라 결정됩니다. authorization server는 TLS 버전 1.2 [RFC5246]를 지원해야 하며(MUST), 자체 보안 요구사항을 충족하는 TLS 메커니즘을 추가로 지원할 수 있습니다(MAY). TLS를 사용할 때 client는 RFC 6125 [RFC6125]에 따라 TLS/SSL 서버 인증서를 검증해야 합니다(MUST). 구현 시 보안 고려 사항은 "Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)" [BCP195]에서 확인할 수 있습니다.</p><span></span><p>정보 유출과 변조를 막으려면 기밀성과 무결성을 보호하는 cipher suite를 사용하는 TLS로 기밀성을 보호해야 합니다(MUST).</p><span></span><h3 id="st-heading-0017">6.2. 사칭 공격</h3><span></span><p>client가 authorization server metadata를 요청할 때는 6.1절에 설명된 대로 TLS 인증서를 검사해야 합니다(MUST). 서버 인증서가 issuer 식별자 URL에 대해 유효한지 확인하면 중간자 공격과 DNS 기반 <span></span>공격을 방지할 수 있습니다. 이러한 공격은 client를 속여 공격자의 키와 endpoint를 사용하게 함으로써 정당한 authorization server를 사칭할 수 있게 합니다. 공격자가 사칭에 성공하면, 영향을 받은 client가 사칭 대상 authorization server를 사용해 접근할 수 있는 리소스에 접근할 수 있습니다.</p><span></span><span></span><span></span><p>공격자는 사칭 대상 authorization server의 issuer 식별자 URL을 "issuer" claim에 넣되, endpoint와 서명 키는 자신의 것으로 넣은 metadata 문서를 게시하여 authorization server를 사칭하려 할 수도 있습니다. client가 그 문서를 받아들이면 공격자는 해당 authorization server를 사칭할 수 있습니다. 이를 방지하려면 client는 metadata 요청의 접두부로 사용하는 issuer 식별자 URL이 수신한 authorization server metadata 문서에 있는 "issuer" metadata 값과 정확히 일치하는지 확인해야 합니다(MUST).</p><span></span><h3 id="st-heading-0018">6.3. 표준 형식으로 metadata 게시</h3><span></span><p>authorization server 정보를 표준 형식으로 게시하면 정당한 client와 공격자 모두 authorization server를 더 쉽게 사용할 수 있습니다. authorization server가 metadata를 자체 방식으로 게시하든 이 명세에서 정의한 표준 형식으로 게시하든, 이 정보를 이용해 시도할 수 있는 공격에는 동일한 방어 조치를 적용하는 것이 바람직합니다.</p><span></span><h3 id="st-heading-0019">6.4. protected resource(보호된 리소스)</h3><span></span><p>모든 사용 사례에서 authorization server와 함께 사용할 적절한 protected resource를 안전하게 결정하는 방법은 이 명세의 범위에 포함되지 않습니다. 이 명세는 client가 authorization server와 함께 사용할 적절한 protected resource를 결정할 수단을 갖추고 있으며, 각 authorization server에 올바른 metadata를 사용한다고 가정합니다. 구현자는 client가 부적절한 protected resource를 사용하면 공격자가 authorization server나 client에 탐지되지 않은 채 유효한 protected resource에 대한 중간자 proxy로 동작할 수 있음을 유의해야 합니다.</p><span></span><p>authorization server와 함께 사용할 적절한 protected resource를 결정하는 방법은 일반적으로 애플리케이션에 따라 다릅니다. 예를 들어 일부 authorization server는 고정된 protected resource 하나 또는 고정된 protected resource 집합과 함께 사용됩니다. 그 위치는 널리 알려져 있을 수도 있고, authorization server가 metadata 값으로 게시할 수도 있습니다. 다른 경우에는 관리 작업을 통해 authorization server와 함께 사용할 수 있는 리소스 집합을 동적으로 변경할 수 있습니다. 이 밖에도 authorization server와 protected resource 사이의 적절한 연결 관계를 결정하는 방법은 다양합니다.</p><span></span><span></span><h2 id="st-heading-0020">7. IANA 고려 사항</h2><span></span><p>이 명세에서 신설하는 registry에는 다음 등록 절차를 적용합니다.</p><span></span><p>값은 oauth-ext-review@ietf.org mailing list에서 2주간의 검토를 거친 뒤, 한 명 이상의 Designated Expert(지정 전문가)의 자문에 따라 Specification Required [RFC8126] 정책으로 등록합니다. 다만 명세가 발행되기 전에 값을 배정할 수 있도록, Designated Expert는 해당 명세가 발행될 것이라고 판단하면 등록을 승인할 수 있습니다.</p><span></span><p>검토를 위해 mailing list에 보내는 등록 요청에는 적절한 제목을 사용하는 것이 바람직합니다(예: "Request to register OAuth Authorization Server Metadata: example").</p><span></span><p>Designated Expert는 검토 기간 안에 등록 요청을 승인하거나 거부하고, 그 결정을 검토용 mailing list와 IANA에 알립니다. 거부할 때는 그 이유와, 해당하는 경우 요청이 승인될 수 있도록 개선할 방안을 함께 제시하는 것이 바람직합니다. 21일을 넘겨도 결정되지 않은 등록 요청은 해결을 위해 IESG에 알릴 수 있습니다(iesg@ietf.org mailing list 이용).</p><span></span><p>Designated Expert가 적용할 기준에는 제안된 등록이 기존 기능과 중복되는지, 일반적으로 적용할 수 있을 가능성이 있는지 아니면 특정 애플리케이션 하나에만 유용한지, 그리고 등록이 타당한지를 판단하는 것이 포함됩니다.</p><span></span><p>IANA는 Designated Expert가 제출한 registry 갱신만 받아들여야 하며, 모든 등록 요청은 검토용 mailing list로 안내하는 것이 바람직합니다.</p><span></span><p>등록 결정을 다양한 관점에서 충분한 정보를 바탕으로 검토할 수 있도록, 이 명세를 사용하는 여러 애플리케이션의 관점을 대변할 수 있는 Designated Expert를 여러 명 임명하는 것을 권장합니다. 등록 결정이 특정 Designated Expert에게 이해 상충을 일으키는 것으로 비칠 수 있다면, 해당 Designated Expert는 다른 Designated Expert의 판단에 맡기는 것이 바람직합니다.</p><span></span><h3 id="st-heading-0021">7.1. OAuth Authorization Server Metadata Registry</h3><span></span><p>이 명세는 OAuth 2.0 authorization server metadata 이름을 위한 IANA "OAuth Authorization Server Metadata" registry를 신설합니다. 이 registry에는 authorization server metadata 멤버와 이를 정의하는 명세에 대한 참조를 기록합니다.</p><span></span><span></span><p>Designated Expert는 다음 두 가지 중 하나를 따라야 합니다.</p><span></span><p>(a) 등록하려는 metadata 이름과 값에 큰따옴표('"')와 역슬래시('\')를 제외한 인쇄 가능한 ASCII 문자(Unicode code point U+0021, U+0023~U+005B, U+005D~U+007E에 해당하는 문자)만 사용하도록 요구합니다. 또는</p><span></span><p>(b) 다른 code point를 사용하는 새 metadata 멤버나 값을 정의한다면, 그 정의에 이를 나타내는 정확한 Unicode code point 시퀀스를 명시하도록 요구합니다. 또한 JSON 문자열에서 escape된 문자로만 표현할 수 있는 Unicode code point를 사용하는 등록 제안은 받아들여서는 안 됩니다.</p><span></span><h4 id="st-heading-0022">7.1.1. 등록 양식</h4><span></span><p>metadata 이름:
+요청하는 이름(예: "issuer"). 이 이름은 대소문자를 구분합니다. Designated Expert가 예외를 허용할 만한 충분히 설득력 있는 사유가 있다고 명시하지 않는 한, 대소문자를 구분하지 않고 비교했을 때(두 문자열 모두에 Unicode toLowerCase() 연산을 적용하면 일치하는 경우) 이미 등록된 다른 이름과 일치해서는 안 됩니다.</p><span></span><p>metadata 설명:
+metadata에 대한 간략한 설명(예: "Issuer identifier URL").</p><span></span><p>변경 관리 주체:
+Standards Track RFC에는 "IESG"를 기재합니다. 그 외에는 담당 주체의 이름을 기재합니다. 우편 주소, 이메일 주소, 홈페이지 URI 등 다른 세부 정보도 포함할 수 있습니다.</p><span></span><p>명세 문서:
+해당 매개변수를 명세하는 하나 이상의 문서에 대한 참조. 가급적 문서 사본을 가져올 수 있는 URI도 포함합니다. 관련 절을 표시할 수도 있지만 필수는 아닙니다.</p><span></span><span></span><h4 id="st-heading-0023">7.1.2. registry 초기 내용</h4><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: issuer</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 issuer 식별자 URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: authorization_endpoint</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 authorization endpoint URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: token_endpoint</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 token endpoint URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: jwks_uri</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 JWK Set 문서 URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: registration_endpoint</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 OAuth 2.0 Dynamic Client Registration Endpoint URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: scopes_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 authorization server가 지원하는 OAuth 2.0 "scope" 값 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: response_types_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 authorization server가 지원하는 OAuth 2.0 "response_type" 값 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: response_modes_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 authorization server가 지원하는 OAuth 2.0 "response_mode" 값 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: grant_types_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 authorization server가 지원하는 OAuth 2.0 grant type 값 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: token_endpoint_auth_methods_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 token endpoint가 지원하는 client 인증 방식 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: token_endpoint_auth_signing_alg_values_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: token endpoint에서 client 인증에 사용하는 JWT의 서명을 위해 token endpoint가 지원하는 JWS 서명 알고리즘 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: service_documentation</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server를 사용할 때 개발자가 알고 싶거나 알아야 할 수 있는, 사람이 읽을 수 있는 정보가 담긴 페이지의 URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: ui_locales_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 사용자 인터페이스에서 지원하는 언어와 문자 체계를 BCP 47 언어 태그 값의 JSON 배열로 나타낸 것</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: op_policy_uri</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: client가 authorization server에서 제공한 데이터를 어떻게 사용할 수 있는지에 관한 authorization server의 요구 사항을 client 등록자가 읽을 수 있도록 authorization server가 제공하는 URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: op_tos_uri</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: client 등록자가 authorization server의 서비스 약관을 읽을 수 있도록 authorization server가 제공하는 URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: revocation_endpoint</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: authorization server의 OAuth 2.0 revocation endpoint URL</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>o  metadata 이름: revocation_endpoint_auth_methods_supported</p></div><div class="st-structured-item" role="listitem"><p>o  metadata 설명: 이 revocation endpoint가 지원하는 client 인증 방식 목록을 담은 JSON 배열</p></div><div class="st-structured-item" role="listitem"><p>o  변경 관리 주체: IESG</p></div><div class="st-structured-item" role="listitem"><p>o  명세 문서: RFC 8414의 2절</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름:
+      revocation_endpoint_auth_signing_alg_values_supported
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: revocation endpoint에서 client 인증에 사용하는 JWT의 서명에 대해, 해당 revocation endpoint가 지원하는 JWS 서명 알고리즘 목록을 담은 JSON 배열
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2절
+</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름: introspection_endpoint
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: authorization server의 OAuth 2.0 introspection endpoint URL
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2절
+</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름: introspection_endpoint_auth_methods_supported
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: 이 introspection endpoint가 지원하는 client 인증 방식 목록을 담은 JSON 배열
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2절
+</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름:
+      introspection_endpoint_auth_signing_alg_values_supported
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: introspection endpoint에서 client 인증에 사용하는 JWT의 서명에 대해, 해당 introspection endpoint가 지원하는 JWS 서명 알고리즘 목록을 담은 JSON 배열
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2절
+</p></div></div><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름: code_challenge_methods_supported
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: 이 authorization server가 지원하는 PKCE code challenge method
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2절
+</p></div></div><span></span><span></span><div class="st-structured-list" role="list"><div class="st-structured-item" role="listitem"><p>   o  metadata 이름: signed_metadata
+</p></div><div class="st-structured-item" role="listitem"><p>   o  metadata 설명: authorization server의 metadata 값을 claim으로 담은 서명된 JWT
+</p></div><div class="st-structured-item" role="listitem"><p>   o  변경 관리 주체: IESG
+</p></div><div class="st-structured-item" role="listitem"><p>   o  명세 문서: RFC 8414의 2.1절
+</p></div></div><span></span><h3 id="st-heading-0024">7.2.  개정된 등록 지침
+</h3><span></span><p>   이 명세는 아래 두 IANA registry의 Designated Expert를 위한 지침을 추가합니다. 두 registry는 모두 "OAuth Parameters" registry [IANA.OAuth.Parameters]에 속합니다.
+</p><span></span><p>   o  OAuth Access Token Types
+</p><p>   o  OAuth Token Endpoint Authentication Methods
+</p><span></span><p>   IANA는 이들 registry의 참고 문헌 섹션에 이 명세의 링크를 추가했습니다.
+</p><span></span><p>   두 registry의 Designated Expert는 어느 한 registry에 이미 있는 값을 다른 registry에 등록하려는 요청을 거부해야 합니다. "introspection_endpoint_auth_methods_supported" parameter가 두 registry 중 어느 쪽의 값이든 사용할 수 있도록 허용하므로 이 지침이 필요합니다. 이렇게 하면 두 registry에 같은 값이 존재하지 않으므로 모호함이 생기지 않습니다.
+</p><span></span><h3 id="st-heading-0025">7.3.  Well-Known URI Registry
+</h3><span></span><p>   이 명세는 3절에서 정의한 well-known URI를 RFC 5785 [RFC5785]가 제정한 IANA의 "Well-Known URIs" registry [IANA.well-known]에 등록합니다.
+</p><span></span><h4 id="st-heading-0026">7.3.1.  registry 내용
+</h4><span></span><p>   o  URI 접미사: oauth-authorization-server
+</p><p>   o  변경 관리 주체: IESG
+</p><p>   o  명세 문서: RFC 8414의 3절
+</p><p>   o  관련 정보: (없음)
+</p><span></span><span></span><h2 id="st-heading-0027">8.  참고 문헌
+</h2><span></span><h3 id="st-heading-0028">8.1.  규범적 참고 문헌
+</h3><span></span><p>   [BCP195]   Sheffer, Y., Holz, R., and P. Saint-Andre,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 7525, 2015년 5월,
+              &lt;http://www.rfc-editor.org/info/bcp195&gt;.
+</p><span></span><p>   [IANA.OAuth.Parameters]
+              IANA, "OAuth Parameters",
+              &lt;https://www.iana.org/assignments/oauth-parameters&gt;.
+</p><span></span><p>   [JWE]      Jones, M. and J. Hildebrand, "JSON Web Encryption (JWE)",
+              RFC 7516, DOI 10.17487/RFC7516, 2015년 5월,
+              &lt;https://www.rfc-editor.org/info/rfc7516&gt;.
+</p><span></span><p>   [JWK]      Jones, M., "JSON Web Key (JWK)", RFC 7517,
+              DOI 10.17487/RFC7517, 2015년 5월,
+              &lt;https://www.rfc-editor.org/info/rfc7517&gt;.
+</p><span></span><p>   [JWS]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web
+              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, 2015년 5월, &lt;https://www.rfc-editor.org/info/rfc7515&gt;.
+</p><span></span><p>   [JWT]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
+              (JWT)", RFC 7519, DOI 10.17487/RFC7519, 2015년 5월,
+              &lt;https://www.rfc-editor.org/info/rfc7519&gt;.
+</p><span></span><p>   [OAuth.Post]
+              Jones, M. and B. Campbell, "OAuth 2.0 Form Post Response
+              Mode", 2015년 4월, &lt;<code>http://openid.net/specs/
+              oauth-v2-form-post-response-mode-1_0.html</code>&gt;.
+</p><span></span><p>   [OAuth.Responses]
+              de Medeiros, B., Ed., Scurtescu, M., Tarjan, P., and M.
+              Jones, "OAuth 2.0 Multiple Response Type Encoding
+              Practices", 2014년 2월, &lt;<code>http://openid.net/specs/
+              oauth-v2-multiple-response-types-1_0.html</code>&gt;.
+</p><span></span><p>   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, 1997년 3월,
+              &lt;https://www.rfc-editor.org/info/rfc2119&gt;.
+</p><span></span><span></span><p>   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+              (TLS) Protocol Version 1.2", RFC 5246,
+              DOI 10.17487/RFC5246, 2008년 8월,
+              &lt;https://www.rfc-editor.org/info/rfc5246&gt;.
+</p><span></span><p>   [RFC5646]  Phillips, A., Ed. and M. Davis, Ed., "Tags for Identifying
+              Languages", BCP 47, RFC 5646, DOI 10.17487/RFC5646,
+              2009년 9월, &lt;https://www.rfc-editor.org/info/rfc5646&gt;.
+</p><span></span><p>   [RFC5785]  Nottingham, M. and E. Hammer-Lahav, "Defining Well-Known
+              Uniform Resource Identifiers (URIs)", RFC 5785,
+              DOI 10.17487/RFC5785, 2010년 4월,
+              &lt;https://www.rfc-editor.org/info/rfc5785&gt;.
+</p><span></span><p>   [RFC6125]  Saint-Andre, P. and J. Hodges, "Representation and
+              Verification of Domain-Based Application Service Identity
+              within Internet Public Key Infrastructure Using X.509
+              (PKIX) Certificates in the Context of Transport Layer
+              Security (TLS)", RFC 6125, DOI 10.17487/RFC6125, 2011년 3월, &lt;https://www.rfc-editor.org/info/rfc6125&gt;.
+</p><span></span><p>   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, 2012년 10월,
+              &lt;https://www.rfc-editor.org/info/rfc6749&gt;.
+</p><span></span><p>   [RFC7009]  Lodderstedt, T., Ed., Dronia, S., and M. Scurtescu, "OAuth
+              2.0 Token Revocation", RFC 7009, DOI 10.17487/RFC7009,
+              2013년 8월, &lt;https://www.rfc-editor.org/info/rfc7009&gt;.
+</p><span></span><p>   [RFC7033]  Jones, P., Salgueiro, G., Jones, M., and J. Smarr,
+              "WebFinger", RFC 7033, DOI 10.17487/RFC7033, 2013년 9월, &lt;https://www.rfc-editor.org/info/rfc7033&gt;.
+</p><span></span><p>   [RFC7591]  Richer, J., Ed., Jones, M., Bradley, J., Machulak, M., and
+              P. Hunt, "OAuth 2.0 Dynamic Client Registration Protocol",
+              RFC 7591, DOI 10.17487/RFC7591, 2015년 7월,
+              &lt;https://www.rfc-editor.org/info/rfc7591&gt;.
+</p><span></span><p>   [RFC7636]  Sakimura, N., Ed., Bradley, J., and N. Agarwal, "Proof Key
+              for Code Exchange by OAuth Public Clients", RFC 7636,
+              DOI 10.17487/RFC7636, 2015년 9월,
+              &lt;https://www.rfc-editor.org/info/rfc7636&gt;.
+</p><span></span><p>   [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
+              RFC 7662, DOI 10.17487/RFC7662, 2015년 10월,
+              &lt;https://www.rfc-editor.org/info/rfc7662&gt;.
+</p><span></span><span></span><p>   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, 2017년 6월,
+              &lt;https://www.rfc-editor.org/info/rfc8126&gt;.
+</p><span></span><p>   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              2017년 5월, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.
+</p><span></span><p>   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, 2017년 12월,
+              &lt;https://www.rfc-editor.org/info/rfc8259&gt;.
+</p><span></span><p>   [UNICODE]  The Unicode Consortium, "The Unicode Standard",
+              &lt;http://www.unicode.org/versions/latest/&gt;.
+</p><span></span><p>   [USA15]    Davis, M., Ed. and K. Whistler, Ed., "Unicode
+              Normalization Forms", Unicode Standard Annex #15, 2018년 5월, &lt;http://www.unicode.org/reports/tr15/&gt;.
+</p><span></span><h3 id="st-heading-0029">8.2.  정보 제공용 참고 문헌
+</h3><span></span><p>   [IANA.well-known]
+              IANA, "Well-Known URIs",
+              &lt;https://www.iana.org/assignments/well-known-uris&gt;.
+</p><span></span><p>   [MIX-UP]   Jones, M., Bradley, J., and N. Sakimura, "OAuth 2.0 Mix-Up
+              Mitigation", 작업 중인 문서, draft-ietf-oauth-mix-up-mitigation-01, 2016년 7월.
+</p><span></span><p>   [OpenID.Core]
+              Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
+              C. Mortimore, "OpenID Connect Core 1.0", 2014년 11월,
+              &lt;http://openid.net/specs/openid-connect-core-1_0.html&gt;.
+</p><span></span><p>   [OpenID.Discovery]
+              Sakimura, N., Bradley, J., Jones, M., and E. Jay, "OpenID
+              Connect Discovery 1.0", 2014년 11월,
+              &lt;<code>http://openid.net/specs/
+              openid-connect-discovery-1_0.html</code>&gt;.
+</p><span></span><p>   [OpenID.Registration]
+              Sakimura, N., Bradley, J., and M. Jones, "OpenID Connect
+              Dynamic Client Registration 1.0", 2014년 11월,
+              &lt;<code>http://openid.net/specs/
+              openid-connect-registration-1_0.html</code>&gt;.
+</p><span></span><span></span><h2 id="st-heading-0030"><span>감사의 말</span>
+</h2><span></span><p>   이 명세는 OpenID Foundation의 OpenID Connect 워킹 그룹이 작성한 OpenID Connect Discovery 1.0 명세를 바탕으로 합니다. 이 명세는 OAuth authorization server의 metadata를 게시하는 데 OpenID Connect Discovery가 정의한 metadata 형식을 써 온 관행을 표준화합니다.
+</p><span></span><p>   저자들은 이 명세를 검토해 주신 다음 분들께 감사드립니다: Shwetha Bhandari, Ben Campbell, Brian Campbell, Brian Carpenter, William Denniss, Vladimir Dzhuvinov, Donald Eastlake, Samuel Erdtman, George Fletcher, Dick Hardt, Phil Hunt, Alexey Melnikov, Tony Nadalin, Mark Nottingham, Eric Rescorla, Justin Richer, Adam Roach, Hannes Tschofenig, Hans Zandbelt.
+</p><span></span><h2 id="st-heading-0031"><span>저자 연락처</span>
+</h2><span></span><p>   Michael B. Jones
+   Microsoft
+</p><span></span><p>   이메일: mbj@microsoft.com
+   URI:   http://self-issued.info/
+</p><span></span><p>   Nat Sakimura
+   Nomura Research Institute, Ltd.
+</p><span></span><p>   이메일: n-sakimura@nri.co.jp
+   URI:   http://nat.sakimura.org/
+</p><span></span><p>   John Bradley
+   Yubico
+</p><span></span><p>   이메일: RFC8414@ve7jtb.com
+   URI:   http://www.thread-safe.com/
+</p><span></span><span></span></div><details class="st-source-notes"><summary>원문 페이지 표기</summary><pre><span>Jones, et al.                Standards Track                    [Page 1]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 2]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 3]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 4]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 5]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 6]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 7]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 8]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                    [Page 9]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 10]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 11]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 12]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 13]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 14]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 15]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 16]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 17]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 18]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 19]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 20]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 21]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 22]</span>
+</pre><pre><span>RFC 8414         OAuth 2.0 Authorization Server Metadata       June 2018</span>
+</pre><pre><span>Jones, et al.                Standards Track                   [Page 23]</span>
+</pre><h2><span>목차</span>
+</h2><p>   1. 서론 ....................................................2
+</p><p>      1.1. 요구사항 표기 및 규칙 ......................3
+</p><p>      1.2. 용어 ................................................3
+</p><p>   2. Authorization Server Metadata ...................................4
+</p><p>      2.1. 서명된 Authorization Server Metadata .......................8
+</p><p>   3. Authorization Server Metadata 가져오기 .........................8
+</p><p>      3.1. Authorization Server Metadata 요청 ......................9
+</p><p>      3.2. Authorization Server Metadata 응답 ....................10
+</p><p>      3.3. Authorization Server Metadata 검증 ..................11
+</p><p>   4. 문자열 연산 ..............................................11
+</p><p>   5. 호환성 참고 사항 ............................................11
+</p><p>   6. 보안 고려 사항 ........................................12
+</p><p>      6.1. TLS 요구사항 ..........................................12
+</p><p>      6.2. 사칭 공격 .....................................12
+</p><p>      6.3. 표준 형식으로 metadata 게시 ..................13
+</p><p>      6.4. Protected Resources .......................................13
+</p><p>   7. IANA 고려 사항 ..................................................14
+</p><p>      7.1. OAuth Authorization Server Metadata 레지스트리 ..............14
+</p><p>           7.1.1. 등록 템플릿 ...........................................15
+</p><p>           7.1.2. 레지스트리 초기 내용 ..................................16
+</p><p>      7.2. 개정된 등록 지침 .............................................19
+</p><p>      7.3. Well-Known URI 레지스트리 ....................................19
+</p><p>           7.3.1. 레지스트리 내용 .......................................19
+</p><p>   8. 참고 문헌 ........................................................20
+</p><p>      8.1. 규범적 참고 문헌 .............................................20
+</p><p>      8.2. 정보 제공용 참고 문헌 ........................................22
+</p><p>   감사의 말 ...........................................................23
+</p><p>   저자 연락처 .........................................................23
+</p></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/rfc8414/">공식 원문</a></footer></article>

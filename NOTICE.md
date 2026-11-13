@@ -19,6 +19,10 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 
 [RFC 7636 — Proof Key for Code Exchange by OAuth Public Clients](https://datatracker.ietf.org/doc/rfc7636/), N. Sakimura, J. Bradley, N. Agarwal, September 2015. 2015년 IETF Trust 및 원문에 명시된 저작자의 저작권, BCP 78과 발행 당시 IETF Trust Legal Provisions, 추출 코드에 대한 Simplified BSD License 고지는 읽기판의 ‘저작권 고지’와 공식 원문에서 확인할 수 있습니다.
 
+## RFC 8414
+
+[RFC 8414 — OAuth 2.0 Authorization Server Metadata](https://datatracker.ietf.org/doc/rfc8414/), M. Jones, N. Sakimura, J. Bradley, June 2018. 2018년 IETF Trust 및 원문에 명시된 저작자의 저작권, BCP 78과 발행 당시 IETF Trust Legal Provisions, 추출 코드에 대한 Simplified BSD License 고지는 읽기판의 ‘저작권 고지’와 공식 원문에 있습니다.
+
 ## RFC 9700
 
 [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://datatracker.ietf.org/doc/html/rfc9700/), T. Lodderstedt, J. Bradley, A. Labunets and D. Fett, January 2025.

@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "890e485f2b1a8aa10982e057a446b703704f0d6c0d97a9305437a33c1b90f091",
+  "verdict": "pass",
+  "evidence": "Inspected all 29 current viewport tiles (1440: 9, 768: 9, 390: 11; tablet/mobile tiles grouped into image strips), including title, front matter, sections 1–8, the corrected Section 5 wording, joined sentences in Sections 2 and 6.2, separated definitions and grouped IANA entries, three HTTP/JSON examples, references and end matter. Opened and inspected the generated TOC and source notes at all three widths, checked all 31 TOC destinations and followed Section 5, and confirmed 45 preserved print furniture blocks. The mobile front matter and long code retain fixed alignment with local horizontal scrolling. No whole-page overflow or layout blocker was seen."
+}

@@ -1,0 +1,945 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "090be945bb8e9e2f7e31b49413e260609c5078e8baff0d5ac8bf5d68aa7fb145",
+  "content_selector": "[data-wt-preformatted-root]",
+  "title": "OAuth 2.0 Authorization Server Metadata",
+  "removals": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000023\"]",
+      "text_sha256": "8a13de3ab1d2fbb6b49d33cddbec9ed505fddba61907feef4c3e3b81889eba30",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000024\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000063\"]",
+      "text_sha256": "def7a31629f6493160a4799dbf97ff322a9dea89a3ac8493bbbdd7caa85b9b52",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000064\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000080\"]",
+      "text_sha256": "69ec84cf22943a727384b770c15c99342303fb50900e86398585161ebf0415ee",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000081\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000099\"]",
+      "text_sha256": "c73bb0dea34e34f40f3bac4525b4112a4399f49819b3050c2fb19ee23a3f3c50",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000100\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000114\"]",
+      "text_sha256": "d58c15e7abd4cbc909d082130166fb35c84a92fdd3f3dbdc3dfbe44712dadc15",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000115\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000131\"]",
+      "text_sha256": "fb0784d1f57058c3051597127d924388a56b6c9d26fe3381b632825cb6e7eadb",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000132\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000146\"]",
+      "text_sha256": "6d2765979b395310cdc36cc11fbb7cc4bf9bebcc9f2915ed31d65ec6ce2d57f2",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000147\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000163\"]",
+      "text_sha256": "177ea300f0f185e41f8c04ffa51a4f4714702675d8e8a1188352396638b1229c",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000164\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000186\"]",
+      "text_sha256": "f25c1aa9f99f2fc97a983c8d99769ebaebc189fefea2a047c39e39ec743cbe47",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000187\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000201\"]",
+      "text_sha256": "d7be6588cebe88bd9c6de774dac7ff7ffbe7f28e37a59cae433ed87cf9eef3b8",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000202\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000228\"]",
+      "text_sha256": "9ec39df4ce6e6b69e4c1676684d213dc6b775063892e4cae78413eec84353ed8",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000229\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000247\"]",
+      "text_sha256": "a88e484a658238ebab00937fd3708c255764e1b6f13697e608e3c92850fda481",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000248\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000264\"]",
+      "text_sha256": "35f7c231a094d7122bf0e26f53808c9d738a4eec9753ed2797e12e1ff92d5fa4",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000265\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000287\"]",
+      "text_sha256": "f1cbe9a37625a94e8e8c8c616166d6bfb2c0519e283902e60a34495c682b5ea6",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000288\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000306\"]",
+      "text_sha256": "c043a283b55c57d0d2cc116cd58ab76e0178ea864e57c537a5ff5d3f1462671e",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000307\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000351\"]",
+      "text_sha256": "78c36b63428eae6c5e759a7675bc7c252f05444cc5ee54b204bcf521900090e9",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000352\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000389\"]",
+      "text_sha256": "7dd8d7bc7c69575c92e5b1b5c829be86d2b6f6e29d200a17c816b6215303212d",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000390\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000427\"]",
+      "text_sha256": "3c6c147c4a7667a50e58f1269d41d6284665b06630eafc06e1241aced70fa9d7",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000428\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000457\"]",
+      "text_sha256": "713e6893aeda073f231fdf85eae585479552eac8040162c3a0271c8f6c207b39",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000458\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000482\"]",
+      "text_sha256": "e4217db15a9529a273168fbe344cc36dd0bd67190262704543e27ef67ad84128",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000483\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000505\"]",
+      "text_sha256": "0d523d9fc1740843bc6d1a2073eaa3bd50cb5c9172590aef79c47b02b73e439e",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000506\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000530\"]",
+      "text_sha256": "00f74a5df7ef460af43594557319d48c5ad0f222f3158febc897152d63a9f145",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000531\"]",
+      "text_sha256": "25538f1ec7a3314f5679f415a29242694bd8a8910d3ebd9a5f8cd0683f98e44a",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000553\"]",
+      "text_sha256": "fd854bca4cfd9ce7c7c41dfeabdb0160aefcff6f23e575238ee38f514307049c",
+      "reason": "Recurring original RFC page header/footer, preserved in source notes."
+    }
+  ],
+  "joins": [
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000112\"]",
+        "[data-wt-preformatted-block=\"block-000117\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000129\"]",
+        "[data-wt-preformatted-block=\"block-000134\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000161\"]",
+        "[data-wt-preformatted-block=\"block-000166\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000226\"]",
+        "[data-wt-preformatted-block=\"block-000231\"]"
+      ]
+    },
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000245\"]",
+        "[data-wt-preformatted-block=\"block-000250\"]"
+      ]
+    }
+  ],
+  "heading_levels": {
+    "[data-wt-preformatted-block=\"block-000057\"]": 2,
+    "[data-wt-preformatted-block=\"block-000070\"]": 3,
+    "[data-wt-preformatted-block=\"block-000076\"]": 3,
+    "[data-wt-preformatted-block=\"block-000083\"]": 2,
+    "[data-wt-preformatted-block=\"block-000149\"]": 3,
+    "[data-wt-preformatted-block=\"block-000157\"]": 2,
+    "[data-wt-preformatted-block=\"block-000172\"]": 3,
+    "[data-wt-preformatted-block=\"block-000189\"]": 3,
+    "[data-wt-preformatted-block=\"block-000204\"]": 3,
+    "[data-wt-preformatted-block=\"block-000208\"]": 2,
+    "[data-wt-preformatted-block=\"block-000222\"]": 2,
+    "[data-wt-preformatted-block=\"block-000235\"]": 2,
+    "[data-wt-preformatted-block=\"block-000237\"]": 3,
+    "[data-wt-preformatted-block=\"block-000243\"]": 3,
+    "[data-wt-preformatted-block=\"block-000254\"]": 3,
+    "[data-wt-preformatted-block=\"block-000258\"]": 3,
+    "[data-wt-preformatted-block=\"block-000267\"]": 2,
+    "[data-wt-preformatted-block=\"block-000283\"]": 3,
+    "[data-wt-preformatted-block=\"block-000296\"]": 4,
+    "[data-wt-preformatted-block=\"block-000309\"]": 4,
+    "[data-wt-preformatted-block=\"block-000435\"]": 3,
+    "[data-wt-preformatted-block=\"block-000446\"]": 3,
+    "[data-wt-preformatted-block=\"block-000450\"]": 4,
+    "[data-wt-preformatted-block=\"block-000460\"]": 2,
+    "[data-wt-preformatted-block=\"block-000462\"]": 3,
+    "[data-wt-preformatted-block=\"block-000518\"]": 3
+  },
+  "list_items": [],
+  "text_edits": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000233\"]",
+      "input_html_sha256": "ffdf962b2371165b91c64eb692f932c5664ddcb6982d6e3ef7d3cc843186c514",
+      "replacement_html": "앞으로 OAuth authorization server metadata 위치를 정할 때는 이 명세에서 정의한 변환을 사용하는 것이 좋습니다. 다만 OpenID Connect Discovery 1.0의 변환이 이미 사용 중인 레거시 환경에 배포하는 경우, 전환 기간에는 경로 구성 요소가 있는 issuer 식별자의 metadata를 두 위치에 모두 게시해야 할 수도 있습니다. 이 기간에 애플리케이션은 먼저 이 명세의 변환을 적용해 그 결과 위치에서 authorization server metadata를 가져오도록 시도하는 것이 좋습니다. 해당 위치에서 가져오지 못한 경우에만 OpenID Connect Discovery 1.0이 정의한 변환으로 얻은 대체 위치에서 다시 시도하는 것이 좋습니다. 이러한 하위 호환 동작은 애플리케이션이 사용하는 well-known URI 접미사가 \"openid-configuration\"인 경우에만 필요할 것으로 예상됩니다.",
+      "source_text": "   Going forward, OAuth authorization server metadata locations should\n   use the transformation defined in this specification.  However, when\n   deployed in legacy environments in which the OpenID Connect Discovery\n   1.0 transformation is already used, it may be necessary during a\n   transition period to publish metadata for issuer identifiers\n   containing a path component at both locations.  During this\n   transition period, applications should first apply the transformation\n   defined in this specification and attempt to retrieve the\n   authorization server metadata from the resulting location; only if\n   the retrieval from that location fails should they fall back to\n   attempting to retrieve it from the alternate location obtained using\n   the transformation defined by OpenID Connect Discovery 1.0.  This\n   backwards-compatible behavior should only be necessary when the well-\n   known URI suffix employed by the application is \"openid-\n   configuration\".\n",
+      "evidence": "The final sentence expresses expected necessity, not a categorical claim; the suffix and failure-only fallback are unchanged."
+    }
+  ],
+  "presentation": {
+    "toc_selectors": [
+      "[data-wt-preformatted-block=\"block-000026\"]",
+      "[data-wt-preformatted-block=\"block-000028\"]",
+      "[data-wt-preformatted-block=\"block-000029\"]",
+      "[data-wt-preformatted-block=\"block-000030\"]",
+      "[data-wt-preformatted-block=\"block-000031\"]",
+      "[data-wt-preformatted-block=\"block-000032\"]",
+      "[data-wt-preformatted-block=\"block-000033\"]",
+      "[data-wt-preformatted-block=\"block-000034\"]",
+      "[data-wt-preformatted-block=\"block-000035\"]",
+      "[data-wt-preformatted-block=\"block-000036\"]",
+      "[data-wt-preformatted-block=\"block-000037\"]",
+      "[data-wt-preformatted-block=\"block-000038\"]",
+      "[data-wt-preformatted-block=\"block-000039\"]",
+      "[data-wt-preformatted-block=\"block-000040\"]",
+      "[data-wt-preformatted-block=\"block-000041\"]",
+      "[data-wt-preformatted-block=\"block-000042\"]",
+      "[data-wt-preformatted-block=\"block-000043\"]",
+      "[data-wt-preformatted-block=\"block-000044\"]",
+      "[data-wt-preformatted-block=\"block-000045\"]",
+      "[data-wt-preformatted-block=\"block-000046\"]",
+      "[data-wt-preformatted-block=\"block-000047\"]",
+      "[data-wt-preformatted-block=\"block-000048\"]",
+      "[data-wt-preformatted-block=\"block-000049\"]",
+      "[data-wt-preformatted-block=\"block-000050\"]",
+      "[data-wt-preformatted-block=\"block-000051\"]",
+      "[data-wt-preformatted-block=\"block-000052\"]",
+      "[data-wt-preformatted-block=\"block-000053\"]",
+      "[data-wt-preformatted-block=\"block-000054\"]",
+      "[data-wt-preformatted-block=\"block-000055\"]"
+    ],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000087\"]",
+        "term_end": 10,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000089\"]",
+        "term_end": 26,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000091\"]",
+        "term_end": 18,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000093\"]",
+        "term_end": 12,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000095\"]",
+        "term_end": 25,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000097\"]",
+        "term_end": 20,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000102\"]",
+        "term_end": 28,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000104\"]",
+        "term_end": 28,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000106\"]",
+        "term_end": 25,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000108\"]",
+        "term_end": 41,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000110\"]",
+        "term_end": 52,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000112\"]",
+        "term_end": 25,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000119\"]",
+        "term_end": 24,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000121\"]",
+        "term_end": 17,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000123\"]",
+        "term_end": 14,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000125\"]",
+        "term_end": 23,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000127\"]",
+        "term_end": 46,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000129\"]",
+        "term_end": 57,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000136\"]",
+        "term_end": 26,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000138\"]",
+        "term_end": 46,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000140\"]",
+        "term_end": 57,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000142\"]",
+        "term_end": 33,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000155\"]",
+        "term_end": 16,
+        "evidence": "The exact metadata field identifier occupies its own source line."
+      }
+    ],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000311\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000312\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000313\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000314\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000316\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000317\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000318\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000319\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000321\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000322\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000323\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000324\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000326\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000327\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000328\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000329\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000331\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000332\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000333\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000334\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000336\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000337\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000338\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000339\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000341\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000342\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000343\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000344\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000346\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000347\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000348\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000349\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000354\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000355\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000356\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000357\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000359\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000360\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000361\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000362\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000364\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000365\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000366\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000367\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000369\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000370\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000371\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000372\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000374\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000375\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000376\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000377\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000379\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000380\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000381\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000382\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000384\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000385\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000386\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000387\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000392\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000393\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000394\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000395\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000397\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000398\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000399\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000400\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000402\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000403\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000404\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000405\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000407\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000408\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000409\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000410\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000412\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000413\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000414\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000415\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000417\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000418\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000419\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000420\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000422\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000423\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000424\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000425\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000430\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000431\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000432\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000433\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "One initial IANA registry entry: name, description, change controller and specification."
+      }
+    ]
+  }
+}

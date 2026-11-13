@@ -18,6 +18,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc7636/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7636/) · [읽기판 검토 기록](rfc/rfc7636/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc7636/)
 
+### RFC 8414 — OAuth 2.0 Authorization Server Metadata
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc8414/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8414/) · [읽기판 검토 기록](rfc/rfc8414/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc8414/)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
@@ -35,6 +39,8 @@ RFC 6749·6750의 설명은 2012년 발행본의 맥락을 유지합니다. 이�
 GitHub Pages는 `main` 브랜치의 루트에서 게시됩니다. 저장소에 변경 사항을 푸시하면 GitHub의 기본 Pages 빌드·배포가 실행됩니다. 별도 애플리케이션 서버나 사용자 정의 배포 워크플로는 사용하지 않습니다.
 
 RFC 6749·6750·9700은 기존 supertranslator 0.10.2 읽기판을 유지합니다. RFC 7636은 기존 AI 번역을 재사용하고 supertranslator 0.10.3으로 별도 읽기판을 만들었습니다. 접힌 목차와 원문 페이지 표기, PC 18px·모바일 16px 본문, 코드·도식의 원래 줄바꿈과 블록 내부 가로 스크롤을 제공합니다. 읽기판 생성은 새 전면 재번역이나 새 의미 감수를 뜻하지 않습니다.
+
+RFC 8414도 기존 AI 번역을 재사용했습니다. §5의 예상 표현 한 문장을 원문과 대조해 교정하고, 이어지는 문단과 등록 항목을 정리했습니다. 데스크톱·태블릿·모바일에서 최종 읽기판을 확인했습니다.
 
 ## 공개 범위와 검증 기록
 
