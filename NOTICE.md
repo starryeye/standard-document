@@ -23,6 +23,14 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 
 [RFC 8414 — OAuth 2.0 Authorization Server Metadata](https://datatracker.ietf.org/doc/rfc8414/), M. Jones, N. Sakimura, J. Bradley, June 2018. 2018년 IETF Trust 및 원문에 명시된 저작자의 저작권, BCP 78과 발행 당시 IETF Trust Legal Provisions, 추출 코드에 대한 Simplified BSD License 고지는 읽기판의 ‘저작권 고지’와 공식 원문에 있습니다.
 
+## RFC 7519
+
+[RFC 7519 — JSON Web Token (JWT)](https://datatracker.ietf.org/doc/rfc7519/), M. Jones, J. Bradley, N. Sakimura, May 2015.
+
+> Copyright (c) 2015 IETF Trust and the persons identified as the document authors. All rights reserved.
+>
+> This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.
+
 ## RFC 9700
 
 [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://datatracker.ietf.org/doc/html/rfc9700/), T. Lodderstedt, J. Bradley, A. Labunets and D. Fett, January 2025.

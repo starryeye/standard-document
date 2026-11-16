@@ -18,6 +18,12 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc7636/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7636/) · [읽기판 검토 기록](rfc/rfc7636/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc7636/)
 
+### RFC 7519 — JSON Web Token (JWT)
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc7519/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7519/) · [읽기판 검토 기록](rfc/rfc7519/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc7519/)
+
+2015년 발행본의 비공식 한국어 번역입니다. §7.2 검증 절차 및 §13.2 참고문헌에 대한 [RFC Editor 정오표](https://www.rfc-editor.org/rfc/inline-errata/rfc7519.html)는 본문과 별도로 참고하세요.
+
 ### RFC 8414 — OAuth 2.0 Authorization Server Metadata
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc8414/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8414/) · [읽기판 검토 기록](rfc/rfc8414/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc8414/)

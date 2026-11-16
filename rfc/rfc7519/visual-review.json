@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "54b168c3bfde3a066e302e9c0eb1b21a45f3007d920ee05ce13cab7a3e4280b7",
+  "verdict": "pass",
+  "evidence": "Freshly inspected all 32 current 3000px reader tiles at 1440/768/390 (10/10/12), covering through 29509/29509/35861. Inspected all new opened TOC and original-page notes tiles at each width (3/8); checked the corrected Subject/Audience labels, private-name recommendation, both trust prerequisites, and signing order in sequence. Content comparison found exactly eight changed text nodes and unchanged DOM, links, code, literal blocks, stylesheet, and assets. No page-wide horizontal overflow. Checked 104 mobile literal scrollers were viewport-local and sampled newly captured right edges of reference, two long JWT examples, publication details, and print contents. See open-states.json, revision-tile-map.json and editorial-diff.json in the correction review workspace."
+}
