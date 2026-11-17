@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "e247cc5d6886d9a3cda2abe032dfff96c2e3b60f750308cc7eae9bfaaa726cb1",
+  "verdict": "pass",
+  "evidence": "직접 화면 검토: 1440px 6장, 768px 6장, 390px 8장의 본문 스크롤을 제목부터 저자 연락처까지 대조. 각 폭의 목차, 문서 정보 및 원문 페이지 표기 펼침 상태 9개 확인. 390px HTTP 및 JWT 예시에서 끝까지 가로 스크롤 가능 확인. 정의 목록, 검증 항목, 두 캡션 및 참고문헌이 읽기 가능하며 문서 전체 가로 넘침 없음. 화면 및 서브패널 비교 증거는 .supertranslator/reviews/rfc9068-20261117/에 별도 보관."
+}

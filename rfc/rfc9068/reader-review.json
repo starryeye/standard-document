@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "02315eabbfa3fbe9684d6ff8e0a91ec025ea4b1a987de02bc152e831c28ed02a",
+  "content_selector": ".rfchtml",
+  "title": "RFC 9068 — OAuth 2.0 access token용 JSON Web Token (JWT) 프로파일",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "564313cd6550a0eebd8ba79bfe23629057003c7f9fc6e726576b9e64212d44d2",
+      "reason": "Print running header/footer (RFC no., abbreviated title, publication date, name, status and page marker); the front matter and content remain separately visible."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

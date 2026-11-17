@@ -28,6 +28,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc8414/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8414/) · [읽기판 검토 기록](rfc/rfc8414/review-report.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc8414/)
 
+### RFC 9068 — JSON Web Token Profile for OAuth 2.0 Access Tokens
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc9068/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9068/) · [번역자 주와 원문 대조](https://starryeye.github.io/standard-document/rfc/rfc9068/translator-note.html) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9068)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
