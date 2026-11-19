@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "410cf5372b6400a78c5be0d7cf44482a8b77b12a9a8f242a96ad80926738f171",
+  "content_selector": ".rfchtml",
+  "title": "RFC 8693 — OAuth 2.0 토큰 교환",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "b2fea5d62c8003b16be6512191bda16625c5433575670199aea756490ba7363b",
+      "reason": "The table is the original print running header/footer (number, title, date, authors, status and page label); preserve it in source notes, separate from article metadata."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

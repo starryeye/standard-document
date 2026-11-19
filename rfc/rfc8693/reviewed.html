@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RFC 8693 — OAuth 2.0 토큰 교환</title><link href="assets/reader.css" rel="stylesheet"/><meta content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; child-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' data:" http-equiv="Content-Security-Policy"/></head><body class="st-reader-page"><main><article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 8693</h1><h1 class="st-document-title" id="title">OAuth 2.0 토큰 교환</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>스트림:</dt>
+<dd>Internet Engineering Task Force (IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc8693">8693</a></dd>
+<dt>분류:</dt>
+<dd>표준 트랙</dd>
+<dt>발행:</dt>
+<dd>
+<time>2020년 1월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>M. Jones</div>
+<div>Microsoft</div>
+</div>
+<div>
+<div>A. Nadalin</div>
+<div>Microsoft</div>
+</div>
+<div>
+<div>B. Campbell, <span>Ed.</span>
+</div>
+<div>Ping Identity</div>
+</div>
+<div>
+<div>J. Bradley</div>
+<div>Yubico</div>
+</div>
+<div>
+<div>C. Mortimore</div>
+<div>Visa</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 지위</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 서론</a><ol><li><a href="#name-delegation-vs-impersonation">1.1. delegation과 impersonation의 의미 차이</a></li><li><a href="#name-requirements-notation-and-c">1.2. 요구사항 표기법과 규칙</a></li><li><a href="#name-terminology">1.3. 용어</a></li></ol></li><li><a href="#name-token-exchange-request-and-">2. 토큰 교환 요청과 응답</a><ol><li><a href="#name-request">2.1. 요청</a><ol><li><a href="#name-relationship-between-resour">2.1.1. resource, audience, scope의 관계</a></li></ol></li><li><a href="#name-response">2.2. 응답</a><ol><li><a href="#name-successful-response">2.2.1. 성공 응답</a></li><li><a href="#name-error-response">2.2.2. 오류 응답</a></li></ol></li><li><a href="#name-example-token-exchange">2.3. 토큰 교환 예시</a></li></ol></li><li><a href="#name-token-type-identifiers">3. 토큰 유형 식별자</a></li><li><a href="#name-json-web-token-claims-and-i">4. JSON Web Token claim 및 Introspection 응답 매개변수</a><ol><li><a href="#name-act-actor-claim">4.1. "act"(actor) claim</a></li><li><a href="#name-scope-scopes-claim">4.2. "scope"(scope) claim</a></li><li><a href="#name-client_id-client-identifier">4.3. "client_id"(client 식별자) claim</a></li><li><a href="#name-may_act-authorized-actor-cl">4.4. "may_act"(인가된 actor) claim</a></li></ol></li><li><a href="#name-security-considerations">5. 보안 고려사항</a></li><li><a href="#name-privacy-considerations">6. 개인정보 보호 고려사항</a></li><li><a href="#name-iana-considerations">7. IANA 고려사항</a><ol><li><a href="#name-oauth-uri-registration">7.1. OAuth URI 등록</a></li><li><a href="#name-oauth-parameters-registrati">7.2. OAuth 매개변수 등록</a></li><li><a href="#name-oauth-access-token-type-reg">7.3. OAuth access token 유형 등록</a></li><li><a href="#name-json-web-token-claims-regis">7.4. JSON Web Token claim 등록</a></li><li><a href="#name-oauth-token-introspection-r">7.5. OAuth 토큰 Introspection 응답 등록</a></li></ol></li><li><a href="#name-references">8. 참고문헌</a><ol><li><a href="#name-normative-references">8.1. 규범 참고문헌</a></li><li><a href="#name-informative-references">8.2. 참고용 문헌</a></li></ol></li><li><a href="#name-additional-token-exchange-e">부록 A. 추가 토큰 교환 예시</a></li><li><a href="#name-impersonation-token-exchang">A.1. impersonation 토큰 교환 예시</a><ol><li><a href="#name-token-exchange-request-2">A.1.1. 토큰 교환 요청</a></li><li><a href="#name-subject-token-claims">A.1.2. subject token의 claim</a></li><li><a href="#name-token-exchange-response-2">A.1.3. 토큰 교환 응답</a></li><li><a href="#name-issued-token-claims">A.1.4. 발급된 토큰의 claim</a></li></ol></li><li><a href="#name-delegation-token-exchange-e">A.2. delegation 토큰 교환 예시</a><ol><li><a href="#name-token-exchange-request-4">A.2.1. 토큰 교환 요청</a></li><li><a href="#name-subject-token-claims-3">A.2.2. subject token의 claim</a></li><li><a href="#name-actor-token-claims">A.2.3. actor token의 claim</a></li><li><a href="#name-token-exchange-response-4">A.2.4. 토큰 교환 응답</a></li><li><a href="#name-issued-token-claims-3">A.2.5. 발급된 토큰의 claim</a></li></ol></li><li><a href="#name-acknowledgements">감사의 말</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">
+ 이 명세는 OAuth 2.0 authorization server(인가 서버)에 security token(보안 토큰)을 요청하여 발급받는 방법을 정함으로써 HTTP 및 JSON 기반 Security Token Service(보안 토큰 서비스) (STS) 프로토콜을 정의한다. 여기에는 impersonation(가장)과 delegation(위임)을 사용하는 security token도 포함된다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 지위</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준 트랙에 속한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">이 문서는 Internet Engineering Task Force(IETF)가 작성했으며, IETF 커뮤니티의 합의를 반영한다. 공개 검토를 거쳤으며 Internet Engineering Steering Group(IESG)의 발행 승인을 받았다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 2절에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">이 문서의 현재 상태와 정오표, 의견을 보내는 방법은 다음 주소에서 확인할 수 있다: <span><a href="https://www.rfc-editor.org/info/rfc8693">https://www.rfc-editor.org/info/rfc8693</a></span>.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice"><a href="#name-copyright-notice">저작권 고지</a></h2>
+<p id="section-boilerplate.2-1">Copyright (c) 2020 IETF Trust 및 이 문서의 저자로 명시된 사람들. 모든 권리를 보유한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">이 문서에는 BCP 78과 이 문서의 발행일에 유효한 IETF Trust의 Legal Provisions Relating to IETF Documents(<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)가 적용된다. 이들 문서에는 이 문서에 관한 독자의 권리와 제한 사항이 명시되어 있으므로 주의 깊게 읽기 바란다. 이 문서에서 추출한 Code Components에는 Trust 법률 조항 4.e절에 명시된 대로 Simplified BSD License 전문을 포함해야 하며, 해당 라이선스에 명시된 대로 어떠한 보증도 없이 제공된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<div id="Introduction">
+<section id="section-1">
+<h2 id="name-introduction"><a href="#section-1">1. </a><a href="#name-introduction">서론</a></h2>
+<p id="section-1-1">security token은 서로 다른 환경이나 보안 도메인 사이에서 신원 및 보안 정보를 쉽게 공유하도록 하는 정보의 집합이다. 대표적인 예로 JSON Web Token(JWT) <span>[<a href="#RFC7519">JWT</a>]</span> 및 Security Assertion Markup Language(SAML) 2.0 어설션 <span>[<a href="#OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]</span>이 있다. security token에는 일반적으로 무결성을 확보하기 위해 서명하며, 기밀성을 확보하기 위해 암호화를 병행하기도 한다. <span>[<a href="#RFC7521">RFC7521</a>]</span>에서처럼 security token을 어설션이라고 부르기도 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<p id="section-1-2">Security Token Service(STS)는 전달받은 security token을 검증하고 그에 응답해 새 security token을 발급할 수 있는 서비스다. 이를 통해 client는 서로 다른 환경 또는 보안 도메인에 있는 리소스에 적합한 접근 자격 증명을 얻을 수 있다. 웹 서비스 client는 토큰 교환을 위해 STS와 통신하는 프로토콜로 WS-Trust <span>[<a href="#WS-Trust">WS-Trust</a>]</span>를 사용해 왔다. WS-Trust가 XML과 SOAP을 사용하는 반면, 최근 웹 개발은 RESTful(Representational State Transfer) 패턴과 JSON을 사용하는 추세다. OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749">RFC6749</a>]</span>와 OAuth 2.0 Bearer Tokens <span>[<a href="#RFC6750">RFC6750</a>]</span>는 서드파티 애플리케이션의 HTTP 및 RESTful 리소스 접근을 인가하는 데 널리 쓰이는 표준으로 자리 잡았다. 기존 OAuth 2.0 방식은 resource owner(리소스 소유자)의 인가를 나타내는 어떤 형태의 정보를 access token으로 교환하는 것으로, 실무에서 매우 유용한 방식임이 입증되었다. 그러나 기존의 입력과 출력은 그대로 사용하기에는 제약이 다소 커서 security token 교환 프레임워크를 완전히 수용하기 어렵다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-2">¶</a></p>
+<p id="section-1-3">이 명세는 OAuth 2.0을 확장하여 client가 STS 역할을 하는 authorization server에 security token을 요청하고 발급받을 수 있도록 하는 프로토콜을 정의한다. OAuth 2.0과 마찬가지로 이 명세는 client를 쉽게 개발할 수 있도록 하는 데 중점을 두며, 오늘날 거의 모든 개발 환경에서 쓸 수 있는 HTTP client와 JSON 파서만 필요로 한다. 이 명세에서 정의하는 STS 프로토콜 자체는 RESTful하지 않다(STS는 REST 접근법에 그다지 잘 맞지 않는다). 다만 RESTful 시스템을 다뤄 온 개발자에게 익숙할 만한 통신 패턴과 데이터 형식을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a></p>
+<p id="section-1-4">이 명세는 토큰 교환 요청을 위한 새로운 grant type(인가 부여 유형)과 그러한 요청을 token endpoint(토큰 엔드포인트)에 보낼 때 사용하는 구체적인 매개변수를 정의한다. 토큰 교환 응답은 token endpoint가 보내는 일반적인 OAuth 2.0 응답에, client에 정보를 제공하기 위해 이 명세에서 정의하는 몇 가지 매개변수를 추가한 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4">¶</a></p>
+<p id="section-1-5">토큰 교환 과정에서는 토큰 교환을 요청하는 주체를 client로 본다. 그렇다고 이 프로파일을 기존 OAuth client만 사용할 수 있는 것은 아니다. 예를 들어 OAuth resource server(리소스 서버)는 보호된 리소스 요청에서 받은 access token을 백엔드 서비스 호출에 사용하기 적합한 새 토큰으로 교환하기 위해 토큰 교환 과정에서 client 역할을 맡을 수 있다. 새 토큰은 다운스트림 서비스에 맞춰 권한 범위가 더 좁게 설정된 access token일 수도 있고, 완전히 다른 종류의 토큰일 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-5">¶</a></p>
+<p id="section-1-6">이 명세의 범위는 OAuth 2.0을 사용하는 STS 방식의 토큰 교환을 위한 기본 요청·응답 프로토콜을 정의하는 데 한정된다. delegation의 의미를 표현할 수 있도록 몇 가지 새로운 JWT claim을 정의하지만, 토큰 자체(authorization server에 제시하는 토큰과 client가 발급받는 토큰 모두)의 구체적인 구문, 의미, 보안 특성은 명시적으로 범위에서 제외하며, 구현이 배포될 때 적용되는 신뢰 모델에는 어떠한 요구사항도 부과하지 않는다. 추가 프로파일은 관련 당사자와 신뢰 관계의 구체적 특성에 관하여 더 자세한 요구사항을 정할 수 있다. 예를 들어 토큰 서명이나 암호화 또는 둘 다가 필요한지, 소유 증명(proof-of-possession) 방식의 토큰을 요구하거나 발급할지 등이 이에 해당한다. 다만 이러한 세부사항은 흔히 배포 환경별 요구에 맞춰 정책으로 결정되며, 그에 따라 설정하거나 구현한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-6">¶</a></p>
+<p id="section-1-7">이렇게 얻은 security token은 여러 맥락에서 사용할 수 있으며, 각 사용 맥락의 세부사항 역시 이 명세의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-7">¶</a></p>
+<div id="DelegationImpersonation">
+<section id="section-1.1">
+<h3 id="name-delegation-vs-impersonation"><a href="#section-1.1">1.1. </a><a href="#name-delegation-vs-impersonation">delegation과 impersonation의 의미 차이</a></h3>
+<p id="section-1.1-1">앞 절에서 언급했듯이, STS의 일반적인 사용 사례 중 하나는 resource server A가 요청을 보낸 사용자 B를 대신하여 백엔드 서비스 C를 호출할 수 있게 하는 것이다. 해당 사이트의 정책과 인가 인프라에 따라, A가 자신의 자격 증명을 사용해 C에 접근하되 B를 대신해 행동한다는 사실을 어떤 형태로든 표시하는 방식("delegation")이 바람직할 수 있다. 또는 A가 C에 대한 제한된 접근 자격 증명을 부여받되, 그 자격 증명이 여전히 B를 인가된 주체로 식별하는 방식("impersonation")이 바람직할 수 있다. delegation과 impersonation은 여러 참여자가 관여하는 다른 시나리오에서도 유용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+<p id="section-1.1-2">principal(보안 주체) A가 principal B인 것처럼 행동하는 impersonation에서는, A가 정해진 권한의 맥락에서 B가 가진 모든 권한을 부여받으며 그 맥락에서 B와 구별되지 않는다. 따라서 그런 토큰을 받는 개체 입장에서는 실제로 B를 상대하는 셈이다. 신원 시스템의 일부 구성원은 impersonation이 이루어지고 있다는 사실을 알 수도 있지만, 반드시 알아야 하는 것은 아니다. A가 B로서 행위할 때 토큰이 인가한 권한의 맥락에서 A는 실질적으로 B다. A가 B로서 행위할 수 있는 범위나 시간에 제한을 두거나, 심지어 한 번만 허용할 수도 있다. 이러한 제한은 토큰의 내용이나 별도 경로의 메커니즘으로 적용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-2">¶</a></p>
+<p id="section-1.1-3">delegation과 impersonation은 밀접하게 관련되어 있지만 의미는 서로 다르다. delegation에서 principal A는 B와 구별되는 고유한 신원을 유지한다. B가 자기 권한의 일부를 A에게 위임했을 수는 있지만, 실제로 행위하는 쪽은 B를 대리하는 A라는 점이 명확하다. 말하자면 A는 B의 대리인이다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-3">¶</a></p>
+<p id="section-1.1-4">delegation과 impersonation이 모든 상황을 포괄하는 것은 아니다. 예를 들어 principal이 자신을 위해 직접 행동한다면 delegation과 impersonation 어느 쪽도 적용되지 않는다. 다만 토큰 교환에서는 이 두 방식이 더 흔히 쓰이므로 이 명세에서 더 직접적으로 다룬다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-4">¶</a></p>
+<p id="section-1.1-5">토큰에서 delegation을 표현할 때는 대개 토큰의 주된 대상에 관한 정보와, 그 대상에게서 권한 일부를 위임받은 actor에 관한 정보를 모두 포함한다. 이렇게 여러 대상의 정보로 이루어진 토큰을 composite token(복합 토큰)이라 부르기도 한다. 일반적으로 요청에서 <code>subject_token</code>은 토큰 요청자가 대리하는 당사자의 신원을 나타내고, <code>actor_token</code>은 발급된 토큰의 접근 권한을 위임받는 당사자의 신원을 나타낸다. authorization server가 발급하는 composite token에는 양쪽 당사자의 정보가 모두 들어간다. composite token을 발급할지 여부와 발급 시점은 authorization server의 재량과 적용되는 정책 및 구성에 따른다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-5">¶</a></p>
+<p id="section-1.1-6">composite token을 구체적으로 어떻게 표현할지, 나아가 그런 토큰을 발급할지 여부는 구현의 세부 사항과 토큰의 종류에 따라 달라진다. JWT가 아닌 composite token의 표현 방식은 이 명세의 범위를 벗어난다. 다만 <code>actor_token</code> 요청 매개변수로 원하는 actor에 관한 정보를 제공할 수 있고, JWT의 <code>act</code> claim으로 delegation의 연쇄를 표현할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-6">¶</a></p>
+</section>
+</div>
+<div id="RNC">
+<section id="section-1.2">
+<h3 id="name-requirements-notation-and-c"><a href="#section-1.2">1.2. </a><a href="#name-requirements-notation-and-c">요구사항 표기법과 규칙</a></h3>
+<p id="section-1.2-1">이 문서에서 "<span>MUST</span>", "<span>MUST NOT</span>", "<span>REQUIRED</span>", "<span>SHALL</span>", "<span>SHALL NOT</span>", "<span>SHOULD</span>", "<span>SHOULD NOT</span>", "<span>RECOMMENDED</span>", "<span>NOT RECOMMENDED</span>", "<span>MAY</span>", "<span>OPTIONAL</span>"라는 핵심어는 여기에 표시된 것처럼 모두 대문자로 표기된 경우에만 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 설명된 대로 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.2-1">¶</a></p>
+</section>
+</div>
+<div id="Terminology">
+<section id="section-1.3">
+<h3 id="name-terminology"><a href="#section-1.3">1.3. </a><a href="#name-terminology">용어</a></h3>
+<p id="section-1.3-1">이 명세에서는 OAuth 2.0 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 정의한 "access token type", "authorization server", "client", "client identifier", "resource server", "token endpoint", "token request", "token response"와 JSON Web Token(JWT) <span>[<a href="#RFC7519">JWT</a>]</span>에서 정의한 "Base64url Encoding", "Claim", "JWT Claims Set"이라는 용어를 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.3-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="Messages">
+<section id="section-2">
+<h2 id="name-token-exchange-request-and-"><a href="#section-2">2. </a><a href="#name-token-exchange-request-and-">토큰 교환 요청과 응답</a></h2>
+<div id="Request">
+<section id="section-2.1">
+<h3 id="name-request"><a href="#section-2.1">2.1. </a><a href="#name-request">요청</a></h3>
+<p id="section-2.1-1">client는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.5">4.5절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서 정의한 확장 grant type 메커니즘을 사용하여 authorization server의 token endpoint에 토큰 요청을 보내 security token을 요청한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-1">¶</a></p>
+<p id="section-2.1-2">authorization server에 대한 client 인증에는 OAuth 2.0이 제공하는 일반적인 메커니즘을 사용한다. <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-2.3.1">2.3.1절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서는 client의 비밀번호 기반 인증을 정의한다. 다만 client 인증은 확장할 수 있으므로 다른 메커니즘도 가능하다. 예를 들어 <span>[<a href="#RFC7523">RFC7523</a>]</span>은 bearer JSON Web Token(JWT) <span>[<a href="#RFC7519">JWT</a>]</span>을 사용하는 client 인증을 정의한다. 어떤 client 인증 방식을 지원할지, 인증되지 않았거나 신원이 확인되지 않은 client를 허용할지는 배포 시 authorization server가 재량으로 결정한다. client 인증을 생략하면 보안이 훼손된 토큰을 가진 사람은 누구나 그 보안이 훼손된 토큰으로 STS를 통해 다른 토큰을 얻을 수 있다는 점에 유의한다. 따라서 client를 인증하면 STS는 어떤 개체가 다른 개체에 대해 impersonation을 하거나 그 개체로부터 delegation을 받을 수 있는지 추가로 인가를 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-2">¶</a></p>
+<p id="section-2.1-3">client는 HTTP <code>POST</code> 메서드로 token endpoint에 확장 grant type을 사용한 토큰 교환 요청을 보낸다. 아래 매개변수는 HTTP 요청의 엔터티 본문에 <code>application/x-www-form-urlencoded</code> 형식으로 포함한다. 이때 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#appendix-B">부록 B</a>([<a href="#RFC6749">RFC6749</a>])</span>에 설명된 대로 UTF-8 문자 인코딩을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-3">¶</a></p>
+<dl id="section-2.1-4">
+<dt id="section-2.1-4.1">grant_type</dt>
+<dd id="section-2.1-4.2"><span>REQUIRED</span>. 값 <code>urn:ietf:params:oauth:grant-type:token-exchange</code>는 토큰 교환을 수행한다는 뜻이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.2">¶</a></dd>
+<dt id="section-2.1-4.3">resource</dt>
+<dd id="section-2.1-4.4"><span>OPTIONAL</span>. client가 요청한 security token을 사용하려는 대상 서비스나 리소스를 가리키는 URI다. 이를 통해 authorization server는 발급할 토큰의 유형과 내용, 암호화 여부와 방식 등을 정하는 등 대상에 맞는 정책을 적용할 수 있다. 많은 경우 client는 자신이 상호작용하는 시스템의 논리적 구성을 모르며, 토큰을 사용하려는 서비스의 URI만 안다. <code>resource</code> 매개변수를 사용하면 client는 발급된 토큰을 어디에서 사용할지 authorization server에 알릴 수 있다. 이를 위해 토큰 교환 요청에 해당 위치를, 실제로 그 리소스에 접근할 때 사용할 것과 동일한 형식(대개 https URL)으로 제공한다. 일반적으로 authorization server는 리소스 URI 값을 적절한 정책에 매핑할 수 있다. <code>resource</code> 매개변수의 값은 절대 URI여야 한다(<span>MUST</span>). 여기서 절대 URI란 <span><a href="https://www.rfc-editor.org/rfc/rfc3986#section-4.3">4.3절</a>([<a href="#RFC3986">RFC3986</a>])</span>에서 규정한 것을 말한다. 쿼리 구성요소는 포함해도 되지만(<span>MAY</span>), 프래그먼트 구성요소는 포함해서는 안 된다(<span>MUST NOT</span>). <code>resource</code> 매개변수를 여러 개 사용해 발급된 토큰을 나열된 여러 리소스에서 사용하려는 것임을 나타낼 수 있다. <span>[<a href="#I-D.ietf-oauth-resource-indicators">OAUTH-RESOURCE</a>]</span>에서 <code>resource</code> 매개변수의 배경과 용도에 관한 자세한 내용을 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.4">¶</a></dd>
+<dt id="section-2.1-4.5">audience</dt>
+<dd id="section-2.1-4.6"><span>OPTIONAL</span>. client가 요청한 security token을 사용하려는 대상 서비스의 논리적 이름이다. <code>resource</code> 매개변수와 용도는 비슷하지만 여기서는 client가 대상 서비스의 논리적 이름을 제공한다. 이 이름을 해석하려면 client와 authorization server 모두 그 값의 의미를 알아야 한다. OAuth client identifier, SAML entity identifier <span>[<a href="#OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]</span>, OpenID Connect Issuer Identifier <span>[<a href="#OpenID.Core">OpenID.Core</a>]</span> 등은 <code>audience</code> 매개변수의 값으로 사용할 수 있는 예다. 다만 값이 의도한 유형으로 올바르게 해석되려면, 특정 authorization server에서 사용하는 <code>audience</code> 값은 그 서버 내에서 고유해야 한다. <code>audience</code> 매개변수를 여러 개 사용해 발급된 토큰을 나열된 여러 audience에서 사용하려는 것임을 나타낼 수 있다. <code>audience</code>와 <code>resource</code> 매개변수를 함께 사용해 논리적 이름과 리소스 URI를 섞어 여러 대상 서비스를 지정할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.6">¶</a></dd>
+<dt id="section-2.1-4.7">scope</dt>
+<dd id="section-2.1-4.8"><span>OPTIONAL</span>. <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-3.3">3.3절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서 정의한 대로, 공백으로 구분되며 대소문자를 구별하는 문자열의 목록이다. client는 이 목록으로 토큰을 사용할 서비스나 리소스의 맥락에서 요청한 security token에 어떤 scope를 원하는지 지정할 수 있다. scope의 값과 그 의미는 서비스마다 다르며, 해당 서비스 문서에 설명되어 있을 것으로 본다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.8">¶</a></dd>
+<dt id="section-2.1-4.9">requested_token_type</dt>
+<dd id="section-2.1-4.10"><span>OPTIONAL</span>. <a href="#TokenTypeIdentifiers">3절</a>에 설명된 대로, 요청한 security token의 유형을 나타내는 식별자다. 요청에서 유형을 지정하지 않으면 authorization server가 재량으로 발급할 토큰의 유형을 정한다. <code>resource</code> 또는 <code>audience</code> 매개변수가 가리키는 서비스나 리소스의 요구사항을 알고 있다면, 그 요구사항에 따라 유형이 결정될 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.10">¶</a></dd>
+<dt id="section-2.1-4.11">subject_token</dt>
+<dd id="section-2.1-4.12"><span>REQUIRED</span>. 요청자가 대리하는 당사자의 신원을 나타내는 security token이다. 일반적으로 이 토큰의 대상은 요청에 응답하여 발급되는 security token의 대상이 된다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.12">¶</a></dd>
+<dt id="section-2.1-4.13">subject_token_type</dt>
+<dd id="section-2.1-4.14"><span>REQUIRED</span>. <a href="#TokenTypeIdentifiers">3절</a>에 설명된 대로, <code>subject_token</code> 매개변수의 security token 유형을 나타내는 식별자다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.14">¶</a></dd>
+<dt id="section-2.1-4.15">actor_token</dt>
+<dd id="section-2.1-4.16"><span>OPTIONAL</span>. 실제로 행위하는 당사자의 신원을 나타내는 security token이다. 일반적으로 이 당사자는 요청한 security token을 사용해 토큰의 대상을 대신하여 행동할 권한을 부여받는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.16">¶</a></dd>
+<dt id="section-2.1-4.17">actor_token_type</dt>
+<dd id="section-2.1-4.18"><a href="#TokenTypeIdentifiers">3절</a>에 설명된 대로, <code>actor_token</code> 매개변수의 security token 유형을 나타내는 식별자다. 이 식별자가 필수인 경우(<span>REQUIRED</span>)는 요청에 <code>actor_token</code> 매개변수가 있을 때다. 그렇지 않으면 포함해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4.18">¶</a></dd>
+</dl>
+<p id="section-2.1-5">authorization server는 요청을 처리할 때 표시된 토큰 유형에 적합한 검증 절차를 수행해야 한다(<span>MUST</span>). actor token이 있는 경우에는 그 토큰에 대해 표시된 유형에 적합한 검증 절차도 수행해야 한다. 개별 토큰의 유효성 판단 기준과 세부 사항은 이 문서의 범위를 벗어나며, 각 토큰의 유형과 내용에 따라 달라진다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-5">¶</a></p>
+<p id="section-2.1-6">일회용이라는 조건이나 토큰 유형에 고유한 다른 의미 규칙이 없다면, 토큰 교환을 수행하는 것 자체는 subject token이나 actor token의 유효성에 영향을 주지 않는다. 또한 각 토큰 교환은 일회성 처리이며 입력 토큰과 출력 토큰을 긴밀히 연결하지 않는다. 예를 들어 출력 토큰의 만료 시각이 입력 토큰의 만료 시각에 영향을 받을 수는 있지만, 입력 토큰을 갱신하거나 그 유효 기간을 연장해도 그 변경이 출력 토큰의 속성에 반영된다고 기대할 수는 없다. 토큰 철회 이벤트를 전파하는 것이 적절하거나 바람직할 수는 있다. 다만 이는 STS 프로토콜의 일반적인 특성이 아니며, 특정 구현, 토큰 유형 또는 배포 환경에 따르는 동작이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-6">¶</a></p>
+<section id="section-2.1.1">
+<h4 id="name-relationship-between-resour"><a href="#section-2.1.1">2.1.1. </a><a href="#name-relationship-between-resour">resource, audience, scope의 관계</a></h4>
+<p id="section-2.1.1-1">토큰을 요청할 때 client는 <code>audience</code> 및 <code>resource</code> 매개변수로 토큰을 사용하려는 대상 서비스를 지정할 수 있고, <code>scope</code> 매개변수로 요청하는 토큰에 원하는 scope를 지정할 수 있다. 이 요청에서 client가 요구하는 것은 요청한 scope를 가지면서 요청에 지정된 모든 대상 서비스에서 사용할 수 있는 토큰이다. 따라서 토큰에 대해 요청한 접근 권한은 사실상 모든 scope와 모든 대상 서비스의 데카르트 곱이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.1-1">¶</a></p>
+<p id="section-2.1.1-2">authorization server는 어떤 토큰 요청이든 받아들이지 않거나 처리할 수 없을 수 있지만, 매우 광범위한 접근 권한을 요청하면 요청을 충족할 수 없을 가능성이 훨씬 높아진다. 따라서 배포 환경 내 시스템 간의 관계를 구체적으로 알지 못한다면, client는 요청할 접근 범위, 특히 대상 서비스의 수를 신중하게 정하는 것이 좋다. authorization server는 <code>invalid_target</code> 오류 코드를 사용해 너무 많은 대상 서비스에 대한 접근을 한꺼번에 요청했음을 client에 알릴 수 있다. 이 오류 코드는 <a href="#ErrorResponse">2.2.2절</a>에서 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.1-2">¶</a></p>
+</section>
+</section>
+</div>
+<div id="Response">
+<section id="section-2.2">
+<h3 id="name-response"><a href="#section-2.2">2.2. </a><a href="#name-response">응답</a></h3>
+<p id="section-2.2-1">authorization server는 토큰 교환 요청에 대해 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5">5절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 명시된 대로 token endpoint에서 일반적인 OAuth 2.0 응답을 반환한다. 자세한 내용과 설명은 다음 하위 절에서 다룬다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-1">¶</a></p>
+<div id="SuccessfulResponse">
+<section id="section-2.2.1">
+<h4 id="name-successful-response"><a href="#section-2.2.1">2.2.1. </a><a href="#name-successful-response">성공 응답</a></h4>
+<p id="section-2.2.1-1">요청이 유효하고 authorization server의 모든 정책과 기타 기준을 충족하면 성공 토큰 응답을 구성한다. <span>[<a href="#RFC8259">RFC8259</a>]</span>에 명시된 "application/json" 미디어 유형을 사용해 다음 매개변수를 HTTP 응답의 엔티티 본문에 추가하고, HTTP 상태 코드는 200으로 설정한다. 각 매개변수를 최상위 수준에 추가하여 JavaScript Object Notation(JSON) 구조로 직렬화한다. 매개변수 이름과 문자열 값은 JSON 문자열로, 수치 값은 JSON 숫자로 넣는다. 매개변수의 순서는 중요하지 않으며 달라질 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-1">¶</a></p>
+<dl id="section-2.2.1-2">
+<dt id="section-2.2.1-2.1">access_token</dt>
+<dd id="section-2.2.1-2.2"><span>REQUIRED</span>. 토큰 교환 요청에 대한 응답으로 authorization server가 발급한 security token이다. 여기서는 <code>access_token</code> 매개변수에 요청된 토큰을 담는다. 이 매개변수는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.1">5.1절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 나온다. 이렇게 하면 이 토큰 교환 프로토콜은 token endpoint에 대해 이미 정의된 OAuth 2.0 요청 및 응답 구조를 사용할 수 있다. <code>access_token</code> 식별자는 역사적인 이유로 사용하며, 발급된 토큰이 OAuth access token일 필요는 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.2">¶</a></dd>
+<dt id="section-2.2.1-2.3">issued_token_type</dt>
+<dd id="section-2.2.1-2.4"><span>REQUIRED</span>. <a href="#TokenTypeIdentifiers">3절</a>에서 설명하는 바와 같이, 발급된 security token의 표현 형식을 나타내는 식별자다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.4">¶</a></dd>
+<dt id="section-2.2.1-2.5">token_type</dt>
+<dd id="section-2.2.1-2.6"><span>REQUIRED</span>. <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-7.1">7.1절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 명시된 대로, 발급된 access token의 사용 방법을 지정하는 대소문자 구분 없는 값이다. client는 이 값으로 보호된 리소스에 접근할 때 access token을 어떻게 사용해야 하는지 알 수 있다. 예를 들어 <code>Bearer</code> 값(<span>[<a href="#RFC6750">RFC6750</a>]</span>에 명시됨)은 발급된 security token이 bearer token임을 뜻한다. 이 경우 client는 토큰 자체의 내용 외에 별도로 자격을 증명하지 않고 토큰을 그대로 제시하면 된다. 이 매개변수의 뜻은 발급된 security token의 표현 형식을 선언하는 <code>issued_token_type</code> 매개변수의 뜻과 다르다. 일반적으로 "토큰 유형"이란 security token의 구조적 또는 구문적 표현 형식을 뜻하며, 이 명세의 모든 <code>*_token_type</code> 매개변수에서도 같은 뜻으로 쓰인다. 발급된 토큰이 access token에 해당하지 않고 access token으로 사용할 수도 없다면, <code>token_type</code>에 <code>N_A</code> 값을 사용하여 해당 맥락에는 OAuth 2.0 <code>token_type</code> 식별자가 적용되지 않음을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.6">¶</a></dd>
+<dt id="section-2.2.1-2.7">expires_in</dt>
+<dd id="section-2.2.1-2.8"><span>RECOMMENDED</span>. authorization server가 발급한 토큰의 유효 기간을 초 단위로 나타낸다. client는 토큰 내용을 검사할 필요성을 느끼지 못하거나 검사할 능력이 없는 경우가 많다. 이 매개변수는 토큰 유형에 관계없이 토큰이 얼마 동안 유효할 것으로 예상되는지를 일관된 방식으로 나타낸다. 예를 들어 값 1800은 응답이 생성된 시점으로부터 30분 뒤에 토큰이 만료된다는 뜻이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.8">¶</a></dd>
+<dt id="section-2.2.1-2.9">scope</dt>
+<dd id="section-2.2.1-2.10">발급된 security token의 scope가 client가 요청한 scope와 같으면 선택 사항(<span>OPTIONAL</span>)이며, 그렇지 않으면 필수 사항(<span>REQUIRED</span>)이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.10">¶</a></dd>
+<dt id="section-2.2.1-2.11">refresh_token</dt>
+<dd id="section-2.2.1-2.12"><span>OPTIONAL</span>. 임시 자격 증명 하나(subject_token)를 다른 맥락에서 사용할 별도의 임시 자격 증명(발급된 토큰)으로 교환하는 경우에는 일반적으로 refresh token(갱신 토큰)을 발급하지 않는다. 원래의 자격 증명이 더 이상 유효하지 않아도 토큰 교환을 수행한 client가 리소스에 접근할 수 있어야 한다면 refresh token을 발급할 수 있다. 예를 들어 사용자가 자리를 비웠거나 오프라인이어서 client와 활성 세션을 유지하는 사용자가 더 이상 없는 경우가 이에 해당한다. 이 명세를 적용하는 프로파일이나 배포 환경에서는 <code>urn:ietf:params:oauth:grant-type:token-exchange</code> grant type의 요청에 대해 client가 어떤 조건에서 refresh token을 받을 것으로 예상할 수 있는지 명확히 문서화하는 것이 좋다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.12">¶</a></dd>
+</dl>
+</section>
+</div>
+<div id="ErrorResponse">
+<section id="section-2.2.2">
+<h4 id="name-error-response"><a href="#section-2.2.2">2.2.2. </a><a href="#name-error-response">오류 응답</a></h4>
+<p id="section-2.2.2-1">요청 자체가 유효하지 않거나, <code>subject_token</code> 또는 <code>actor_token</code> 중 하나라도 어떤 이유로든 유효하지 않거나 정책상 수용할 수 없는 경우, authorization server는 반드시(<span>MUST</span>) <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.2">5.2절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 명시된 대로 오류 응답을 구성해야 한다. <code>error</code> 매개변수의 값은 반드시(<span>MUST</span>) <code>invalid_request</code> 오류 코드여야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.2-1">¶</a></p>
+<p id="section-2.2.2-2"><code>resource</code> 또는 <code>audience</code> 매개변수로 지정한 대상 서비스 중 어느 하나에 대해 authorization server가 토큰을 발급할 의사가 없거나 발급할 수 없는 경우, 오류 응답에는 <code>invalid_target</code> 오류 코드를 사용하는 것이 권고된다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.2-2">¶</a></p>
+<p id="section-2.2.2-3">authorization server는 오류 원인에 관한 정보를 추가할 수 있다(<span>MAY</span>). 이때 <code>error_description</code>을 사용하며, 그 사용법은 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.2">5.2절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서 설명한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.2-3">¶</a></p>
+<p id="section-2.2.2-4">필요에 따라 다른 오류 코드를 사용할 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.2-4">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="MainExample">
+<section id="section-2.3">
+<h3 id="name-example-token-exchange"><a href="#section-2.3">2.3. </a><a href="#name-example-token-exchange">토큰 교환 예시</a></h3>
+<p id="section-2.3-1">다음은 OAuth resource server가 교환 과정에서 client 역할을 맡는 가상의 토큰 교환 예시다. resource server는 보호된 리소스에 대한 요청에서 받은 access token을 백엔드 서비스를 호출하는 데 사용할 새 토큰으로 교환한다. 예시에 추가된 줄바꿈과 들여쓰기는 표시를 위한 것일 뿐이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-1">¶</a></p>
+<p id="section-2.3-2"><a href="#main-prr">그림 1</a>은 resource server가 보호된 리소스에 대한 요청을 받는 모습을 보여 준다. 이 요청의 Authorization 헤더에는 <span><a href="https://www.rfc-editor.org/rfc/rfc6750#section-2.1">2.1절</a>([<a href="#RFC6750">RFC6750</a>])</span>에 명시된 대로 OAuth access token이 들어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-2">¶</a></p>
+<span id="name-protected-resource-request"></span><div id="main-prr">
+<figure id="figure-1">
+<div id="section-2.3-3.1">
+<div><pre>
+ GET /resource HTTP/1.1
+ Host: frontend.example.com
+ Authorization: Bearer accVkjcJyb4BWCxGsndESCJQbdFMogUC5PbRDqceLTC
+</pre></div>
+</div>
+<figcaption><a href="#figure-1">그림 1</a>: <a href="#name-protected-resource-request">보호된 리소스에 대한 요청</a></figcaption></figure>
+</div>
+<p id="section-2.3-4"><a href="#main-tereq">그림 2</a>에서 resource server는 토큰 교환을 위한 client 역할을 맡는다. <a href="#main-prr">그림 1</a>의 요청에서 받은 access token은 <a href="#Request">2.1절</a>에 명시된 요청을 통해 authorization server로 전송된다. <code>subject_token</code> 매개변수의 값에 access token을 담고, <code>subject_token_type</code> 매개변수의 값으로 이 토큰이 OAuth 2.0 access token임을 나타낸다. client 역할을 하는 resource server는 자신의 식별자와 시크릿으로 HTTP Basic 인증 방식을 사용해 authorization server에 자신의 신원을 증명한다. <code>resource</code> 매개변수는 발급된 토큰을 사용할 백엔드 서비스의 위치인 &lt;https://backend.example.com/api&gt; 주소를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-4">¶</a></p>
+<span id="name-token-exchange-request"></span><div id="main-tereq">
+<figure id="figure-2">
+<div id="section-2.3-5.1">
+<div><pre>
+ POST /as/token.oauth2 HTTP/1.1
+ Host: as.example.com
+ Authorization: Basic cnMwODpsb25nLXNlY3VyZS1yYW5kb20tc2VjcmV0
+ Content-Type: application/x-www-form-urlencoded
+
+ grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange
+ &amp;resource=https%3A%2F%2Fbackend.example.com%2Fapi
+ &amp;subject_token=accVkjcJyb4BWCxGsndESCJQbdFMogUC5PbRDqceLTC
+ &amp;subject_token_type=
+  urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Aaccess_token
+</pre></div>
+</div>
+<figcaption><a href="#figure-2">그림 2</a>: <a href="#name-token-exchange-request">토큰 교환 요청</a></figcaption></figure>
+</div>
+<p id="section-2.3-6">authorization server는 client의 자격 증명과 토큰 교환 요청에 제시된 <code>subject_token</code>을 검증한다. authorization server는 <code>resource</code> 매개변수에서 요청에 적용할 적절한 정책을 판단할 수 있으며, &lt;https://backend.example.com&gt; 주소에서 사용하기에 적합한 토큰을 발급한다. 응답의 <code>access_token</code> 매개변수에는 새 토큰이 들어 있다(<a href="#main-teresp">그림 3</a> 참조). 이 토큰은 그 자체로 1분 동안 유효한 bearer 방식의 OAuth access token이다. 이 토큰은 마침 JWT이지만, client는 그 구조와 형식을 알 수 없으므로 <code>issued_token_type</code>에는 access token이라는 점만 표시된다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-6">¶</a></p>
+<span id="name-token-exchange-response"></span><div id="main-teresp">
+<figure id="figure-3">
+<div id="section-2.3-7.1">
+<div><pre>
+ HTTP/1.1 200 OK
+ Content-Type: application/json
+ Cache-Control: no-cache, no-store
+
+ {
+  "access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6IjllciJ9.eyJhdWQiOiJo
+    dHRwczovL2JhY2tlbmQuZXhhbXBsZS5jb20iLCJpc3MiOiJodHRwczovL2FzLmV
+    4YW1wbGUuY29tIiwiZXhwIjoxNDQxOTE3NTkzLCJpYXQiOjE0NDE5MTc1MzMsIn
+    N1YiI6ImJkY0BleGFtcGxlLmNvbSIsInNjb3BlIjoiYXBpIn0.40y3ZgQedw6rx
+    f59WlwHDD9jryFOr0_Wh3CGozQBihNBhnXEQgU85AI9x3KmsPottVMLPIWvmDCM
+    y5-kdXjwhw",
+  "issued_token_type":
+      "urn:ietf:params:oauth:token-type:access_token",
+  "token_type":"Bearer",
+  "expires_in":60
+ }
+</pre></div>
+</div>
+<figcaption><a href="#figure-3">그림 3</a>: <a href="#name-token-exchange-response">토큰 교환 응답</a></figcaption></figure>
+</div>
+<p id="section-2.3-8">이제 resource server는 <a href="#main-beprr">그림 4</a>와 같이 새로 얻은 access token을 백엔드 서버에 요청을 보낼 때 사용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-8">¶</a></p>
+<span id="name-backend-protected-resource-"></span><div id="main-beprr">
+<figure id="figure-4">
+<div id="section-2.3-9.1">
+<div><pre>
+ GET /api HTTP/1.1
+ Host: backend.example.com
+ Authorization: Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjllciJ9.eyJhdWQ
+    iOiJodHRwczovL2JhY2tlbmQuZXhhbXBsZS5jb20iLCJpc3MiOiJodHRwczovL2
+    FzLmV4YW1wbGUuY29tIiwiZXhwIjoxNDQxOTE3NTkzLCJpYXQiOjE0NDE5MTc1M
+    zMsInN1YiI6ImJkY0BleGFtcGxlLmNvbSIsInNjb3BlIjoiYXBpIn0.40y3ZgQe
+    dw6rxf59WlwHDD9jryFOr0_Wh3CGozQBihNBhnXEQgU85AI9x3KmsPottVMLPIW
+    vmDCMy5-kdXjwhw
+</pre></div>
+</div>
+<figcaption><a href="#figure-4">그림 4</a>: <a href="#name-backend-protected-resource-">백엔드의 보호된 리소스에 대한 요청</a></figcaption></figure>
+</div>
+<p id="section-2.3-10">추가 예시는 <a href="#AdditionalExamples">부록 A</a>에서 볼 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-10">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="TokenTypeIdentifiers">
+<section id="section-3">
+<h2 id="name-token-type-identifiers"><a href="#section-3">3. </a><a href="#name-token-type-identifiers">토큰 유형 식별자</a></h2>
+<p id="section-3-1">이 명세의 여러 매개변수는 해당 토큰을 설명하는 식별자를 값으로 사용한다. 구체적으로는 요청의 <code>requested_token_type</code>, <code>subject_token_type</code> 및 <code>actor_token_type</code> 매개변수와 응답의 <code>issued_token_type</code> 멤버가 이에 해당한다. 토큰 유형 식별자는 URI다. 토큰 교환에는 다른 주체가 발급한 토큰과 해당 authorization server가 발급한 토큰을 모두 사용할 수 있다. 전자의 경우 토큰 유형 식별자는 authorization server가 토큰을 파싱할 수 있도록 구문 형식(예: JWT 또는 SAML 2.0)을 나타낸다. 후자의 경우에는 해당 authorization server가 토큰을 어떤 용도로 발급했는지(예: <code>access_token</code> 또는 <code>refresh_token</code>)를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<p id="section-3-2">이 명세에서는 다음 토큰 유형 식별자를 정의한다. 다른 토큰 유형을 나타내기 위해 다른 URI를 사용할 수 있다(<span>MAY</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-3-2">¶</a></p>
+<dl id="section-3-3">
+<dt id="section-3-3.1">urn:ietf:params:oauth:token-type:access_token</dt>
+<dd id="section-3-3.2">해당 authorization server가 발급한 OAuth 2.0 access token임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3.2">¶</a></dd>
+<dt id="section-3-3.3">urn:ietf:params:oauth:token-type:refresh_token</dt>
+<dd id="section-3-3.4">해당 authorization server가 발급한 OAuth 2.0 refresh token임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3.4">¶</a></dd>
+<dt id="section-3-3.5">urn:ietf:params:oauth:token-type:id_token</dt>
+<dd id="section-3-3.6">2절(<span>[<a href="#OpenID.Core">OpenID.Core</a>]</span>)에 정의된 ID Token임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3.6">¶</a></dd>
+<dt id="section-3-3.7">urn:ietf:params:oauth:token-type:saml1</dt>
+<dd id="section-3-3.8">base64url로 인코딩된 SAML 1.1 <span>[<a href="#OASIS.saml-core-1.1">OASIS.saml-core-1.1</a>]</span> 어설션임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3.8">¶</a></dd>
+<dt id="section-3-3.9">urn:ietf:params:oauth:token-type:saml2</dt>
+<dd id="section-3-3.10">base64url로 인코딩된 SAML 2.0 <span>[<a href="#OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]</span> 어설션임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3.10">¶</a></dd>
+</dl>
+<p id="section-3-4"><code>urn:ietf:params:oauth:token-type:jwt</code> 값은 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-9">9절</a>([<a href="#RFC7519">JWT</a>])</span>에 정의되어 있으며, 해당 토큰이 JWT임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-4">¶</a></p>
+<p id="section-3-5">access token과 JWT의 차이는 미묘하다. access token은 위임된 인가 결정을 나타내지만, JWT는 토큰 형식이다. access token은 JWT 형식일 수 있지만 반드시 그럴 필요는 없다. JWT가 access token일 수는 있지만, 모든 JWT가 access token인 것은 아니다.
+
+이 명세에서 <code>urn:ietf:params:oauth:token-type:access_token</code>은 해당 authorization server가 발급한 일반적인 OAuth access token임을 나타내기 위한 것이다. client는 이 토큰의 내부 내용을 알 수 없으며, 같은 authorization server에서 얻은 다른 access token과 똑같은 방식으로 사용할 수 있다. (토큰이 실제로 JWT일 수 있지만, client는 그 사실을 알지 못하며 알 필요도 없다.) 반면 <code>urn:ietf:params:oauth:token-type:jwt</code>는 요청하거나 보내는 토큰이 구체적으로 JWT임을 나타내기 위한 것이다(가령 <span>[<a href="#RFC7523">RFC7523</a>]</span>이 지원하는 것처럼, 다른 authorization server에서 access token을 얻기 위한 인가 부여 수단으로 JWT를 사용하는 도메인 간 사례가 이에 해당할 수 있다).<a aria-label="문단 링크" class="st-permalink" href="#section-3-5">¶</a></p>
+<p id="section-3-6">바이너리 형태의 토큰을 전달하는 데 쓰는 URI는 base64 또는 HTTP와 OAuth에서 사용하기에 적합한 다른 인코딩 방식을 적용한다는 의미와 연결되어 있어야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-6">¶</a></p>
+</section>
+</div>
+<div id="JWTClaims">
+<section id="section-4">
+<h2 id="name-json-web-token-claims-and-i"><a href="#section-4">4. </a><a href="#name-json-web-token-claims-and-i">JSON Web Token claim 및 Introspection 응답 매개변수</a></h2>
+<p id="section-4-1">토큰 안에 delegation을 표현하고, delegation 또는 impersonation을 할 권한을 나타내는 방법을 정의해 두면 유용하다. 이 문서에서 설명하는 토큰 교환 프로토콜은 모든 유형의 토큰에 사용할 수 있지만, 이 절에서는 특히 JWT와 OAuth 2.0 Token Introspection <span>[<a href="#RFC7662">RFC7662</a>]</span> 응답에서 이러한 의미를 표현할 claim을 정의한다. 다른 유형의 토큰에도 비슷한 정의를 마련할 수 있지만, 이는 이 명세의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+<p id="section-4-2"><code>iss</code>, <code>sub</code>, <code>exp</code> 등 이 문서에서 새로 정의하지 않고 예시와 설명에 사용하는 claim은 <span>[<a href="#RFC7519">JWT</a>]</span>에 정의되어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-2">¶</a></p>
+<div id="actor">
+<section id="section-4.1">
+<h3 id="name-act-actor-claim"><a href="#section-4.1">4.1. </a><a href="#name-act-actor-claim">"act"(actor) claim</a></h3>
+<p id="section-4.1-1"><code>act</code>(actor) claim은 JWT에서 delegation이 이루어졌음을 나타내고 권한을 위임받아 행동하는 당사자를 식별하는 수단이다. <code>act</code> claim의 값은 JSON 객체이며, 이 객체의 멤버는 actor를 식별하는 claim이다. <code>act</code> claim을 구성하는 claim은 actor를 식별하고, 경우에 따라 actor에 관한 추가 정보를 제공한다. 예를 들어 actor를 고유하게 식별하려면 <code>iss</code>와 <code>sub</code> 두 claim을 함께 사용해야 할 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-1">¶</a></p>
+<p id="section-4.1-2">그러나 <code>act</code> claim 안의 claim은 actor의 신원에만 관련되며, 최상위 claim과 달리 이를 포함한 JWT의 유효성과는 관련되지 않는다. 따라서 신원과 무관한 claim(예: <code>exp</code>, <code>nbf</code>, <code>aud</code>)은 <code>act</code> claim 안에서 의미가 없으므로 사용하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-2">¶</a></p>
+<p id="section-4.1-3"><a href="#act-ex">그림 5</a>는 JWT claim 집합에 포함된 <code>act</code>(actor) claim의 예를 보여 준다. 토큰 자체의 claim은 user@example.com에 관한 것이고, <code>act</code> claim은 admin@example.com이 현재 actor임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-3">¶</a></p>
+<span id="name-actor-claim"></span><div id="act-ex">
+<figure id="figure-5">
+<div id="section-4.1-4.1">
+<pre>
+ {
+   "aud":"https://consumer.example.com",
+   "iss":"https://issuer.example.com",
+   "exp":1443904177,
+   "nbf":1443904077,
+   "sub":"user@example.com",
+   "act":
+   {
+     "sub":"admin@example.com"
+   }
+ }</pre>
+</div>
+<figcaption><a href="#figure-5">그림 5</a>: <a href="#name-actor-claim">actor claim</a></figcaption></figure>
+</div>
+<p id="section-4.1-5">한 <code>act</code> claim을 다른 것 안에 중첩하면 delegation이 이어진 과정을 표현할 수 있다. 가장 바깥쪽의 <code>act</code> claim은 현재 actor를 나타내고, 안에 중첩된 <code>act</code> claim은 이전 actor를 나타낸다. 가장 오래된 actor는 가장 깊은 곳에 중첩된다. 중첩된 <code>act</code> claim은 최초 요청과 토큰이 대표하는 당사자에서 출발해, 여러 delegation 단계를 거쳐 현재 actor에 이르기까지의 이력을 보여 준다. 이런 의미에서 현재 actor가 인가 및 delegation 이력 전체를 포함한다고 볼 수 있으며, 여기서 설명하는 중첩 구조는 그에 자연스럽게 따른다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-5">¶</a></p>
+<p id="section-4.1-6">토큰을 사용하는 쪽이 접근 제어 정책을 적용할 때는 다음 요건을 따라야 한다(<span>MUST</span>). 토큰의 최상위 claim과 <code>act</code> claim이 현재 actor로 식별한 당사자만 고려해야 한다. 중첩된 <code>act</code> claim으로 식별되는 이전 actor는 정보 제공용일 뿐이며, 접근 제어 결정에서 고려하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-6">¶</a></p>
+<p id="section-4.1-7"><a href="#acts-ex">그림 6</a>의 예는 JWT claim 집합에 중첩된 <code>act</code>(actor) claim을 보여 준다. 토큰 자체의 claim은 user@example.com에 관한 것이고, <code>act</code> claim은 시스템 &lt;https://service16.example.com&gt;가 현재 actor이고 &lt;https://service77.example.com&gt;는 이전 actor였음을 나타낸다. 예를 들어 service16이 service77의 호출에서 토큰을 받아 service26을 호출하는 데 적합한 토큰으로 교환하고, authorization server가 이 상황을 새로 발급한 토큰에 기록하면 이러한 토큰이 만들어질 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-7">¶</a></p>
+<span id="name-nested-actor-claim"></span><div id="acts-ex">
+<figure id="figure-6">
+<div id="section-4.1-8.1">
+<pre>
+ {
+   "aud":"https://service26.example.com",
+   "iss":"https://issuer.example.com",
+   "exp":1443904100,
+   "nbf":1443904000,
+   "sub":"user@example.com",
+   "act":
+   {
+     "sub":"https://service16.example.com",
+     "act":
+     {
+       "sub":"https://service77.example.com"
+     }
+   }
+ }
+</pre>
+</div>
+<figcaption><a href="#figure-6">그림 6</a>: <a href="#name-nested-actor-claim">중첩된 actor claim</a></figcaption></figure>
+</div>
+<p id="section-4.1-9">OAuth 토큰 Introspection 응답에 <code>act</code> 항목이 최상위 멤버로 포함되면, 이 항목의 의미와 형식은 같은 이름의 claim과 같다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-9">¶</a></p>
+</section>
+</div>
+<div id="scopes">
+<section id="section-4.2">
+<h3 id="name-scope-scopes-claim"><a href="#section-4.2">4.2. </a><a href="#name-scope-scopes-claim">"scope"(scope) claim</a></h3>
+<p id="section-4.2-1"><code>scope</code> claim의 값은 해당 토큰에 연결된 scope를 공백으로 구분해 나열한 JSON 문자열이며, <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-3.3">3.3절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 설명된 형식을 따른다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.2-1">¶</a></p>
+<p id="section-4.2-2"><a href="#scope-ex">그림 7</a>은 JWT claim 집합에 포함된 <code>scope</code> claim의 예를 보여 준다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.2-2">¶</a></p>
+<span id="name-scopes-claim"></span><div id="scope-ex">
+<figure id="figure-7">
+<div id="section-4.2-3.1">
+<pre>
+ {
+   "aud":"https://consumer.example.com",
+   "iss":"https://issuer.example.com",
+   "exp":1443904177,
+   "nbf":1443904077,
+   "sub":"dgaf4mvfs75Fci_FL3heQA",
+   "scope":"email profile phone address"
+ }
+</pre>
+</div>
+<figcaption><a href="#figure-7">그림 7</a>: <a href="#name-scopes-claim">scope claim</a></figcaption></figure>
+</div>
+<p id="section-4.2-4"><span><a href="#RFC7662">OAuth 2.0 Token Introspection</a> [<a href="#RFC7662">RFC7662</a>]</span>은 해당 토큰에 연결된 scope를 전달하는 매개변수 <code>scope</code>를 이미 정의하고 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.2-4">¶</a></p>
+</section>
+</div>
+<div id="client_id">
+<section id="section-4.3">
+<h3 id="name-client_id-client-identifier"><a href="#section-4.3">4.3. </a><a href="#name-client_id-client-identifier">"client_id"(client 식별자) claim</a></h3>
+<p id="section-4.3-1"><code>client_id</code> claim은 해당 토큰을 요청한 <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span> client의 식별자를 전달한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.3-1">¶</a></p>
+<p id="section-4.3-2"><a href="#client_id-ex">그림 8</a>은 JWT claim 집합에 포함된 <code>client_id</code> claim의 예를 보여 준다. 이 claim은 식별자가 "s6BhdRkqt3"인 OAuth 2.0 client를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.3-2">¶</a></p>
+<span id="name-client-identifier-claim"></span><div id="client_id-ex">
+<figure id="figure-8">
+<div id="section-4.3-3.1">
+<pre>
+ {
+   "aud":"https://consumer.example.com",
+   "iss":"https://issuer.example.com",
+   "exp":1443904177,
+   "sub":"user@example.com",
+   "client_id":"s6BhdRkqt3"
+ }
+</pre>
+</div>
+<figcaption><a href="#figure-8">그림 8</a>: <a href="#name-client-identifier-claim">client 식별자 claim</a></figcaption></figure>
+</div>
+<p id="section-4.3-4"><span><a href="#RFC7662">OAuth 2.0 Token Introspection</a> [<a href="#RFC7662">RFC7662</a>]</span>은 <code>client_id</code> 매개변수를 해당 토큰을 요청한 OAuth 2.0 client의 식별자로 이미 정의하고 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.3-4">¶</a></p>
+</section>
+</div>
+<div id="may_act">
+<section id="section-4.4">
+<h3 id="name-may_act-authorized-actor-cl"><a href="#section-4.4">4.4. </a><a href="#name-may_act-authorized-actor-cl">"may_act"(인가된 actor) claim</a></h3>
+<p id="section-4.4-1"><code>may_act</code> claim은 한 당사자가 actor가 되어 다른 당사자를 대신해 행동할 권한이 있음을 명시한다. 예를 들어 토큰 교환 요청에서 <code>subject_token</code>이 token endpoint에 제시되면, authorization server는 subject token의 <code>may_act</code> claim을 사용해 client(또는 <code>actor_token</code>으로 식별되는 당사자)에게 요청된 delegation 또는 impersonation을 수행할 권한이 있는지 판단할 수 있다. 이 claim의 값은 JSON 객체이며, 객체의 멤버는 이 claim을 포함한 JWT가 식별하는 당사자를 대신해 행동할 자격이 있다고 명시된 당사자를 식별하는 claim이다. <code>may_act</code> claim을 구성하는 claim은 인가된 actor를 식별하고, 경우에 따라 그 actor에 관한 추가 정보를 제공한다. 예를 들어 인가된 actor를 고유하게 식별하려면 <code>iss</code>와 <code>sub</code> 두 claim을 함께 사용해야 하는 경우가 있으며, <code>email</code> claim으로 그 당사자에 관한 유용한 추가 정보를 제공할 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.4-1">¶</a></p>
+<p id="section-4.4-2">그러나 <code>may_act</code> claim 안의 claim은 그 당사자의 신원에만 관련되며, 최상위 claim과 달리 이를 포함한 JWT의 유효성과는 관련되지 않는다. 따라서 <code>exp</code>, <code>nbf</code>, <code>aud</code> 등의 claim은 <code>may_act</code> claim 안에서 의미가 없으므로 사용하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.4-2">¶</a></p>
+<p id="section-4.4-3"><a href="#may_act-ex">그림 9</a>는 JWT claim 집합에 포함된 <code>may_act</code> claim의 예를 보여 준다. 토큰 자체의 claim은 user@example.com에 관한 것이고, <code>may_act</code> claim은 admin@example.com에게 user@example.com을 대신해 행동할 권한이 있음을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.4-3">¶</a></p>
+<span id="name-authorized-actor-claim"></span><div id="may_act-ex">
+<figure id="figure-9">
+<div id="section-4.4-4.1">
+<pre>
+ {
+   "aud":"https://consumer.example.com",
+   "iss":"https://issuer.example.com",
+   "exp":1443904177,
+   "nbf":1443904077,
+   "sub":"user@example.com",
+   "may_act":
+   {
+     "sub":"admin@example.com"
+   }
+ }
+</pre>
+</div>
+<figcaption><a href="#figure-9">그림 9</a>: <a href="#name-authorized-actor-claim">인가된 actor claim</a></figcaption></figure>
+</div>
+<p id="section-4.4-5">OAuth 토큰 Introspection 응답에 <code>may_act</code> 항목이 최상위 멤버로 포함되면, 이 항목의 의미와 형식은 같은 이름의 claim과 같다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.4-5">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="Security">
+<section id="section-5">
+<h2 id="name-security-considerations"><a href="#section-5">5. </a><a href="#name-security-considerations">보안 고려사항</a></h2>
+<p id="section-5-1">The OAuth 2.0 Authorization Framework의 보안 고려사항을 담은 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-10">10절</a>([<a href="#RFC6749">RFC6749</a>])</span> 지침은 상당 부분 이 명세에도 적용된다. 또한 <span>[<a href="#RFC6819">RFC6819</a>]</span>는 OAuth의 추가 보안 고려사항을 제시하며, <span>[<a href="#I-D.ietf-oauth-security-topics">OAUTH-SECURITY</a>]</span>에는 배포 경험과 OAuth 2.0 최초 발행 이후 등장한 새로운 위협을 반영해 갱신한 보안 지침이 담겨 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-1">¶</a></p>
+<p id="section-5-2"><span>[<a href="#RFC7519">JWT</a>]</span>에서 다루는 일반적인 보안 문제는 모두 이 명세에도 적용되며, 특히 URI를 비교하거나 인식할 수 없는 값을 처리할 때 그렇다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-2">¶</a></p>
+<p id="section-5-3">이와 별도로 delegation과 impersonation은 둘 다 특유의 보안 문제를 일으킨다. 한 principal이 다른 principal의 권한을 위임받을 때는 늘 남용 가능성을 우려해야 한다. <code>scope</code> claim은 위임된 권한을 행사할 수 있는 상황을 제한하므로, 남용 가능성을 줄이기 위해 토큰 수명 제한과 같은 일반적인 제약에 더해 이 claim을 사용하는 것이 제안된다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-3">¶</a></p>
+</section>
+</div>
+<div id="Privacy">
+<section id="section-6">
+<h2 id="name-privacy-considerations"><a href="#section-6">6. </a><a href="#name-privacy-considerations">개인정보 보호 고려사항</a></h2>
+<p id="section-6-1">
+        이 문서에서 설명하는 기능에 쓰이는 토큰에는 개인정보 보호 측면에서 민감한 정보가 들어 있을 수 있다. 이러한 정보가 의도하지 않은 당사자에게 공개되지 않도록, 토큰은 Transport Layer Security(TLS)와 같이 암호화된 채널을 통해서만 전송해야 한다(<span>MUST</span>). 특정 정보가 client에 공개되지 않도록 하는 것이 바람직하다면, 지정된 수신자용으로 토큰을 암호화해야 한다(<span>MUST</span>). 배포 환경에서는 필요한 최소한의 데이터가 무엇인지 정하고, 발급하는 토큰에는 그 정보만 포함하는 것이 권고된다(<span>SHOULD</span>). 경우에 따라서는 익명 또는 가명 사용자만을 나타내는 방식도 데이터 최소화에 포함될 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-6-1">¶</a></p>
+</section>
+</div>
+<div id="IANA">
+<section id="section-7">
+<h2 id="name-iana-considerations">
+<a href="#section-7">7. </a><a href="#name-iana-considerations">IANA 고려사항</a>
+</h2>
+<div id="URIReg">
+<section id="section-7.1">
+<h3 id="name-oauth-uri-registration">
+<a href="#section-7.1">7.1. </a><a href="#name-oauth-uri-registration">OAuth URI 등록</a>
+</h3>
+<p id="section-7.1-1">
+   IANA는 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>의 "OAuth URI" 하위 레지스트리에 다음 값을 등록했다. "OAuth URI" 하위 레지스트리는 <span>[<a href="#RFC6755">RFC6755</a>]</span>에서 신설되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-1">¶</a></p>
+<ul>
+<li id="section-7.1-2.1">URN: urn:ietf:params:oauth:grant-type:token-exchange<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-2.1">¶</a>
+</li>
+<li id="section-7.1-2.2">일반 명칭: OAuth 2.0 토큰 교환 grant type<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-2.2">¶</a>
+</li>
+<li id="section-7.1-2.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-2.3">¶</a>
+</li>
+<li id="section-7.1-2.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-2.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.1-3.1">URN: urn:ietf:params:oauth:token-type:access_token<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-3.1">¶</a>
+</li>
+<li id="section-7.1-3.2">일반 명칭: OAuth 2.0 access token의 토큰 유형 URI<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-3.2">¶</a>
+</li>
+<li id="section-7.1-3.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-3.3">¶</a>
+</li>
+<li id="section-7.1-3.4">명세 문서: RFC 8693의 <a href="#TokenTypeIdentifiers">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-3.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.1-4.1">URN: urn:ietf:params:oauth:token-type:refresh_token<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-4.1">¶</a>
+</li>
+<li id="section-7.1-4.2">일반 명칭: OAuth 2.0 refresh token의 토큰 유형 URI<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-4.2">¶</a>
+</li>
+<li id="section-7.1-4.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-4.3">¶</a>
+</li>
+<li id="section-7.1-4.4">명세 문서: RFC 8693의 <a href="#TokenTypeIdentifiers">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-4.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.1-5.1">URN: urn:ietf:params:oauth:token-type:id_token<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-5.1">¶</a>
+</li>
+<li id="section-7.1-5.2">일반 명칭: ID Token의 토큰 유형 URI<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-5.2">¶</a>
+</li>
+<li id="section-7.1-5.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-5.3">¶</a>
+</li>
+<li id="section-7.1-5.4">명세 문서: RFC 8693의 <a href="#TokenTypeIdentifiers">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-5.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.1-6.1">URN: urn:ietf:params:oauth:token-type:saml1<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-6.1">¶</a>
+</li>
+<li id="section-7.1-6.2">일반 명칭: base64url로 인코딩한 SAML 1.1 어설션의 토큰 유형 URI<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-6.2">¶</a>
+</li>
+<li id="section-7.1-6.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-6.3">¶</a>
+</li>
+<li id="section-7.1-6.4">명세 문서: RFC 8693의 <a href="#TokenTypeIdentifiers">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-6.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.1-7.1">URN: urn:ietf:params:oauth:token-type:saml2<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-7.1">¶</a>
+</li>
+<li id="section-7.1-7.2">일반 명칭: base64url로 인코딩한 SAML 2.0 어설션의 토큰 유형 URI<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-7.2">¶</a>
+</li>
+<li id="section-7.1-7.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-7.3">¶</a>
+</li>
+<li id="section-7.1-7.4">명세 문서: RFC 8693의 <a href="#TokenTypeIdentifiers">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.1-7.4">¶</a>
+</li>
+</ul>
+</section>
+</div>
+<div id="OAuthParametersReg">
+<section id="section-7.2">
+<h3 id="name-oauth-parameters-registrati">
+<a href="#section-7.2">7.2. </a><a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a>
+</h3>
+<p id="section-7.2-1">
+   IANA는 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>의 "OAuth Parameters" 하위 레지스트리에 다음 값을 등록했다. "OAuth Parameters" 하위 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 신설되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-1">¶</a></p>
+<ul>
+<li id="section-7.2-2.1">매개변수 이름: audience<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-2.1">¶</a>
+</li>
+<li id="section-7.2-2.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-2.2">¶</a>
+</li>
+<li id="section-7.2-2.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-2.3">¶</a>
+</li>
+<li id="section-7.2-2.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-2.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-3.1">매개변수 이름: requested_token_type<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-3.1">¶</a>
+</li>
+<li id="section-7.2-3.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-3.2">¶</a>
+</li>
+<li id="section-7.2-3.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-3.3">¶</a>
+</li>
+<li id="section-7.2-3.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-3.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-4.1">매개변수 이름: subject_token<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-4.1">¶</a>
+</li>
+<li id="section-7.2-4.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-4.2">¶</a>
+</li>
+<li id="section-7.2-4.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-4.3">¶</a>
+</li>
+<li id="section-7.2-4.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-4.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-5.1">매개변수 이름: subject_token_type<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-5.1">¶</a>
+</li>
+<li id="section-7.2-5.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-5.2">¶</a>
+</li>
+<li id="section-7.2-5.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-5.3">¶</a>
+</li>
+<li id="section-7.2-5.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-5.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-6.1">매개변수 이름: actor_token<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-6.1">¶</a>
+</li>
+<li id="section-7.2-6.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-6.2">¶</a>
+</li>
+<li id="section-7.2-6.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-6.3">¶</a>
+</li>
+<li id="section-7.2-6.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-6.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-7.1">매개변수 이름: actor_token_type<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-7.1">¶</a>
+</li>
+<li id="section-7.2-7.2">매개변수 사용 위치: token request<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-7.2">¶</a>
+</li>
+<li id="section-7.2-7.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-7.3">¶</a>
+</li>
+<li id="section-7.2-7.4">명세 문서: RFC 8693의 <a href="#Request">2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-7.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.2-8.1">매개변수 이름: issued_token_type<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-8.1">¶</a>
+</li>
+<li id="section-7.2-8.2">매개변수 사용 위치: token response<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-8.2">¶</a>
+</li>
+<li id="section-7.2-8.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-8.3">¶</a>
+</li>
+<li id="section-7.2-8.4">명세 문서: RFC 8693의 <a href="#SuccessfulResponse">2.2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.2-8.4">¶</a>
+</li>
+</ul>
+</section>
+</div>
+<div id="TokenTypeReg">
+<section id="section-7.3">
+<h3 id="name-oauth-access-token-type-reg">
+<a href="#section-7.3">7.3. </a><a href="#name-oauth-access-token-type-reg">OAuth access token 유형 등록</a>
+</h3>
+<p id="section-7.3-1">
+          IANA는 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>의 "OAuth Access Token Types" 하위 레지스트리에 다음 access token 유형을 등록했다. "OAuth Access Token Types" 하위 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 신설되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-1">¶</a></p>
+<ul>
+<li id="section-7.3-2.1">유형 이름: N_A<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2.1">¶</a>
+</li>
+<li id="section-7.3-2.2">추가 token endpoint 응답 매개변수: none<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2.2">¶</a>
+</li>
+<li id="section-7.3-2.3">HTTP 인증 방식: none<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2.3">¶</a>
+</li>
+<li id="section-7.3-2.4">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2.4">¶</a>
+</li>
+<li id="section-7.3-2.5">명세 문서: RFC 8693의 <a href="#SuccessfulResponse">2.2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2.5">¶</a>
+</li>
+</ul>
+</section>
+</div>
+<div id="ClaimsReg">
+<section id="section-7.4">
+<h3 id="name-json-web-token-claims-regis">
+<a href="#section-7.4">7.4. </a><a href="#name-json-web-token-claims-regis">JSON Web Token claim 등록</a>
+</h3>
+<p id="section-7.4-1">
+   IANA는 "JSON Web Token (JWT)" 레지스트리 <span>[<a href="#IANA.JWT">IANA.JWT</a>]</span>의 "JSON Web Token Claims" 하위 레지스트리에 다음 claim을 등록했다. "JSON Web Token Claims" 하위 레지스트리는 <span>[<a href="#RFC7519">JWT</a>]</span>에서 신설되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-1">¶</a></p>
+<ul>
+<li id="section-7.4-2.1">claim 이름: act<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-2.1">¶</a>
+</li>
+<li id="section-7.4-2.2">claim 설명: Actor<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-2.2">¶</a>
+</li>
+<li id="section-7.4-2.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-2.3">¶</a>
+</li>
+<li id="section-7.4-2.4">명세 문서: RFC 8693의 <a href="#actor">4.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.4-2.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.4-3.1">claim 이름: scope<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-3.1">¶</a>
+</li>
+<li id="section-7.4-3.2">claim 설명: scope 값<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-3.2">¶</a>
+</li>
+<li id="section-7.4-3.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-3.3">¶</a>
+</li>
+<li id="section-7.4-3.4">명세 문서: RFC 8693의 <a href="#scopes">4.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.4-3.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.4-4.1">claim 이름: client_id<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-4.1">¶</a>
+</li>
+<li id="section-7.4-4.2">claim 설명: client 식별자<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-4.2">¶</a>
+</li>
+<li id="section-7.4-4.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-4.3">¶</a>
+</li>
+<li id="section-7.4-4.4">명세 문서: RFC 8693의 <a href="#client_id">4.3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.4-4.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.4-5.1">claim 이름: may_act<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-5.1">¶</a>
+</li>
+<li id="section-7.4-5.2">claim 설명: 인가된 actor - actor가 될 권한을 부여받은 당사자<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-5.2">¶</a>
+</li>
+<li id="section-7.4-5.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-5.3">¶</a>
+</li>
+<li id="section-7.4-5.4">명세 문서: RFC 8693의 <a href="#may_act">4.4절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.4-5.4">¶</a>
+</li>
+</ul>
+</section>
+</div>
+<div id="IntrospectionReg">
+<section id="section-7.5">
+<h3 id="name-oauth-token-introspection-r">
+<a href="#section-7.5">7.5. </a><a href="#name-oauth-token-introspection-r">OAuth 토큰 Introspection 응답 등록</a>
+</h3>
+<p id="section-7.5-1">
+          IANA는 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 속한 "OAuth Token Introspection Response" 레지스트리에 다음 값을 등록했다. "OAuth Token Introspection Response" 레지스트리는 <span>[<a href="#RFC7662">RFC7662</a>]</span>에서 신설되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-1">¶</a></p>
+<ul>
+<li id="section-7.5-2.1">이름: act<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.1">¶</a>
+</li>
+<li id="section-7.5-2.2">설명: Actor<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.2">¶</a>
+</li>
+<li id="section-7.5-2.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.3">¶</a>
+</li>
+<li id="section-7.5-2.4">명세 문서: RFC 8693의 <a href="#actor">4.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.4">¶</a>
+</li>
+</ul>
+<ul>
+<li id="section-7.5-3.1">이름: may_act<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-3.1">¶</a>
+</li>
+<li id="section-7.5-3.2">설명: 인가된 actor - actor가 될 권한을 부여받은 당사자<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-3.2">¶</a>
+</li>
+<li id="section-7.5-3.3">변경 관리 주체: IESG<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-3.3">¶</a>
+</li>
+<li id="section-7.5-3.4">명세 문서: RFC 8693의 <a href="#may_act">4.4절</a><a aria-label="문단 링크" class="st-permalink" href="#section-7.5-3.4">¶</a>
+</li>
+</ul>
+</section>
+</div>
+</section>
+</div>
+<section id="section-8">
+<h2 id="name-references">
+<a href="#section-8">8. </a><a href="#name-references">참고문헌</a>
+</h2>
+<section id="section-8.1">
+<h3 id="name-normative-references">
+<a href="#section-8.1">8.1. </a><a href="#name-normative-references">규범 참고문헌</a>
+</h3>
+<dl>
+<dt id="IANA.JWT">[IANA.JWT]</dt>
+<dd>
+<span>IANA</span>, <span>"JSON Web Token (JWT)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jwt">https://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+<dd>
+<span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>. </dd>
+<dt id="RFC7519">[JWT]</dt>
+<dd>
+<span>Jones, M.</span><span>, Bradley, J.</span><span>, and N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd>
+<span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time>March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dt id="RFC3986">[RFC3986]</dt>
+<dd>
+<span>Berners-Lee, T.</span><span>, Fielding, R.</span><span>, and L. Masinter</span>, <span>"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span>STD 66</span>, <span>RFC 3986</span>, <span>DOI 10.17487/RFC3986</span>, <time>January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd>
+<span>Hardt, D., Ed.</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time>October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dt id="RFC7662">[RFC7662]</dt>
+<dd>
+<span>Richer, J., Ed.</span>, <span>"OAuth 2.0 Token Introspection"</span>, <span>RFC 7662</span>, <span>DOI 10.17487/RFC7662</span>, <time>October 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>&gt;</span>. </dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd>
+<span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time>May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dt id="RFC8259">[RFC8259]</dt>
+<dd>
+<span>Bray, T., Ed.</span>, <span>"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span>STD 90</span>, <span>RFC 8259</span>, <span>DOI 10.17487/RFC8259</span>, <time>December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+</dl>
+</section>
+<section id="section-8.2">
+<h3 id="name-informative-references">
+<a href="#section-8.2">8.2. </a><a href="#name-informative-references">참고용 문헌</a>
+</h3>
+<dl>
+<dt id="OASIS.saml-core-1.1">[OASIS.saml-core-1.1]</dt>
+<dd>
+<span>Maler, E.</span><span>, Mishra, P.</span><span>, and R. Philpott</span>, <span>"Assertions and Protocol for the OASIS Security Assertion Markup Language (SAML) V1.1"</span>, <span>OASIS Standard oasis-sstc-saml-core-1.1</span>, <time>September 2003</time>, <span>&lt;<a href="https://www.oasis-open.org/committees/download.php/3406/oasis-sstc-saml-core-1.1.pdf">https://www.oasis-open.org/committees/download.php/3406/oasis-sstc-saml-core-1.1.pdf</a>&gt;</span>. </dd>
+<dt id="OASIS.saml-core-2.0-os">[OASIS.saml-core-2.0-os]</dt>
+<dd>
+<span>Cantor, S.</span><span>, Kemp, J.</span><span>, Philpott, R.</span><span>, and E. Maler</span>, <span>"Assertions and Protocol for the OASIS Security Assertion Markup Language (SAML) V2.0"</span>, <span>OASIS Standard saml-core-2.0-os</span>, <time>March 2005</time>, <span>&lt;<a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf</a>&gt;</span>. </dd>
+<dt id="I-D.ietf-oauth-resource-indicators">[OAUTH-RESOURCE]</dt>
+<dd>
+<span>Campbell, B.</span><span>, Bradley, J.</span><span>, and H. Tschofenig</span>, <span>"Resource Indicators for OAuth 2.0"</span>, <span>Work in Progress</span>, <span>Internet-Draft, draft-ietf-oauth-resource-indicators-08</span>, <time>11 September 2019</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-oauth-resource-indicators-08">https://tools.ietf.org/html/draft-ietf-oauth-resource-indicators-08</a>&gt;</span>. </dd>
+<dt id="I-D.ietf-oauth-security-topics">[OAUTH-SECURITY]</dt>
+<dd>
+<span>Lodderstedt, T.</span><span>, Bradley, J.</span><span>, Labunets, A.</span><span>, and D. Fett</span>, <span>"OAuth 2.0 Security Best Current Practice"</span>, <span>Work in Progress</span>, <span>Internet-Draft, draft-ietf-oauth-security-topics-13</span>, <time>8 July 2019</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13">https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13</a>&gt;</span>. </dd>
+<dt id="OpenID.Core">[OpenID.Core]</dt>
+<dd>
+<span>Sakimura, N.</span><span>, Bradley, J.</span><span>, Jones, M.</span><span>, de Medeiros, B.</span><span>, and C. Mortimore</span>, <span>"OpenID Connect Core 1.0"</span>, <time>November 2014</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dt id="RFC6750">[RFC6750]</dt>
+<dd>
+<span>Jones, M.</span><span> and D. Hardt</span>, <span>"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span>RFC 6750</span>, <span>DOI 10.17487/RFC6750</span>, <time>October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>. </dd>
+<dt id="RFC6755">[RFC6755]</dt>
+<dd>
+<span>Campbell, B.</span><span> and H. Tschofenig</span>, <span>"An IETF URN Sub-Namespace for OAuth"</span>, <span>RFC 6755</span>, <span>DOI 10.17487/RFC6755</span>, <time>October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6755">https://www.rfc-editor.org/info/rfc6755</a>&gt;</span>. </dd>
+<dt id="RFC6819">[RFC6819]</dt>
+<dd>
+<span>Lodderstedt, T., Ed.</span><span>, McGloin, M.</span><span>, and P. Hunt</span>, <span>"OAuth 2.0 Threat Model and Security Considerations"</span>, <span>RFC 6819</span>, <span>DOI 10.17487/RFC6819</span>, <time>January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6819">https://www.rfc-editor.org/info/rfc6819</a>&gt;</span>. </dd>
+<dt id="RFC7521">[RFC7521]</dt>
+<dd>
+<span>Campbell, B.</span><span>, Mortimore, C.</span><span>, Jones, M.</span><span>, and Y. Goland</span>, <span>"Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7521</span>, <span>DOI 10.17487/RFC7521</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7521">https://www.rfc-editor.org/info/rfc7521</a>&gt;</span>. </dd>
+<dt id="RFC7523">[RFC7523]</dt>
+<dd>
+<span>Jones, M.</span><span>, Campbell, B.</span><span>, and C. Mortimore</span>, <span>"JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7523</span>, <span>DOI 10.17487/RFC7523</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7523">https://www.rfc-editor.org/info/rfc7523</a>&gt;</span>. </dd>
+<dt id="WS-Trust">[WS-Trust]</dt>
+<dd>
+<span>Nadalin, A., Ed.</span><span>, Goodner, M., Ed.</span><span>, Gudgin, M., Ed.</span><span>, Barbir, A., Ed.</span><span>, and H. Granqvist, Ed.</span>, <span>"WS-Trust 1.4"</span>, <time>February 2012</time>, <span>&lt;<a href="https://docs.oasis-open.org/ws-sx/ws-trust/v1.4/ws-trust.html">https://docs.oasis-open.org/ws-sx/ws-trust/v1.4/ws-trust.html</a>&gt;</span>. </dd>
+</dl>
+</section>
+</section>
+<div id="AdditionalExamples">
+<section id="section-appendix.a">
+<h2 id="name-additional-token-exchange-e">
+<a href="#section-appendix.a">부록 A. </a><a href="#name-additional-token-exchange-e">추가 토큰 교환 예시</a>
+</h2>
+<p id="section-appendix.a-1">
+다음 절에서는 impersonation과 delegation을 각각 보여 주는 두 가지 토큰 교환 예시를 제시한다(추가 줄바꿈과 들여쓰기는 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.a-1">¶</a></p>
+<div id="ImpersonationExample">
+<section id="section-a.1">
+<h2 id="name-impersonation-token-exchang">
+<a href="#section-a.1">A.1. </a><a href="#name-impersonation-token-exchang">impersonation 토큰 교환 예시</a>
+</h2>
+<div id="ImpersonationRequest">
+<section id="section-a.1.1">
+<h3 id="name-token-exchange-request-2">
+<a href="#section-a.1.1">A.1.1. </a><a href="#name-token-exchange-request-2">토큰 교환 요청</a>
+</h3>
+<p id="section-a.1.1-1">
+다음 토큰 교환 요청에서 client는 impersonation 방식으로 사용할 토큰을 요청한다(<code>subject_token</code>만 있고 <code>actor_token</code>이 없으면 delegation은 불가능하다). client는 논리 이름이 <code>urn:example:cooperation-context</code>인 대상 서비스에서 사용할 토큰이 필요하다고 authorization server에 알린다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.1.1-1">¶</a></p>
+<span id="name-token-exchange-request-3"></span><div id="ImpersonationRequestEx">
+<figure id="figure-10">
+<div id="section-a.1.1-2.1">
+<div><pre>
+ POST /as/token.oauth2 HTTP/1.1
+ Host: as.example.com
+ Content-Type: application/x-www-form-urlencoded
+
+ grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange
+ &amp;audience=urn%3Aexample%3Acooperation-context
+ &amp;subject_token=eyJhbGciOiJFUzI1NiIsImtpZCI6IjE2In0.eyJhdWQiOiJodHRwc
+   zovL2FzLmV4YW1wbGUuY29tIiwiaXNzIjoiaHR0cHM6Ly9vcmlnaW5hbC1pc3N1ZXI
+   uZXhhbXBsZS5uZXQiLCJleHAiOjE0NDE5MTA2MDAsIm5iZiI6MTQ0MTkwOTAwMCwic
+   3ViIjoiYmRjQGV4YW1wbGUubmV0Iiwic2NvcGUiOiJvcmRlcnMgcHJvZmlsZSBoaXN
+   0b3J5In0.PRBg-jXn4cJuj1gmYXFiGkZzRuzbXZ_sDxdE98ddW44ufsbWLKd3JJ1VZ
+   hF64pbTtfjy4VXFVBDaQpKjn5JzAw
+ &amp;subject_token_type=urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Ajwt
+</pre></div>
+</div>
+<figcaption><a href="#figure-10">그림 10</a>:
+<a href="#name-token-exchange-request-3">토큰 교환 요청</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ImpersonationSubjectClaims">
+<section id="section-a.1.2">
+<h3 id="name-subject-token-claims">
+<a href="#section-a.1.2">A.1.2. </a><a href="#name-subject-token-claims">subject token의 claim</a>
+</h3>
+<p id="section-a.1.2-1">
+앞선 요청의 <code>subject_token</code>은 JWT이며, 디코딩한 JWT Claims Set을 여기에 제시한다. 이 JWT는 정해진 시간 구간 내에 authorization server가 사용하도록 만들어졌다. 새 토큰은 JWT의 대상(<code>bdc@example.net</code>)을 대신하여 요청한 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.1.2-1">¶</a></p>
+<span id="name-subject-token-claims-2"></span><div id="ImpersonationSubjectClaimsEx">
+<figure id="figure-11">
+<div id="section-a.1.2-2.1">
+<pre>
+  {
+    "aud":"https://as.example.com",
+    "iss":"https://original-issuer.example.net",
+    "exp":1441910600,
+    "nbf":1441909000,
+    "sub":"bdc@example.net",
+    "scope":"orders profile history"
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-11">그림 11</a>:
+<a href="#name-subject-token-claims-2">subject token의 claim</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ImpersonationResponse">
+<section id="section-a.1.3">
+<h3 id="name-token-exchange-response-2">
+<a href="#section-a.1.3">A.1.3. </a><a href="#name-token-exchange-response-2">토큰 교환 응답</a>
+</h3>
+<p id="section-a.1.3-1">
+<code>access_token</code> 매개변수는 아래에 제시한 토큰 교환 응답의 일부이며, client가 요청한 새 토큰을 담고 있다. 응답의 다른 매개변수는 이 토큰이 1시간 후 만료되는 bearer access token임을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.1.3-1">¶</a></p>
+<span id="name-token-exchange-response-3"></span><div id="ImpersonationResponseEx">
+<figure id="figure-12">
+<div id="section-a.1.3-2.1">
+<div><pre>
+ HTTP/1.1 200 OK
+ Content-Type: application/json
+ Cache-Control: no-cache, no-store
+
+ {
+  "access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6IjcyIn0.eyJhdWQiOiJ1cm4
+    6ZXhhbXBsZTpjb29wZXJhdGlvbi1jb250ZXh0IiwiaXNzIjoiaHR0cHM6Ly9hcy5l
+    eGFtcGxlLmNvbSIsImV4cCI6MTQ0MTkxMzYxMCwic3ViIjoiYmRjQGV4YW1wbGUub
+    mV0Iiwic2NvcGUiOiJvcmRlcnMgcHJvZmlsZSBoaXN0b3J5In0.rMdWpSGNACTvnF
+    uOL74sYZ6MVuld2Z2WkGLmQeR9ztj6w2OXraQlkJmGjyiCq24kcB7AI2VqVxl3wSW
+    nVKh85A",
+  "issued_token_type":
+    "urn:ietf:params:oauth:token-type:access_token",
+  "token_type":"Bearer",
+  "expires_in":3600
+ }
+</pre></div>
+</div>
+<figcaption><a href="#figure-12">그림 12</a>:
+<a href="#name-token-exchange-response-3">토큰 교환 응답</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ImpersonationIssuedClaims">
+<section id="section-a.1.4">
+<h3 id="name-issued-token-claims">
+<a href="#section-a.1.4">A.1.4. </a><a href="#name-issued-token-claims">발급된 토큰의 claim</a>
+</h3>
+<p id="section-a.1.4-1">
+발급된 토큰의 JWT Claims Set을 디코딩한 결과는 아래와 같다. 새 JWT는 authorization server가 발급하며, 논리 이름이 <code>urn:example:cooperation-context</code>인 시스템 주체가 만료 전까지 언제든 사용할 수 있도록 만들어졌다. JWT의 대상(<code>sub</code>)은 요청에 사용한 토큰의 대상과 같다. 따라서 client는 이 토큰을 사용해 논리 이름이 <code>urn:example:cooperation-context</code>인 시스템 주체에서 해당 대상인 것처럼 행동할 수 있다(impersonation).<a aria-label="문단 링크" class="st-permalink" href="#section-a.1.4-1">¶</a></p>
+<span id="name-issued-token-claims-2"></span><div id="ImpersonationIssuedClaimsEx">
+<figure id="figure-13">
+<div id="section-a.1.4-2.1">
+<pre>
+  {
+    "aud":"urn:example:cooperation-context",
+    "iss":"https://as.example.com",
+    "exp":1441913610,
+    "sub":"bdc@example.net",
+    "scope":"orders profile history"
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-13">그림 13</a>:
+<a href="#name-issued-token-claims-2">발급된 토큰의 claim</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="DelegationExample">
+<section id="section-a.2">
+<h2 id="name-delegation-token-exchange-e">
+<a href="#section-a.2">A.2. </a><a href="#name-delegation-token-exchange-e">delegation 토큰 교환 예시</a>
+</h2>
+<div id="DelegationRequest">
+<section id="section-a.2.1">
+<h3 id="name-token-exchange-request-4">
+<a href="#section-a.2.1">A.2.1. </a><a href="#name-token-exchange-request-4">토큰 교환 요청</a>
+</h3>
+<p id="section-a.2.1-1">
+다음 토큰 교환 요청에서 client는 토큰을 요청하면서 <code>subject_token</code>과 <code>actor_token</code>을 모두 제공한다. client는 논리 이름이 <code>urn:example:cooperation-context</code>인 대상 서비스에서 사용할 토큰이 필요하다고 authorization server에 알린다. authorization server의 정책에 따라 발급되는 토큰은 composite token이어야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.2.1-1">¶</a></p>
+<span id="name-token-exchange-request-5"></span><div id="DelegationRequestEx">
+<figure id="figure-14">
+<div id="section-a.2.1-2.1">
+<div><pre>
+ POST /as/token.oauth2 HTTP/1.1
+ Host: as.example.com
+ Content-Type: application/x-www-form-urlencoded
+
+ grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange
+ &amp;audience=urn%3Aexample%3Acooperation-context
+ &amp;subject_token=eyJhbGciOiJFUzI1NiIsImtpZCI6IjE2In0.eyJhdWQiOiJodHRwc
+   zovL2FzLmV4YW1wbGUuY29tIiwiaXNzIjoiaHR0cHM6Ly9vcmlnaW5hbC1pc3N1ZXI
+   uZXhhbXBsZS5uZXQiLCJleHAiOjE0NDE5MTAwNjAsInNjb3BlIjoic3RhdHVzIGZlZ
+   WQiLCJzdWIiOiJ1c2VyQGV4YW1wbGUubmV0IiwibWF5X2FjdCI6eyJzdWIiOiJhZG1
+   pbkBleGFtcGxlLm5ldCJ9fQ.4rPRSWihQbpMIgAmAoqaJojAxj-p2X8_fAtAGTXrvM
+   xU-eEZHnXqY0_AOZgLdxw5DyLzua8H_I10MCcckF-Q_g
+ &amp;subject_token_type=urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Ajwt
+ &amp;actor_token=eyJhbGciOiJFUzI1NiIsImtpZCI6IjE2In0.eyJhdWQiOiJodHRwczo
+   vL2FzLmV4YW1wbGUuY29tIiwiaXNzIjoiaHR0cHM6Ly9vcmlnaW5hbC1pc3N1ZXIuZ
+   XhhbXBsZS5uZXQiLCJleHAiOjE0NDE5MTAwNjAsInN1YiI6ImFkbWluQGV4YW1wbGU
+   ubmV0In0.7YQ-3zPfhUvzje5oqw8COCvN5uP6NsKik9CVV6cAOf4QKgM-tKfiOwcgZ
+   oUuDL2tEs6tqPlcBlMjiSzEjm3yBg
+ &amp;actor_token_type=urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Ajwt
+</pre></div>
+</div>
+<figcaption><a href="#figure-14">그림 14</a>:
+<a href="#name-token-exchange-request-5">토큰 교환 요청</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="DelegationSubjectClaims">
+<section id="section-a.2.2">
+<h3 id="name-subject-token-claims-3">
+<a href="#section-a.2.2">A.2.2. </a><a href="#name-subject-token-claims-3">subject token의 claim</a>
+</h3>
+<p id="section-a.2.2-1">
+앞선 요청의 <code>subject_token</code>은 JWT이며, 디코딩한 JWT Claims Set을 여기에 제시한다. 이 JWT는 정해진 만료 시각 전에 authorization server가 사용하도록 만들어졌다. 새 토큰은 JWT의 대상(<code>user@example.net</code>)을 대신하여 요청한 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.2.2-1">¶</a></p>
+<span id="name-subject-token-claims-4"></span><div id="DelegationSubjectClaimsEx">
+<figure id="figure-15">
+<div id="section-a.2.2-2.1">
+<pre>
+  {
+    "aud":"https://as.example.com",
+    "iss":"https://original-issuer.example.net",
+    "exp":1441910060,
+    "scope":"status feed",
+    "sub":"user@example.net",
+    "may_act":
+    {
+      "sub":"admin@example.net"
+    }
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-15">그림 15</a>:
+<a href="#name-subject-token-claims-4">subject token의 claim</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="DelegationActorClaims">
+<section id="section-a.2.3">
+<h3 id="name-actor-token-claims">
+<a href="#section-a.2.3">A.2.3. </a><a href="#name-actor-token-claims">actor token의 claim</a>
+</h3>
+<p id="section-a.2.3-1">
+앞선 요청의 <code>actor_token</code>은 JWT이며, 디코딩한 JWT Claims Set을 여기에 제시한다. 이 JWT 역시 정해진 만료 시각 전에 authorization server가 사용하도록 만들어졌다. JWT의 대상(<code>admin@example.net</code>)은 요청 중인 security token을 사용할 actor다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.2.3-1">¶</a></p>
+<span id="name-actor-token-claims-2"></span><div id="DelegationActorClaimsEx">
+<figure id="figure-16">
+<div id="section-a.2.3-2.1">
+<pre>
+  {
+    "aud":"https://as.example.com",
+    "iss":"https://original-issuer.example.net",
+    "exp":1441910060,
+    "sub":"admin@example.net"
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-16">그림 16</a>:
+<a href="#name-actor-token-claims-2">actor token의 claim</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="DelegationResponse">
+<section id="section-a.2.4">
+<h3 id="name-token-exchange-response-4">
+<a href="#section-a.2.4">A.2.4. </a><a href="#name-token-exchange-response-4">토큰 교환 응답</a>
+</h3>
+<p id="section-a.2.4-1">
+<code>access_token</code> 매개변수는 아래에 제시한 토큰 교환 응답의 일부이며, client가 요청한 새 토큰을 담고 있다. 응답의 다른 매개변수는 이 토큰이 1시간 후 만료되는 JWT이며, 발급된 토큰이 access token이 아니므로 access token 유형은 적용되지 않음을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.2.4-1">¶</a></p>
+<span id="name-token-exchange-response-5"></span><div id="DelegationResponseEx">
+<figure id="figure-17">
+<div id="section-a.2.4-2.1">
+<div><pre>
+ HTTP/1.1 200 OK
+ Content-Type: application/json
+ Cache-Control: no-cache, no-store
+
+ {
+  "access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6IjcyIn0.eyJhdWQiOiJ1cm4
+    6ZXhhbXBsZTpjb29wZXJhdGlvbi1jb250ZXh0IiwiaXNzIjoiaHR0cHM6Ly9hcy5l
+    eGFtcGxlLmNvbSIsImV4cCI6MTQ0MTkxMzYxMCwic2NvcGUiOiJzdGF0dXMgZmVlZ
+    CIsInN1YiI6InVzZXJAZXhhbXBsZS5uZXQiLCJhY3QiOnsic3ViIjoiYWRtaW5AZX
+    hhbXBsZS5uZXQifX0.3paKl9UySKYB5ng6_cUtQ2qlO8Rc_y7Mea7IwEXTcYbNdwG
+    9-G1EKCFe5fW3H0hwX-MSZ49Wpcb1SiAZaOQBtw",
+  "issued_token_type":"urn:ietf:params:oauth:token-type:jwt",
+  "token_type":"N_A",
+  "expires_in":3600
+ }
+</pre></div>
+</div>
+<figcaption><a href="#figure-17">그림 17</a>:
+<a href="#name-token-exchange-response-5">토큰 교환 응답</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="DelegationIssuedClaims">
+<section id="section-a.2.5">
+<h3 id="name-issued-token-claims-3">
+<a href="#section-a.2.5">A.2.5. </a><a href="#name-issued-token-claims-3">발급된 토큰의 claim</a>
+</h3>
+<p id="section-a.2.5-1">
+발급된 토큰의 JWT Claims Set을 디코딩한 결과는 아래와 같다. 새 JWT는 authorization server가 발급하며, 논리 이름이 <code>urn:example:cooperation-context</code>인 시스템 주체가 만료 전까지 언제든 사용할 수 있도록 만들어졌다. JWT의 대상(<code>sub</code>)은 요청에 사용한 <code>subject_token</code>의 대상과 같다. JWT의 actor(<code>act</code>)는 요청에 사용한 <code>actor_token</code>의 대상과 같다. 이는 delegation을 나타내며, 현재 actor인 <code>admin@example.net</code>에게 <code>user@example.net</code>을 대신해 행동할 권한이 위임되었음을 보여 준다.<a aria-label="문단 링크" class="st-permalink" href="#section-a.2.5-1">¶</a></p>
+<span id="name-issued-token-claims-4"></span><div id="DelegationIssuedClaimsEx">
+<figure id="figure-18">
+<div id="section-a.2.5-2.1">
+<pre>
+  {
+    "aud":"urn:example:cooperation-context",
+    "iss":"https://as.example.com",
+    "exp":1441913610,
+    "scope":"status feed",
+    "sub":"user@example.net",
+    "act":
+    {
+      "sub":"admin@example.net"
+    }
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-18">그림 18</a>:
+<a href="#name-issued-token-claims-4">발급된 토큰의 claim</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="Acknowledgements">
+<section id="section-appendix.b">
+<h2 id="name-acknowledgements">
+<a href="#name-acknowledgements">감사의 말</a>
+</h2>
+<p id="section-appendix.b-1">
+이 명세는 수십 명의 참여자가 열의를 갖고 활발히 활동하는 OAuth 작업반에서 개발되었다. <span>Hannes Tschofenig</span>, <span>Derek  Atkins</span>, <span>Rifaat Shekh-Yusef</span>가 의장을 맡아 명세 작성을 이끌었으며, <span>Kathleen Moriarty</span>, <span>Stephen  Farrell</span>, <span>Eric Rescorla</span>, <span>Roman  Danyliw</span>, <span>Benjamin Kaduk</span>가 보안 영역 책임자(Security Area Director)를 맡았다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.b-1">¶</a></p>
+<p id="section-appendix.b-2">
+다음 사람들은 이 명세에 아이디어를 제안하고 피드백과 문구를 제공했다.
+<span>Caleb Baker</span>,
+  <span>Vittorio Bertocci</span>,
+        <span>Mike Brown</span>,
+  <span>Thomas Broyer</span>,
+        <span>Roman Danyliw</span>,
+ <span>William Denniss</span>,
+  <span>Vladimir Dzhuvinov</span>,
+        <span>Eric Fazendin</span>,
+ <span>Phil Hunt</span>,
+  <span>Benjamin Kaduk</span>,
+ <span>Jason Keglovitz</span>,
+  <span>Torsten Lodderstedt</span>,
+        <span>Barry Leiba</span>,
+  <span>Adam Lewis</span>,
+  <span>James Manger</span>,
+  <span>Nov Matake</span>,
+ <span>Matt Miller</span>,
+        <span>Hilarie Orman</span>,
+ <span>Matthew Perry</span>,
+  <span>Eric Rescorla</span>,
+ <span>Justin Richer</span>,
+<span>Adam Roach</span>,
+  <span>Rifaat Shekh-Yusef</span>,
+ <span>Scott Tomilson</span>,
+<span>Hannes Tschofenig</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.b-2">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="section-appendix.c">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Michael B. Jones</span></div>
+<div dir="auto"><span>Microsoft</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:mbj@microsoft.com">mbj@microsoft.com</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="https://self-issued.info/">https://self-issued.info/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Anthony Nadalin</span></div>
+<div dir="auto"><span>Microsoft</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:tonynad@microsoft.com">tonynad@microsoft.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Brian Campbell (<span>편집자</span>)</span></div>
+<div dir="auto"><span>Ping Identity</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:brian.d.campbell@gmail.com">brian.d.campbell@gmail.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>John Bradley</span></div>
+<div dir="auto"><span>Yubico</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:ve7jtb@ve7jtb.com">ve7jtb@ve7jtb.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Chuck Mortimore</span></div>
+<div dir="auto"><span>Visa</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:chuck.mortimore@visa.com">chuck.mortimore@visa.com</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 8693</td>
+<td>OAuth 2.0 토큰 교환</td>
+<td>2020년 1월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Jones, et al.</td>
+<td>표준 트랙</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents"><a href="#name-table-of-contents">목차</a></h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>. <a href="#name-introduction">서론</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>. <a href="#name-delegation-vs-impersonation">delegation과 impersonation의 의미 차이</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.1.2.2">
+<p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2">1.2</a>. <a href="#name-requirements-notation-and-c">요구사항 표기법과 규칙</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.1.2.3">
+<p id="section-toc.1-1.1.2.3.1"><a href="#section-1.3">1.3</a>. <a href="#name-terminology">용어</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.3.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>. <a href="#name-token-exchange-request-and-">토큰 교환 요청과 응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1">
+<p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1">2.1</a>. <a href="#name-request">요청</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1.2.1">
+<p id="section-toc.1-1.2.2.1.2.1.1"><a href="#section-2.1.1">2.1.1</a>. <a href="#name-relationship-between-resour">resource, audience, scope(권한 범위)의 관계</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.2.1.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2.2.2">
+<p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2">2.2</a>. <a href="#name-response">응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.2.2.1">
+<p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1">2.2.1</a>. <a href="#name-successful-response">성공 응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.2.2.2.2.2">
+<p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2">2.2.2</a>. <a href="#name-error-response">오류 응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2.2.3">
+<p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3">2.3</a>. <a href="#name-example-token-exchange">토큰 교환 예시</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.3.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>. <a href="#name-token-type-identifiers">토큰 유형 식별자</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>. <a href="#name-json-web-token-claims-and-i">JSON Web Token claim(클레임) 및 Introspection 응답 매개변수</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.4.2.1">
+<p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1">4.1</a>. <a href="#name-act-actor-claim">"act"(actor(행위 주체)) claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.4.2.2">
+<p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2">4.2</a>. <a href="#name-scope-scopes-claim">"scope"(scope) claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.4.2.3">
+<p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3">4.3</a>. <a href="#name-client_id-client-identifier">"client_id"(client(클라이언트) 식별자) claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.4.2.4">
+<p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4">4.4</a>. <a href="#name-may_act-authorized-actor-cl">"may_act"(인가된 actor) claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.2.4.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>. <a href="#name-security-considerations">보안 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.5.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>. <a href="#name-privacy-considerations">개인정보 보호 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#section-7">7</a>. <a href="#name-iana-considerations">IANA 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.7.2.1">
+<p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1">7.1</a>. <a href="#name-oauth-uri-registration">OAuth URI 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.2">
+<p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2">7.2</a>. <a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.3">
+<p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3">7.3</a>. <a href="#name-oauth-access-token-type-reg">OAuth access token(액세스 토큰) 유형 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.4">
+<p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4">7.4</a>. <a href="#name-json-web-token-claims-regis">JSON Web Token claim 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.5">
+<p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5">7.5</a>. <a href="#name-oauth-token-introspection-r">OAuth 토큰 Introspection 응답 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.5.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#section-8">8</a>. <a href="#name-references">참고문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.8.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.8.2.1">
+<p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1">8.1</a>. <a href="#name-normative-references">규범 참고문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.8.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.8.2.2">
+<p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2">8.2</a>. <a href="#name-informative-references">참고용 문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.8.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.9">
+<p id="section-toc.1-1.9.1"><a href="#section-appendix.a">부록 A</a>. <a href="#name-additional-token-exchange-e">추가 토큰 교환 예시</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.1">
+<p id="section-toc.1-1.9.2.1.1"><a href="#section-a.1">A.1</a>. <a href="#name-impersonation-token-exchang">impersonation 토큰 교환 예시</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.1.2.1">
+<p id="section-toc.1-1.9.2.1.2.1.1"><a href="#section-a.1.1">A.1.1</a>. <a href="#name-token-exchange-request-2">토큰 교환 요청</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.1.2.2">
+<p id="section-toc.1-1.9.2.1.2.2.1"><a href="#section-a.1.2">A.1.2</a>. <a href="#name-subject-token-claims">subject token의 claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.1.2.3">
+<p id="section-toc.1-1.9.2.1.2.3.1"><a href="#section-a.1.3">A.1.3</a>. <a href="#name-token-exchange-response-2">토큰 교환 응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.1.2.4">
+<p id="section-toc.1-1.9.2.1.2.4.1"><a href="#section-a.1.4">A.1.4</a>. <a href="#name-issued-token-claims">발급된 토큰의 claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.2.4.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.9.2.2">
+<p id="section-toc.1-1.9.2.2.1"><a href="#section-a.2">A.2</a>. <a href="#name-delegation-token-exchange-e">delegation 토큰 교환 예시</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.2.2.1">
+<p id="section-toc.1-1.9.2.2.2.1.1"><a href="#section-a.2.1">A.2.1</a>. <a href="#name-token-exchange-request-4">토큰 교환 요청</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2.2.2">
+<p id="section-toc.1-1.9.2.2.2.2.1"><a href="#section-a.2.2">A.2.2</a>. <a href="#name-subject-token-claims-3">subject token의 claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2.2.3">
+<p id="section-toc.1-1.9.2.2.2.3.1"><a href="#section-a.2.3">A.2.3</a>. <a href="#name-actor-token-claims">actor token의 claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2.2.4">
+<p id="section-toc.1-1.9.2.2.2.4.1"><a href="#section-a.2.4">A.2.4</a>. <a href="#name-token-exchange-response-4">토큰 교환 응답</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.2.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2.2.5">
+<p id="section-toc.1-1.9.2.2.2.5.1"><a href="#section-a.2.5">A.2.5</a>. <a href="#name-issued-token-claims-3">발급된 토큰의 claim</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.2.5.1">¶</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.10">
+<p id="section-toc.1-1.10.1"><a href="#section-appendix.b"></a><a href="#name-acknowledgements">감사의 말</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.10.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.11">
+<p id="section-toc.1-1.11.1"><a href="#section-appendix.c"></a><a href="#name-authors-addresses">저자 연락처</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.11.1">¶</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc8693">공식 원문</a></footer></article></main></body></html>

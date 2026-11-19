@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "b2da4a038cb2ac3b670897508112ac2623dfaa558a2b3fef457147f2a45e1708",
+  "verdict": "pass",
+  "evidence": "Opened all 35 current plugin QA tiles at widths 1440, 768 and 390, plus overlapping full-height reader tiles and opened TOC, metadata and source notes at all widths. Checked 18 HTTP/JSON/JWT figures and captions, desktop definition columns and mobile stacked fields, IANA list and reference wraps, appendix, authors and final edge. Prose 18/18/16px with 1.75 line height. Inspected all 18 mobile literal right-edge states: long text is reachable within its own scroll region; no document-wide clipping, broken glyphs or missing panel content. Original paragraph anchors remain visible in low contrast; nonblocking."
+}

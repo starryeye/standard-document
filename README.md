@@ -42,6 +42,12 @@
 
 보관본의 상단 안내는 공개 페이지에만 추가했습니다. 원래 검수 바이트는 [검수 원본](rfc/rfc7009/reviewed.html)으로 보존하며, [공개판과 검수 원본의 해시](rfc/rfc7009/publication.json)를 따로 확인할 수 있습니다.
 
+### RFC 8693 — OAuth 2.0 Token Exchange
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc8693/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8693/) · [번역자 주와 정오표](https://starryeye.github.io/standard-document/rfc/rfc8693/translator-note.html) · [공식 원문](https://www.rfc-editor.org/rfc/rfc8693.html)
+
+2020년 1월 발행본의 비공식 한국어 번역입니다. 보고 단계의 정오표는 본문을 바꾸지 않고 별도로 안내합니다.
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
