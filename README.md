@@ -32,6 +32,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9068/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9068/) · [번역자 주와 원문 대조](https://starryeye.github.io/standard-document/rfc/rfc9068/translator-note.html) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9068)
 
+### RFC 7662 — OAuth 2.0 Token Introspection
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc7662/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7662/) · [번역자 주와 정오표](https://starryeye.github.io/standard-document/rfc/rfc7662/translator-note.html) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc7662)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)

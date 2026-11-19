@@ -1,0 +1,782 @@
+{
+  "schema_version": "1.0",
+  "format": "reviewed-reading-edition",
+  "tool": {
+    "name": "supertranslator",
+    "version": "0.12.1"
+  },
+  "source_url": "https://datatracker.ietf.org/doc/rfc7662/",
+  "qa_status": "passed",
+  "input_html_sha256": "b667a74a1f4890306a81f6a203e6206beb50564233e0b13cbf557dfba3b53a28",
+  "input_manifest_sha256": "701f8b8b58f896d51f6699d5c3f15352746219516abcd350484359af9fdb519b",
+  "reader_review_sha256": "2d758f9b396755869c4857e0b5700016b0002df2af732e6a25852973e2d3514b",
+  "html_sha256": "7fcc5bcae4f22d58de368ac9db52df067c1f49d89349a23e366bbc5b085e05a3",
+  "article_sha256": "1eb5db3cc68030f8509e368f9a5ff9ef0591abf3ae256af41a730c56deecb3d9",
+  "stylesheet_sha256": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+  "asset_sha256": {
+    "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+    "assets/2f91dcb31b5e6a73.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
+    "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+    "assets/83824260e30146ac.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+    "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+    "assets/cb703bef198b7702.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+    "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+    "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+    "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+    "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+    "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+    "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+    "assets/132ed25d6598d436.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+    "assets/reader.css": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+    "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+    "assets/675c90a7d88a7108.css": "b34028766f32f2bebfc8400180edf656d4dc1f1ee8ff3e06ce71397a4e989caf",
+    "assets/wt-preformatted-14edac915a1f0158.css": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072",
+    "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+    "assets/5cf3e46e391a9dfc.css": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
+    "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+    "assets/c953a4f1e6ee0c16.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+    "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+    "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+    "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+    "assets/1150558bdc86c743.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+    "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+    "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+    "assets/b10f6a2fbfd3aaa7.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+    "assets/5e1d42de3a140c1e.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+  },
+  "transformations": {
+    "removals": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+        "text_sha256": "a45d7ad100c6afc1c315cc869519b887c6d16b02f54465d74b827e1a6a9481a3",
+        "reason": "Authentic paired author/date, standards-stream and ISSN metadata"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000023\"]",
+        "text_sha256": "41e17be1b5783d6dc8aa7810ab8544a6e0d806e263cc71321685946e3d538f45",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000024\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000026\"]",
+        "text_sha256": "d3de6299936263635738c6f58b5e4fc6b39b9a025788139173fe2e590735dd52",
+        "reason": "Dotted print TOC with page numbers and live original section links; preserve with derived navigation"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000034\"]",
+        "text_sha256": "c09089d1e3ebccc0b84476790036e052898f57fb454e1543d698451a34f9ca81",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000035\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000063\"]",
+        "text_sha256": "d068c08a7e01fdd2340f15039039b742b0b12619f1ec6ff57b66bfc3477cb617",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000064\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000082\"]",
+        "text_sha256": "6f0520bcfb178d3be24213f33e1f23189cc79a51b5f51e94842b30f5af3fda35",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000083\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000101\"]",
+        "text_sha256": "67f950385e97337ccfe74694a4891b8a0bc2fc52d6b6d3e5e3e21d52951d0a1c",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000102\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000132\"]",
+        "text_sha256": "86b00e26002f2a636840e62b989c09afb002cb7544eb4329eb71a7ace4436d08",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000133\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000153\"]",
+        "text_sha256": "19b73e070a5cbf8b7367ca44ddd49ad2ce540a47f9642e9f77b6702ce313512d",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000154\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000172\"]",
+        "text_sha256": "793f91e15f1996e1c9e862e60096da57b1faa98f26b47c0f686be7a0053c0130",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000173\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000193\"]",
+        "text_sha256": "7d04d375aac0884d2a58a7454ec1b523be3b63bbe6b07bcc53a7018e38bb7bbc",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000194\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000229\"]",
+        "text_sha256": "9aa6085cf15656af674c1dde4f4b988787d9cd58367c0b196ac24b93a2a7fcfb",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000230\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000272\"]",
+        "text_sha256": "6f581b70d13ba0787bfa41a9821f7d31bf65dbeb6d3caa46bafc52224bc22539",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000273\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000294\"]",
+        "text_sha256": "e6af6e34ef5153c8d9be614b6b1b8f4ae7a1f685fc774363425f055962b71008",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000295\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000307\"]",
+        "text_sha256": "085a07384a15c32a122383eabd6bf66d7a96581a4ad116f8cf27768a05545de6",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000308\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000322\"]",
+        "text_sha256": "6bfb950577e160fd4081cf3035e5b52853e3d5afbcdf61cb02f7faab67a9148c",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000323\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000347\"]",
+        "text_sha256": "7e8b26d8785ab2f0bb02ddee1e5550a530f67cd14cd242a5d8b38543f310f097",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000348\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000358\"]",
+        "text_sha256": "ba05c75f9837c94c5750848a0002c2c021e161268b8cf434f6cc3a477b1a7adc",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000359\"]",
+        "text_sha256": "a8902f30758ccfe7cde84b23d4a34bfb06f83d67aef3953a867bbf29965cb5a8",
+        "reason": "Repeated page header separates physical pages, not article prose"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000373\"]",
+        "text_sha256": "3a0b12e1187740ec283250fdde65c6c1c5a2188821ac6b87fa2ebce6497dbc75",
+        "reason": "Repeated author/standards track/page footer, not article prose"
+      }
+    ],
+    "joins": [
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000032\"]",
+          "[data-wt-preformatted-block=\"block-000037\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000061\"]",
+          "[data-wt-preformatted-block=\"block-000066\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000080\"]",
+          "[data-wt-preformatted-block=\"block-000085\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000292\"]",
+          "[data-wt-preformatted-block=\"block-000297\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000305\"]",
+          "[data-wt-preformatted-block=\"block-000310\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000053\"]",
+          "[data-wt-preformatted-block=\"block-000054\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000056\"]",
+          "[data-wt-preformatted-block=\"block-000057\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000074\"]",
+          "[data-wt-preformatted-block=\"block-000075\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000077\"]",
+          "[data-wt-preformatted-block=\"block-000078\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000108\"]",
+          "[data-wt-preformatted-block=\"block-000109\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000111\"]",
+          "[data-wt-preformatted-block=\"block-000112\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000114\"]",
+          "[data-wt-preformatted-block=\"block-000115\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000117\"]",
+          "[data-wt-preformatted-block=\"block-000118\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000120\"]",
+          "[data-wt-preformatted-block=\"block-000121\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000123\"]",
+          "[data-wt-preformatted-block=\"block-000124\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000126\"]",
+          "[data-wt-preformatted-block=\"block-000127\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000129\"]",
+          "[data-wt-preformatted-block=\"block-000130\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000135\"]",
+          "[data-wt-preformatted-block=\"block-000136\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000138\"]",
+          "[data-wt-preformatted-block=\"block-000139\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000141\"]",
+          "[data-wt-preformatted-block=\"block-000142\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000144\"]",
+          "[data-wt-preformatted-block=\"block-000145\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000198\"]",
+          "[data-wt-preformatted-block=\"block-000199\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000201\"]",
+          "[data-wt-preformatted-block=\"block-000202\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000204\"]",
+          "[data-wt-preformatted-block=\"block-000205\"]"
+        ]
+      },
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000207\"]",
+          "[data-wt-preformatted-block=\"block-000208\"]"
+        ]
+      }
+    ],
+    "heading_levels": {},
+    "list_items": []
+  },
+  "text_edits": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000108\"]",
+      "input_html_sha256": "12fceb742c4d186388edc870710d5964546afc096c94c97e804a789e57e51a89",
+      "replacement_html": "active <span></span>REQUIRED. 제시된 토큰이 현재 활성 상태인지 나타내는 Boolean 값이다. 토큰이 \"active\" 상태인지 판단하는 구체적인 기준은 authorization server의 구현과 이 서버가 토큰에 대해 보관하는 정보에 따라 달라진다. 그러나 일반적으로 \"active\" 속성의 반환 값이 \"true\"이면 해당 토큰을 이 authorization server가 발급했고, resource owner가 철회하지 않았으며, 정해진 유효 시간 범위(예: 발급 시각이 지난 뒤, 만료 시각 이전) 내에 있음을 뜻한다. 이러한 확인 절차의 구현에 대해서는 4절을 참조한다.",
+      "source_text": "after its issuance time and before its expiration time",
+      "evidence": "Reviewed against RFC 7662 §2.2, 2015 edition, physical p. 6 lines 16–18. After excludes the exact issuance instant in the illustrative validity window. The revision only disambiguates Korean phrasing, and does not change the condition, example status, expiration, optional/required fields, or §4 caching rule."
+    }
+  ],
+  "presentation": {
+    "toc_selectors": [],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000053\"]",
+        "term_end": 19,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000056\"]",
+        "term_end": 22,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000074\"]",
+        "term_end": 5,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000077\"]",
+        "term_end": 15,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000108\"]",
+        "term_end": 6,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000111\"]",
+        "term_end": 5,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000114\"]",
+        "term_end": 9,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000117\"]",
+        "term_end": 8,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000120\"]",
+        "term_end": 10,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000123\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000126\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000129\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000135\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000138\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000141\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000144\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000198\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000201\"]",
+        "term_end": 3,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000204\"]",
+        "term_end": 9,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000207\"]",
+        "term_end": 6,
+        "evidence": "Original term on a separate line directly above its own indented definition."
+      }
+    ],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000214\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000215\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000216\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000217\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000219\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000220\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000221\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000222\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000224\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000225\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000226\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000227\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000232\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000233\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000234\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000235\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000237\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000238\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000239\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000240\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000242\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000243\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000244\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000245\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000247\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000248\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000249\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000250\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000252\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000253\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000254\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000255\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000257\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000258\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000259\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000260\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000262\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000263\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000264\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000265\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000267\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000268\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000269\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000270\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000275\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000276\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000277\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000278\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive legacy o-marked fields of one initial registry entry."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000284\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000285\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000286\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000287\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000288\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Five consecutive legacy o-marked checks in the §4 security considerations."
+      }
+    ]
+  },
+  "render_input_sha256": "fa80f7f39d80d5a8352b6182eec2a6d941d54cf230c050a3a6d292a465b6cea2",
+  "browser_qa_sha256": "ab9fb99c7fd38cf37aabbd7f04c1e81d018545d350ca1a59dca02cfbbf62c3a8"
+}
