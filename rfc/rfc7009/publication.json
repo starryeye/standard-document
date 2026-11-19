@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "public_html": {
+    "path": "index.html",
+    "sha256": "9bf82ea0039101963f2663f2bb3a73bfea818d695fa6ac767b05feaef9a4b93b"
+  },
+  "reviewed_html": {
+    "path": "reviewed.html",
+    "sha256": "75fe5bfca0a0aeb678a6b10e06114f071eee820957093f5becafd3552fda39d8"
+  },
+  "article": {
+    "path": "article.html",
+    "sha256": "9503b248b5dae35e09290705353491a0305b5d619b92f6c1a4c9be3ece23913d"
+  },
+  "note": "The public wrapper adds reading guidance before the exact reviewed article. The reader manifest applies to reviewed.html (the original index.html bytes)."
+}

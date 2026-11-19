@@ -1,6 +1,6 @@
 {
-  "html_sha256": "1e167a5d743941faa46d8932bbb0c38e02257ea04a25887192242a6e3930aa68",
-  "render_input_sha256": "6fab951acc7be2c2c3b9ba5be762e16437102733a391143a38e6acde22611577",
+  "html_sha256": "75fe5bfca0a0aeb678a6b10e06114f071eee820957093f5becafd3552fda39d8",
+  "render_input_sha256": "92a1e2c868c0e1a8b611f65701eb191a6a361830e0bef4d7253379699065c9ab",
   "automated_status": "passed",
   "visual_status": "passed",
   "viewports": {
@@ -202,7 +202,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 10720
+      "documentHeight": 10751
     },
     "768": {
       "minFont": 18,
@@ -402,7 +402,7 @@
           "overflow": "auto"
         }
       ],
-      "documentHeight": 10720
+      "documentHeight": 10751
     },
     "390": {
       "minFont": 16,
@@ -624,7 +624,7 @@
       },
       {
         "path": "reader-screenshots/1440-0004.png",
-        "y": 7720,
+        "y": 7751,
         "height": 3000
       }
     ],
@@ -646,7 +646,7 @@
       },
       {
         "path": "reader-screenshots/768-0004.png",
-        "y": 7720,
+        "y": 7751,
         "height": 3000
       }
     ],
@@ -678,5 +678,5 @@
       }
     ]
   },
-  "visual_review_sha256": "83505bca6cf64c1fcc71fe0676c1d4f339adceb9c6b9c656dc3014bea51f8c05"
+  "visual_review_sha256": "8366123bb76e23101c0198735da8fc3e63ecd65547ec5c2c61059182c95dfc6a"
 }

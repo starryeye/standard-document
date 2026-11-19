@@ -40,6 +40,8 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc7009/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7009/) · [번역자 주와 원문 대조](https://starryeye.github.io/standard-document/rfc/rfc7009/translator-note.html) · [공식 원문](https://www.rfc-editor.org/rfc/rfc7009.html)
 
+보관본의 상단 안내는 공개 페이지에만 추가했습니다. 원래 검수 바이트는 [검수 원본](rfc/rfc7009/reviewed.html)으로 보존하며, [공개판과 검수 원본의 해시](rfc/rfc7009/publication.json)를 따로 확인할 수 있습니다.
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
@@ -63,7 +65,7 @@ RFC 8414도 기존 AI 번역을 재사용했습니다. §5의 예상 표현 한 
 ## 공개 범위와 검증 기록
 
 - 완료된 RFC의 HTML, 필요한 정적 자산, 검토 보고서와 공개용 `manifest.json`만 포함합니다.
-- HTML·본문 조각·스타일과 자산은 검토가 끝난 읽기용 산출물과 바이트가 동일합니다. 렌더링 승인은 HTML·CSS·그림 해시 전체에 결합됩니다. 큰 화면 타일은 저장소에 포함하지 않으며, 원래 증거와 실행 기록은 로컬에 보존합니다.
+- 검수 원본 HTML·본문 조각·스타일과 자산은 검토가 끝난 읽기용 산출물과 바이트가 동일합니다. 공개용 안내를 따로 추가한 곳은 해당 문서에서 공개 페이지와 검수 원본을 구분합니다. 렌더링 승인은 HTML·CSS·그림 해시 전체에 결합됩니다. 큰 화면 타일은 저장소에 포함하지 않으며, 원래 증거와 실행 기록은 로컬에 보존합니다.
 - `input-*` 보고서는 이전 번역의 검토 기록입니다. 현재 편집 검토와 혼동하지 않도록 별도로 보존합니다. 이번 변경은 새 전면 번역이나 새 의미 검토가 아닙니다.
 - 작업 중인 번역, 실패한 실행, 로컬 환경·에이전트 기록, 상용 책 PDF는 포함하지 않습니다.
 - 후속 문서를 자동으로 번역하거나 게시하지 않습니다.

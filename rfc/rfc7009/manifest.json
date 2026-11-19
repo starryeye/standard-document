@@ -9,9 +9,9 @@
   "qa_status": "passed",
   "input_html_sha256": "a691f5a39f02ea06fa46ab107f92cadf39e0808d15b6ecef3634c6d772aad4a7",
   "input_manifest_sha256": "746b9745ea93586644c05837e3a7963c8e9a225390fb5c94679b97b1f2d96069",
-  "reader_review_sha256": "7be64bb01c5ee79b0100d21f0b8cf611a979b522373a13b3fc83740858434ac2",
-  "html_sha256": "1e167a5d743941faa46d8932bbb0c38e02257ea04a25887192242a6e3930aa68",
-  "article_sha256": "0a626cf2ef467a8b8b2432576f28f2934e00e9391d9b79d01f0ca9fd07db6be3",
+  "reader_review_sha256": "b82014840e78cb4de369c37a34d8b15edbf1413b6e9a8e0a03fae02009c42430",
+  "html_sha256": "75fe5bfca0a0aeb678a6b10e06114f071eee820957093f5becafd3552fda39d8",
+  "article_sha256": "9503b248b5dae35e09290705353491a0305b5d619b92f6c1a4c9be3ece23913d",
   "stylesheet_sha256": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
   "asset_sha256": {
     "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
@@ -173,7 +173,15 @@
     "heading_levels": {},
     "list_items": []
   },
-  "text_edits": [],
+  "text_edits": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000193\"]",
+      "input_html_sha256": "96fa90af54df49e1464bc25365752d0854f4e10c13d6a53c34c1606db609d506",
+      "replacement_html": "악의적인 client는 새로운 endpoint를 이용하여 authorization server에 서비스 거부 공격을 가하려고 시도할 수 있다. 적절한 대응책을 revocation endpoint에 반드시 적용해야 한다(MUST) ([RFC6819]의 4.4.1.11절 참조). token endpoint에도 이러한 대응책을 마련하는 것이 좋다. 특히, 유효하지 않은 token type hint는 <span></span>authorization server를 잘못 유도하여 추가 database 조회를 유발할 수 있다. 악의적인 client가 이 기능을 악용하여 서비스 거부 공격을 가하지 못하도록 반드시 주의를 기울여야 한다(MUST).",
+      "source_text": "Appropriate countermeasures, which should be in place for the token endpoint as well, MUST be applied to the revocation endpoint (see [RFC6819], Section 4.4.1.11).",
+      "evidence": "RFC 7009 (2013) §5, print p.9. The recommendation for the token endpoint and the mandatory requirement for the revocation endpoint have distinct scopes. Splitting the sentence restores readability without changing either force or moving the RFC 6819 citation away from the mandatory revocation-endpoint countermeasure. Both DoS statements and the joined p.10 continuation remain unchanged."
+    }
+  ],
   "presentation": {
     "toc_selectors": [],
     "metadata_selectors": [],
@@ -261,6 +269,6 @@
       }
     ]
   },
-  "render_input_sha256": "6fab951acc7be2c2c3b9ba5be762e16437102733a391143a38e6acde22611577",
-  "browser_qa_sha256": "a59fb0c9ce811b38f5479b7e68dee1f93f3e801701155d2281b97bdb7f1cbb50"
+  "render_input_sha256": "92a1e2c868c0e1a8b611f65701eb191a6a361830e0bef4d7253379699065c9ab",
+  "browser_qa_sha256": "0af7d8664c1089bc2902943e82f6edacf6fe980ec53bc601ed037747f14ad04b"
 }

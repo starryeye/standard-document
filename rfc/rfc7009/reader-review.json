@@ -216,5 +216,14 @@
         "evidence": "Exactly two adjacent source asterisk bullets enumerate the two token_type_hint values; both are at the same indentation level."
       }
     ]
-  }
+  },
+  "text_edits": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000193\"]",
+      "input_html_sha256": "96fa90af54df49e1464bc25365752d0854f4e10c13d6a53c34c1606db609d506",
+      "replacement_html": "악의적인 client는 새로운 endpoint를 이용하여 authorization server에 서비스 거부 공격을 가하려고 시도할 수 있다. 적절한 대응책을 revocation endpoint에 반드시 적용해야 한다(MUST) ([RFC6819]의 4.4.1.11절 참조). token endpoint에도 이러한 대응책을 마련하는 것이 좋다. 특히, 유효하지 않은 token type hint는 <span></span>authorization server를 잘못 유도하여 추가 database 조회를 유발할 수 있다. 악의적인 client가 이 기능을 악용하여 서비스 거부 공격을 가하지 못하도록 반드시 주의를 기울여야 한다(MUST).",
+      "source_text": "Appropriate countermeasures, which should be in place for the token endpoint as well, MUST be applied to the revocation endpoint (see [RFC6819], Section 4.4.1.11).",
+      "evidence": "RFC 7009 (2013) §5, print p.9. The recommendation for the token endpoint and the mandatory requirement for the revocation endpoint have distinct scopes. Splitting the sentence restores readability without changing either force or moving the RFC 6819 citation away from the mandatory revocation-endpoint countermeasure. Both DoS statements and the joined p.10 continuation remain unchanged."
+    }
+  ]
 }
