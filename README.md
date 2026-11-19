@@ -36,6 +36,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc7662/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7662/) · [번역자 주와 정오표](https://starryeye.github.io/standard-document/rfc/rfc7662/translator-note.html) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc7662)
 
+### RFC 7009 — OAuth 2.0 Token Revocation
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc7009/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7009/) · [번역자 주와 원문 대조](https://starryeye.github.io/standard-document/rfc/rfc7009/translator-note.html) · [공식 원문](https://www.rfc-editor.org/rfc/rfc7009.html)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)

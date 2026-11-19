@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "a691f5a39f02ea06fa46ab107f92cadf39e0808d15b6ecef3634c6d772aad4a7",
+  "content_selector": "[data-wt-preformatted-root]",
+  "title": "RFC 7009 — OAuth 2.0 Token 철회",
+  "removals": [
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+      "text_sha256": "d042743b90947b9bbb697501331441781e856723ff0622f16a344dbf881face4",
+      "reason": "Aligned publication header with author affiliations, RFC number, date and ISSN"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000017\"]",
+      "text_sha256": "bb36500421e722815db9223a13339f9e1b013df957c9a64ae8b4bd3b951d7416",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000018\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000026\"]",
+      "text_sha256": "2f22f2432fc707b65af96c10282106c1918b32fd43b4528d9c214f7b78d3b08f",
+      "reason": "Original dotted printing TOC with page numbers; retain separately from derived Korean navigation"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000028\"]",
+      "text_sha256": "268fef689fe78977a3165ec302afc7cf6f20ab4b5820ea1663f3c99b95973442",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000029\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000049\"]",
+      "text_sha256": "dbde8573b0ab755571fe3a10dbe95e1d7f6caa8a09ed6aa25784d35b5d062cb3",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000050\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000072\"]",
+      "text_sha256": "53058f90508be660428e64e29b14b8050b283ad5bc29571716332f693d6c465e",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000073\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000091\"]",
+      "text_sha256": "04cb63082d2f81d05eb186f69dde642413c619f3163653afabc2ab47f3c1f1b6",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000092\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000120\"]",
+      "text_sha256": "bf284695f4c3c21c8330deab67fe33e6c4c7ee861704c3fd03f683f1b37a014e",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000121\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000141\"]",
+      "text_sha256": "4f0984e57892d455f044711ed22ccd0c9f3f8de2f0555f97522ce60d71a60bb6",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000142\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000168\"]",
+      "text_sha256": "f1154856a00878677a0449dff4d88d13d52f14684b8eeacbc0a8aaa7d0205a11",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000169\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000195\"]",
+      "text_sha256": "fbcc86750d2f7448149c2442bdd7623b2b83fac5fc2865b33e1db85eb83078f3",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000196\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000218\"]",
+      "text_sha256": "e38c1da39ff92f8f74990544d2239a021f917758e2f606b77569fdbcd0c7d25b",
+      "reason": "Repeated standards-track author/page footer"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000219\"]",
+      "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+      "reason": "Repeated physical page header"
+    },
+    {
+      "selector": "[data-wt-preformatted-block=\"block-000239\"]",
+      "text_sha256": "9f053701548e52135ab86a6afab1429d866a174f573935c40c6719b7dae0dba2",
+      "reason": "Repeated standards-track author/page footer"
+    }
+  ],
+  "joins": [
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=\"block-000193\"]",
+        "[data-wt-preformatted-block=\"block-000198\"]"
+      ]
+    }
+  ],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000060\"]",
+        "term_end": 5,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000062\"]",
+        "term_end": 15,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000104\"]",
+        "term_end": 23,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000114\"]",
+        "term_end": 9,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000154\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000156\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000158\"]",
+        "term_end": 15,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000160\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000162\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000173\"]",
+        "term_end": 7,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000175\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000177\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      }
+    ],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000064\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000066\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Exactly two adjacent source asterisk bullets enumerate the two token_type_hint values; both are at the same indentation level."
+      }
+    ]
+  }
+}

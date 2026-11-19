@@ -47,6 +47,14 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 >
 > This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.
 
+## RFC 7009
+
+[RFC 7009 — OAuth 2.0 Token Revocation](https://www.rfc-editor.org/rfc/rfc7009.html), T. Lodderstedt, Ed., S. Dronia, and M. Scurtescu, August 2013.
+
+> Copyright (c) 2013 IETF Trust and the persons identified as the document authors. All rights reserved.
+>
+> This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.
+
 ## RFC 9700
 
 [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://datatracker.ietf.org/doc/html/rfc9700/), T. Lodderstedt, J. Bradley, A. Labunets and D. Fett, January 2025.

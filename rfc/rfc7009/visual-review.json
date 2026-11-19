@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "6fab951acc7be2c2c3b9ba5be762e16437102733a391143a38e6acde22611577",
+  "verdict": "pass",
+  "evidence": "Fresh corrected edition directly viewed in all13 current QA tiles via 1440/768/390 revision sheets. All article sections through bottom, actual opened TOC and all23 original-print note blocks inspected anew at all3 widths. All11 overflowing body literal right ends and all23 note literal right ends at390 directly viewed. 18px/31.5px desktop/tablet,16px/28px phone; h2-h5,12 definitions including colon ownership,two hint bullets,one page9–10 join,HTTP/JSONP,ASCII table+caption,7references,3contacts verified. Corrected JSONP advice and token-endpoint recommendation do not introduce layout regression. Local literal scrolling works; no document-wide overflow,clipped prose,overlap or broken glyphs. Source and prior intermediate results remain unchanged; no publication."
+}

@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "format": "reviewed-reading-edition",
+  "tool": {
+    "name": "supertranslator",
+    "version": "0.12.1"
+  },
+  "source_url": "https://datatracker.ietf.org/doc/rfc7009/",
+  "qa_status": "passed",
+  "input_html_sha256": "a691f5a39f02ea06fa46ab107f92cadf39e0808d15b6ecef3634c6d772aad4a7",
+  "input_manifest_sha256": "746b9745ea93586644c05837e3a7963c8e9a225390fb5c94679b97b1f2d96069",
+  "reader_review_sha256": "7be64bb01c5ee79b0100d21f0b8cf611a979b522373a13b3fc83740858434ac2",
+  "html_sha256": "1e167a5d743941faa46d8932bbb0c38e02257ea04a25887192242a6e3930aa68",
+  "article_sha256": "0a626cf2ef467a8b8b2432576f28f2934e00e9391d9b79d01f0ca9fd07db6be3",
+  "stylesheet_sha256": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+  "asset_sha256": {
+    "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+    "assets/2f91dcb31b5e6a73.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
+    "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+    "assets/83824260e30146ac.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+    "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+    "assets/cb703bef198b7702.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+    "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+    "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+    "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+    "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+    "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+    "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+    "assets/132ed25d6598d436.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+    "assets/reader.css": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+    "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+    "assets/675c90a7d88a7108.css": "b34028766f32f2bebfc8400180edf656d4dc1f1ee8ff3e06ce71397a4e989caf",
+    "assets/wt-preformatted-14edac915a1f0158.css": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072",
+    "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+    "assets/5cf3e46e391a9dfc.css": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
+    "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+    "assets/c953a4f1e6ee0c16.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+    "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+    "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+    "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+    "assets/1150558bdc86c743.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+    "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+    "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+    "assets/b10f6a2fbfd3aaa7.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+    "assets/5e1d42de3a140c1e.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+  },
+  "transformations": {
+    "removals": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000001\"]",
+        "text_sha256": "d042743b90947b9bbb697501331441781e856723ff0622f16a344dbf881face4",
+        "reason": "Aligned publication header with author affiliations, RFC number, date and ISSN"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000017\"]",
+        "text_sha256": "bb36500421e722815db9223a13339f9e1b013df957c9a64ae8b4bd3b951d7416",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000018\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000026\"]",
+        "text_sha256": "2f22f2432fc707b65af96c10282106c1918b32fd43b4528d9c214f7b78d3b08f",
+        "reason": "Original dotted printing TOC with page numbers; retain separately from derived Korean navigation"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000028\"]",
+        "text_sha256": "268fef689fe78977a3165ec302afc7cf6f20ab4b5820ea1663f3c99b95973442",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000029\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000049\"]",
+        "text_sha256": "dbde8573b0ab755571fe3a10dbe95e1d7f6caa8a09ed6aa25784d35b5d062cb3",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000050\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000072\"]",
+        "text_sha256": "53058f90508be660428e64e29b14b8050b283ad5bc29571716332f693d6c465e",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000073\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000091\"]",
+        "text_sha256": "04cb63082d2f81d05eb186f69dde642413c619f3163653afabc2ab47f3c1f1b6",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000092\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000120\"]",
+        "text_sha256": "bf284695f4c3c21c8330deab67fe33e6c4c7ee861704c3fd03f683f1b37a014e",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000121\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000141\"]",
+        "text_sha256": "4f0984e57892d455f044711ed22ccd0c9f3f8de2f0555f97522ce60d71a60bb6",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000142\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000168\"]",
+        "text_sha256": "f1154856a00878677a0449dff4d88d13d52f14684b8eeacbc0a8aaa7d0205a11",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000169\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000195\"]",
+        "text_sha256": "fbcc86750d2f7448149c2442bdd7623b2b83fac5fc2865b33e1db85eb83078f3",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000196\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000218\"]",
+        "text_sha256": "e38c1da39ff92f8f74990544d2239a021f917758e2f606b77569fdbcd0c7d25b",
+        "reason": "Repeated standards-track author/page footer"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000219\"]",
+        "text_sha256": "745ea588043b9c571cc8792c2b214443fcabb2396d3986b4bc68a33799d7c60b",
+        "reason": "Repeated physical page header"
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000239\"]",
+        "text_sha256": "9f053701548e52135ab86a6afab1429d866a174f573935c40c6719b7dae0dba2",
+        "reason": "Repeated standards-track author/page footer"
+      }
+    ],
+    "joins": [
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=\"block-000193\"]",
+          "[data-wt-preformatted-block=\"block-000198\"]"
+        ]
+      }
+    ],
+    "heading_levels": {},
+    "list_items": []
+  },
+  "text_edits": [],
+  "presentation": {
+    "toc_selectors": [],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=\"block-000003\"]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000060\"]",
+        "term_end": 5,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000062\"]",
+        "term_end": 15,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000104\"]",
+        "term_end": 23,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000114\"]",
+        "term_end": 9,
+        "evidence": "The source names this protocol field before its own indented definition; an existing label colon stays with its term, and no neighboring entry is included."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000154\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000156\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000158\"]",
+        "term_end": 15,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000160\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000162\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000173\"]",
+        "term_end": 7,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000175\"]",
+        "term_end": 9,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=\"block-000177\"]",
+        "term_end": 6,
+        "evidence": "One explicitly labelled registration field and its associated description in the source."
+      }
+    ],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000064\"]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=\"block-000066\"]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Exactly two adjacent source asterisk bullets enumerate the two token_type_hint values; both are at the same indentation level."
+      }
+    ]
+  },
+  "render_input_sha256": "6fab951acc7be2c2c3b9ba5be762e16437102733a391143a38e6acde22611577",
+  "browser_qa_sha256": "a59fb0c9ce811b38f5479b7e68dee1f93f3e801701155d2281b97bdb7f1cbb50"
+}
