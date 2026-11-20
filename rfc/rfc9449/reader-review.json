@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "a4a0d2e55582648e1ba6f74ad3b13db594ea5dbf45e44957e68d13051d519af6",
+  "content_selector": ".rfchtml",
+  "title": "RFC 9449 — OAuth 2.0 소유 증명(DPoP)",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "eafe7dbf6fac4aa551f2b81946dbc90b620b0bdc28e17e2a237c42463655271f",
+      "reason": "Original print running table: number, short title, date, authors, stream and page label. Keep it intact in collapsed source notes."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

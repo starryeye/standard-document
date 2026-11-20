@@ -48,6 +48,12 @@
 
 2020년 1월 발행본의 비공식 한국어 번역입니다. 보고 단계의 정오표는 본문을 바꾸지 않고 별도로 안내합니다.
 
+### RFC 9449 — OAuth 2.0 Demonstrating Proof of Possession (DPoP)
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc9449/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9449/) · [번역자 주와 정오표](https://starryeye.github.io/standard-document/rfc/rfc9449/translator-note.html) · [공식 원문](https://www.rfc-editor.org/rfc/rfc9449.html)
+
+2023년 9월 발행본의 비공식 한국어 번역입니다. §4.2의 검증된 정오표 EID 7646은 본문과 구분해 별도로 안내합니다.
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)
