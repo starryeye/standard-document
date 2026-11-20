@@ -29,5 +29,28 @@
   "structure": {
     "definitions": [],
     "lists": []
-  }
+  },
+  "text_edits": [
+    {
+      "selector": "[id=\"section-2.3-6\"]",
+      "input_html_sha256": "ceb89b85e8168099606e9c353ea043f417f72e07c14e45db71c0ee7c1f3dfef0",
+      "replacement_html": "authorization server는 client의 자격 증명과 토큰 교환 요청에 제시된 <code>subject_token</code>을 검증한다. authorization server는 <code>resource</code> 매개변수에서 요청에 적용할 적절한 정책을 판단할 수 있으며, &lt;https://backend.example.com&gt; 주소에서 사용하기에 적합한 토큰을 발급한다. 응답의 <code>access_token</code> 매개변수에는 새 토큰이 들어 있다(<a class=\"xref\" href=\"#main-teresp\">그림 3</a> 참조). 이 토큰은 그 자체로 1분 동안 유효한 bearer 방식의 OAuth access token이다. 이 토큰은 마침 JWT이지만, client는 그 구조와 형식을 알 필요 없이 사용하므로 <code>issued_token_type</code>에는 access token이라는 점만 표시된다.<a class=\"pilcrow\" href=\"#section-2.3-6\">¶</a>",
+      "source_text": "The authorization server validates the client credentials and the subject_token presented in the token exchange request. From the resource parameter, the authorization server is able to determine the appropriate policy to apply to the request and issues a token suitable for use at <https://backend.example.com>. The access_token parameter of the response shown in Figure 3 contains the new token, which is itself a bearer OAuth access token that is valid for one minute. The token happens to be a JWT; however, its structure and format are opaque to the client, so the issued_token_type indicates only that it is an access token.",
+      "evidence": "The example token happens to be JWT; the client-facing contract treats its internal structure and format as opaque. The token type still denotes only access token, and the one-minute lifetime and all inline references remain unchanged."
+    },
+    {
+      "selector": "[id=\"section-3-5\"]",
+      "input_html_sha256": "fd15f6a2205ae8df0e414dfe2268638cd4c6d7027abaf0c601ee44abe725c6d2",
+      "replacement_html": "access token과 JWT의 차이는 미묘하다. access token은 위임된 인가 결정을 나타내지만, JWT는 토큰 형식이다. access token은 JWT 형식일 수 있지만 반드시 그럴 필요는 없다. JWT가 access token일 수는 있지만, 모든 JWT가 access token인 것은 아니다.\n\n이 명세에서 <code>urn:ietf:params:oauth:token-type:access_token</code>은 해당 authorization server가 발급한 일반적인 OAuth access token임을 나타내기 위한 것이다. client는 이 토큰의 내부 구조에 의존하지 않고, 같은 authorization server에서 얻은 다른 access token과 똑같은 방식으로 사용할 수 있다. (토큰이 실제로 JWT일 수 있지만, client는 그 사실을 알지 못하며 알 필요도 없다.) 반면 <code>urn:ietf:params:oauth:token-type:jwt</code>는 요청하거나 보내는 토큰이 구체적으로 JWT임을 나타내기 위한 것이다(가령 <span>[<a class=\"xref\" href=\"#RFC7523\">RFC7523</a>]</span>이 지원하는 것처럼, 다른 authorization server에서 access token을 얻기 위한 인가 부여 수단으로 JWT를 사용하는 도메인 간 사례가 이에 해당할 수 있다).<a class=\"pilcrow\" href=\"#section-3-5\">¶</a>",
+      "source_text": "The distinction between an access token and a JWT is subtle. An access token represents a delegated authorization decision, whereas JWT is a token format. An access token can be formatted as a JWT but doesn't necessarily have to be. And a JWT might well be an access token, but not all JWTs are access tokens. The intent of this specification is that urn:ietf:params:oauth:token-type:access_token be an indicator that the token is a typical OAuth access token issued by the authorization server in question, opaque to the client, and usable the same manner as any other access token obtained from that authorization server. (It could well be a JWT, but the client isn't and needn't be aware of that fact.) Whereas, urn:ietf:params:oauth:token-type:jwt is to indicate specifically that a JWT is being requested or sent (perhaps in a cross-domain use case where the JWT is used as an authorization grant to obtain an access token from a different authorization server as is facilitated by [RFC7523]).",
+      "evidence": "A normal access token is opaque to the client and usable like any other access token from that authorization server. This does not say its bytes cannot technically be inspected; the parenthetical explicitly permits a JWT without client awareness."
+    },
+    {
+      "selector": "[id=\"section-5-3\"]",
+      "input_html_sha256": "568e947afb4184a6285718b2278e39c8eb470fde6aaa53e89a46a37b6d08ca09",
+      "replacement_html": "이와 별도로 delegation과 impersonation은 둘 다 특유의 보안 문제를 일으킨다. 한 principal이 다른 principal의 권한을 위임받으면 권한이 남용될 수 있다. <code>scope</code> claim은 위임된 권한을 행사할 수 있는 상황을 제한하므로, 남용 가능성을 줄이기 위해 토큰 수명 제한과 같은 일반적인 제약에 더해 이 claim을 사용하는 것이 제안된다.<a class=\"pilcrow\" href=\"#section-5-3\">¶</a>",
+      "source_text": "In addition, both delegation and impersonation introduce unique security issues. Any time one principal is delegated the rights of another principal, the potential for abuse is a concern. The use of the scope claim (in addition to other typical constraints such as a limited token lifetime) is suggested to mitigate potential for such abuse, as it restricts the contexts in which the delegated rights can be exercised.",
+      "evidence": "The original describes a risk when rights are delegated, not an additional duty. The following unchanged sentence still suggests using the scope claim alongside ordinary constraints."
+    }
+  ]
 }

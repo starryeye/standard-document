@@ -1,5 +1,5 @@
 {
-  "render_input_sha256": "b2da4a038cb2ac3b670897508112ac2623dfaa558a2b3fef457147f2a45e1708",
+  "render_input_sha256": "46a942640d2e9ffad5d3c4cb2665eec549a024bb0531934a1e5cbbf16aaac80a",
   "verdict": "pass",
-  "evidence": "Opened all 35 current plugin QA tiles at widths 1440, 768 and 390, plus overlapping full-height reader tiles and opened TOC, metadata and source notes at all widths. Checked 18 HTTP/JSON/JWT figures and captions, desktop definition columns and mobile stacked fields, IANA list and reference wraps, appendix, authors and final edge. Prose 18/18/16px with 1.75 line height. Inspected all 18 mobile literal right-edge states: long text is reachable within its own scroll region; no document-wide clipping, broken glyphs or missing panel content. Original paragraph anchors remain visible in low contrast; nonblocking."
+  "evidence": "1440·768·390px Chromium에서 이 교정판의 전체 35개 타일(11/11/13)을 처음부터 저자 연락처까지 대조했다. 세 교정 문단을 원래 크기로 다시 읽고 각 폭에서 목차·문서 정보·원문 페이지 표기를 펼쳐 봤다. 이전 시각 QA와 26개 타일은 바이트 단위로 동일했고, 나머지 9개는 세 문단의 줄바꿈 차이를 확인했다. 절 위계·예제·캡션·부록이 보존되며 문서 전체의 가로 넘침이 없다. 별도 블로그 미리보기에서 세 폭의 18개 캡션이 모두 코드 아래이고 모바일 긴 코드가 내부 스크롤로 끝까지 보였다. 이번 교정은 세 구절 외 새 의미 검토 또는 전면 재번역이 아니다."
 }

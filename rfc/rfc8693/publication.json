@@ -2,15 +2,15 @@
   "schema_version": "1.0",
   "public_html": {
     "path": "index.html",
-    "sha256": "fd4e0ab1361046ce0d01d220c20293cbf04ef619af505f816aaa25e6a2a4b7fc"
+    "sha256": "a726dcd72ac6fc819c239faa0b2e4621def2d858c849d085fa7a1c189220283d"
   },
   "reviewed_html": {
     "path": "reviewed.html",
-    "sha256": "fbcb4ab3a7099f21fee2c68545fbacb9739f6b2ea4a31c2e20e0326cd9cec209"
+    "sha256": "1089772db745a08aec93bb4a5b6231051d074413614853bce81d084c23eed458"
   },
   "article": {
     "path": "article.html",
-    "sha256": "1a612a4dc2b400f8d685743f07a57bafac41ab9a097c3c6b89b2bba90585ff61"
+    "sha256": "8df1384f36cef6e2ca858f7d4be67a4448ab2ce1e7bc67ef4c935df23aa720ff"
   },
   "note": "The public wrapper adds a separate notice. The unchanged audited article and reader manifest bind reviewed.html."
 }
