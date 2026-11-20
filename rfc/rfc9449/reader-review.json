@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "input_html_sha256": "a4a0d2e55582648e1ba6f74ad3b13db594ea5dbf45e44957e68d13051d519af6",
+  "input_html_sha256": "9f3dcd51556f7c75e4dcaff75d2525adb7e66436247c09d632bb385af0c7fb0e",
   "content_selector": ".rfchtml",
   "title": "RFC 9449 — OAuth 2.0 소유 증명(DPoP)",
   "removals": [

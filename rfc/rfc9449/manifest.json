@@ -7,11 +7,11 @@
   },
   "source_url": "https://datatracker.ietf.org/doc/html/rfc9449",
   "qa_status": "passed",
-  "input_html_sha256": "a4a0d2e55582648e1ba6f74ad3b13db594ea5dbf45e44957e68d13051d519af6",
-  "input_manifest_sha256": "9c1f1132a1de7431397eccfb19dfb0c5e7e3d017b51d4605c212b2d682151d37",
-  "reader_review_sha256": "b7e9441ac987b8669675d2487b9370ecf32498dc4a2839242a4ffb3b2e043ccf",
-  "html_sha256": "a42ea66eabc8bcd2926931a66fde53e5a62f3a6790426dd9d00c376215f68836",
-  "article_sha256": "9f4dc67536eac133662f4245ebe0a76571dce14b68b56850b1a1ebb0ac68cb64",
+  "input_html_sha256": "9f3dcd51556f7c75e4dcaff75d2525adb7e66436247c09d632bb385af0c7fb0e",
+  "input_manifest_sha256": "f0e738e66efd9dc8b47c7e56cb747bc7f8e37259b2705ef60bc0359e7f9d3dd6",
+  "reader_review_sha256": "8aa16b877332789527aabf8487acbed51caaa5432e5e88bc8c2f98759343f4c1",
+  "html_sha256": "2e38ad5758ed998fcbdeaf28939a30100caf9d5b503f3675ee5ece449c113426",
+  "article_sha256": "6feabf8d0058eea68a6197a643ff215ea635026badc785fa0b64b80c3dc09ab7",
   "stylesheet_sha256": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
   "asset_sha256": {
     "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
@@ -74,6 +74,6 @@
     "definitions": [],
     "lists": []
   },
-  "render_input_sha256": "facbea4b20d8fd725df34bf29f6ce434411ecd6ca6b746a223790f497862c4b7",
-  "browser_qa_sha256": "206b0f3834c2e731fe1c67caf0a8ea13d82e579156e7927916622d0cfa8f5eed"
+  "render_input_sha256": "6a39b6c80582e32bd904637501684d81e823eecd3ff47d9a3996e0ab32b7378b",
+  "browser_qa_sha256": "41c29d8cad4ce390d40ce19c1245174035cbb58435a513a087e2b1a177baa298"
 }
