@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "public_html": {
+    "path": "index.html",
+    "sha256": "87f69835e80a1fe91c6dbacadae6a9c9a85efeaed22cb02c0e600b8d97c83744"
+  },
+  "reviewed_html": {
+    "path": "reviewed.html",
+    "sha256": "3512ed0b84e216dd53da3c57b11f609ae92862cc61ab81e0d03819e2c4b10180"
+  },
+  "article": {
+    "path": "article.html",
+    "sha256": "ffd9a253f52d9d354b84961db4f8f7fda375e21c2e7e2c1a22671e2ca7f07c6a"
+  },
+  "note": "The public wrapper adds a separate notice. Both sites embed the unchanged reviewed article."
+}

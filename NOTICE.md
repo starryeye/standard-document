@@ -71,6 +71,14 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 >
 > This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Revised BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Revised BSD License.
 
+## RFC 8705
+
+[RFC 8705 — OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens](https://datatracker.ietf.org/doc/html/rfc8705), B. Campbell, J. Bradley, N. Sakimura, and T. Lodderstedt, February 2020.
+
+> Copyright (c) 2020 IETF Trust and the persons identified as the document authors. All rights reserved.
+>
+> This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.
+
 ## RFC 9700
 
 [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://datatracker.ietf.org/doc/html/rfc9700/), T. Lodderstedt, J. Bradley, A. Labunets and D. Fett, January 2025.

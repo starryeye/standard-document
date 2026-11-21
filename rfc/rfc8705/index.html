@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RFC 8705 — OAuth 2.0 Mutual-TLS 기반 client authentication 및 인증서에 바인딩된 access token</title><link href="assets/reader.css" rel="stylesheet"/><meta content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; child-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' data:" http-equiv="Content-Security-Policy"/><style>.rfc8705-publication-note{box-sizing:border-box;max-width:768px;margin:0 auto;padding:1.15rem 2rem 0;font:1rem/1.6 system-ui,sans-serif}.rfc8705-publication-note p{margin:0 0 .3em}.rfc8705-publication-note a{color:inherit;text-underline-offset:.15em}@media(max-width:600px){.rfc8705-publication-note{padding-inline:1rem}}</style></head><body class="st-reader-page"><main><aside class="rfc8705-publication-note" aria-label="번역 안내"><p><strong>RFC 8705 · 2020년 2월 발행본</strong> · 비공식 AI 한국어 번역<br><a href="https://datatracker.ietf.org/doc/html/rfc8705">공식 영문</a> · <a href="https://errata.rfc-editor.org/search/?rfc_number=8705">RFC Editor 정오표</a></p><p>예제가 화면보다 넓으면 해당 블록 안에서 좌우로 스크롤할 수 있습니다.</p></aside><article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 8705</h1><h1 class="st-document-title" id="title">OAuth 2.0 Mutual-TLS 기반 client authentication 및 인증서에 바인딩된 access token</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>발행 계열:</dt>
+<dd>Internet Engineering Task Force (IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc8705">8705</a></dd>
+<dt>분류:</dt>
+<dd>Standards Track</dd>
+<dt>발행일:</dt>
+<dd>
+<time>2020년 2월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>B. Campbell</div>
+<div>Ping Identity</div>
+</div>
+<div>
+<div>J. Bradley</div>
+<div>Yubico</div>
+</div>
+<div>
+<div>N. Sakimura</div>
+<div>Nomura Research Institute</div>
+</div>
+<div>
+<div>T. Lodderstedt</div>
+<div>YES.com AG</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 상태</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 소개</a><ol><li><a href="#name-requirements-notation-and-c">1.1. 요구사항 표기 규칙과 관례</a></li><li><a href="#name-terminology">1.2. 용어</a></li></ol></li><li><a href="#name-mutual-tls-for-oauth-client">2. OAuth client authentication을 위한 Mutual TLS</a><ol><li><a href="#name-pki-mutual-tls-method">2.1. PKI 기반 mutual TLS 방식</a><ol><li><a href="#name-pki-method-metadata-value">2.1.1. PKI 방식의 메타데이터 값</a></li><li><a href="#name-client-registration-metadat">2.1.2. client 등록 메타데이터</a></li></ol></li><li><a href="#name-self-signed-certificate-mut">2.2. 자체 서명 인증서 기반 mutual TLS 방식</a><ol><li><a href="#name-self-signed-method-metadata">2.2.1. 자체 서명 방식의 메타데이터 값</a></li><li><a href="#name-client-registration-metadata">2.2.2. client 등록 메타데이터</a></li></ol></li></ol></li><li><a href="#name-mutual-tls-client-certifica">3. mutual TLS client certificate에 바인딩된 access token</a><ol><li><a href="#name-jwt-certificate-thumbprint-">3.1. JWT의 certificate thumbprint 확인 방법</a></li><li><a href="#name-confirmation-method-for-tok">3.2. token introspection을 위한 확인 방법</a></li><li><a href="#name-authorization-server-metada">3.3. authorization server 메타데이터</a></li><li><a href="#name-client-registration-metadata-2">3.4. client 등록 메타데이터</a></li></ol></li><li><a href="#name-public-clients-and-certific">4. public client와 인증서에 바인딩된 토큰</a></li><li><a href="#name-metadata-for-mutual-tls-end">5. mutual TLS용 endpoint 별칭 메타데이터</a></li><li><a href="#name-implementation-consideratio">6. 구현 고려사항</a><ol><li><a href="#name-authorization-server">6.1. authorization server</a></li><li><a href="#name-resource-server">6.2. resource server</a></li><li><a href="#name-certificate-expiration-and-">6.3. 인증서 만료와 인증서에 바인딩된 access token</a></li><li><a href="#name-implicit-grant-unsupported">6.4. implicit grant 미지원</a></li><li><a href="#name-tls-termination">6.5. TLS 종료</a></li></ol></li><li><a href="#name-security-considerations">7. 보안 고려사항</a><ol><li><a href="#name-certificate-bound-refresh-t">7.1. 인증서에 바인딩된 refresh token</a></li><li><a href="#name-certificate-thumbprint-bind">7.2. certificate thumbprint 바인딩</a></li><li><a href="#name-tls-versions-and-best-pract">7.3. TLS 버전과 모범 사례</a></li><li><a href="#name-x509-certificate-spoofing">7.4. X.509 인증서 스푸핑</a></li><li><a href="#name-x509-certificate-parsing-an">7.5. X.509 인증서 파싱 및 검증의 복잡성</a></li></ol></li><li><a href="#name-privacy-considerations">8. 개인정보 보호 고려사항</a></li><li><a href="#name-iana-considerations">9. IANA 고려사항</a><ol><li><a href="#name-jwt-confirmation-methods-re">9.1. JWT 확인 방식 등록</a></li><li><a href="#name-authorization-server-metadat">9.2. authorization server 메타데이터 등록</a></li><li><a href="#name-token-endpoint-authenticati">9.3. token endpoint 인증 방식 등록</a></li><li><a href="#name-token-introspection-respons">9.4. token introspection 응답 등록</a></li><li><a href="#name-dynamic-client-registration">9.5. 동적 client 등록 메타데이터 등록</a></li></ol></li><li><a href="#name-references">10. 참고문헌</a><ol><li><a href="#name-normative-references">10.1. 규범 참고문헌</a></li><li><a href="#name-informative-references">10.2. 참고용 문헌</a></li></ol></li><li><a href="#name-example-cnf-claim-certifica">부록 A. "cnf" 클레임, 인증서 및 JWK 예시</a></li><li><a href="#name-relationship-to-token-bindi">부록 B. Token Binding과의 관계</a></li><li><a href="#name-acknowledgements">감사의 말</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">
+  이 문서는 X.509 인증서를 사용하는 Transport Layer Security (TLS)의 상호 인증(Mutual TLS)을 활용하여 OAuth client authentication과 인증서에 바인딩된 access token 및 refresh token(갱신 토큰)을 설명한다. OAuth client(클라이언트)는 자체 서명 인증서 또는 공개 키 인프라(PKI)를 기반으로 Mutual TLS를 사용해 authorization server(인가 서버)에 자신을 인증할 수 있다. OAuth authorization server는 access token을 client의 Mutual-TLS 인증서에 바인딩할 수 있으며, OAuth로 보호되는 리소스는 이렇게 바인딩된 access token을 제시받았을 때 그 토큰이 실제로 이를 제시한 client에게 발급되었는지 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 상태</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준화 절차(Standards Track)에 속한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">
+            이 문서는 Internet Engineering Task Force (IETF)가 작성한 것으로, IETF 커뮤니티의 합의를 반영한다. 공개 검토를 거쳤으며 Internet Engineering Steering Group (IESG)의 발행 승인을 받았다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 2절에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">
+            이 문서의 현재 상태, 정오표, 의견을 보내는 방법은 <span><a href="https://www.rfc-editor.org/info/rfc8705">https://www.rfc-editor.org/info/rfc8705</a></span>에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice">
+<a href="#name-copyright-notice">저작권 고지</a>
+</h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2020 IETF Trust 및 이 문서의 저자로 명시된 사람들. 모든 권리를 보유한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">이 문서에는 발행일에 유효한 BCP 78 및 IETF Trust의 Legal Provisions Relating to IETF Documents(<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)가 적용된다. 이 문서와 관련된 권리와 제한 사항이 명시되어 있으므로 해당 문서들을 주의 깊게 검토하기 바란다. 이 문서에서 추출한 코드 구성 요소에는 Trust Legal Provisions의 4.e절에 명시된 대로 Simplified BSD License 문구를 포함해야 하며, 해당 코드 구성 요소는 Simplified BSD License에 명시된 대로 보증 없이 제공된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<div id="Introduction">
+<section id="section-1">
+<h2 id="name-introduction"><a href="#section-1">1. </a><a href="#name-introduction">소개</a></h2>
+<p id="section-1-1">The OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749">RFC6749</a>]</span>는 서드파티 client 애플리케이션이 보호된 리소스에 대한 접근 권한을 위임받을 수 있게 한다. <a href="#protocol-flow-figure">그림 1</a>에 제시된 전형적인 OAuth 흐름을 개념적으로 살펴보면, client는 authorization server라는 주체로부터 access token을 받은 뒤 HTTPS API와 같은 보호된 리소스에 접근할 때 그 토큰을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<span id="name-abstract-oauth-20-protocol-"></span><div id="protocol-flow-figure">
+<figure id="figure-1">
+<div id="section-1-2.1">
+<div><pre>
+  +--------+                                 +---------------+
+  |        |                                 |               |
+  |        |&lt;--(A)-- Get an access token ---&gt;| Authorization |
+  |        |                                 |     Server    |
+  |        |                                 |               |
+  |        |                                 +---------------+
+  |        |                                         ^
+  |        |                                         |
+  |        |
+  |        |                               (C)       |
+  | Client |                           Validate the
+  |        |                           access token  |
+  |        |
+  |        |                                         |
+  |        |                                         v
+  |        |                                 +---------------+
+  |        |                                 |      (C)      |
+  |        |                                 |               |
+  |        |&lt;--(B)-- Use the access token --&gt;|   Protected   |
+  |        |                                 |    Resource   |
+  |        |                                 |               |
+  +--------+                                 +---------------+
+</pre></div>
+</div>
+<figcaption><a href="#figure-1">그림 1</a>: <a href="#name-abstract-oauth-20-protocol-">OAuth 2.0 프로토콜의 개념적 흐름</a></figcaption></figure>
+</div>
+<p id="section-1-3"><a href="#protocol-flow-figure">그림 1</a>의 흐름은 다음 단계로 구성된다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a></p>
+<dl id="section-1-4">
+<dt>(A)</dt>
+<dd id="section-1-4.1">client는 authorization server에 HTTPS <code>POST</code> 요청을 보내고, authorization grant를 나타내는 자격 증명을 제시한다. 특정 유형의 client, 즉 client 자격 증명 세트를 발급받았거나 다른 방식으로 갖춘 client의 경우에는 요청을 인증해야 한다. authorization server는 응답에서 client에 access token을 발급한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4.1">¶</a></dd>
+<dt>(B)</dt>
+<dd id="section-1-4.2">client는 보호된 리소스에 접근하는 요청에 access token을 포함한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4.2">¶</a></dd>
+<dt>(C)</dt>
+<dd id="section-1-4.3">보호된 리소스는 요청을 인가하기 위해 access token을 검증한다. 토큰이 자체 완결적이고 암호학적으로 보호되는 경우 등에는 보호된 리소스가 자체적으로 검증할 수 있다. 그 밖의 경우에는 보호된 리소스가 authorization server에 질의하여 토큰의 상태를 확인하고 토큰의 메타정보를 얻어야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4.3">¶</a></dd>
+</dl>
+<p id="section-1-5">이 문서는 위의 개념적 흐름을 바탕으로, client certificate 기반 mutual TLS를 사용하는 OAuth 2.0의 보안 강화 옵션을 표준화한다. <a href="#mtlsca">2절</a>은 (A) 단계의 요청을 인증하는 옵션을 제시한다. (C) 단계를 지원하기 위해 <a href="#x5t">3.1절</a>과 <a href="#introspect">3.2절</a>은 각각 로컬 처리와 원격 처리에서 토큰이 client certificate에 바인딩되어 있음을 표현하는 방법을 정의한다. 이에 따라 <a href="#CertificateBoundAccessTokens">3절</a>에서 설명하듯, (B) 단계에서 보호된 리소스에 접근할 수 있는 주체는 인증서에 바인딩된 토큰을 사용하고 해당 인증서에 대응하는 개인 키를 보유한 정당한 client뿐이다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-5">¶</a></p>
+<p id="section-1-6">OAuth 2.0은 공유 비밀을 사용하는 client authentication 방식을 정의하지만, authorization server와 직접 상호작용할 때 사용할 추가 client authentication 메커니즘을 정의하고 사용하는 것도 허용한다. 이 문서는 공유 비밀 방식보다 보안 특성이 우수한 추가 client authentication 메커니즘으로서 mutual TLS 인증서 기반 인증을 설명한다. <span>[<a href="#RFC6749">RFC6749</a>]</span>는 token endpoint 요청에 대한 client authentication을 다루지만, OAuth 2.0 확장(Introspection <span>[<a href="#RFC7662">RFC7662</a>]</span>, Revocation <span>[<a href="#RFC7009">RFC7009</a>]</span>, <span>[<a href="#OpenID.CIBA">OpenID.CIBA</a>]</span>의 Backchannel Authentication Endpoint 등)도 client authentication을 사용하는 endpoint를 정의한다. 이 문서에서 정의하는 mutual TLS 방식은 이러한 endpoint에도 적용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-6">¶</a></p>
+<p id="section-1-7">mutual TLS 인증서에 바인딩된 access token은 인증서에 대응하는 개인 키를 보유한 주체만 그 토큰을 사용해 관련 리소스에 접근할 수 있도록 한다. 이러한 제약을 key confirmation, proof-of-possession 또는 holder-of-key라고 부르기도 한다. 이는 access token을 보유한 누구나 그 토큰을 사용해 관련 리소스에 접근할 수 있는 <span>[<a href="#RFC6750">RFC6750</a>]</span>의 bearer token(Bearer 토큰)과는 다르다. access token을 client의 인증서에 바인딩하면 권한 없는 주체가 탈취한 access token을 사용하거나 access token을 재전송하는 일을 막을 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-7">¶</a></p>
+<p id="section-1-8">mutual TLS 인증서에 바인딩된 access token과 mutual TLS client authentication은 서로 보완하는 별개의 메커니즘이며, 반드시 함께 배포하거나 사용할 필요는 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-8">¶</a></p>
+<p id="section-1-9">이 문서는 인증서에 바인딩된 access token과 mutual TLS client authentication을 지원하기 위해 client 메타데이터 매개변수를 추가로 도입한다. authorization server는 Dynamic Client Registration Protocol <span>[<a href="#RFC7591">RFC7591</a>]</span>을 통해 client 메타데이터를 얻을 수 있다. 이 프로토콜은 OAuth 2.0 client 메타데이터를 authorization server에 동적으로 등록하는 메커니즘을 정의한다. 또한 <span>[<a href="#RFC7591">RFC7591</a>]</span>과 그 등록된 확장에 정의된 메타데이터에는 client에 대한 일반적인 데이터 모델이 내포되어 있다. 이 모델은 Dynamic Client Registration Protocol을 사용하지 않을 때에도 authorization server 구현에 유용하다. 이러한 구현은 일반적으로 client 구성을 관리하는 데 사용할 수 있는 사용자 인터페이스를 어떤 형태로든 제공한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-9">¶</a></p>
+<div id="RNC">
+<section id="section-1.1">
+<h3 id="name-requirements-notation-and-c"><a href="#section-1.1">1.1. </a><a href="#name-requirements-notation-and-c">요구사항 표기 규칙과 관례</a></h3>
+<p id="section-1.1-1">이 문서의 키워드 "<span>MUST</span>", "<span>MUST NOT</span>", "<span>REQUIRED</span>", "<span>SHALL</span>", "<span>SHALL NOT</span>", "<span>SHOULD</span>", "<span>SHOULD NOT</span>", "<span>RECOMMENDED</span>", "<span>NOT RECOMMENDED</span>", "<span>MAY</span>", "<span>OPTIONAL</span>"는 여기에서 보이는 것처럼 모두 대문자로 표기된 경우에만 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 명시된 대로 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+</section>
+</div>
+<div id="Terminology">
+<section id="section-1.2">
+<h3 id="name-terminology"><a href="#section-1.2">1.2. </a><a href="#name-terminology">용어</a></h3>
+<p id="section-1.2-1">이 문서에서 "mutual TLS"는 TLS 세션을 협상할 때, 인증서를 사용하는 일반적인 TLS 서버 인증에 더해 client가 서버에 자신의 X.509 인증서를 제시하고 그 인증서에 대응하는 개인 키를 보유했음을 입증하는 절차를 뜻한다. 현행 TLS 버전 <span>[<a href="#RFC5246">RFC5246</a>]</span> <span>[<a href="#RFC8446">RFC8446</a>]</span>에서는 이를 위해 client가 핸드셰이크 중에 Certificate 및 CertificateVerify 메시지를 보내고 서버가 CertificateVerify 및 Finished 메시지를 검증해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.2-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="mtlsca">
+<section id="section-2">
+<h2 id="name-mutual-tls-for-oauth-client"><a href="#section-2">2. </a><a href="#name-mutual-tls-for-oauth-client">OAuth client authentication을 위한 Mutual TLS</a></h2>
+<p id="section-2-1">이 절에서는 OAuth 2.0의 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-2.3">2.3절</a> [<a href="#RFC6749">RFC6749</a>]</span>을 확장해, mutual TLS에 사용하는 X.509 client certificate를 client 자격 증명으로 활용하는 두 가지 별개의 방법을 정의한다. client authentication에 mutual TLS를 요구할지는 authorization server가 해당 client에 적용되는 정책이나 설정에 따라 결정한다. 이는 client가 동적으로 등록되었는지, 정적으로 설정되었는지, 또는 다른 방식으로 설정되었는지와 무관하다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-1">¶</a></p>
+<p id="section-2-2">OAuth client authentication에 TLS를 사용하려면 client와 authorization server 간의 TLS 연결이 mutual TLS의 X.509 인증서 인증으로 설정되었거나 다시 설정되었어야 한다(<span>MUST</span>). 즉, TLS handshake 중에 client의 Certificate 및 CertificateVerify 메시지가 전송된다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-2">¶</a></p>
+<p id="section-2-3">mutual TLS로 client authentication을 수행하는 경우, client가 authorization server에 보내는 모든 요청에는 반드시(<span>MUST</span>) OAuth 2.0의 <code>client_id</code> 매개변수를 포함해야 한다. 이 매개변수는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-2.2">2.2절</a> [<a href="#RFC6749">RFC6749</a>]</span>에 설명되어 있다. <code>client_id</code> 매개변수가 있으면 authorization server가 인증서의 내용과 별개로 client를 쉽게 식별할 수 있다. authorization server는 client 식별자로 client 설정을 찾고, TLS handshake에서 제시된 인증서를 해당 client에 대해 기대하는 자격 증명과 대조할 수 있다. authorization server는 client와 인증서의 바인딩을 강제해야 한다(<span>MUST</span>). 그 방법은 아래 <a href="#pki_method">2.1절</a> 또는 <a href="#self_signed_method">2.2절</a>에 설명되어 있다. 인증서가 제시되지 않거나 제시된 인증서가 해당 <code>client_id</code>에 대해 기대하는 인증서와 일치하지 않으면, authorization server는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.2">5.2절</a> [<a href="#RFC6749">RFC6749</a>]</span>에 따라 일반적인 OAuth 2.0 오류 응답을 반환하고, <code>invalid_client</code> 오류 코드로 client authentication의 실패를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-3">¶</a></p>
+<div id="pki_method">
+<section id="section-2.1">
+<h3 id="name-pki-mutual-tls-method"><a href="#section-2.1">2.1. </a><a href="#name-pki-mutual-tls-method">PKI 기반 mutual TLS 방식</a></h3>
+<p id="section-2.1-1">mutual TLS를 사용하는 OAuth client authentication의 PKI(public key infrastructure) 방식은 X.509 인증서를 전통적으로 인증에 사용하는 방식을 따른다. 검증된 인증서 체인 <span>[<a href="#RFC5280">RFC5280</a>]</span>과 하나의 subject distinguished name(DN) 또는 하나의 subject alternative name(SAN)을 사용해 client를 인증한다. 각 client에는 유형에 관계없이 subject 이름 값을 하나만 사용한다. TLS handshake에서는 client가 인증서에 들어 있는 공개 키에 대응하는 개인 키를 보유하는지 확인하고 해당 인증서 체인을 검증한다. 인증서의 subject 정보가 해당 client에 대해 설정하거나 등록해 둔 하나의 기대 subject와 일치하면 인증에 성공한다. 인증서의 subject DN을 client에 등록된 DN과 비교할 때는 <span>[<a href="#RFC4517">RFC4517</a>]</span>의 distinguishedNameMatch 규칙처럼 DN 값을 예측 가능한 방식으로 처리하는 규칙이 필요하다. PKI 방식에서는 인증서의 폐기 여부를 확인할 수 있으나, 이를 확인할지와 어떤 방식으로 확인할지는 배포 시 authorization server의 재량으로 결정한다. client는 신뢰하는 인증 기관(CA)에서 subject가 같은 새 인증서를 발급받아, authorization server에 있는 해당 인증 데이터를 변경하지 않고도 X.509 인증서를 교체할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-1">¶</a></p>
+<div id="metadata_auth_value_pki">
+<section id="section-2.1.1">
+<h4 id="name-pki-method-metadata-value"><a href="#section-2.1.1">2.1.1. </a><a href="#name-pki-method-metadata-value">PKI 방식의 메타데이터 값</a></h4>
+<p id="section-2.1.1-1">이 명세는 mutual TLS를 사용하는 client authentication의 PKI 방식을 위해 다음 인증 방식 메타데이터 값을 정의하고, 이를 ‘OAuth Token Endpoint Authentication Methods’ 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.1-1">¶</a></p>
+<dl id="section-2.1.1-2">
+<dt id="section-2.1.1-2.1">tls_client_auth</dt>
+<dd id="section-2.1.1-2.2">authorization server에 대한 client authentication은 mutual TLS로 이루어지며, 인증서와 client를 연결하는 데 PKI 방식을 사용한다는 뜻이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.1-2.2">¶</a></dd>
+</dl>
+</section>
+</div>
+<div id="client_metadata_pki">
+<section id="section-2.1.2">
+<h4 id="name-client-registration-metadat"><a href="#section-2.1.2">2.1.2. </a><a href="#name-client-registration-metadat">client 등록 메타데이터</a></h4>
+<p id="section-2.1.2-1">mutual TLS를 사용하는 client authentication의 PKI 방식을 지원하기 위해, OAuth 2.0 Dynamic Client Registration Protocol <span>[<a href="#RFC7591">RFC7591</a>]</span>에 인증서의 기대 subject를 전달하는 다음 메타데이터 매개변수를 도입한다. <code>tls_client_auth</code> 인증 방식을 사용하는 client는 아래 메타데이터 매개변수 중 정확히 하나를 사용해, authorization server가 해당 client를 인증할 때 기대해야 할 인증서 subject 값을 표시해야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-1">¶</a></p>
+<dl id="section-2.1.2-2">
+<dt id="section-2.1.2-2.1">tls_client_auth_subject_dn</dt>
+<dd id="section-2.1.2-2.2">OAuth client가 mutual TLS 인증에 사용할 인증서의 기대 subject distinguished name을 <span>[<a href="#RFC4514">RFC4514</a>]</span>에 정의된 방식으로 나타낸 문자열이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-2.2">¶</a></dd>
+<dt id="section-2.1.2-2.3">tls_client_auth_san_dns</dt>
+<dd id="section-2.1.2-2.4">OAuth client가 mutual TLS 인증에 사용할 인증서에 들어 있을 것으로 기대하는 dNSName SAN 항목의 값을 담은 문자열이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-2.4">¶</a></dd>
+<dt id="section-2.1.2-2.5">tls_client_auth_san_uri</dt>
+<dd id="section-2.1.2-2.6">OAuth client가 mutual TLS 인증에 사용할 인증서에 들어 있을 것으로 기대하는 uniformResourceIdentifier SAN 항목의 값을 담은 문자열이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-2.6">¶</a></dd>
+<dt id="section-2.1.2-2.7">tls_client_auth_san_ip</dt>
+<dd id="section-2.1.2-2.8">IP 주소를 점으로 구분한 십진수 표기(IPv4) 또는 콜론으로 구분한 16진수 표기(IPv6, <span>[<a href="#RFC5952">RFC5952</a>]</span>에 정의됨)로 나타낸 문자열이다. 이 IP 주소는 OAuth client가 mutual TLS 인증에 사용할 인증서에 iPAddress SAN 항목으로 들어 있을 것으로 기대하는 값이다. <span><a href="https://www.rfc-editor.org/rfc/rfc5952#section-8">8절</a> [<a href="#RFC5952">RFC5952</a>]</span>에 따라 이 매개변수의 IP 주소와 인증서의 SAN 항목에 들어 있는 IP 주소는 이진 형식으로 비교한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-2.8">¶</a></dd>
+<dt id="section-2.1.2-2.9">tls_client_auth_san_email</dt>
+<dd id="section-2.1.2-2.10">OAuth client가 mutual TLS 인증에 사용할 인증서에 들어 있을 것으로 기대하는 rfc822Name SAN 항목의 값을 담은 문자열이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1.2-2.10">¶</a></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="self_signed_method">
+<section id="section-2.2">
+<h3 id="name-self-signed-certificate-mut"><a href="#section-2.2">2.2. </a><a href="#name-self-signed-certificate-mut">자체 서명 인증서 기반 mutual TLS 방식</a></h3>
+<p id="section-2.2-1">mutual TLS를 사용하는 이 OAuth client authentication 방식은 자체 서명 인증서를 사용한 client authentication을 지원하기 위한 것이다. 사전 조건으로 client는 자신의 X.509 인증서(<code>jwks</code> 사용, <span>[<a href="#RFC7591">RFC7591</a>]</span>에 정의됨) 또는 그 인증서의 신뢰할 수 있는 출처를 가리키는 참조(<code>jwks_uri</code> 사용, <span>[<a href="#RFC7591">RFC7591</a>]</span> 참조)를 authorization server에 등록한다. 인증 중에는 TLS를 사용해 해당 TLS handshake에서 제시된 인증서의 공개 키에 대응하는 개인 키를 client가 보유하는지 확인한다. PKI 방식과 달리 이 경우 서버는 client의 인증서 체인을 검증하지 않는다. client가 handshake 중에 제시한 인증서가 해당 client에 대해 설정되거나 등록된 인증서 중 하나와 일치하면 인증에 성공한다. 자체 서명 인증서 방식으로는 PKI를 유지하지 않고도 mutual TLS를 사용해 client를 인증할 수 있다. 또한 client의 <code>jwks_uri</code>와 함께 사용하면, client는 authorization server에 있는 해당 인증 데이터를 직접 변경하지 않고도 X.509 인증서를 교체할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-1">¶</a></p>
+<div id="metadata_auth_value_self_signed">
+<section id="section-2.2.1">
+<h4 id="name-self-signed-method-metadata"><a href="#section-2.2.1">2.2.1. </a><a href="#name-self-signed-method-metadata">자체 서명 방식의 메타데이터 값</a></h4>
+<p id="section-2.2.1-1">이 명세는 mutual TLS를 사용하는 client authentication의 자체 서명 인증서 방식을 위해 다음 인증 방식 메타데이터 값을 정의하고, 이를 ‘OAuth Token Endpoint Authentication Methods’ 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-1">¶</a></p>
+<dl id="section-2.2.1-2">
+<dt id="section-2.2.1-2.1">self_signed_tls_client_auth</dt>
+<dd id="section-2.2.1-2.2">authorization server에 대한 client authentication은 mutual TLS로 이루어지며, client가 자체 서명 인증서를 사용한다는 뜻이다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.1-2.2">¶</a></dd>
+</dl>
+</section>
+</div>
+<div id="client_metadata_self_signed">
+<section id="section-2.2.2">
+<h4 id="name-client-registration-metadata"><a href="#section-2.2.2">2.2.2. </a><a href="#name-client-registration-metadata">client 등록 메타데이터</a></h4>
+<p id="section-2.2.2-1">mutual TLS로 client authentication을 수행하면서 인증서를 client에 바인딩하는 자체 서명 인증서 방식에서는 <code>jwks_uri</code> 또는 <code>jwks</code>라는 기존 메타데이터 매개변수(<span>[<a href="#RFC7591">RFC7591</a>]</span>)를 사용해, JWK Set <span>[<a href="#RFC7517">RFC7517</a>]</span> 안의 JSON Web Key(JWK)를 통해 client의 인증서를 전달한다. <code>jwks</code> 메타데이터 매개변수는 client의 공개 키를 JWK 배열로 담은 JWK Set이고, <code>jwks_uri</code> 매개변수는 client의 JWK Set을 가리키는 URL이다. 인증서는 JWK Set 안의 개별 JWK에 있는 <code>x5c</code> 매개변수로 표현한다. 공개 키를 나타내는 JWK 멤버(예: RSA의 "n"과 "e", Elliptic Curve(EC)의 "x"와 "y")는 <span>[<a href="#RFC7518">RFC7518</a>]</span>에 따른 필수 매개변수이므로 여기서는 사용하지 않더라도 존재한다. 또한 <span><a href="https://www.rfc-editor.org/rfc/rfc7517#section-4.7">4.7절</a> [<a href="#RFC7517">RFC7517</a>]</span>에서는 <code>x5c</code> 매개변수의 첫 번째 인증서에 들어 있는 키가 JWK의 다른 해당 멤버들이 나타내는 공개 키와 일치해야 한다고 규정한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2.2-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="CertificateBoundAccessTokens">
+<section id="section-3">
+<h2 id="name-mutual-tls-client-certifica"><a href="#section-3">3. </a><a href="#name-mutual-tls-client-certifica">mutual TLS client certificate에 바인딩된 access token</a></h2>
+<p id="section-3-1">client가 token endpoint에 연결할 때 mutual TLS를 사용하면 authorization server는 발급하는 access token을 client certificate에 바인딩할 수 있다. 이렇게 바인딩하려면 보호된 리소스가 그 연결 관계를 확인할 수 있는 방식으로 인증서를 토큰과 연결한다. 예를 들어 <a href="#x5t">3.1절</a>의 구문에 따라 인증서 해시를 발급하는 access token에 직접 넣거나, <a href="#introspect">3.2절</a>에 설명된 token introspection을 사용할 수 있다. 이렇게 access token을 client certificate에 바인딩하면 그 바인딩을 authorization server에서 이루어지는 client authentication과 분리할 수 있다. 따라서 보호된 리소스에 접근할 때의 mutual TLS는 오로지 소유 증명 수단으로만 기능할 수 있다. authorization server와 보호된 리소스가 합의하면 인증서와 access token을 연결하는 다른 방법도 가능하지만, 이 명세의 범위에는 포함되지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<p id="section-3-2">resource server가 인증서에 바인딩된 access token을 사용하려면 리소스 접근의 일부 또는 전부에 mutual TLS를 사용한다는 사실을 미리 알아야 한다. 특히 access token 자체를 mutual TLS 요청 여부를 결정하는 데 사용할 수 없다. TLS 관점에서 access token은 TLS 핸드셰이크가 완료된 후에만 교환되는 "Application Data"인 반면, 최초의 CertificateRequest는 Application Data를 사용할 수 있게 되기 전인 핸드셰이크 도중에 일어나기 때문이다. TLS 1.2 재협상 <span>[<a href="#RFC5246">RFC5246</a>]</span>이나 TLS 1.3 핸드셰이크 후 인증 <span>[<a href="#RFC8446">RFC8446</a>]</span> 등을 통해 TLS client가 나중에 인증서를 제시할 기회가 있을 수 있지만, 이 문서는 그러한 기회를 활용하는 방식을 규정하지 않는다. 다른 방식도 가능하지만, mutual TLS를 사용하는 resource server는 일반적으로 자신이 호스팅하는 모든 리소스에 mutual TLS를 요구하거나, mutual TLS로 보호되는 리소스와 일반 리소스를 서로 다른 호스트 이름과 포트의 조합으로 제공할 것으로 예상된다. resource server의 정책을 authorization server(AS)와 어떻게 동기화하는지는 이 문서의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-2">¶</a></p>
+<p id="section-3-3">mutual TLS로 보호되는 리소스 접근 흐름에서 client는 <span>[<a href="#RFC6750">RFC6750</a>]</span>에 설명된 방식대로 보호된 리소스를 요청한다. 단, 이 요청은 token endpoint에서 mutual TLS에 사용한 것과 동일한 인증서로 상호 인증한 TLS 연결을 통해 보내야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-3-3">¶</a></p>
+<p id="section-3-4">보호된 리소스는 자신의 TLS 구현 계층에서 mutual TLS에 사용한 client certificate를 가져와야 하며(<span>MUST</span>), 그 인증서가 access token과 연결된 인증서와 일치하는지 확인해야 한다(<span>MUST</span>). 두 인증서가 일치하지 않으면 리소스 접근 시도를 오류로 거부해야 한다(<span>MUST</span>). 오류 응답에는 <span>[<a href="#RFC6750">RFC6750</a>]</span>에 따라 HTTP 401 상태 코드와 <code>invalid_token</code> 오류 코드를 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-4">¶</a></p>
+<p id="section-3-5">mutual TLS의 client certificate에 바인딩된 access token에 대한 서버와 client의 지원 여부를 알리는 메타데이터는 각각 <a href="#server_metadata_at">3.3</a>절과 <a href="#client_metadata_at">3.4</a>절에서 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-5">¶</a></p>
+<div id="x5t">
+<section id="section-3.1">
+<h3 id="name-jwt-certificate-thumbprint-"><a href="#section-3.1">3.1. </a><a href="#name-jwt-certificate-thumbprint-">JWT의 certificate thumbprint 확인 방법</a></h3>
+<p id="section-3.1-1">access token을 JSON Web Token(JWT) <span>[<a href="#RFC7519">RFC7519</a>]</span>으로 표현할 때, 인증서 해시 정보를 나타내는 데 권고되는(<span>SHOULD</span>) 방식은 이 문서에서 정의하는 <code>x5t#S256</code> 확인 방법 멤버를 사용하는 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.1-1">¶</a></p>
+<p id="section-3.1-2">JWT에서 인증서의 해시를 나타낼 수 있도록 이 명세는 X.509 인증서의 SHA-256 thumbprint를 위한 새 JWT Confirmation Method <span>[<a href="#RFC7800">RFC7800</a>]</span> 멤버 <code>x5t#S256</code>를 정의한다. <code>x5t#S256</code> 멤버의 값은 base64url <span>[<a href="#RFC4648">RFC4648</a>]</span>로 인코딩한 SHA-256 <span>[<a href="#SHS">SHS</a>]</span> 해시(thumbprint, fingerprint 또는 digest라고도 함)다. 이 해시는 DER 인코딩 <span>[<a href="#X690">X690</a>]</span>을 적용한 X.509 인증서 <span>[<a href="#RFC5280">RFC5280</a>]</span>를 대상으로 계산한다. base64url로 인코딩한 값에서는 끝에 붙는 패딩 문자 '='를 모두 빼야 하며(<span>MUST</span>), 줄바꿈이나 공백 문자 또는 그 밖의 추가 문자를 포함해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-3.1-2">¶</a></p>
+<p id="section-3.1-3">다음은 <code>x5t#S256</code> certificate thumbprint 확인 방법을 포함하는 JWT 페이로드의 예다. 이 명세에서 JWT에 새로 도입하는 내용은 예의 맨 아래에 있는 <code>cnf</code> 확인 방법 클레임이다. 이 클레임의 <code>x5t#S256</code> 확인 방법 멤버에는 access token이 바인딩된 client certificate의 해시가 값으로 들어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.1-3">¶</a></p>
+<span id="name-example-jwt-claims-set-with"></span><div id="eg_x5ts256jwt">
+<figure id="figure-2">
+<div id="section-3.1-4.1">
+<pre>
+  {
+    "iss": "https://server.example.com",
+    "sub": "ty.webb@example.com",
+    "exp": 1493726400,
+    "nbf": 1493722800,
+    "cnf":{
+      "x5t#S256": "bwcK0esc3ACC3DB2Y5_lESsXE8o9ltc05O89jdN-dg2"
+    }
+  }
+</pre>
+</div>
+<figcaption><a href="#figure-2">그림 2</a>: <a href="#name-example-jwt-claims-set-with">X.509 certificate thumbprint 확인 방법을 포함하는 JWT 클레임 집합의 예</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="introspect">
+<section id="section-3.2">
+<h3 id="name-confirmation-method-for-tok"><a href="#section-3.2">3.2. </a><a href="#name-confirmation-method-for-tok">token introspection을 위한 확인 방법</a></h3>
+<p id="section-3.2-1">OAuth 2.0 Token Introspection <span>[<a href="#RFC7662">RFC7662</a>]</span>은 보호된 리소스가 authorization server에 질의해 access token이 활성 상태인지 확인하고, 해당 토큰의 메타정보도 알아낼 수 있는 방법을 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.2-1">¶</a></p>
+<p id="section-3.2-2">mutual TLS의 client certificate에 바인딩된 access token의 경우, 해당 토큰이 바인딩된 인증서의 해시는 token introspection 응답의 메타정보로 보호된 리소스에 전달된다. 해시는 introspection 응답 JSON의 최상위 멤버인 <code>cnf</code> 안에 <code>x5t#S256</code> 멤버로 담아 전달한다. 이는 <a href="#x5t">3.1절</a>에 설명된 인증서 SHA-256 thumbprint 확인 방법과 같은 구조다. 보호된 리소스는 이 인증서 해시와 mutual TLS 인증에 사용된 client certificate의 해시를 비교하고, 두 해시가 일치하지 않으면 요청을 거부한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.2-2">¶</a></p>
+<p id="section-3.2-3">다음은 <code>x5t#S256</code> certificate thumbprint 확인 방법을 포함하는 활성 토큰의 introspection 응답 예다. 이 명세에서 introspection 응답에 새로 도입하는 내용은 예의 맨 아래에 있는 <code>cnf</code> 확인 방법이다. 그 안의 <code>x5t#S256</code> 확인 방법 멤버에는 access token이 바인딩된 client certificate의 해시가 값으로 들어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.2-3">¶</a></p>
+<span id="name-example-introspection-respo"></span><div id="eg_x5ts256intro">
+<figure id="figure-3">
+<div id="section-3.2-4.1">
+<div><pre>
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+
+  {
+    "active": true,
+    "iss": "https://server.example.com",
+    "sub": "ty.webb@example.com",
+    "exp": 1493726400,
+    "nbf": 1493722800,
+    "cnf":{
+      "x5t#S256": "bwcK0esc3ACC3DB2Y5_lESsXE8o9ltc05O89jdN-dg2"
+    }
+  }
+</pre></div>
+</div>
+<figcaption><a href="#figure-3">그림 3</a>: <a href="#name-example-introspection-respo">인증서에 바인딩된 access token의 introspection 응답 예</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="server_metadata_at">
+<section id="section-3.3">
+<h3 id="name-authorization-server-metada"><a href="#section-3.3">3.3. </a><a href="#name-authorization-server-metada">authorization server 메타데이터</a></h3>
+<p id="section-3.3-1">이 문서는 서버가 인증서에 바인딩된 access token을 발급할 수 있는지를 알리기 위해 다음과 같은 새 authorization server 메타데이터 <span>[<a href="#RFC8414">RFC8414</a>]</span> 매개변수를 도입한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.3-1">¶</a></p>
+<dl id="section-3.3-2">
+<dt id="section-3.3-2.1">tls_client_certificate_bound_access_tokens</dt>
+<dd id="section-3.3-2.2"><span>OPTIONAL</span>. 서버가 mutual TLS의 client certificate에 바인딩된 access token을 지원하는지 나타내는 불리언 값이다. 생략하면 기본값은 <code>false</code>이다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.3-2.2">¶</a></dd>
+</dl>
+</section>
+</div>
+<div id="client_metadata_at">
+<section id="section-3.4">
+<h3 id="name-client-registration-metadata-2"><a href="#section-3.4">3.4. </a><a href="#name-client-registration-metadata-2">client 등록 메타데이터</a></h3>
+<p id="section-3.4-1">client가 인증서에 바인딩된 access token을 사용할 의향이 있음을 알릴 수 있도록 다음과 같은 새 client 메타데이터 매개변수를 도입한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.4-1">¶</a></p>
+<dl id="section-3.4-2">
+<dt id="section-3.4-2.1">tls_client_certificate_bound_access_tokens</dt>
+<dd id="section-3.4-2.2"><span>OPTIONAL</span>. client가 mutual TLS의 client certificate에 바인딩된 access token을 사용할 의향이 있는지 나타내는 불리언 값이다. 생략하면 기본값은 <code>false</code>이다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.4-2.2">¶</a></dd>
+</dl>
+<p id="section-3.4-3">다만 mutual TLS의 client certificate에 바인딩된 토큰을 사용할 의향을 밝힌 client가 mutual TLS를 사용하지 않는 연결을 통해 token endpoint에 요청을 보내면, 오류를 반환할지 바인딩되지 않은 토큰을 발급할지는 authorization server가 재량으로 결정한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3.4-3">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="PubClient">
+<section id="section-4">
+<h2 id="name-public-clients-and-certific"><a href="#section-4">4. </a><a href="#name-public-clients-and-certific">public client와 인증서에 바인딩된 토큰</a></h2>
+<p id="section-4-1">mutual TLS를 이용한 OAuth client authentication과 인증서에 바인딩된 access token은 서로 독립적으로 사용할 수 있다. 예를 들어 mutual TLS를 이용한 OAuth client authentication을 사용하지 않고도 public client(<code>client_id</code>에 연결된 인증 자격 증명이 없는 client)를 위해 access token을 TLS client certificate에 바인딩할 수 있다. 이 경우 authorization server는 자체 서명 인증서 방식과 동일하게 TLS 스택을 구성하여, 핸드셰이크 중에 client가 제시하는 인증서가 신뢰할 수 있는 CA의 서명을 받았는지 검증하지 않는다. client의 개별 인스턴스는 authorization server와 resource server 양쪽에 대해 mutual TLS를 사용하기 위해 자체 서명 인증서를 만든다. authorization server는 OAuth 계층에서 client를 인증하는 데 mutual TLS 인증서를 사용하지 않는다. 대신 발급한 access token을 client가 대응하는 개인 키를 보유했음을 증명한 인증서에 바인딩한다. 이렇게 인증서에 바인딩된 access token은 해당 인증서와 그에 대응하는 개인 키를 보유하고, 이를 사용해 resource server와의 연결에서 mutual TLS를 협상하는 client만 사용할 수 있다. authorization server가 이와 같은 client에 refresh token을 발급할 때는 그 refresh token도 해당 인증서에 바인딩하고, 새로운 access token을 얻으려고 refresh token을 제시할 때 그 바인딩을 확인하는 것이 권고된다(<span>SHOULD</span>). refresh token 바인딩의 세부 구현은 authorization server의 재량에 맡긴다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+</section>
+</div>
+<div id="endpointAliases">
+<section id="section-5">
+<h2 id="name-metadata-for-mutual-tls-end"><a href="#section-5">5. </a><a href="#name-metadata-for-mutual-tls-end">mutual TLS용 endpoint 별칭 메타데이터</a></h2>
+<p id="section-5-1">client certificate 기반 mutual TLS를 협상할 때는 TLS 서버가 TLS client에 인증서를 요청한다(client가 요청 없이 인증서를 먼저 제시하지는 않는다). client가 인증서를 제시하지 않아도 연결을 계속할 수 있도록 서버에서 client certificate를 선택 사항으로 설정할 수는 있다. 그러나 서버가 인증서를 요청하는 행위 자체가 일부 client에서 원치 않는 동작을 유발할 수 있다. 특히 TLS client 역할을 하는 웹 브라우저는 서버가 인증서를 요청하면 대개 최종 사용자의 작업을 방해하는 인증서 선택 화면을 띄운다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-1">¶</a></p>
+<p id="section-5-2">mutual TLS를 사용하는 client와 일반 client를 모두 지원하는 authorization server는 서버 측의 mutual TLS 동작을 mutual TLS를 사용하려는 client로만 한정할 수 있다(<span>MAY</span>). 이렇게 하면 그 동작이 일반 client에 줄 수 있는 원치 않는 영향을 피할 수 있다. 이처럼 동작을 분리하기 쉽게 하려고 다음과 같은 authorization server 메타데이터 매개변수를 도입한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-2">¶</a></p>
+<dl id="section-5-3">
+<dt id="section-5-3.1">mtls_endpoint_aliases</dt>
+<dd id="section-5-3.2"><span>OPTIONAL</span>. 대체 authorization server endpoint를 담는 JSON 객체다. 이 객체가 있으면 mutual TLS를 사용하려는 OAuth client는 일반 endpoint보다 이 대체 endpoint를 우선 사용한다. 매개변수 값 자체는 보통 authorization server 메타데이터의 최상위 수준에 정의되는 <code>token_endpoint</code>, <code>revocation_endpoint</code>, <code>introspection_endpoint</code> 등의 endpoint 매개변수 하나 이상으로 구성된다. OAuth client authentication을 수행하거나 인증서에 바인딩된 토큰을 취득 또는 사용하기 위해, 혹은 두 목적 모두를 위해 mutual TLS를 사용하려는 OAuth client는 authorization server에 직접 요청할 때 다음 규칙을 반드시 따른다(<span>MUST</span>). <code>mtls_endpoint_aliases</code>에 해당 endpoint가 있으면 메타데이터의 최상위 수준에 정의된 같은 이름의 endpoint URL보다 그 별칭 URL을 우선 사용한다. <code>mtls_endpoint_aliases</code>에 해당 endpoint가 없으면 client는 authorization server 메타데이터의 최상위 수준에 정의된 일반 endpoint URL을 사용한다. <code>mtls_endpoint_aliases</code>의 메타데이터 매개변수 중 OAuth client가 직접 요청을 보내는 endpoint를 정의하지 않는 것은 의미가 없으므로 무시하는 것이 권고된다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-5-3.2">¶</a></dd>
+</dl>
+<p id="section-5-4">아래는 <code>mtls_endpoint_aliases</code> 매개변수가 포함된 authorization server 메타데이터 문서의 예다. 이 매개변수는 token endpoint, revocation endpoint, introspection endpoint의 별칭을 나타낸다. Mutual TLS를 사용하려는 OAuth client는 해당 일반 endpoint보다 이 별칭을 우선 사용한다. <code>mtls_endpoint_aliases</code>의 endpoint는 각각에 대응하는 일반 endpoint와 다른 호스트를 사용한다. 따라서 authorization server는 TLS의 <code>server_name</code> 확장 <span>[<a href="#RFC6066">RFC6066</a>]</span>을 이용하거나 실제로 별개의 호스트를 두어 TLS 동작을 필요에 따라 달리할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-4">¶</a></p>
+<span id="name-example-authorization-serve"></span><div id="as-meta">
+<figure id="figure-4">
+<div id="section-5-5.1">
+<pre>
+{
+  "issuer": "https://server.example.com",
+  "authorization_endpoint": "https://server.example.com/authz",
+  "token_endpoint": "https://server.example.com/token",
+  "introspection_endpoint": "https://server.example.com/introspect",
+  "revocation_endpoint": "https://server.example.com/revo",
+  "jwks_uri": "https://server.example.com/jwks",
+  "response_types_supported": ["code"],
+  "response_modes_supported": ["fragment","query","form_post"],
+  "grant_types_supported": ["authorization_code", "refresh_token"],
+  "token_endpoint_auth_methods_supported":
+                  ["tls_client_auth","client_secret_basic","none"],
+  "tls_client_certificate_bound_access_tokens": true,
+  "mtls_endpoint_aliases": {
+    "token_endpoint": "https://mtls.example.com/token",
+    "revocation_endpoint": "https://mtls.example.com/revo",
+    "introspection_endpoint": "https://mtls.example.com/introspect"
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4">그림 4</a>: <a href="#name-example-authorization-serve">mutual TLS endpoint 별칭을 포함한 authorization server 메타데이터 예시</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="Impl">
+<section id="section-6">
+<h2 id="name-implementation-consideratio"><a href="#section-6">6. </a><a href="#name-implementation-consideratio">구현 고려사항</a></h2>
+<div id="ImplAS">
+<section id="section-6.1">
+<h3 id="name-authorization-server"><a href="#section-6.1">6.1. </a><a href="#name-authorization-server">authorization server</a></h3>
+<p id="section-6.1-1">Authorization server는 지원하는 OAuth client authentication 방식에 맞게 TLS를 설정해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-1">¶</a></p>
+<p id="section-6.1-2">Mutual TLS를 이용한 client authentication과 함께 다른 client authentication 방식 또는 public client도 지원하는 authorization server는 mutual TLS를 선택 사항으로 둔다. 즉, 서버가 client certificate를 요청했는데 client가 이를 보내지 않아도 handshake를 계속할 수 있게 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-2">¶</a></p>
+<p id="section-6.1-3">Self-Signed Certificate 방식만 지원하려면 authorization server는 handshake 중에 client가 제시한 인증서가 신뢰하는 CA 인증서로 서명되었는지 검증하지 않도록 TLS 스택을 설정한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-3">¶</a></p>
+<p id="section-6.1-4"><a href="#CertificateBoundAccessTokens">3절</a>에서 설명하듯이, authorization server는 발급한 access token을 TLS client certificate에 바인딩한다. 따라서 client가 해당 개인 키를 보유하고 있음을 증명한 인증서에 대해서만 인증서에 바인딩된 토큰을 발급한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-4">¶</a></p>
+<p id="section-6.1-5">Authorization server는 authorization endpoint 등 다른 endpoint의 TLS 동작에 의도치 않은 영향을 주지 않도록, token endpoint와 그 밖에 client authentication이 필요한 endpoint를 별도의 호스트 이름이나 포트에서 제공하는 방안도 고려할 수 있다. <a href="#endpointAliases">5절</a>에서 설명하듯이, 별도의 호스트나 포트에서 기존 endpoint의 별칭으로 쓰일 별도 endpoint 집합을 제공하면 서버의 client certificate 요청이 미칠 수 있는 영향을 더 격리할 수 있다. Mutual TLS를 사용하려는 client는 일반 endpoint보다 이 별칭을 우선 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-5">¶</a></p>
+</section>
+</div>
+<div id="ImplRS">
+<section id="section-6.2">
+<h3 id="name-resource-server"><a href="#section-6.2">6.2. </a><a href="#name-resource-server">resource server</a></h3>
+<p id="section-6.2-1">OAuth에서는 역할과 책임을 나누어 resource server가 client authentication과 리소스 소유자(최종 사용자)의 인가 획득을 authorization server에 맡기도록 한다. Resource server는 client가 제시한 access token에 따라 인가 여부를 결정하지만 client 자체를 직접 인증하지는 않는다. Access token을 client certificate에 바인딩하는 방식과 보호된 리소스에서 소유 증명을 검증하는 방식은 client가 authorization server에 자신을 인증할 때 사용한 구체적인 방식과 독립적이다. 따라서 보호된 리소스에 접근할 때 mutual TLS는 소유 증명 수단으로만 쓰일 수 있다. 그러므로 이 문서에서 정의하는 어느 방식에서도 resource server가 client certificate의 신뢰 체인을 검증할 필요는 없다. 따라서 resource server는 handshake 중에 client가 제시한 인증서가 신뢰하는 CA 인증서로 서명되었는지 검증하지 않도록 TLS 스택을 설정한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.2-1">¶</a></p>
+</section>
+</div>
+<div id="ImplExp">
+<section id="section-6.3">
+<h3 id="name-certificate-expiration-and-"><a href="#section-6.3">6.3. </a><a href="#name-certificate-expiration-and-">인증서 만료와 인증서에 바인딩된 access token</a></h3>
+<p id="section-6.3-1"><a href="#CertificateBoundAccessTokens">3절</a>에서 설명하듯이, access token은 특정 client certificate에 바인딩되므로 보호된 리소스에 접근할 때도 같은 인증서로 mutual TLS를 수행해야 한다. 이는 client가 인증서를 갱신하면 access token이 무효화된다는 뜻이기도 하다. 이 경우 access token이 만료되었을 때와 마찬가지로, client가 새 access token을 요청하고(일반적으로 refresh token 사용) 보호된 리소스에 대한 요청을 다시 보내는 방식으로 처리할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.3-1">¶</a></p>
+</section>
+</div>
+<div id="ImplImplicit">
+<section id="section-6.4">
+<h3 id="name-implicit-grant-unsupported"><a href="#section-6.4">6.4. </a><a href="#name-implicit-grant-unsupported">implicit grant 미지원</a></h3>
+<p id="section-6.4-1">이 문서는 client에서 authorization server의 token endpoint로 연결되는 TLS 연결에서 제시한 client certificate에 access token을 바인딩하는 방법을 설명한다. 다만 implicit grant 흐름에서 authorization endpoint가 직접 발급하는 access token에 이러한 바인딩을 적용하는 것은 명시적으로 범위에서 제외한다. 최종 사용자는 웹 브라우저를 통해 authorization endpoint와 직접 상호작용하며, 사용자의 브라우저에서 client certificate를 쓰면 운영 및 사용성 문제가 생긴다. 따라서 implicit grant 흐름에서 발급되는 인증서에 바인딩된 access token을 지원하는 것은 바람직하지 않다. 인증서에 바인딩된 access token을 사용하려는 구현에서는 client가 token endpoint에 access token을 직접 요청하는 grant 유형(예: authorization code 또는 refresh token grant 유형)을 사용하는 것이 바람직하다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.4-1">¶</a></p>
+</section>
+</div>
+<div id="TTRP">
+<section id="section-6.5">
+<h3 id="name-tls-termination"><a href="#section-6.5">6.5. </a><a href="#name-tls-termination">TLS 종료</a></h3>
+<p id="section-6.5-1">Authorization server 또는 resource server는 로드 밸런서, 리버스 프록시 또는 그 밖의 네트워크 중개 장치에서 TLS 연결을 종료할 수 있다(<span>MAY</span>). 이 경우 중개 장치와 애플리케이션 서버 사이에서 client certificate 메타데이터를 안전하게 전달하는 방법은 이 명세의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.5-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="Security">
+<section id="section-7">
+<h2 id="name-security-considerations"><a href="#section-7">7. </a><a href="#name-security-considerations">보안 고려사항</a></h2>
+<section id="section-7.1">
+<h3 id="name-certificate-bound-refresh-t"><a href="#section-7.1">7.1. </a><a href="#name-certificate-bound-refresh-t">인증서에 바인딩된 refresh token</a></h3>
+<p id="section-7.1-1">OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749">RFC6749</a>]</span>는 authorization server(AS)가 refresh token을 그 발급 대상 client에 바인딩하고, confidential client(기밀 클라이언트)(AS에 인증 자격 증명을 설정한 client)는 refresh token을 제시할 때 AS에 자신을 인증하도록 요구한다. 따라서 client authentication에 <code>tls_client_auth</code> 또는 <code>self_signed_tls_client_auth</code> 방식을 사용하는 client에 발급된 refresh token은 client ID와 그에 수반되는 AS에 대한 (인증서 기반) 인증 요구사항을 통해 간접적으로 인증서에 바인딩된다. <a href="#PubClient">4절</a>에서는 public client(<code>client_id</code>에 연결된 인증 자격 증명이 없는 client)에 발급되는 인증서에 바인딩된 refresh token을 설명한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.1-1">¶</a></p>
+</section>
+<section id="section-7.2">
+<h3 id="name-certificate-thumbprint-bind"><a href="#section-7.2">7.2. </a><a href="#name-certificate-thumbprint-bind">certificate thumbprint 바인딩</a></h3>
+<p id="section-7.2-1"><a href="#x5t">3.1절</a>에서 규정하는 인증서와 access token 간의 바인딩은 인증서의 암호학적 해시를 사용한다. 이 방식은 해시 함수의 제2 역상 저항성이 충분히 높아, 같은 해시 출력값을 내는 다른 인증서를 찾거나 만드는 일이 계산상 실현 불가능하다는 데 의존한다. SHA-256 해시 함수는 앞서 말한 요건을 충족하면서 널리 사용할 수 있어 채택되었다. 앞으로 SHA-256이 아닌 다른 해시 함수로 certificate thumbprint를 계산할 필요가 생긴다면, 관련 JWT 확인 방식을 추가하기 위한 멤버를 정의하고 IANA "JWT Confirmation Methods" 레지스트리 <span>[<a href="#IANA.JWT.Claims">IANA.JWT.Claims</a>]</span>에 JWT <code>cnf</code> 멤버 값으로 등록하는 방안을 제안한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-1">¶</a></p>
+<p id="section-7.2-2">여러 알고리즘의 강도와 실행 가능한 공격에 대해 관련 분야에서 알려진 내용은 갑자기 달라질 수 있다. 경험상 보안 문서는 특정 시점의 판단을 담는 데 그친다. 독자는 이 문서에 적용되는 정오표나 업데이트가 있는지 찾아보는 것이 좋다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.2-2">¶</a></p>
+</section>
+<div id="TLSV">
+<section id="section-7.3">
+<h3 id="name-tls-versions-and-best-pract"><a href="#section-7.3">7.3. </a><a href="#name-tls-versions-and-best-pract">TLS 버전과 모범 사례</a></h3>
+<p id="section-7.3-1">이 문서는 인증서 기반 client authentication을 지원하는 모든 TLS 버전에 적용된다. 이 문서가 <span><a href="#RFC8446">TLS 1.3</a> [<a href="#RFC8446">RFC8446</a>]</span>과 <span><a href="#RFC5246">TLS 1.2</a> [<a href="#RFC5246">RFC5246</a>]</span>를 모두 인용하는 것은 작성 당시 1.3이 최신 버전인 반면 1.2는 가장 널리 배포된 버전이었기 때문이다. 버전 권고를 비롯한 TLS의 일반적인 구현 및 보안 고려사항은 <span>[<a href="#BCP195">BCP195</a>]</span>에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-1">¶</a></p>
+<p id="section-7.3-2">TLS 인증서 검증(client 인증서와 서버 인증서 모두)에는 신뢰할 수 있는 인증 기관(CA)의 로컬 데이터베이스가 필요하다. 어떤 CA를 신뢰할지, 그 신뢰 여부를 어떻게 판단할지는 이 문서의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.3-2">¶</a></p>
+</section>
+</div>
+<div id="certspoofing">
+<section id="section-7.4">
+<h3 id="name-x509-certificate-spoofing"><a href="#section-7.4">7.4. </a><a href="#name-x509-certificate-spoofing">X.509 인증서 스푸핑</a></h3>
+<p id="section-7.4-1">PKI 방식으로 client authentication을 수행하는 경우, 공격자는 subject(DN 또는 SAN)가 같지만 authorization server가 신뢰하는 다른 CA에서 발급한 인증서로 client를 사칭하려 할 수 있다. 이러한 위협에 대응하려면 authorization server는 인증서 발급 정책이 자신의 보안 요구사항을 충족하는 제한된 수의 CA만 신뢰 앵커로 받아들이는 것이 권고된다(<span>SHOULD</span>). 이때 client와 서버가, 서버에서 인증서 체인을 구성하고 검증하는 데 사용하는 신뢰 앵커 집합에 대해 별도의 경로로 합의한다는 전제가 있다. 이 전제 없이 subject로 client certificate를 식별하면 서버가 인증서 스푸핑 공격에 노출된다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.4-1">¶</a></p>
+</section>
+</div>
+<section id="section-7.5">
+<h3 id="name-x509-certificate-parsing-an"><a href="#section-7.5">7.5. </a><a href="#name-x509-certificate-parsing-an">X.509 인증서 파싱 및 검증의 복잡성</a></h3>
+<p id="section-7.5-1">
+X.509 인증서와 인증서 체인을 파싱하고 검증하는 일은 복잡하며, 과거에는 구현 오류로 보안 취약점이 드러난 적이 있다. 검증이 복잡한 이유에는 다음과 같은 항목이 포함되며, 이에 국한되지 않는다. <span>[<a href="#CX5P">CX5P</a>]</span> <span>[<a href="#DCW">DCW</a>]</span> <span>[<a href="#RFC5280">RFC5280</a>]</span>:<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-1">¶</a></p>
+<ul>
+<li id="section-7.5-2.1">기본 제약 조건, 기본 및 확장 키 용도 제약 조건, 유효 기간, 중요 확장 필드를 확인한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.1">¶</a>
+</li>
+<li id="section-7.5-2.2">길이가 명시된 ASN.1 문자열에 포함된 NUL 바이트와 subject 이름에 나타나는 표준형이 아니거나 정규화되지 않은 문자열 표현을 처리한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.2">¶</a>
+</li>
+<li id="section-7.5-2.3">subject 이름에서 와일드카드 패턴을 처리한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.3">¶</a>
+</li>
+<li id="section-7.5-2.4">인증서 체인을 재귀적으로 검증하고 인증서 폐기 여부를 확인한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-2.4">¶</a>
+</li>
+</ul>
+<p id="section-7.5-3">
+이러한 이유로 구현자는 X.509 인증서 체인을 검증할 때 널리 쓰이고 충분히 테스트된 X.509 라이브러리(예를 들어, 널리 쓰이는 TLS 라이브러리가 사용하는 것)를 사용하는 것이 권장되며(<span>SHOULD</span>), X.509 인증서 검증 절차를 직접 작성하려고 시도하지 않는 것이 권장된다(<span>SHOULD NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-7.5-3">¶</a></p>
+</section>
+</section>
+</div>
+<div id="Privacy">
+<section id="section-8">
+<h2 id="name-privacy-considerations">
+<a href="#section-8">8. </a><a href="#name-privacy-considerations">개인정보 보호 고려사항</a>
+</h2>
+<p id="section-8-1">
+TLS 1.3 이전 버전에서는 최초 핸드셰이크에서 client certificate를 암호화하지 않고 전송하므로, 제3자가 이를 이용해 client 활동을 감시하거나 추적하고 서로 연관 지을 가능성이 있다. 상당수의 최종 사용자를 대신해 동작하는 client는 전체 client 활동 속에서 개별 사용자의 활동을 구별할 수 없으므로 크게 우려할 일은 아닐 가능성이 높다. 그러나 모바일 기기의 네이티브 애플리케이션처럼 한 명의 최종 사용자를 대신하는 client는 가능한 한 TLS 1.3을 사용하거나, 이전 버전에서 mutual TLS를 사용할 경우 개인정보 보호에 미칠 수 있는 영향을 고려하는 것이 바람직하다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-1">¶</a></p>
+</section>
+</div>
+<div id="IANA">
+<section id="section-9">
+<h2 id="name-iana-considerations">
+<a href="#section-9">9. </a><a href="#name-iana-considerations">IANA 고려사항</a>
+</h2>
+<section id="section-9.1">
+<h3 id="name-jwt-confirmation-methods-re">
+<a href="#section-9.1">9.1. </a><a href="#name-jwt-confirmation-methods-re">JWT 확인 방식 등록</a>
+</h3>
+<p id="section-9.1-1">
+이 명세에 따라 다음 값이 IANA의 "JWT Confirmation Methods" 레지스트리 <span>[<a href="#IANA.JWT.Claims">IANA.JWT.Claims</a>]</span>에 등록되었다. 이 레지스트리는 JWT의 <code>cnf</code> 멤버 값을 위한 것으로, <span>[<a href="#RFC7800">RFC7800</a>]</span>에서 마련했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-1">¶</a></p>
+<dl id="section-9.1-2">
+<dt id="section-9.1-2.1">확인 방식 값:</dt>
+<dd id="section-9.1-2.2">
+<code>x5t#S256</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-2.2">¶</a>
+</dd>
+<dt id="section-9.1-2.3">확인 방식 설명:</dt>
+<dd id="section-9.1-2.4">X.509 Certificate SHA-256 Thumbprint<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-2.4">¶</a>
+</dd>
+<dt id="section-9.1-2.5">변경 관리 주체:</dt>
+<dd id="section-9.1-2.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-2.6">¶</a>
+</dd>
+<dt id="section-9.1-2.7">명세 문서:</dt>
+<dd id="section-9.1-2.8">
+RFC 8705의 <a href="#x5t">3.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-2.8">¶</a>
+</dd>
+</dl>
+</section>
+<section id="section-9.2">
+<h3 id="name-authorization-server-metadat">
+<a href="#section-9.2">9.2. </a><a href="#name-authorization-server-metadat">authorization server 메타데이터 등록</a>
+</h3>
+<p id="section-9.2-1">
+이 명세에 따라 다음 값이 IANA의 "OAuth Authorization Server Metadata" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록되었다. 이 레지스트리는 <span>[<a href="#RFC8414">RFC8414</a>]</span>에서 마련했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-1">¶</a></p>
+<dl id="section-9.2-2">
+<dt id="section-9.2-2.1">메타데이터 이름:</dt>
+<dd id="section-9.2-2.2">
+<code>tls_client_certificate_bound_access_tokens</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.2">¶</a>
+</dd>
+<dt id="section-9.2-2.3">메타데이터 설명:</dt>
+<dd id="section-9.2-2.4">authorization server가 mutual TLS의 client certificate에 바인딩된 access token을 지원하는지를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.4">¶</a>
+</dd>
+<dt id="section-9.2-2.5">변경 관리 주체:</dt>
+<dd id="section-9.2-2.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.6">¶</a>
+</dd>
+<dt id="section-9.2-2.7">명세 문서:</dt>
+<dd id="section-9.2-2.8">
+RFC 8705의 <a href="#server_metadata_at">3.3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.2-3">
+<dt id="section-9.2-3.1">메타데이터 이름:</dt>
+<dd id="section-9.2-3.2">
+<code>mtls_endpoint_aliases</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.2-3.2">¶</a>
+</dd>
+<dt id="section-9.2-3.3">메타데이터 설명:</dt>
+<dd id="section-9.2-3.4">authorization server의 대체 endpoint를 담은 JSON 객체다. mutual TLS를 사용하려는 client는 일반 endpoint보다 이 대체 endpoint를 우선 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-3.4">¶</a>
+</dd>
+<dt id="section-9.2-3.5">변경 관리 주체:</dt>
+<dd id="section-9.2-3.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-3.6">¶</a>
+</dd>
+<dt id="section-9.2-3.7">명세 문서:</dt>
+<dd id="section-9.2-3.8">
+RFC 8705의 <a href="#endpointAliases">5절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.2-3.8">¶</a>
+</dd>
+</dl>
+</section>
+<section id="section-9.3">
+<h3 id="name-token-endpoint-authenticati">
+<a href="#section-9.3">9.3. </a><a href="#name-token-endpoint-authenticati">token endpoint 인증 방식 등록</a>
+</h3>
+<p id="section-9.3-1">
+이 명세에 따라 다음 값이 IANA의 "OAuth Token Endpoint Authentication Methods" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록되었다. 이 레지스트리는 <span>[<a href="#RFC7591">RFC7591</a>]</span>에서 마련했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-1">¶</a></p>
+<dl id="section-9.3-2">
+<dt id="section-9.3-2.1">token endpoint 인증 방식 이름:</dt>
+<dd id="section-9.3-2.2">
+<code>tls_client_auth</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.2">¶</a>
+</dd>
+<dt id="section-9.3-2.3">변경 관리 주체:</dt>
+<dd id="section-9.3-2.4">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.4">¶</a>
+</dd>
+<dt id="section-9.3-2.5">명세 문서:</dt>
+<dd id="section-9.3-2.6">
+RFC 8705의 <a href="#metadata_auth_value_pki">2.1.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.6">¶</a>
+</dd>
+</dl>
+<dl id="section-9.3-3">
+<dt id="section-9.3-3.1">token endpoint 인증 방식 이름:<br/>
+</dt>
+<dd id="section-9.3-3.2">
+<code>self_signed_tls_client_​auth</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.3-3.2">¶</a>
+</dd>
+<dt id="section-9.3-3.3">변경 관리 주체:</dt>
+<dd id="section-9.3-3.4">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-3.4">¶</a>
+</dd>
+<dt id="section-9.3-3.5">명세 문서:</dt>
+<dd id="section-9.3-3.6">
+RFC 8705의 <a href="#metadata_auth_value_self_signed">2.2.1절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.3-3.6">¶</a>
+</dd>
+</dl>
+</section>
+<section id="section-9.4">
+<h3 id="name-token-introspection-respons">
+<a href="#section-9.4">9.4. </a><a href="#name-token-introspection-respons">token introspection 응답 등록</a>
+</h3>
+<p id="section-9.4-1">
+"Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)" <span>[<a href="#RFC7800">RFC7800</a>]</span>은 JWT에 확인 키 정보를 담을 수 있도록 <code>cnf</code> (confirmation) 클레임을 정의했다. 그러나 같은 소유 증명 의미 체계는 token introspection을 거치는 access token에도 유용하다. 이 경우 보호된 리소스는 token introspection 응답의 메타정보로 확인 키 데이터를 얻고 이를 소유 증명 검증에 사용한다. 따라서 이 명세는 OAuth 2.0 token introspection <span>[<a href="#RFC7662">RFC7662</a>]</span>을 위해 <code>cnf</code> 구조를 사용하는 소유 증명 의미 체계를 정의하고 등록한다. OAuth token introspection 응답의 최상위 멤버로 포함될 때 <code>cnf</code>는 <span>[<a href="#RFC7800">RFC7800</a>]</span>에서 정의한 같은 이름의 클레임과 의미 및 형식이 동일하다. 이 명세에서 명시적으로 사용하는 확인 방식 멤버는 <code>x5t#S256</code>뿐이지만(<a href="#introspect">3.2절</a> 참조), 더 구체적인 certificate thumbprint 확인 방식을 정의하고 사용하려면 상위 구조인 <code>cnf</code>를 introspection 응답 멤버로 정의하고 등록해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.4-1">¶</a></p>
+<p id="section-9.4-2">
+이에 따라 다음 값이 IANA의 "OAuth Token Introspection Response" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록되었다. 이 레지스트리는 <span>[<a href="#RFC7662">RFC7662</a>]</span>에서 마련했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.4-2">¶</a></p>
+<dl id="section-9.4-3">
+<dt id="section-9.4-3.1">클레임 이름:</dt>
+<dd id="section-9.4-3.2">
+<code>cnf</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.4-3.2">¶</a>
+</dd>
+<dt id="section-9.4-3.3">클레임 설명:</dt>
+<dd id="section-9.4-3.4">Confirmation<a aria-label="문단 링크" class="st-permalink" href="#section-9.4-3.4">¶</a>
+</dd>
+<dt id="section-9.4-3.5">변경 관리 주체:</dt>
+<dd id="section-9.4-3.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.4-3.6">¶</a>
+</dd>
+<dt id="section-9.4-3.7">명세 문서:</dt>
+<dd id="section-9.4-3.8">
+<span>[<a href="#RFC7800">RFC7800</a>]</span> 및 RFC 8705<a aria-label="문단 링크" class="st-permalink" href="#section-9.4-3.8">¶</a>
+</dd>
+</dl>
+</section>
+<section id="section-9.5">
+<h3 id="name-dynamic-client-registration">
+<a href="#section-9.5">9.5. </a><a href="#name-dynamic-client-registration">동적 client 등록 메타데이터 등록</a>
+</h3>
+<p id="section-9.5-1">
+이 명세에 따라 다음 client 메타데이터 정의가 IANA의 "OAuth Dynamic Client Registration Metadata" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 등록되었다. 이 레지스트리는 <span>[<a href="#RFC7591">RFC7591</a>]</span>에서 마련했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-1">¶</a></p>
+<dl id="section-9.5-2">
+<dt id="section-9.5-2.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-2.2">
+<code>tls_client_certificate_bound_access_tokens</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-2.2">¶</a>
+</dd>
+<dt id="section-9.5-2.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-2.4">client가 mutual TLS의 client certificate에 바인딩된 access token을 사용할 의사가 있음을 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-2.4">¶</a>
+</dd>
+<dt id="section-9.5-2.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-2.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-2.6">¶</a>
+</dd>
+<dt id="section-9.5-2.7">
+명세 문서:</dt>
+<dd id="section-9.5-2.8">
+RFC 8705의 <a href="#client_metadata_at">3.4절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-2.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.5-3">
+<dt id="section-9.5-3.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-3.2">
+<code>tls_client_auth_subject_dn</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-3.2">¶</a>
+</dd>
+<dt id="section-9.5-3.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-3.4">client certificate에서 예상하는 subject DN을 지정하는 문자열 값이다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-3.4">¶</a>
+</dd>
+<dt id="section-9.5-3.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-3.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-3.6">¶</a>
+</dd>
+<dt id="section-9.5-3.7">
+명세 문서:</dt>
+<dd id="section-9.5-3.8">
+RFC 8705의 <a href="#client_metadata_pki">2.1.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-3.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.5-4">
+<dt id="section-9.5-4.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-4.2">
+<code>tls_client_auth_san_dns</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-4.2">¶</a>
+</dd>
+<dt id="section-9.5-4.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-4.4">client certificate에서 예상하는 dNSName SAN 항목을 지정하는 문자열 값이다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-4.4">¶</a>
+</dd>
+<dt id="section-9.5-4.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-4.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-4.6">¶</a>
+</dd>
+<dt id="section-9.5-4.7">
+명세 문서:</dt>
+<dd id="section-9.5-4.8">
+RFC 8705의 <a href="#client_metadata_pki">2.1.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-4.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.5-5">
+<dt id="section-9.5-5.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-5.2">
+<code>tls_client_auth_san_uri</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-5.2">¶</a>
+</dd>
+<dt id="section-9.5-5.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-5.4">client certificate에서 예상하는 uniformResourceIdentifier SAN 항목을 지정하는 문자열 값이다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-5.4">¶</a>
+</dd>
+<dt id="section-9.5-5.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-5.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-5.6">¶</a>
+</dd>
+<dt id="section-9.5-5.7">
+명세 문서:</dt>
+<dd id="section-9.5-5.8">
+RFC 8705의 <a href="#client_metadata_pki">2.1.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-5.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.5-6">
+<dt id="section-9.5-6.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-6.2">
+<code>tls_client_auth_san_ip</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-6.2">¶</a>
+</dd>
+<dt id="section-9.5-6.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-6.4">client certificate에서 예상하는 iPAddress SAN 항목을 지정하는 문자열 값이다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-6.4">¶</a>
+</dd>
+<dt id="section-9.5-6.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-6.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-6.6">¶</a>
+</dd>
+<dt id="section-9.5-6.7">
+명세 문서:</dt>
+<dd id="section-9.5-6.8">
+RFC 8705의 <a href="#client_metadata_pki">2.1.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-6.8">¶</a>
+</dd>
+</dl>
+<dl id="section-9.5-7">
+<dt id="section-9.5-7.1">
+client 메타데이터 이름:</dt>
+<dd id="section-9.5-7.2">
+<code>tls_client_auth_san_email</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-7.2">¶</a>
+</dd>
+<dt id="section-9.5-7.3">
+client 메타데이터 설명:</dt>
+<dd id="section-9.5-7.4">client certificate에서 예상하는 rfc822Name SAN 항목을 지정하는 문자열 값이다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-7.4">¶</a>
+</dd>
+<dt id="section-9.5-7.5">
+변경 관리 주체:</dt>
+<dd id="section-9.5-7.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-9.5-7.6">¶</a>
+</dd>
+<dt id="section-9.5-7.7">
+명세 문서:</dt>
+<dd id="section-9.5-7.8">
+RFC 8705의 <a href="#client_metadata_pki">2.1.2절</a><a aria-label="문단 링크" class="st-permalink" href="#section-9.5-7.8">¶</a>
+</dd>
+</dl>
+</section>
+</section>
+</div>
+<section id="section-10">
+<h2 id="name-references">
+<a href="#section-10">10. </a><a href="#name-references">참고문헌</a>
+</h2>
+<section id="section-10.1">
+<h3 id="name-normative-references">
+<a href="#section-10.1">10.1. </a><a href="#name-normative-references">규범 참고문헌</a>
+</h3>
+<dl>
+<dt id="BCP195">[BCP195]</dt>
+<dd>
+<span>Sheffer, Y.</span><span>, Holz, R.</span><span>, and P. Saint-Andre</span>, <span>"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span>BCP 195</span>, <span>RFC 7525</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp195">https://www.rfc-editor.org/info/bcp195</a>&gt;</span>. </dd>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd>
+<span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time>March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dt id="RFC4514">[RFC4514]</dt>
+<dd>
+<span>Zeilenga, K., Ed.</span>, <span>"Lightweight Directory Access Protocol (LDAP): String Representation of Distinguished Names"</span>, <span>RFC 4514</span>, <span>DOI 10.17487/RFC4514</span>, <time>June 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4514">https://www.rfc-editor.org/info/rfc4514</a>&gt;</span>. </dd>
+<dt id="RFC4648">[RFC4648]</dt>
+<dd>
+<span>Josefsson, S.</span>, <span>"The Base16, Base32, and Base64 Data Encodings"</span>, <span>RFC 4648</span>, <span>DOI 10.17487/RFC4648</span>, <time>October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+<dt id="RFC5246">[RFC5246]</dt>
+<dd>
+<span>Dierks, T.</span><span> and E. Rescorla</span>, <span>"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span>RFC 5246</span>, <span>DOI 10.17487/RFC5246</span>, <time>August 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5246">https://www.rfc-editor.org/info/rfc5246</a>&gt;</span>. </dd>
+<dt id="RFC5280">[RFC5280]</dt>
+<dd>
+<span>Cooper, D.</span><span>, Santesson, S.</span><span>, Farrell, S.</span><span>, Boeyen, S.</span><span>, Housley, R.</span><span>, and W. Polk</span>, <span>"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span>RFC 5280</span>, <span>DOI 10.17487/RFC5280</span>, <time>May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5280">https://www.rfc-editor.org/info/rfc5280</a>&gt;</span>. </dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd>
+<span>Hardt, D., Ed.</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time>October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dt id="RFC6750">[RFC6750]</dt>
+<dd>
+<span>Jones, M.</span><span> and D. Hardt</span>, <span>"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span>RFC 6750</span>, <span>DOI 10.17487/RFC6750</span>, <time>October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>. </dd>
+<dt id="RFC7517">[RFC7517]</dt>
+<dd>
+<span>Jones, M.</span>, <span>"JSON Web Key (JWK)"</span>, <span>RFC 7517</span>, <span>DOI 10.17487/RFC7517</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7517">https://www.rfc-editor.org/info/rfc7517</a>&gt;</span>. </dd>
+<dt id="RFC7519">[RFC7519]</dt>
+<dd>
+<span>Jones, M.</span><span>, Bradley, J.</span><span>, and N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dt id="RFC7591">[RFC7591]</dt>
+<dd>
+<span>Richer, J., Ed.</span><span>, Jones, M.</span><span>, Bradley, J.</span><span>, Machulak, M.</span><span>, and P. Hunt</span>, <span>"OAuth 2.0 Dynamic Client Registration Protocol"</span>, <span>RFC 7591</span>, <span>DOI 10.17487/RFC7591</span>, <time>July 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7591">https://www.rfc-editor.org/info/rfc7591</a>&gt;</span>. </dd>
+<dt id="RFC7662">[RFC7662]</dt>
+<dd>
+<span>Richer, J., Ed.</span>, <span>"OAuth 2.0 Token Introspection"</span>, <span>RFC 7662</span>, <span>DOI 10.17487/RFC7662</span>, <time>October 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>&gt;</span>. </dd>
+<dt id="RFC7800">[RFC7800]</dt>
+<dd>
+<span>Jones, M.</span><span>, Bradley, J.</span><span>, and H. Tschofenig</span>, <span>"Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)"</span>, <span>RFC 7800</span>, <span>DOI 10.17487/RFC7800</span>, <time>April 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7800">https://www.rfc-editor.org/info/rfc7800</a>&gt;</span>. </dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd>
+<span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time>May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dt id="RFC8414">[RFC8414]</dt>
+<dd>
+<span>Jones, M.</span><span>, Sakimura, N.</span><span>, and J. Bradley</span>, <span>"OAuth 2.0 Authorization Server Metadata"</span>, <span>RFC 8414</span>, <span>DOI 10.17487/RFC8414</span>, <time>June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<dt id="RFC8446">[RFC8446]</dt>
+<dd>
+<span>Rescorla, E.</span>, <span>"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span>RFC 8446</span>, <span>DOI 10.17487/RFC8446</span>, <time>August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
+<dt id="SHS">[SHS]</dt>
+<dd>
+<span>National Institute of Standards and Technology (NIST)</span>, <span>"Secure Hash Standard (SHS)"</span>, <span>FIPS PUB 180-4</span>, <span>DOI 10.6028/NIST.FIPS.180-4</span>, <time>August 2015</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf</a>&gt;</span>. </dd>
+<dt id="X690">[X690]</dt>
+<dd>
+<span>ITU-T</span>, <span>"Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"</span>, <span>ITU-T Recommendation X.690</span>, <time>August 2015</time>. </dd>
+</dl>
+</section>
+<section id="section-10.2">
+<h3 id="name-informative-references">
+<a href="#section-10.2">10.2. </a><a href="#name-informative-references">참고용 문헌</a>
+</h3>
+<dl>
+<dt id="CX5P">[CX5P]</dt>
+<dd>
+<span>Wong, D.</span>, <span>"Common x509 certificate validation/creation pitfalls"</span>, <time>September 2016</time>, <span>&lt;<a href="https://www.cryptologie.net/article/374/common-x509-certificate-validationcreation-pitfalls">https://www.cryptologie.net/article/374/common-x509-certificate-validationcreation-pitfalls</a>&gt;</span>. </dd>
+<dt id="DCW">[DCW]</dt>
+<dd>
+<span>Georgiev, M.</span><span>, Iyengar, S.</span><span>, Jana, S.</span><span>, Anubhai, R.</span><span>, Boneh, D.</span><span>, and V. Shmatikov</span>, <span>"The Most Dangerous Code in the World: Validating SSL Certificates in Non-Browser Software"</span>, <span>DOI 10.1145/2382196.2382204</span>, <time>October 2012</time>, <span>&lt;<a href="http://www.cs.utexas.edu/~shmat/shmat_ccs12.pdf">http://www.cs.utexas.edu/~shmat/shmat_ccs12.pdf</a>&gt;</span>. </dd>
+<dt id="IANA.JWT.Claims">[IANA.JWT.Claims]</dt>
+<dd>
+<span>IANA</span>, <span>"JSON Web Token Claims"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jwt">https://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+<dd>
+<span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>. </dd>
+<dt id="OpenID.CIBA">[OpenID.CIBA]</dt>
+<dd>
+<span>Fernandez, G.</span><span>, Walter, F.</span><span>, Nennker, A.</span><span>, Tonge, D.</span><span>, and B. Campbell</span>, <span>"OpenID Connect Client Initiated Backchannel Authentication Flow - Core 1.0"</span>, <time>16 January 2019</time>, <span>&lt;<a href="https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html">https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html</a>&gt;</span>. </dd>
+<dt id="RFC4517">[RFC4517]</dt>
+<dd>
+<span>Legg, S., Ed.</span>, <span>"Lightweight Directory Access Protocol (LDAP): Syntaxes and Matching Rules"</span>, <span>RFC 4517</span>, <span>DOI 10.17487/RFC4517</span>, <time>June 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4517">https://www.rfc-editor.org/info/rfc4517</a>&gt;</span>. </dd>
+<dt id="RFC5952">[RFC5952]</dt>
+<dd>
+<span>Kawamura, S.</span><span> and M. Kawashima</span>, <span>"A Recommendation for IPv6 Address Text Representation"</span>, <span>RFC 5952</span>, <span>DOI 10.17487/RFC5952</span>, <time>August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5952">https://www.rfc-editor.org/info/rfc5952</a>&gt;</span>. </dd>
+<dt id="RFC6066">[RFC6066]</dt>
+<dd>
+<span>Eastlake 3rd, D.</span>, <span>"Transport Layer Security (TLS) Extensions: Extension Definitions"</span>, <span>RFC 6066</span>, <span>DOI 10.17487/RFC6066</span>, <time>January 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6066">https://www.rfc-editor.org/info/rfc6066</a>&gt;</span>. </dd>
+<dt id="RFC7009">[RFC7009]</dt>
+<dd>
+<span>Lodderstedt, T., Ed.</span><span>, Dronia, S.</span><span>, and M. Scurtescu</span>, <span>"OAuth 2.0 Token Revocation"</span>, <span>RFC 7009</span>, <span>DOI 10.17487/RFC7009</span>, <time>August 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7009">https://www.rfc-editor.org/info/rfc7009</a>&gt;</span>. </dd>
+<dt id="RFC7518">[RFC7518]</dt>
+<dd>
+<span>Jones, M.</span>, <span>"JSON Web Algorithms (JWA)"</span>, <span>RFC 7518</span>, <span>DOI 10.17487/RFC7518</span>, <time>May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>. </dd>
+<dt id="I-D.ietf-oauth-token-binding">[TOKEN]</dt>
+<dd>
+<span>Jones, M.</span><span>, Campbell, B.</span><span>, Bradley, J.</span><span>, and W. Denniss</span>, <span>"OAuth 2.0 Token Binding"</span>, <span>Work in Progress</span>, <span>Internet-Draft, draft-ietf-oauth-token-binding-08</span>, <time>19 October 2018</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-08">https://tools.ietf.org/html/draft-ietf-oauth-token-binding-08</a>&gt;</span>. </dd>
+</dl>
+</section>
+</section>
+<div id="example">
+<section id="section-appendix.a">
+<h2 id="name-example-cnf-claim-certifica">
+<a href="#section-appendix.a">부록 A. </a><a href="#name-example-cnf-claim-certifica">"cnf" 클레임, 인증서 및 JWK 예시</a>
+</h2>
+<p id="section-appendix.a-1">
+        참고로, <code>x5t#S256</code> 값과 그 값을 계산하는 데 사용한 X.509 인증서를 각각 아래의 그림 <a href="#cnf">5</a>와 그림 <a href="#pem">6</a>에 예시로 제시한다. <code>x5c</code> 멤버를 포함해 해당 인증서의 공개 키를 JWK로 나타낸 예도 <a href="#jwk">그림 7</a>에 제시한다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.a-1">¶</a></p>
+<span id="name-x5ts256-confirmation-claim"></span><div id="cnf">
+<figure id="figure-5">
+<div id="section-appendix.a-2.1">
+<pre>
+"cnf":{"x5t#S256":"A4DtL2JmUMhAsvJj5tKyn64SqzmuXbMrJa0n761y5v0"}
+</pre>
+</div>
+<figcaption><a href="#figure-5">그림 5</a>:
+<a href="#name-x5ts256-confirmation-claim">x5t#S256 확인 클레임</a>
+</figcaption></figure>
+</div>
+<span id="name-pem-encoded-self-signed-cer"></span><div id="pem">
+<figure id="figure-6">
+<div id="section-appendix.a-3.1">
+<div><pre>
+-----BEGIN CERTIFICATE-----
+MIIBBjCBrAIBAjAKBggqhkjOPQQDAjAPMQ0wCwYDVQQDDARtdGxzMB4XDTE4MTAx
+ODEyMzcwOVoXDTIyMDUwMjEyMzcwOVowDzENMAsGA1UEAwwEbXRsczBZMBMGByqG
+SM49AgEGCCqGSM49AwEHA0IABNcnyxwqV6hY8QnhxxzFQ03C7HKW9OylMbnQZjjJ
+/Au08/coZwxS7LfA4vOLS9WuneIXhbGGWvsDSb0tH6IxLm8wCgYIKoZIzj0EAwID
+SQAwRgIhAP0RC1E+vwJD/D1AGHGzuri+hlV/PpQEKTWUVeORWz83AiEA5x2eXZOV
+bUlJSGQgjwD5vaUaKlLR50Q2DmFfQj1L+SY=
+-----END CERTIFICATE-----</pre></div>
+</div>
+<figcaption><a href="#figure-6">그림 6</a>:
+<a href="#name-pem-encoded-self-signed-cer">PEM으로 인코딩한 자체 서명 인증서</a>
+</figcaption></figure>
+</div>
+<span id="name-json-web-key"></span><div id="jwk">
+<figure id="figure-7">
+<div id="section-appendix.a-4.1">
+<pre>
+{
+ "kty":"EC",
+ "x":"1yfLHCpXqFjxCeHHHMVDTcLscpb07KUxudBmOMn8C7Q",
+ "y":"8_coZwxS7LfA4vOLS9WuneIXhbGGWvsDSb0tH6IxLm8",
+ "crv":"P-256",
+ "x5c":[
+  "MIIBBjCBrAIBAjAKBggqhkjOPQQDAjAPMQ0wCwYDVQQDDARtdGxzMB4XDTE4MTA
+   xODEyMzcwOVoXDTIyMDUwMjEyMzcwOVowDzENMAsGA1UEAwwEbXRsczBZMBMGBy
+   qGSM49AgEGCCqGSM49AwEHA0IABNcnyxwqV6hY8QnhxxzFQ03C7HKW9OylMbnQZ
+   jjJ/Au08/coZwxS7LfA4vOLS9WuneIXhbGGWvsDSb0tH6IxLm8wCgYIKoZIzj0E
+   AwIDSQAwRgIhAP0RC1E+vwJD/D1AGHGzuri+hlV/PpQEKTWUVeORWz83AiEA5x2
+   eXZOVbUlJSGQgjwD5vaUaKlLR50Q2DmFfQj1L+SY="
+   ]
+ }</pre>
+</div>
+<figcaption><a href="#figure-7">그림 7</a>:
+<a href="#name-json-web-key">JSON Web Key</a>
+</figcaption></figure>
+</div>
+</section>
+</div>
+<div id="relation">
+<section id="section-appendix.b">
+<h2 id="name-relationship-to-token-bindi">
+<a href="#section-appendix.b">부록 B. </a><a href="#name-relationship-to-token-bindi">Token Binding과의 관계</a>
+</h2>
+<p id="section-appendix.b-1">
+        OAuth 2.0 Token Binding <span>[<a href="#I-D.ietf-oauth-token-binding">TOKEN</a>]</span>을 사용하면 OAuth 전반에서 쓰이는 여러 산출물과 토큰에 Token Binding을 적용할 수 있다. 그중 하나는 access token을 Token Binding 키에 바인딩하는 것으로, 이 문서에서 정의하는 mutual TLS client certificate에 바인딩된 access token과 도입 취지와 설계 면에서 일부 유사하다. 두 문서 모두 access token을 위한 보안 메커니즘을 정의한다. 흔히 proof-of-possession이라고 부르는 이 메커니즘에서는 client가 보호된 리소스에 접근할 때 암호학적 키 자료를 보유하고 있음을 증명해야 한다. 세부 사항은 두 문서에서 다소 다르지만, 두 방식 모두 authorization server가 자신이 발급한 access token을 client가 보유한 비대칭 키 쌍에 바인딩한다. 그런 다음 client는 보호된 리소스에 접근하는 데 사용하는 TLS 연결에서 그 키 쌍의 개인 키를 보유하고 있음을 증명한다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.b-1">¶</a></p>
+<p id="section-appendix.b-2">
+        Token Binding은 client에서 생성한 인증서 없는 키를 사용한다. 따라서 이 명세에서 사용하는 인증서를 생성하고 배포하고 관리할 때 겪는 여러 어려움을 피할 수 있다. 다만 이 문서를 작성하는 시점에는 Token Binding이 비교적 새로워, 이용 가능한 애플리케이션 개발 플랫폼과 도구에서 이를 지원하는 경우가 상대적으로 드물다. 기반이 되는 핵심 Token Binding 명세에 대한 지원이 개선되기 전까지는 OAuth 2.0 Token Binding의 실용적인 구현은 현실적으로 불가능하다. 반면 mutual TLS는 한동안 사용되어 왔으며 웹 서버와 개발 플랫폼에서 널리 지원된다. 따라서 이 문서를 작성하는 시점에도 기존 플랫폼과 도구를 사용해 OAuth 2.0 Mutual-TLS 기반 client authentication 및 인증서에 바인딩된 access token을 구현하고 배포할 수 있다. 앞으로는 서로 다른 환경에서 유사한 문제를 해결하기 위해 두 명세에 따른 구현이 병행하여 배포될 가능성이 높다. authorization server가 두 명세를 동시에 지원하면서 client별로 발급한 토큰에 서로 다른 proof-of-possession 메커니즘을 적용하는 것도 가능하다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.b-2">¶</a></p>
+</section>
+</div>
+<div id="Acknowledgements">
+<section id="section-appendix.c">
+<h2 id="name-acknowledgements">
+<a href="#name-acknowledgements">감사의 말</a>
+</h2>
+<p id="section-appendix.c-1">
+        Scott "not Tomlinson" Tomilson과 <span>Matt Peterson</span>은 이 문서에 앞서 나온 mutual TLS 기반 OAuth client authentication 구현체의 설계와 개발에 참여했다. 그 작업에서 얻은 경험과 교훈은 이 문서의 일부 내용에 반영되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.c-1">¶</a></p>
+<p id="section-appendix.c-2">
+        이 명세는 <span>Hannes Tschofenig</span>와 <span>Rifaat Shekh-Yusef</span>가 의장을 맡은 OAuth Working Group에서 개발되었다. 당시 <span>Eric Rescorla</span>, <span>Benjamin Kaduk</span>, <span>Roman Danyliw</span>는 Security Area Director(보안 영역 책임자)로 활동했다. 다음 사람들도 이 명세가 구체화되는 데 도움이 된 아이디어, 의견, 문구를 제공했다:
+
+ <span>Vittorio Bertocci</span>,
+        <span>Sergey Beryozkin</span>,
+        <span>Ralph Bragg</span>,
+        <span>Sophie Bremer</span>,
+        <span>Roman Danyliw</span>,
+        <span>Vladimir Dzhuvinov</span>,
+        <span>Samuel Erdtman</span>,
+        <span>Evan Gilman</span>,
+        <span>Leif Johansson</span>,
+        <span>Michael Jones</span>,
+        <span>Phil Hunt</span>,
+        <span>Benjamin Kaduk</span>,
+        <span>Takahiko Kawasaki</span>,
+        <span>Sean Leonard</span>,
+        <span>Kepeng Li</span>,
+        <span>Neil Madden</span>,
+        <span>James Manger</span>,
+        <span>Jim Manico</span>,
+        <span>Nov Matake</span>,
+        <span>Sascha Preibisch</span>,
+        <span>Eric Rescorla</span>,
+        <span>Justin Richer</span>,
+        <span>Vincent Roca</span>,
+        <span>Filip Skokan</span>,
+        <span>Dave Tonge</span> 및
+        <span>Hannes Tschofenig</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.c-2">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="section-appendix.d">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Brian Campbell</span></div>
+<div dir="auto"><span>Ping Identity</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:brian.d.campbell@gmail.com">brian.d.campbell@gmail.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>John Bradley</span></div>
+<div dir="auto"><span>Yubico</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:ve7jtb@ve7jtb.com">ve7jtb@ve7jtb.com</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="http://www.thread-safe.com/">http://www.thread-safe.com/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Nat Sakimura</span></div>
+<div dir="auto"><span>Nomura Research Institute</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:n-sakimura@nri.co.jp">n-sakimura@nri.co.jp</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="https://nat.sakimura.org/">https://nat.sakimura.org/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Torsten Lodderstedt</span></div>
+<div dir="auto"><span>YES.com AG</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:torsten@lodderstedt.net">torsten@lodderstedt.net</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 8705</td>
+<td>OAuth Mutual TLS</td>
+<td>2020년 2월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Campbell, et al.</td>
+<td>Standards Track</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents"><a href="#name-table-of-contents">목차</a></h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>. <a href="#name-introduction">소개</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>. <a href="#name-requirements-notation-and-c">요구사항 표기 규칙과 관례</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.1.2.2">
+<p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2">1.2</a>. <a href="#name-terminology">용어</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>. <a href="#name-mutual-tls-for-oauth-client">OAuth client authentication을 위한 Mutual TLS</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1">
+<p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1">2.1</a>. <a href="#name-pki-mutual-tls-method">PKI 기반 mutual TLS 방식</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1.2.1">
+<p id="section-toc.1-1.2.2.1.2.1.1"><a href="#section-2.1.1">2.1.1</a>. <a href="#name-pki-method-metadata-value">PKI 방식의 메타데이터 값</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.2.2.1.2.2">
+<p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2">2.1.2</a>. <a href="#name-client-registration-metadat">client 등록 메타데이터</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2.2.2">
+<p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2">2.2</a>. <a href="#name-self-signed-certificate-mut">자체 서명 인증서 기반 mutual TLS 방식</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.2.2.1">
+<p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1">2.2.1</a>. <a href="#name-self-signed-method-metadata">자체 서명 방식의 메타데이터 값</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.2.2.2.2.2">
+<p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2">2.2.2</a>. <a href="#name-client-registration-metadata">client 등록 메타데이터</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>. <a href="#name-mutual-tls-client-certifica">mutual TLS client certificate(클라이언트 인증서)에 바인딩된 access token</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.3.2.1">
+<p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1">3.1</a>. <a href="#name-jwt-certificate-thumbprint-">JWT의 certificate thumbprint(인증서 지문) 확인 방법</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.3.2.2">
+<p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2">3.2</a>. <a href="#name-confirmation-method-for-tok">token introspection(토큰 인트로스펙션)을 위한 확인 방법</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.3.2.3">
+<p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3">3.3</a>. <a href="#name-authorization-server-metada">authorization server 메타데이터</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.3.2.4">
+<p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4">3.4</a>. <a href="#name-client-registration-metadata-2">client 등록 메타데이터</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.2.4.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>. <a href="#name-public-clients-and-certific">public client(공개 클라이언트)와 인증서에 바인딩된 토큰</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>. <a href="#name-metadata-for-mutual-tls-end">mutual TLS용 endpoint(엔드포인트) 별칭 메타데이터</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.5.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>. <a href="#name-implementation-consideratio">구현 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.6.2.1">
+<p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1">6.1</a>. <a href="#name-authorization-server">authorization server</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6.2.2">
+<p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2">6.2</a>. <a href="#name-resource-server">resource server</a><a href="#section-toc.1-1.6.2.2.1">(리소스 서버)¶</a></p>
+</li>
+<li id="section-toc.1-1.6.2.3">
+<p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3">6.3</a>. <a href="#name-certificate-expiration-and-">인증서 만료와 인증서에 바인딩된 access token</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6.2.4">
+<p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4">6.4</a>. <a href="#name-implicit-grant-unsupported">implicit grant 미지원</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6.2.5">
+<p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5">6.5</a>. <a href="#name-tls-termination">TLS 종료</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.5.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#section-7">7</a>. <a href="#name-security-considerations">보안 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.7.2.1">
+<p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1">7.1</a>. <a href="#name-certificate-bound-refresh-t">인증서에 바인딩된 refresh token</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.2">
+<p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2">7.2</a>. <a href="#name-certificate-thumbprint-bind">certificate thumbprint 바인딩</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.3">
+<p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3">7.3</a>. <a href="#name-tls-versions-and-best-pract">TLS 버전과 모범 사례</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.4">
+<p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4">7.4</a>. <a href="#name-x509-certificate-spoofing">X.509 인증서 스푸핑</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.7.2.5">
+<p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5">7.5</a>. <a href="#name-x509-certificate-parsing-an">X.509 인증서 파싱 및 검증의 복잡성</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.2.5.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#section-8">8</a>. <a href="#name-privacy-considerations">개인정보 보호 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.8.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9">
+<p id="section-toc.1-1.9.1"><a href="#section-9">9</a>. <a href="#name-iana-considerations">IANA 고려사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.1">
+<p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1">9.1</a>. <a href="#name-jwt-confirmation-methods-re">JWT 확인 방식 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2">
+<p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2">9.2</a>. <a href="#name-authorization-server-metadat">authorization server 메타데이터 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.2.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.3">
+<p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3">9.3</a>. <a href="#name-token-endpoint-authenticati">token endpoint(토큰 엔드포인트) 인증 방식 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.4">
+<p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4">9.4</a>. <a href="#name-token-introspection-respons">token introspection 응답 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.9.2.5">
+<p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5">9.5</a>. <a href="#name-dynamic-client-registration">동적 client 등록 메타데이터 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.9.2.5.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.10">
+<p id="section-toc.1-1.10.1"><a href="#section-10">10</a>. <a href="#name-references">참고문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.10.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.10.2.1">
+<p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1">10.1</a>. <a href="#name-normative-references">규범 참고문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.10.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.10.2.2">
+<p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2">10.2</a>. <a href="#name-informative-references">참고용 문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.10.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.11">
+<p id="section-toc.1-1.11.1"><a href="#section-appendix.a">부록 A</a>. <a href="#name-example-cnf-claim-certifica">"cnf" 클레임, 인증서 및 JWK 예시</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.11.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.12">
+<p id="section-toc.1-1.12.1"><a href="#section-appendix.b">부록 B</a>. <a href="#name-relationship-to-token-bindi">Token Binding과의 관계</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.12.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.13">
+<p id="section-toc.1-1.13.1"><a href="#section-appendix.c"></a><a href="#name-acknowledgements">감사의 말</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.13.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.14">
+<p id="section-toc.1-1.14.1"><a href="#section-appendix.d"></a><a href="#name-authors-addresses">저자 연락처</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.14.1">¶</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc8705">공식 원문</a></footer></article></main></body></html>

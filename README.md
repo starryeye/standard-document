@@ -54,6 +54,10 @@
 
 2023년 9월 발행본의 비공식 한국어 번역입니다. §4.2의 검증된 정오표 EID 7646은 본문과 구분해 별도로 안내합니다.
 
+### RFC 8705 — OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc8705/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8705/) · [읽기판 검토 기록](rfc/rfc8705/review-report.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc8705)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)

@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "744aa82067f019da3ea03d06dba58d1a194c017e2eb1362971c28d0448eff637",
+  "verdict": "pass",
+  "evidence": "Opened and inspected all 30 renderer tiles at 1440px (9), 768px (9) and 390px (12), and compared the original/final full-height Chromium captures at those same widths. Examined opened TOC, metadata and original-page notes at all three widths. Checked the first and last paragraphs, section headings, definitions, list markers, links and registration groups, exact relationships of seven figure captions beneath their examples, and all seven horizontal tails at 390px. Independently confirmed body prose wraps without page overflow while each long technical example remains a locally scrollable original literal."
+}
