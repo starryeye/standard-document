@@ -1,5 +1,5 @@
 {
-  "render_input_sha256": "744aa82067f019da3ea03d06dba58d1a194c017e2eb1362971c28d0448eff637",
+  "render_input_sha256": "b79d85df8c45db96954a06f0d2885ecfd791e5f4df2caebe94974a3fcf2deb31",
   "verdict": "pass",
-  "evidence": "Opened and inspected all 30 renderer tiles at 1440px (9), 768px (9) and 390px (12), and compared the original/final full-height Chromium captures at those same widths. Examined opened TOC, metadata and original-page notes at all three widths. Checked the first and last paragraphs, section headings, definitions, list markers, links and registration groups, exact relationships of seven figure captions beneath their examples, and all seven horizontal tails at 390px. Independently confirmed body prose wraps without page overflow while each long technical example remains a locally scrollable original literal."
+  "evidence": "I personally inspected contact sheets covering all 30 current browser-QA screenshots across the complete document at 1440, 768 and 390px. I separately inspected the opened TOC, metadata and source notes at each width, all three corrected paragraphs at 390px, and the right end of Figure 1 at 390px. The prose, numbering, definitions, labels, references, seven figures and captions remain legible and in order; the narrow diagram scrolls within its block without page overflow. Re-render review applies to this local reader, not to the publication wrapper."
 }

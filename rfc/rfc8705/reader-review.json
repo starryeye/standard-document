@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "input_html_sha256": "a90a718ba937d665573507eba5ad629c217bbbc9c174bbfcbc097d5caaf08f65",
+  "input_html_sha256": "665adff83c10d4ea1741ac33803296b4816e96ed24959f43318fb7011a633af3",
   "content_selector": ".rfchtml",
   "title": "RFC 8705 — OAuth 2.0 Mutual-TLS 기반 client authentication 및 인증서에 바인딩된 access token",
   "removals": [
