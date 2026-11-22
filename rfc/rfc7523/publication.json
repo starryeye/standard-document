@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "public_html": {
+    "path": "index.html",
+    "sha256": "c4add9b517841837ebf80b4fe9338d06506767bbba260b89ef723a292f56a2d2"
+  },
+  "reviewed_html": {
+    "path": "reviewed.html",
+    "sha256": "654a3258ce792c73a477fb9fb05684b57fde3fc8fa6ef3727ef62787627b1426"
+  },
+  "article": {
+    "path": "article.html",
+    "sha256": "886eb310f84d266dad31931d2dbf2a0cc1358309602591f2aef1cb6f58c59024"
+  },
+  "note": "Both publication wrappers add a clearly separate RFC 10070 update after the \u00a73 heading. Removing that exact note yields the approved article bytes."
+}

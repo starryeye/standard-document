@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "61073927e7876a6c18120f1c82204d129c4fb73e67b1b2de944c2a214268d5a5",
+  "content_selector": "[data-wt-preformatted-root=pre-000001]",
+  "title": "RFC 7523 — OAuth 2.0의 client authentication 및 authorization grant를 위한 JSON Web Token (JWT) 프로파일",
+  "removals": [
+    {
+      "selector": "[data-wt-preformatted-block=block-000001]",
+      "text_sha256": "cd079ef1f4cf20a11d3cc32fade7d7a7c0577fd17e82444bcef73f27cc907e22",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000023]",
+      "text_sha256": "a3c1cf6a4a51a3a054aeacf39170a763e92cb00624158216e957abd9eb2d11cf",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000025]",
+      "text_sha256": "48efe8c83386170253b8af22b836037fa50fa392cb9f20be96ebe3aa62efa5f7",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000033]",
+      "text_sha256": "04c21b1f28f7c0f41e5b3037b111b4cd1fbb47bf04d9a1ab55b8d1b547e99bb5",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000043]",
+      "text_sha256": "cbbf9c048215d66688f521347cf1d81747d821302dc0e01e9526b7bcd8e7c873",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000071]",
+      "text_sha256": "9e387fc2e62fceafaf499165554b66d61c39471afa4bef599cecb0db71980bf0",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000093]",
+      "text_sha256": "8a2fb2d86a6192f14a68fa4298920a91c7277b6fc6aaf1e0bcb9ebe1312b3c53",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000109]",
+      "text_sha256": "589b9edee3a293407e781c841f8e5b23452c1f282c42bcb671c1c13f2fc0b1c3",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000127]",
+      "text_sha256": "8fded73ca150067ab2db575472c07e67a153046b5f8e64bd78a7392e19819500",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000149]",
+      "text_sha256": "a16d25f4dfb8993d182f675d1ed7bfdbd3bfc0f4e68bd22b4c0eb7348e14dada",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000167]",
+      "text_sha256": "c2af2084024be8ff660b1f950dadb88d413cb0067b182aa80b4bec36244816bc",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000197]",
+      "text_sha256": "6c0caf431ffa9df088b69af4517421ced4899b1c9464d95d1b07d19cfc75b9d9",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000223]",
+      "text_sha256": "d13d61c6c5dc3a4550dc4de36899112f96e84ac455b4eb35754e063fb8afaac7",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    },
+    {
+      "selector": "[data-wt-preformatted-block=block-000249]",
+      "text_sha256": "a88e484a658238ebab00937fd3708c255764e1b6f13697e608e3c92850fda481",
+      "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+    }
+  ],
+  "joins": [
+    {
+      "selectors": [
+        "[data-wt-preformatted-block=block-000031]",
+        "[data-wt-preformatted-block=block-000035]"
+      ]
+    }
+  ],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=block-000003]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000095]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000097]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000099]",
+            "depth": 1
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000101]",
+            "depth": 1
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000103]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000105]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000107]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000111]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000113]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000115]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000117]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000119]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Original §3 numbers 1–10 with lettered cases A/B nested only under requirement 2; printed page break is not a list boundary."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000183]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000184]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000185]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000186]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive source registration fields with literal o labels; separate list for each §8 registration."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000192]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000193]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000194]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000195]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive source registration fields with literal o labels; separate list for each §8 registration."
+      }
+    ]
+  }
+}

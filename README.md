@@ -58,6 +58,12 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc8705/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8705/) · [읽기판 검토 기록](rfc/rfc8705/review-report.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc8705)
 
+### RFC 7523 — JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc7523/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc7523/) · [원문 대조 기록](rfc/rfc7523/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/rfc7523/)
+
+2015년 발행본을 번역했으며, RFC 10070이 변경한 요건은 본문과 구분해 §3에 표시합니다.
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)

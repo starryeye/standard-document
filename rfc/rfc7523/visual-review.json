@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "514540d790956e97677c1dd58918aeeb25d20a7b77b9d1b956a09904c7935dfc",
+  "verdict": "pass",
+  "evidence": "I personally viewed all 14 current automated QA tiles and fresh overlapping closed-reader tiles at 1440/768/390, the opened Korean TOC and source print notes at each size, the right edges of all mobile-overflow examples and each print block. §3's original numbered list retains its nested A/B indentation; the §1 printed-page split reflows as one paragraph. All six examples remain preformatted; the phone view keeps scroll inside individual example/print boxes. Headings, references, font sizes and body spacing remain readable without page-wide overflow."
+}

@@ -1,0 +1,242 @@
+{
+  "schema_version": "1.0",
+  "format": "reviewed-reading-edition",
+  "tool": {
+    "name": "supertranslator",
+    "version": "0.12.1"
+  },
+  "source_url": "https://datatracker.ietf.org/doc/rfc7523/",
+  "qa_status": "passed",
+  "input_html_sha256": "61073927e7876a6c18120f1c82204d129c4fb73e67b1b2de944c2a214268d5a5",
+  "input_manifest_sha256": "c60579ddc670702cb080fe09fd936d703471fb01e66b1fece73ce25e36c40924",
+  "reader_review_sha256": "a8457970dee9192025ce1c713451e5578061f0930160dd0251774c40f8f34ccb",
+  "html_sha256": "654a3258ce792c73a477fb9fb05684b57fde3fc8fa6ef3727ef62787627b1426",
+  "article_sha256": "886eb310f84d266dad31931d2dbf2a0cc1358309602591f2aef1cb6f58c59024",
+  "stylesheet_sha256": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+  "asset_sha256": {
+    "assets/80921d3f0743cbb6.woff2": "2f5b3de320cce896f954466bbd3ac8151f79a432cb3dfebe00595bae00622cbb",
+    "assets/2f91dcb31b5e6a73.svg": "03efbd4fda703344e6fca6bc012d5074ce0be4b945d26b9c11b46ee82ec8b024",
+    "assets/a0e410c0f7e3dc19.woff2": "4223382c2fb8043edd3718a9268e93e90b9e38f6077807bfdc7c2c63eab8e559",
+    "assets/83824260e30146ac.svg": "1a27d85d11a1816fc6151c725574d2fc2c52d4290865970f34f22f2388cac39f",
+    "assets/27f6b4e2c219be75.woff2": "89b4a3fe5809bbc10f308a085ae2effc34bd214aa2faaafbb1c43d11fd14e89d",
+    "assets/cb703bef198b7702.png": "9b8ea08883a7ba9f91e7c137c89a4356d621ade48207f392fa9c77fd41d23c5f",
+    "assets/16a945e4301b94df.woff2": "c6ba56e9453628cd6d558ac72c9e791bf3bab2c31f36e68d53196066071a68df",
+    "assets/d3a725cb4810d0e7.woff2": "262a1054100218e2efaa4b2e214e4fb8e920c5a30a53300b80145511df3de895",
+    "assets/b37e2da88d7283b5.woff2": "fe977ddb0912af31a42f3aa85acb9df12bcb5b0fba4b3ca6425a1b2d0eb680cc",
+    "assets/7f6da73d531784d3.woff2": "450f3ba4e47ee174bd9692b396f264b907d37d2528f53911760f3d0edb785f7e",
+    "assets/f532925fb08da239.gif": "548f2d6f4d0d820c6c5ffbeffcbd7f0e73193e2932eefe542accc84762deec87",
+    "assets/d3dff33b5b11f2a5.css": "4ded0189392309849487d147f72b5a578b0f2cf298e425dd1046e8889e4401a5",
+    "assets/132ed25d6598d436.png": "1e77dc831f90a849feff433f282a5253aaa7dc0474f5f188c0f99721c931f0bd",
+    "assets/reader.css": "617034487c1c64485c9721129d01f22452efa0d8508778eeeb20c5b8cd4923d3",
+    "assets/a2eee5530bf32ed5.woff2": "4feeabd3589fad94bda73d3e96376c4e2582be8f7363f5e64a4becc8259762f8",
+    "assets/675c90a7d88a7108.css": "b34028766f32f2bebfc8400180edf656d4dc1f1ee8ff3e06ce71397a4e989caf",
+    "assets/wt-preformatted-14edac915a1f0158.css": "14edac915a1f01585baf87d8c22fec54e261a42cf370c2e5afe244b1f9b07072",
+    "assets/291c297d6baad8bf.css": "98d1fd7298b09bc6567dba7fa92de06a8a89d7b4f544f23d3080d444953a9a79",
+    "assets/5cf3e46e391a9dfc.css": "4c93461abe4e67bcd1f5b5bc853b3b797209b4fb8d59e168ec81a83ceb8c74f7",
+    "assets/014af5d11684e452.woff2": "848492d3aa2f371a2a4bd3d0f300ed044f23e2985a0202d70c05f91083a5909c",
+    "assets/c953a4f1e6ee0c16.svg": "d4da1dab28cd845292c36ddf2fb909864747e080ef5510cf69860c2e11206f6b",
+    "assets/5e3727118774e143.woff2": "498c02a17f83014fcce8afa038a66e4b9510834b4ccc458a75b48dd95f848cf4",
+    "assets/3a24e04966bec07d.woff2": "a45feea1cf94ad188117b3cae8cc3f76ac51f6bfb5dc51830de9bdba855d1baa",
+    "assets/bdc7a9c237186021.woff2": "51451d6713e5be5afd677537d7638150032e1fce209d6b82e78c436ae1917878",
+    "assets/1150558bdc86c743.woff2": "6c75710364a1ca5604267716f6d28997b26319fdb078cf11e0b42ab66ff2ea61",
+    "assets/93e8c6293d2f7670.woff2": "45606f837ab8530c01f3602592ed7a118450be4ef3f629ca644d0543099e5c6b",
+    "assets/b65651088b1c8cd1.woff2": "ac4e131ca9a592d8d092e617c759bc5ac35d411a11fdf1610ba834330ab94d91",
+    "assets/b10f6a2fbfd3aaa7.png": "3880a7cf5e17a47ba7fa23ccb77a8eb951b4b11a909847ff7a6b1d1fbb728d44",
+    "assets/5e1d42de3a140c1e.woff": "f55513b7b591cb84a3b87ff0e34ea24d4831d6fedc22e54b911ca64b5b544a15"
+  },
+  "transformations": {
+    "removals": [
+      {
+        "selector": "[data-wt-preformatted-block=block-000001]",
+        "text_sha256": "cd079ef1f4cf20a11d3cc32fade7d7a7c0577fd17e82444bcef73f27cc907e22",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000023]",
+        "text_sha256": "a3c1cf6a4a51a3a054aeacf39170a763e92cb00624158216e957abd9eb2d11cf",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000025]",
+        "text_sha256": "48efe8c83386170253b8af22b836037fa50fa392cb9f20be96ebe3aa62efa5f7",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000033]",
+        "text_sha256": "04c21b1f28f7c0f41e5b3037b111b4cd1fbb47bf04d9a1ab55b8d1b547e99bb5",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000043]",
+        "text_sha256": "cbbf9c048215d66688f521347cf1d81747d821302dc0e01e9526b7bcd8e7c873",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000071]",
+        "text_sha256": "9e387fc2e62fceafaf499165554b66d61c39471afa4bef599cecb0db71980bf0",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000093]",
+        "text_sha256": "8a2fb2d86a6192f14a68fa4298920a91c7277b6fc6aaf1e0bcb9ebe1312b3c53",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000109]",
+        "text_sha256": "589b9edee3a293407e781c841f8e5b23452c1f282c42bcb671c1c13f2fc0b1c3",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000127]",
+        "text_sha256": "8fded73ca150067ab2db575472c07e67a153046b5f8e64bd78a7392e19819500",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000149]",
+        "text_sha256": "a16d25f4dfb8993d182f675d1ed7bfdbd3bfc0f4e68bd22b4c0eb7348e14dada",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000167]",
+        "text_sha256": "c2af2084024be8ff660b1f950dadb88d413cb0067b182aa80b4bec36244816bc",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000197]",
+        "text_sha256": "6c0caf431ffa9df088b69af4517421ced4899b1c9464d95d1b07d19cfc75b9d9",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000223]",
+        "text_sha256": "d13d61c6c5dc3a4550dc4de36899112f96e84ac455b4eb35754e063fb8afaac7",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      },
+      {
+        "selector": "[data-wt-preformatted-block=block-000249]",
+        "text_sha256": "a88e484a658238ebab00937fd3708c255764e1b6f13697e608e3c92850fda481",
+        "reason": "Original print masthead, dotted page-number TOC, or running printed header/footer; preserved in source notes."
+      }
+    ],
+    "joins": [
+      {
+        "selectors": [
+          "[data-wt-preformatted-block=block-000031]",
+          "[data-wt-preformatted-block=block-000035]"
+        ]
+      }
+    ],
+    "heading_levels": {},
+    "list_items": []
+  },
+  "text_edits": [],
+  "presentation": {
+    "toc_selectors": [],
+    "metadata_selectors": [],
+    "title_selectors": [
+      "[data-wt-preformatted-block=block-000003]"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": [
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000095]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000097]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000099]",
+            "depth": 1
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000101]",
+            "depth": 1
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000103]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000105]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000107]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000111]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000113]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000115]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000117]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000119]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Original §3 numbers 1–10 with lettered cases A/B nested only under requirement 2; printed page break is not a list boundary."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000183]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000184]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000185]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000186]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive source registration fields with literal o labels; separate list for each §8 registration."
+      },
+      {
+        "items": [
+          {
+            "selector": "[data-wt-preformatted-block=block-000192]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000193]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000194]",
+            "depth": 0
+          },
+          {
+            "selector": "[data-wt-preformatted-block=block-000195]",
+            "depth": 0
+          }
+        ],
+        "evidence": "Four consecutive source registration fields with literal o labels; separate list for each §8 registration."
+      }
+    ]
+  },
+  "render_input_sha256": "514540d790956e97677c1dd58918aeeb25d20a7b77b9d1b956a09904c7935dfc",
+  "browser_qa_sha256": "eaaaf9caa0ed046a04c66b30ac9cb1b41153705cff9a4800114530c75f54b5bb"
+}
