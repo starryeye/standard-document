@@ -64,6 +64,10 @@
 
 2015년 발행본을 번역했으며, RFC 10070이 변경한 요건은 본문과 구분해 §3에 표시합니다.
 
+### RFC 10070 — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc10070/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc10070/) · [직접 대조 검토 기록](rfc/rfc10070/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc10070)
+
 ### RFC 9700 — Best Current Practice for OAuth 2.0 Security
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9700/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9700/) · [검토 기록](rfc/rfc9700/controller-review.md) · [공식 원문](https://datatracker.ietf.org/doc/html/rfc9700/)

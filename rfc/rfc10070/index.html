@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RFC 10070 — OAuth 2.0 JSON Web Token(JWT) client 인증 및 assertion 기반 authorization grant 업데이트</title><link href="assets/reader.css" rel="stylesheet"/><meta content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; child-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' data:" http-equiv="Content-Security-Policy"/><style>.rfc10070-publication-note{box-sizing:border-box;max-width:48rem;margin:0 auto;padding:1.15rem 2rem 0;font:1rem/1.6 system-ui,sans-serif;overflow-wrap:anywhere}.rfc10070-publication-note p{margin:0 0 .3em}.rfc10070-publication-note a{color:inherit;text-underline-offset:.15em}.rfc10070-legal{margin:.55em 0;font-size:.88em}.st-reader .st-document-title,.rfc10070-reader .page__title{word-break:keep-all;overflow-wrap:break-word}@media(max-width:600px){.rfc10070-publication-note{padding-inline:1rem}}</style></head><body class="st-reader-page"><main><aside class="rfc10070-publication-note" aria-label="번역 안내"><p><strong>RFC 10070 · 2026년 11월 발행본</strong> · 비공식 AI 한국어 번역<br><a href="https://datatracker.ietf.org/doc/html/rfc10070">공식 영문</a> · <a href="https://www.rfc-editor.org/errata_search.php?rfc=10070">RFC Editor 정오표</a> · <a href="../rfc7523/">RFC 7523 한국어판</a></p><p>화면보다 넓은 예제는 블록 안에서 좌우로 스크롤할 수 있습니다.</p><details class="rfc10070-legal"><summary>원문 영문 저작권 고지</summary><p lang="en">Copyright (c) 2026 IETF Trust and the persons identified as the document authors. All rights reserved.</p><p lang="en">This document is subject to BCP 78 and the IETF Trust&#x27;s Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Revised BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Revised BSD License.</p></details></aside><article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 10070</h1><h1 class="st-document-title" id="title">OAuth 2.0 JSON Web Token(JWT) client 인증 및 assertion 기반 authorization grant 업데이트</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>발행 계열:</dt>
+<dd>Internet Engineering Task Force (IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc10070">10070</a></dd>
+<dt>업데이트 대상:</dt>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc7521">7521</a>, <a href="https://www.rfc-editor.org/rfc/rfc7522">7522</a>, <a href="https://www.rfc-editor.org/rfc/rfc7523">7523</a>, <a href="https://www.rfc-editor.org/rfc/rfc9126">9126</a> </dd>
+<dt>분류:</dt>
+<dd>표준 트랙</dd>
+<dt>발행:</dt>
+<dd>
+<time>2026년 11월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>M.B. Jones</div>
+<div>Self-Issued Consulting</div>
+</div>
+<div>
+<div>B. Campbell</div>
+<div>Ping Identity</div>
+</div>
+<div>
+<div>C. Mortimore</div>
+<div>Ticketmaster</div>
+</div>
+<div>
+<div>F. Skokan</div>
+<div>Okta</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 상태</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 소개</a><ol><li><a href="#name-notational-conventions">1.1. 표기 규칙</a></li><li><a href="#name-terminology">1.2. 용어</a></li></ol></li><li><a href="#name-updates-to-rfc-7521">2. RFC 7521 업데이트</a></li><li><a href="#name-updates-to-rfc-7522">3. RFC 7522 업데이트</a></li><li><a href="#name-updates-to-rfc-7523">4. RFC 7523 업데이트</a><ol><li><a href="#name-client-authentication-jwt-e">4.1. client 인증 JWT 예제</a></li></ol></li><li><a href="#name-updates-to-rfc-9126">5. RFC 9126 업데이트</a></li><li><a href="#name-operational-considerations">6. 운영 시 고려 사항</a></li><li><a href="#name-security-considerations">7. 보안 고려 사항</a></li><li><a href="#name-iana-considerations">8. IANA 고려 사항</a><ol><li><a href="#name-media-type-registration">8.1. 미디어 타입 등록</a><ol><li><a href="#name-registry-contents">8.1.1. 레지스트리 내용</a></li></ol></li><li><a href="#name-oauth-token-endpoint-authen">8.2. OAuth token endpoint 인증 방식</a><ol><li><a href="#name-registry-contents-2">8.2.1. 레지스트리 내용</a></li></ol></li><li><a href="#name-oauth-uri-registration-upda">8.3. OAuth URI 등록 업데이트</a></li></ol></li><li><a href="#name-references">9. 참고 문헌</a><ol><li><a href="#name-normative-references">9.1. 규범적 참고 문헌</a></li><li><a href="#name-informative-references">9.2. 참고용 문헌</a></li></ol></li><li><a href="#name-acknowledgements">감사의 말</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">
+ 이 문서는 여러 OAuth 2.0 명세의 기존 audience(의도된 수신자) 값 요구 사항에서 확인된 보안 취약점을 해결하기 위해, OAuth 2.0에서 assertion을 이용한 client 인증과 assertion 기반 authorization grant의 audience 값 처리와 관련하여 RFC 7521, RFC 7522, RFC 7523 및 RFC 9126을 업데이트합니다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 상태</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준 트랙 문서입니다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">
+            이 문서는 Internet Engineering Task Force(IETF)가 작성했으며 IETF 커뮤니티의 합의를 반영합니다. 공개 검토를 거쳤고 Internet Engineering Steering Group(IESG)의 발행 승인을 받았습니다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 2절을 참조하세요.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">
+            이 문서의 현재 상태와 정오표, 의견을 보내는 방법은 <span><a href="https://www.rfc-editor.org/info/rfc10070">https://www.rfc-editor.org/info/rfc10070</a></span>에서 확인할 수 있습니다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice">
+<a href="#name-copyright-notice">저작권 고지</a>
+</h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust 및 이 문서에 저자로 명시된 사람들. 모든 권리는 유보됩니다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">
+            이 문서에는 발행일에 유효한 BCP 78과 IETF Trust의 Legal Provisions Relating to IETF Documents(<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)가 적용됩니다. 이 문서에 관한 권리와 제한 사항이 명시되어 있으므로 해당 문서들을 주의 깊게 검토하시기 바랍니다. 이 문서에서 발췌한 코드 구성 요소에는 Trust Legal Provisions의 4.e절에 설명된 대로 Revised BSD License 문구를 포함해야 하며, 해당 라이선스에 명시된 대로 어떠한 보증도 없이 제공됩니다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<div id="Introduction">
+<section id="section-1">
+<h2 id="name-introduction">
+<a href="#section-1">1. </a><a href="#name-introduction">소개</a>
+</h2>
+<p id="section-1-1">여러 OAuth 2.0 명세에서는 authorization server(인가 서버)로 보내는 토큰(‘assertion’이라고도 함)을 사용한다. 이 토큰에는 의도된 수신자를 식별하는 하나 이상의 audience 값이 들어 있다. 토큰이 JSON Web Token(JWT) <span>[<a href="#RFC7519">RFC7519</a>]</span>이면, audience 값은 "aud"(audience) 클레임에 담긴다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<p id="section-1-2">슈투트가르트 대학교의 보안 연구자 Pedram Hosseyni, Dr. Ralf Küsters, Tim Würtele는 OpenID Federation 명세 <span>[<a href="#OpenID.Federation">OpenID.Federation</a>]</span>의 최종 확정 전 버전을 보안 분석하던 중, 여러 OpenID 및 OAuth 명세에 영향을 미치는 취약점을 발견했다. 이 취약점은 authorization server에 보내는 토큰의 audience 값이 모호해서 발생했다. 연구자들은 이 취약점을 알리기 위해 2025년 1월에 열린 임시 회의에서 OAuth 작업반에 취약점을 공개하고, 그에 대한 설명 <span>[<a href="#private_key_jwt.Disclosure">private_key_jwt.Disclosure</a>]</span>을 제공했다. 이들이 공격을 설명하며 발표한 논문은 <span>[<a href="#Audience.Injection">Audience.Injection</a>]</span>이다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-2">¶</a></p>
+<p id="section-1-3">이 명세는 발견된 보안 취약점을 해결하기 위해 영향을 받는 OAuth 명세들을 업데이트한다. 구체적으로는 OAuth 2.0 authorization server에 보내는 토큰의 audience 값으로 종전에 허용되던 선택지를 없앤다. <span><a href="https://rfc-editor.org/rfc/rfc8414#section-3.3">3.3절</a>([<a href="#RFC8414">RFC8414</a>])</span>에서는 메타데이터를 가져온 client가 반환된 issuer 값을 검증하도록 요구한다. 메타데이터에 있는 다른 엔드포인트 값은 직접 검증할 수 없으며, 다른 엔드포인트로 보내는 토큰의 audience로 그런 값을 사용하면 공격 경로가 생길 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a></p>
+<p id="section-1-4">이번 업데이트의 핵심은 <span>[<a href="#RFC8414">RFC8414</a>]</span>에서 정의한 authorization server의 issuer identifier(발급자 식별자) URL만 JWT client 인증 assertion의 audience 값으로 사용하도록 요구하는 것이다. 또한 authorization server는 자체 issuer identifier가 유일한 audience 값이 아닌 JWT client 인증 assertion을 모두 거부한다. <span>[<a href="#RFC8725">RFC8725</a>]</span>에서 정의한 방식에 따라 JWT client 인증 assertion의 명시적 타입도 정의한다. 이는 이번 업데이트 이전에 발표된 명세에 따라 만든 토큰과 업데이트를 반영한 명세에 따라 만든 토큰을 쉽게 구별하기 위해서다. 영향을 받는 각 명세의 구체적인 변경 사항은 다음과 같다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4">¶</a></p>
+<div id="NotationalConventions">
+<section id="section-1.1">
+<h3 id="name-notational-conventions">
+<a href="#section-1.1">1.1. </a><a href="#name-notational-conventions">표기 규칙</a>
+</h3>
+<p id="section-1.1-1">이 문서의 키워드 "<span>MUST</span>", "<span>MUST NOT</span>", "<span>REQUIRED</span>", "<span>SHALL</span>", "<span>SHALL NOT</span>", "<span>SHOULD</span>", "<span>SHOULD NOT</span>", "<span>RECOMMENDED</span>", "<span>NOT RECOMMENDED</span>", "<span>MAY</span>", "<span>OPTIONAL</span>"는 여기에 제시된 것처럼 모두 대문자로 표기된 경우에만 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 설명된 대로 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+</section>
+</div>
+<div id="Terminology">
+<section id="section-1.2">
+<h3 id="name-terminology">
+<a href="#section-1.2">1.2. </a><a href="#name-terminology">용어</a>
+</h3>
+<p id="section-1.2-1">모든 용어는 다음 명세에 정의된 의미로 사용한다. "The OAuth 2.0 Authorization Framework" <span>[<a href="#RFC6749">RFC6749</a>]</span>, "Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7521">RFC7521</a>]</span>, "JSON Web Token (JWT)" <span>[<a href="#RFC7519">RFC7519</a>]</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-1.2-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="RFC7521Updates">
+<section id="section-2">
+<h2 id="name-updates-to-rfc-7521">
+<a href="#section-2">2. </a><a href="#name-updates-to-rfc-7521">RFC 7521 업데이트</a>
+</h2>
+<p id="section-2-1">이 절에서는 "Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7521">RFC7521</a>]</span>의 audience 요구사항을 강화하도록 해당 명세를 업데이트한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-1">¶</a></p>
+<p id="section-2-2"><span><a href="https://rfc-editor.org/rfc/rfc7521#section-5.1">5.1절</a>([<a href="#RFC7521">RFC7521</a>])</span>(assertion 메타모델)에 있는 Audience 매개변수의 설명을 다음과 같이 바꾼다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-2">¶</a></p>
+<p id="section-2-3">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-2-3">¶</a></p>
+<blockquote id="section-2-4">
+<span></span><dl id="section-2-4.1">
+<dt id="section-2-4.1.1">Audience</dt>
+<dd id="section-2-4.1.2">assertion을 처리할 대상으로 지정된 하나 이상의 주체를 식별하는 값이다. OAuth 2.0 <a href="https://rfc-editor.org/rfc/rfc6749#section-3.2">3.2</a>절 <span>[<a href="#RFC6749">RFC6749</a>]</span>에 정의된 token endpoint URL을 사용해 authorization server가 해당 assertion의 유효한 audience임을 나타낼 수 있다. 달리 규정한 애플리케이션 프로파일이 없으면, 명세를 준수하는 애플리케이션은 Simple String Comparison 방식으로 Audience 값을 비교해야 한다(MUST). 이 방식은 RFC 3986의 <a href="https://rfc-editor.org/rfc/rfc3986#section-6.2.1">6.2.1</a>절 <span>[<a href="#RFC3986">RFC3986</a>]</span>에 정의되어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-4.1.2">¶</a></dd>
+<dd></dd>
+</dl>
+</blockquote>
+<p id="section-2-5">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-2-5">¶</a></p>
+<blockquote id="section-2-6">
+<span></span><dl id="section-2-6.1">
+<dt id="section-2-6.1.1">Audience</dt>
+<dd id="section-2-6.1.2">assertion을 처리할 대상으로 지정된 주체를 식별하는 값이다. <span>[<a href="#RFC8414">RFC8414</a>]</span>에 정의된 authorization server의 issuer identifier를 사용해 그 서버가 해당 assertion의 유효한 audience임을 나타낼 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-6.1.2">¶</a></dd>
+<dd></dd>
+</dl>
+</blockquote>
+</section>
+</div>
+<div id="RFC7522Updates">
+<section id="section-3">
+<h2 id="name-updates-to-rfc-7522">
+<a href="#section-3">3. </a><a href="#name-updates-to-rfc-7522">RFC 7522 업데이트</a>
+</h2>
+<p id="section-3-1">이 절에서는 "Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7522">RFC7522</a>]</span>를 업데이트한다. SAML authorization grant의 audience 요구사항을 강화하고, SAML assertion을 사용한 client 인증을 더 이상 권장하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<p id="section-3-2"><span><a href="https://rfc-editor.org/rfc/rfc7522#section-2.2">2.2절</a>([<a href="#RFC7522">RFC7522</a>])</span>(SAML assertion을 사용한 client 인증)의 본문과 예제를 다음과 같이 바꾼다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-2">¶</a></p>
+<p id="section-3-3">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-3-3">¶</a></p>
+<blockquote id="section-3-4">
+<p id="section-3-4.1">client 인증에 SAML Bearer Assertion을 사용하려면 client는 다음 매개변수 값과 인코딩을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-4.1">¶</a></p>
+<p id="section-3-4.2">"client_assertion_type" 매개변수의 값은 "urn:ietf:params:oauth:client-assertion-type:saml2-bearer"이다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-4.2">¶</a></p>
+<p id="section-3-4.3">"client_assertion" 매개변수 값에는 SAML 2.0 Assertion이 하나만 들어 있어야 한다(MUST). SAML Assertion의 XML 데이터는 base64url로 인코딩해야 한다(MUST). 이때 인코딩은 RFC 4648의 <a href="https://rfc-editor.org/rfc/rfc4648#section-5">5</a>절 <span>[<a href="#RFC4648">RFC4648</a>]</span>에 정의된 방식을 따르며, 패딩 비트는 0으로 설정한다. 후속 인코딩 단계(예: "application/x-www-form-urlencoded" <span>[<a href="#W3C.REC-html401-19991224">W3C.REC-html401-19991224</a>]</span>에 따른 인코딩)가 필요하지 않도록, base64url로 인코딩한 데이터는 줄바꿈으로 나누지 않는 것이 좋으며(SHOULD NOT), 패딩 문자("=")도 포함하지 않는 것이 좋다(SHOULD NOT).<a aria-label="문단 링크" class="st-permalink" href="#section-3-4.3">¶</a></p>
+<p id="section-3-4.4">다음 예제에서는 client가 access token 요청에 authorization code grant를 제시하면서 Assertion으로 자신을 인증한다(추가 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-3-4.4">¶</a></p>
+<div id="section-3-4.5">
+<div><pre>
+POST /token.oauth2 HTTP/1.1
+Host: as.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&amp;
+code=n0esc3NRze7LTCu7iYzS6a5acc3f0ogp4&amp;
+client_assertion_type=urn%3Aietf%3Aparams%3Aoauth
+%3Aclient-assertion-type%3Asaml2-bearer&amp;
+client_assertion=PHNhbW...[omitted for brevity]...ZT
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-3-4.5">¶</a>
+</div>
+</blockquote>
+<p id="section-3-5">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-3-5">¶</a></p>
+<blockquote id="section-3-6">
+<p id="section-3-6.1">새 애플리케이션에서는 어떤 경우에도 SAML Bearer Assertion을 client 인증에 사용해서는 안 된다(<span>MUST NOT</span>). 이미 <span><a href="https://rfc-editor.org/rfc/rfc7522#section-2.2">2.2절</a>([<a href="#RFC7522">RFC7522</a>])</span>에서 설명한 방식으로 이를 사용하는 애플리케이션이라면, 이 기능을 쓰지 않는 방식으로 전환할지, 이 명세가 RFC 7523에 적용하는 변경과 같은 방식으로 사용할 audience 값을 더 엄격히 제한할지, 또는 둘 다 할지는 구현자와 배포자의 판단에 맡긴다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-6.1">¶</a></p>
+</blockquote>
+<p id="section-3-7"><span><a href="https://rfc-editor.org/rfc/rfc7522#section-3">3절</a>([<a href="#RFC7522">RFC7522</a>])</span>(assertion 형식 및 처리 요구사항)의 항목 2에서 Audience 요소를 설명하는 부분을 다음과 같이 바꾼다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-7">¶</a></p>
+<p id="section-3-8">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-3-8">¶</a></p>
+<blockquote id="section-3-9">
+<p id="section-3-9.1">Assertion에는 &lt;Conditions&gt; 요소가 있어야 한다(<span>MUST</span>). 이 요소 안에는 &lt;AudienceRestriction&gt; 요소가, 그 안에는 authorization server를 의도된 audience로 식별하는 &lt;Audience&gt; 요소가 들어 있어야 한다. "Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0" <span>[<a href="#OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]</span>의 2.5.1.4절은 &lt;AudienceRestriction&gt; 및 &lt;Audience&gt; 요소를 정의한다. 해당 절에서 다루는 URI 참조 외에도 authorization server의 token endpoint URL을 그 서버를 의도된 audience로 식별하는 URI로 사용할 수 있다(MAY). authorization server는 자기 자신을 의도된 audience로 식별하는 값이 없는 Assertion을 모두 거부해야 한다(MUST). 달리 규정한 애플리케이션 프로파일이 없으면, 명세를 준수하는 애플리케이션은 Simple String Comparison 방식으로 Audience 값을 비교해야 한다(MUST). 이 방식은 RFC 3986의 <a href="https://rfc-editor.org/rfc/rfc3986#section-6.2.1">6.2.1</a>절 <span>[<a href="#RFC3986">RFC3986</a>]</span>에 정의되어 있다. <a href="https://rfc-editor.org/rfc/rfc3986#section-5">5</a>절에서 언급했듯이, 특정 authorization server의 Audience에 사용할 정확한 문자열은 authorization server와 Assertion 발급자가 별도의 경로로 설정해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-9.1">¶</a></p>
+</blockquote>
+<p id="section-3-10">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-3-10">¶</a></p>
+<blockquote id="section-3-11">
+<p id="section-3-11.1">Assertion에는 &lt;Conditions&gt; 요소가 있어야 한다(<span>MUST</span>). 이 요소 안에는 &lt;AudienceRestriction&gt; 요소가, 그 안에는 authorization server를 의도된 audience로 식별하는 &lt;Audience&gt; 요소가 들어 있어야 한다. client는 Assertion의 audience가 그 Assertion을 받는 authorization server에 적합한지 확인할 책임이 있다. 이 값은 authorization server의 issuer identifier, authorization server의 token endpoint URL 또는 SAML Entity ID일 수 있다(<span>MAY</span>). "Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0" <span>[<a href="#OASIS.saml-core-2.0-os">OASIS.saml-core-2.0-os</a>]</span>의 2.5.1.4절은 &lt;AudienceRestriction&gt; 및 &lt;Audience&gt; 요소를 정의한다. authorization server는 자기 자신을 의도된 audience로 식별하는 값이 없는 assertion을 모두 거부해야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-3-11.1">¶</a></p>
+</blockquote>
+</section>
+</div>
+<div id="RFC7523Updates">
+<section id="section-4">
+<h2 id="name-updates-to-rfc-7523">
+<a href="#section-4">4. </a><a href="#name-updates-to-rfc-7523">RFC 7523 업데이트</a>
+</h2>
+<p id="section-4-1">이 절에서는 "JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7523">RFC7523</a>]</span>를 업데이트하여 audience 요건을 강화한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+<p id="section-4-2"><span><a href="https://rfc-editor.org/rfc/rfc7523#section-3">3절</a> [<a href="#RFC7523">RFC7523</a>]</span>(JWT 형식 및 처리 요건)에서 audience 값을 설명하는 항목 3을 다음과 같이 교체한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-2">¶</a></p>
+<p id="section-4-3">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-4-3">¶</a></p>
+<blockquote id="section-4-4">
+JWT에는 authorization server를 의도된 audience로 식별하는 값이 담긴 "aud"(audience) 클레임이 반드시 있어야 한다(<span>MUST</span>). authorization server의 token endpoint URL을 "aud" 요소의 값으로 사용해 해당 서버를 JWT의 의도된 audience로 식별할 수 있다(<span>MAY</span>). authorization server는 자신을 의도된 audience로 식별하는 값이 없는 JWT를 모두 거부해야 한다(<span>MUST</span>). 애플리케이션 프로파일에서 달리 정하지 않는 한, 이 규격을 준수하는 애플리케이션은 반드시(<span>MUST</span>) RFC 3986의 <a href="https://rfc-editor.org/rfc/rfc3986#section-6.2.1">6.2.1</a>절 <span>[<a href="#RFC3986">RFC3986</a>]</span>에 정의된 Simple String Comparison 방식으로 audience 값을 비교해야 한다. <a href="https://rfc-editor.org/rfc/rfc3986#section-5">5</a>절에서 설명하듯이, 주어진 authorization server에 대해 audience로 사용할 정확한 문자열은 해당 authorization server와 JWT 발급자가 별도 경로로 구성해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-4">¶</a>
+</blockquote>
+<p id="section-4-5">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-4-5">¶</a></p>
+<blockquote id="section-4-6">
+<p id="section-4-6.1">JWT에는 authorization server를 의도된 audience로 식별하는 값이 담긴 "aud"(audience) 클레임이 반드시 있어야 한다(<span>MUST</span>). 이를 다음 두 경우로 나누어 적용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-6.1">¶</a></p>
+<ol id="section-4-6.2" start="1" type="A">
+<li id="section-4-6.2.1">
+<p id="section-4-6.2.1.1">authorization grant의 경우, JWT assertion의 audience가 이를 받는 authorization server에 적합하도록 하는 것은 client의 책임이다. authorization server는 해당 서버의 issuer identifier 또는 token endpoint URL 중 하나로 식별할 수 있다(<span>MAY</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-4-6.2.1.1">¶</a></p>
+</li>
+<li id="section-4-6.2.2">
+<p id="section-4-6.2.2.1">client 인증의 경우, "aud"(audience) 클레임의 유일한 값으로 반드시(<span>MUST</span>) authorization server의 issuer identifier <span>[<a href="#RFC8414">RFC8414</a>]</span>를 사용해야 한다. 이 규격을 적용하려면 authorization server에 issuer identifier가 있어야 한다(<span>MUST</span>). "aud" 클레임 값은 JWT의 audience로 의도된 authorization server의 issuer identifier만을 나타내야 한다(<span>MUST</span>). 따라서 해당 authorization server의 token endpoint URL을 audience 값으로 사용해서는 안 된다(<span>MUST NOT</span>). authorization server는 자신의 issuer identifier만을 audience 값으로 담고 있지 않은 JWT를 모두 거부해야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-4-6.2.2.1">¶</a></p>
+</li>
+</ol>
+<p id="section-4-6.3">애플리케이션 프로파일에서 달리 정하지 않는 한, 애플리케이션은 반드시(<span>MUST</span>) <span><a href="https://rfc-editor.org/rfc/rfc3986#section-6.2.1">6.2.1절</a> [<a href="#RFC3986">RFC3986</a>]</span>에 정의된 Simple String Comparison 방식으로 audience 값을 비교해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-6.3">¶</a></p>
+</blockquote>
+<p id="section-4-7"><span><a href="https://rfc-editor.org/rfc/rfc7523#section-3.2">3.2절</a> [<a href="#RFC7523">RFC7523</a>]</span>(client 인증 처리)에 다음 요건을 추가한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-7">¶</a></p>
+<blockquote id="section-4-8">
+<p id="section-4-8.1">client 인증 JWT에는 "typ" 헤더 매개변수의 값으로 "client-authentication+jwt" 또는 이 규격의 프로파일을 정의하는 다른 규격에서 정한 더 구체적인 명시적 타입 값을 사용하여 타입을 명시하는 것이 권고된다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-4-8.1">¶</a></p>
+<p id="section-4-8.2">명시적인 "typ" 값을 사용하는 JWT의 강한 타입 지정은 이번 업데이트 이전에 발행된 규격에 따라 만든 토큰과 이번 업데이트를 반영하여 만든 토큰을 구분하는 신호 역할을 한다. 다만 주된 보안 보호 효과는 강화된 audience 요건에서 나온다. client는 타입을 명시하여 이 문서의 요건을 준수함을 알릴 수 있다. 그러나 강한 타입 지정만으로는 <span>[<a href="#private_key_jwt.Disclosure">private_key_jwt.Disclosure</a>]</span> 및 <span>[<a href="#Audience.Injection">Audience.Injection</a>]</span>에 설명된 공격을 막을 수 없으므로, 서버가 타입을 명시하지 않은 JWT를 거부하는 것은 권고되지 않는다(<span>NOT RECOMMENDED</span>). 그렇게 거부하면 강화된 audience 요건은 이미 충족하지만 아직 명시적 타입 지정을 도입하지 않은 client와의 상호운용에 문제가 생긴다. 이 접근 방식은 보안 요건 준수 여부를 알리는 것과 실제 배포 여건 사이에서 균형을 맞추어, 강화된 audience 요건은 이미 충족하지만 아직 명시적 타입 지정을 도입하지 않은 client의 운영에 지장을 주지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-8.2">¶</a></p>
+</blockquote>
+<p id="section-4-9"><span><a href="https://rfc-editor.org/rfc/rfc7523#section-4">4절</a> [<a href="#RFC7523">RFC7523</a>]</span>(authorization grant 예제)에서 아래 문장을 다음과 같이 교체한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-9">¶</a></p>
+<p id="section-4-10">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-4-10">¶</a></p>
+<blockquote id="section-4-11">
+<p id="section-4-11.1">JWT의 의도된 audience는 "https://jwt-rp.example.net"이며, 이는 authorization server가 자신을 식별하는 데 사용하는 식별자다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-11.1">¶</a></p>
+</blockquote>
+<p id="section-4-12">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-4-12">¶</a></p>
+<blockquote id="section-4-13">
+<p id="section-4-13.1">JWT의 의도된 audience는 "https://authz.example.net"이며, 이는 authorization server의 issuer identifier다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-13.1">¶</a></p>
+</blockquote>
+<p id="section-4-14">같은 절의 JWT Claims Set 예제를 다음과 같이 교체한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-14">¶</a></p>
+<p id="section-4-15">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-4-15">¶</a></p>
+<blockquote id="section-4-16">
+<div id="section-4-16.1">
+<div><pre>
+     {"iss":"https://jwt-idp.example.com",
+      "sub":"mailto:mike@example.com",
+      "aud":"https://jwt-rp.example.net",
+      "nbf":1300815780,
+      "exp":1300819380,
+      "http://claims.example.com/member":true}
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-4-16.1">¶</a>
+</div>
+</blockquote>
+<p id="section-4-17">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-4-17">¶</a></p>
+<blockquote id="section-4-18">
+<div id="section-4-18.1">
+<div><pre>
+  {
+    "iss": "https://jwt-idp.example.com",
+    "sub": "mailto:mike@example.com",
+    "aud": "https://authz.example.net",
+    "iat": 1731721541,
+    "exp": 1731725141,
+    "http://claims.example.com/member": true
+  }
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-4-18.1">¶</a>
+</div>
+</blockquote>
+<p id="section-4-19"><span><a href="https://rfc-editor.org/rfc/rfc7523#section-5">5절</a> [<a href="#RFC7523">RFC7523</a>]</span>(상호운용성 고려 사항)에 나열된 참가자 간 필수 합의 사항 중 "audience 식별자"에 대한 합의는 client 인증 JWT에 더 이상 필요하지 않다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-19">¶</a></p>
+<p id="section-4-20">다음 하위 절의 예제를 <span><a href="https://rfc-editor.org/rfc/rfc7523#section-4">4절</a> [<a href="#RFC7523">RFC7523</a>]</span> 뒤에 추가한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-20">¶</a></p>
+<div id="ClientAuthExample">
+<section id="section-4.1">
+<h3 id="name-client-authentication-jwt-e">
+<a href="#section-4.1">4.1. </a><a href="#name-client-authentication-jwt-e">client 인증 JWT 예제</a>
+</h3>
+<p id="section-4.1-1">다음 예제는 client 인증 JWT와 이를 사용하는 토큰 요청이 어떤 형태인지 보여 준다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-1">¶</a></p>
+<p id="section-4.1-2">이 예제는 "https://client.example"으로 식별되는 OAuth client가 발급하고 서명한 JWT를 보여 준다. JWT의 의도된 audience는 "https://authz.example.net"이며, 이는 authorization server의 issuer identifier다. JWT는 토큰 요청의 일부로 authorization server의 token endpoint인 "https://authz.example.net/token.oauth2"에 전송된다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-2">¶</a></p>
+<p id="section-4.1-3">다음은 인코딩하여 client 인증 JWT의 JWT Claims Set을 만들 수 있는 JSON 객체의 예다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-3">¶</a></p>
+<div id="section-4.1-4">
+<div><pre>
+  {
+    "iss": "https://client.example",
+    "sub": "https://client.example",
+    "aud": "https://authz.example.net",
+    "iat": 1752702206,
+    "exp": 1752705806
+  }
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-4.1-4">¶</a>
+</div>
+<p id="section-4.1-5">다음 JSON 객체 예제는 JWT의 헤더 매개변수에 사용된다. 이 객체는 해당 JWT가 client 인증 JWT이며, Elliptic Curve Digital Signature Algorithm(ECDSA) P-256과 SHA-256으로 서명되었고, 서명에는 "kid" 값 "16"으로 식별되는 키가 사용되었음을 명시한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-5">¶</a></p>
+<div id="section-4.1-6">
+<div><pre>
+  {
+    "typ": "client-authentication+jwt",
+    "alg": "ES256",
+    "kid": "16"
+  }
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-4.1-6">¶</a>
+</div>
+<p id="section-4.1-7">예를 들어 client는 위와 같은 클레임과 헤더 매개변수를 담은 JWT를 access token 요청의 일부로 제시하기 위해 다음과 같은 HTTPS 요청을 보낼 수 있다(추가 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-4.1-7">¶</a></p>
+<div id="section-4.1-8">
+<div><pre>
+ POST /token.oauth2 HTTP/1.1
+ Host: authz.example.net
+ Content-Type: application/x-www-form-urlencoded
+
+ grant_type=authorization_code&amp;
+ code=n0esc3NRze7LTCu7iYzS6a5acc3f0ogp4&amp;
+ client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3A
+   client-assertion-type%3Ajwt-bearer&amp;
+ client_assertion=eyJ0eXAiOiJjbGllbnQtYXV0aGVudGljYXRpb24rand0IiwiYWx
+   nIjoiRVMyNTYiLCJraWQiOiIxNiJ9.eyJhdWQiOiJodHRwczovL2F1dGh6LmV4YW1w
+   bGUubmV0IiwiaXNzIjoiaHR0cHM6Ly9jbGllbnQuZXhhbXBsZSIsInN1YiI6Imh0dH
+   BzOi8vY2xpZW50LmV4YW1wbGUiLCJpYXQiOjE3NTI3MDIyMDYsImV4cCI6MTc1Mjcw
+   NTgwNn0.6KrSQUxdl9ehs[...omitted for brevity...]bwc0ZOJw
+</pre></div><a aria-label="문단 링크" class="st-permalink" href="#section-4.1-8">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="RFC9126Updates">
+<section id="section-5">
+<h2 id="name-updates-to-rfc-9126">
+<a href="#section-5">5. </a><a href="#name-updates-to-rfc-9126">RFC 9126 업데이트</a>
+</h2>
+<p id="section-5-1">이 절에서는 "OAuth 2.0 Pushed Authorization Requests" <span>[<a href="#RFC9126">RFC9126</a>]</span>을 업데이트하여 audience 요건을 강화한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-1">¶</a></p>
+<p id="section-5-2"><span><a href="https://rfc-editor.org/rfc/rfc9126#section-2">2절</a> [<a href="#RFC9126">RFC9126</a>]</span>(Pushed Authorization Request Endpoint)에서 audience 값을 설명하는 마지막 단락을 다음과 같이 교체한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-2">¶</a></p>
+<p id="section-5-3">OLD:<a aria-label="문단 링크" class="st-permalink" href="#section-5-3">¶</a></p>
+<blockquote id="section-5-4">
+<p id="section-5-4.1">기존 규격의 이력 때문에 JWT client assertion 기반 인증을 사용할 때 어느 audience 값이 적절한지 모호할 수 있다. 이 인증은 <span><a href="https://rfc-editor.org/rfc/rfc7523#section-2.2">2.2절</a> [<a href="#RFC7523">RFC7523</a>]</span>에 정의되어 있으며, 인증 방식 이름은 private_key_jwt 또는 client_secret_jwt이다(9절 <span>[<a href="#OpenID.Core">OpenID.Core</a>]</span> 참조). 이 모호함을 해소하기 위해 <span>[<a href="#RFC8414">RFC8414</a>]</span>에 따른 authorization server의 issuer identifier URL을 audience 값으로 사용하는 것이 권고된다(SHOULD). 상호운용성을 높이기 위해 authorization server는 자신의 issuer identifier, token endpoint URL 또는 Pushed Authorization Request Endpoint URL을 자신이 의도된 audience임을 나타내는 값으로 수락해야 한다(MUST).<a aria-label="문단 링크" class="st-permalink" href="#section-5-4.1">¶</a></p>
+</blockquote>
+<p id="section-5-5">NEW:<a aria-label="문단 링크" class="st-permalink" href="#section-5-5">¶</a></p>
+<blockquote id="section-5-6">
+<p id="section-5-6.1">기존 규격의 이력 때문에 JWT client assertion 기반 인증을 사용할 때 어느 audience 값이 적절한지 모호할 수 있다. 이 인증은 <span><a href="https://rfc-editor.org/rfc/rfc7523#section-2.2">2.2절</a> [<a href="#RFC7523">RFC7523</a>]</span>에 정의되어 있으며, <a href="#RFC7523Updates">4절</a>에서 업데이트한 내용이 적용된다. 인증 방식 이름은 "private_key_jwt" 또는 "client_secret_jwt"이다(9절 <span>[<a href="#OpenID.Core">OpenID.Core</a>]</span> 참조). 이 모호함을 해소하기 위해 <span>[<a href="#RFC8414">RFC8414</a>]</span>에 따른 authorization server의 issuer identifier URL만을 audience 값으로 사용해야 한다(<span>MUST</span>). authorization server는 자신의 issuer identifier만을 audience 값으로 담고 있지 않은 이러한 JWT를 모두 거부해야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-5-6.1">¶</a></p>
+<p id="section-5-6.2">client 인증 JWT에는 "typ" 헤더 매개변수의 값으로 "client-authentication+jwt" 또는 이 규격의 프로파일을 정의하는 다른 규격에서 정한 더 구체적인 명시적 타입 값을 사용하여 타입을 명시하는 것이 권고된다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-5-6.2">¶</a></p>
+<p id="section-5-6.3">명시적인 "typ" 값을 사용하는 JWT의 강한 타입 지정은 이번 업데이트 이전에 발행된 규격에 따라 만든 토큰과 이번 업데이트를 반영하여 만든 토큰을 구분하는 신호 역할을 한다. 다만 주된 보안 보호 효과는 강화된 audience 요건에서 나온다. client는 타입을 명시하여 이 문서의 요건을 준수함을 알릴 수 있다. 그러나 강한 타입 지정만으로는 <span>[<a href="#private_key_jwt.Disclosure">private_key_jwt.Disclosure</a>]</span> 및 <span>[<a href="#Audience.Injection">Audience.Injection</a>]</span>에 설명된 공격을 막을 수 없으므로, 서버가 타입을 명시하지 않은 JWT를 거부하는 것은 권고되지 않는다(<span>NOT RECOMMENDED</span>). 그렇게 거부하면 강화된 audience 요건은 이미 충족하지만 아직 명시적 타입 지정을 도입하지 않은 client와의 상호운용에 문제가 생긴다. 이 접근 방식은 보안 요건 준수 여부를 알리는 것과 실제 배포 여건 사이에서 균형을 맞추어, 강화된 audience 요건은 이미 충족하지만 아직 명시적 타입 지정을 도입하지 않은 client의 운영에 지장을 주지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-6.3">¶</a></p>
+</blockquote>
+</section>
+</div>
+<section id="section-6">
+<h2 id="name-operational-considerations"><a href="#section-6">6. </a><a href="#name-operational-considerations">운영 시 고려 사항</a></h2>
+<p id="section-6-1">이 명세의 변경 사항은 서로 다른 버전을 구현한 client와 authorization server 간의 상호운용성에 영향을 준다. 특히 버전 간 호환성은 완전히 대칭적이지 않다. 이 명세를 구현한 client는 이 문서의 업데이트를 준수하는 authorization server뿐 아니라 이전 버전을 구현한 authorization server와도 상호운용된다. 그러나 이전 버전을 구현한 일부 client는 이 명세의 업데이트된 요건을 엄격히 적용하는 authorization server와 상호운용되지 않을 수 있다. 이 명세로 업그레이드하는 배포 환경에서는 도입이나 마이그레이션을 계획할 때 이러한 비대칭성을 고려하는 것이 좋다. 변경된 동작을 적용하는 authorization server보다 먼저 client를 업데이트하거나, 서버 업데이트와 조율하여 client를 업데이트해야 할 수 있기 때문이다.<a aria-label="문단 링크" class="st-permalink" href="#section-6-1">¶</a></p>
+</section>
+<div id="Security">
+<section id="section-7">
+<h2 id="name-security-considerations"><a href="#section-7">7. </a><a href="#name-security-considerations">보안 고려 사항</a></h2>
+<p id="section-7-1">다음 명세에 설명된 보안 고려 사항은 모두 이 문서에도 적용된다. "Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7521">RFC7521</a>]</span>, "Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7522">RFC7522</a>]</span>, "JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants" <span>[<a href="#RFC7523">RFC7523</a>]</span>, "OAuth 2.0 Pushed Authorization Requests" <span>[<a href="#RFC9126">RFC9126</a>]</span>, "The OAuth 2.0 Authorization Framework" <span>[<a href="#RFC6749">RFC6749</a>]</span> 및 "JSON Web Token (JWT)" <span>[<a href="#RFC7519">RFC7519</a>]</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-7-1">¶</a></p>
+<p id="section-7-2">이 명세는 <span>[<a href="#RFC7521">RFC7521</a>]</span>, <span>[<a href="#RFC7522">RFC7522</a>]</span>, <span>[<a href="#RFC7523">RFC7523</a>]</span> 및 <span>[<a href="#RFC9126">RFC9126</a>]</span>에서 허용했던 audience의 모호성을 악용하는 공격을 방지하기 위해 assertion의 audience 값 처리 요건을 강화한다. 이러한 공격은 <span>[<a href="#private_key_jwt.Disclosure">private_key_jwt.Disclosure</a>]</span> 및 <span>[<a href="#Audience.Injection">Audience.Injection</a>]</span>에 설명되어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-2">¶</a></p>
+</section>
+</div>
+<div id="IANA">
+<section id="section-8">
+<h2 id="name-iana-considerations"><a href="#section-8">8. </a><a href="#name-iana-considerations">IANA 고려 사항</a></h2>
+<div id="MediaReg">
+<section id="section-8.1">
+<h3 id="name-media-type-registration"><a href="#section-8.1">8.1. </a><a href="#name-media-type-registration">미디어 타입 등록</a></h3>
+<p id="section-8.1-1">IANA는 다음 미디어 타입 <span>[<a href="#RFC2046">RFC2046</a>]</span>을 "Media Types" 레지스트리 <span>[<a href="#IANA.MediaTypes">IANA.MediaTypes</a>]</span>에 <span>[<a href="#RFC6838">RFC6838</a>]</span>에 설명된 방식으로 등록했다.<a aria-label="문단 링크" class="st-permalink" href="#section-8.1-1">¶</a></p>
+<div id="MediaContents">
+<section id="section-8.1.1">
+<h4 id="name-registry-contents"><a href="#section-8.1.1">8.1.1. </a><a href="#name-registry-contents">레지스트리 내용</a></h4>
+<span></span><dl id="section-8.1.1-1">
+<dt id="section-8.1.1-1.1">타입 이름:</dt>
+<dd id="section-8.1.1-1.2">application<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.2">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.3">하위 타입 이름:</dt>
+<dd id="section-8.1.1-1.4">client-authentication+jwt<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.4">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.5">필수 매개변수:</dt>
+<dd id="section-8.1.1-1.6">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.6">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.7">선택적 매개변수:</dt>
+<dd id="section-8.1.1-1.8">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.8">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.9">인코딩 고려 사항:</dt>
+<dd id="section-8.1.1-1.10">binary. client 인증 JWT는 JWT다. JWT 값은 base64url로 인코딩한 여러 값(그중 일부는 빈 문자열일 수 있음)을 마침표('.') 문자로 구분한 형태로 인코딩된다.<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.10">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.11">보안 고려 사항:</dt>
+<dd id="section-8.1.1-1.12">RFC 10070의 <a href="#Security">7절</a>을 참조한다.<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.12">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.13">상호운용성 고려 사항:</dt>
+<dd id="section-8.1.1-1.14">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.14">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.15">공개 명세:</dt>
+<dd id="section-8.1.1-1.16">RFC 10070의 <a href="#RFC7523Updates">4절</a><a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.16">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.17">이 미디어 타입을 사용하는 애플리케이션:</dt>
+<dd id="section-8.1.1-1.18">RFC 10070을 사용하는 애플리케이션<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.18">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.19">프래그먼트 식별자 고려 사항:</dt>
+<dd id="section-8.1.1-1.20">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.20">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.21">추가 정보:</dt>
+<dd id="section-8.1.1-1.22">
+<p id="section-8.1.1-1.22.1"><br/></p>
+<span></span><dl id="section-8.1.1-1.22.2">
+<dt id="section-8.1.1-1.22.2.1">매직 넘버:</dt>
+<dd id="section-8.1.1-1.22.2.2">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.22.2.2">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.22.2.3">파일 확장자:</dt>
+<dd id="section-8.1.1-1.22.2.4">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.22.2.4">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.22.2.5">Macintosh 파일 타입 코드:</dt>
+<dd id="section-8.1.1-1.22.2.6">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.22.2.6">¶</a></dd>
+<dd></dd>
+</dl>
+</dd>
+<dd></dd>
+<dt id="section-8.1.1-1.23">추가 정보 문의처 및 이메일 주소:</dt>
+<dd id="section-8.1.1-1.24">IETF OAuth Working Group &lt;oauth@ietf.org&gt;<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.24">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.25">의도된 용도:</dt>
+<dd id="section-8.1.1-1.26">COMMON<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.26">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.27">사용 제한:</dt>
+<dd id="section-8.1.1-1.28">없음<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.28">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.29">저자:</dt>
+<dd id="section-8.1.1-1.30">Michael B. Jones &lt;michael_b_jones@hotmail.com&gt;<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.30">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.31">변경 관리 주체:</dt>
+<dd id="section-8.1.1-1.32">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.32">¶</a></dd>
+<dd></dd>
+<dt id="section-8.1.1-1.33">임시 등록 여부:</dt>
+<dd id="section-8.1.1-1.34">아니요<a aria-label="문단 링크" class="st-permalink" href="#section-8.1.1-1.34">¶</a></dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="MethodsReg">
+<section id="section-8.2">
+<h3 id="name-oauth-token-endpoint-authen"><a href="#section-8.2">8.2. </a><a href="#name-oauth-token-endpoint-authen">OAuth token endpoint 인증 방식</a></h3>
+<p id="section-8.2-1">IANA는 <span>[<a href="#IANA.OAuthParameters">IANA.OAuthParameters</a>]</span>의 "OAuth Token Endpoint Authentication Methods" 레지스트리에서 다음 항목을 업데이트했다.<a aria-label="문단 링크" class="st-permalink" href="#section-8.2-1">¶</a></p>
+<div id="MethodsContents">
+<section id="section-8.2.1">
+<h4 id="name-registry-contents-2"><a href="#section-8.2.1">8.2.1. </a><a href="#name-registry-contents-2">레지스트리 내용</a></h4>
+<span></span><dl id="section-8.2.1-1">
+<dt id="section-8.2.1-1.1">token endpoint 인증 방식 이름:</dt>
+<dd id="section-8.2.1-1.2">private_key_jwt<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-1.2">¶</a></dd>
+<dd></dd>
+<dt id="section-8.2.1-1.3">변경 관리 주체:</dt>
+<dd id="section-8.2.1-1.4">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-1.4">¶</a></dd>
+<dd></dd>
+<dt id="section-8.2.1-1.5">참고 문헌:</dt>
+<dd id="section-8.2.1-1.6"><span>[<a href="#OpenID.Core">OpenID.Core</a>]</span>의 9절, RFC 10070<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-1.6">¶</a></dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-8.2.1-2">
+<dt id="section-8.2.1-2.1">token endpoint 인증 방식 이름:</dt>
+<dd id="section-8.2.1-2.2">client_secret_jwt<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-2.2">¶</a></dd>
+<dd></dd>
+<dt id="section-8.2.1-2.3">변경 관리 주체:</dt>
+<dd id="section-8.2.1-2.4">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-2.4">¶</a></dd>
+<dd></dd>
+<dt id="section-8.2.1-2.5">참고 문헌:</dt>
+<dd id="section-8.2.1-2.6"><span>[<a href="#OpenID.Core">OpenID.Core</a>]</span>의 9절, RFC 10070<a aria-label="문단 링크" class="st-permalink" href="#section-8.2.1-2.6">¶</a></dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<section id="section-8.3">
+<h3 id="name-oauth-uri-registration-upda"><a href="#section-8.3">8.3. </a><a href="#name-oauth-uri-registration-upda">OAuth URI 등록 업데이트</a></h3>
+<p id="section-8.3-1">IANA는 <span>[<a href="#IANA.OAuthParameters">IANA.OAuthParameters</a>]</span>의 "OAuth URI" 레지스트리에서 다음 항목을 업데이트하여 RFC 10070을 참고 문헌으로 추가했다.<a aria-label="문단 링크" class="st-permalink" href="#section-8.3-1">¶</a></p>
+<ul>
+<li id="section-8.3-2.1">
+<p id="section-8.3-2.1.1">urn:ietf:params:oauth:grant-type:jwt-bearer<a aria-label="문단 링크" class="st-permalink" href="#section-8.3-2.1.1">¶</a></p>
+</li>
+<li id="section-8.3-2.2">
+<p id="section-8.3-2.2.1">urn:ietf:params:oauth:client-assertion-type:jwt-bearer<a aria-label="문단 링크" class="st-permalink" href="#section-8.3-2.2.1">¶</a></p>
+</li>
+<li id="section-8.3-2.3">
+<p id="section-8.3-2.3.1">urn:ietf:params:oauth:grant-type:saml2-bearer<a aria-label="문단 링크" class="st-permalink" href="#section-8.3-2.3.1">¶</a></p>
+</li>
+<li id="section-8.3-2.4">
+<p id="section-8.3-2.4.1">urn:ietf:params:oauth:client-assertion-type:saml2-bearer<a aria-label="문단 링크" class="st-permalink" href="#section-8.3-2.4.1">¶</a></p>
+</li>
+</ul>
+</section>
+</section>
+</div>
+<section id="section-9">
+<h2 id="name-references"><a href="#section-9">9. </a><a href="#name-references">참고 문헌</a></h2>
+<section id="section-9.1">
+<h3 id="name-normative-references"><a href="#section-9.1">9.1. </a><a href="#name-normative-references">규범적 참고 문헌</a></h3>
+<dl>
+<dt id="OASIS.saml-core-2.0-os">[OASIS.saml-core-2.0-os]</dt>
+<dd><span>Cantor, S., Ed.</span>, <span>Kemp, J., Ed.</span>, <span>Philpott, R., Ed.</span> 및 <span>E. Maler, Ed.</span>, <span>"Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0"</span>, <span>OASIS Standard saml-core-2.0-os</span>, <time>2005년 3월</time>, <span>&lt;<a href="https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="OpenID.Core">[OpenID.Core]</dt>
+<dd><span>Sakimura, N.</span>, <span>Bradley, J.</span>, <span>Jones, M.B.</span>, <span>de Medeiros, B.</span> 및 <span>C. Mortimore</span>, <span>"OpenID Connect Core 1.0 incorporating errata set 2"</span>, <time>2023년 12월 15일</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd><span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time>1997년 3월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC3986">[RFC3986]</dt>
+<dd><span>Berners-Lee, T.</span>, <span>Fielding, R.</span> 및 <span>L. Masinter</span>, <span>"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span>STD 66</span>, <span>RFC 3986</span>, <span>DOI 10.17487/RFC3986</span>, <time>2005년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd><span>Hardt, D., Ed.</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time>2012년 10월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+<dd><span>Jones, M.</span>, <span>Bradley, J.</span> 및 <span>N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7521">[RFC7521]</dt>
+<dd><span>Campbell, B.</span>, <span>Mortimore, C.</span>, <span>Jones, M.</span> 및 <span>Y. Goland</span>, <span>"Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7521</span>, <span>DOI 10.17487/RFC7521</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7521">https://www.rfc-editor.org/info/rfc7521</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7522">[RFC7522]</dt>
+<dd><span>Campbell, B.</span>, <span>Mortimore, C.</span> 및 <span>M. Jones</span>, <span>"Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7522</span>, <span>DOI 10.17487/RFC7522</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7522">https://www.rfc-editor.org/info/rfc7522</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7523">[RFC7523]</dt>
+<dd><span>Jones, M.</span>, <span>Campbell, B.</span> 및 <span>C. Mortimore</span>, <span>"JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7523</span>, <span>DOI 10.17487/RFC7523</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7523">https://www.rfc-editor.org/info/rfc7523</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd><span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time>2017년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+<dd><span>Jones, M.</span>, <span>Sakimura, N.</span> 및 <span>J. Bradley</span>, <span>"OAuth 2.0 Authorization Server Metadata"</span>, <span>RFC 8414</span>, <span>DOI 10.17487/RFC8414</span>, <time>2018년 6월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+<dd><span>Sheffer, Y.</span>, <span>Hardt, D.</span> 및 <span>M. Jones</span>, <span>"JSON Web Token Best Current Practices"</span>, <span>BCP 225</span>, <span>RFC 8725</span>, <span>DOI 10.17487/RFC8725</span>, <time>2020년 2월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8725">https://www.rfc-editor.org/info/rfc8725</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC9126">[RFC9126]</dt>
+<dd>
+<span>Lodderstedt, T.</span>, <span>Campbell, B.</span>, <span>Sakimura, N.</span>, <span>Tonge, D.</span> 및 <span>F. Skokan</span>, <span>"OAuth 2.0 Pushed Authorization Requests"</span>, <span>RFC 9126</span>, <span>DOI 10.17487/RFC9126</span>, <time>2021년 9월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9126">https://www.rfc-editor.org/info/rfc9126</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+<section id="section-9.2">
+<h3 id="name-informative-references">
+<a href="#section-9.2">9.2. </a><a href="#name-informative-references">참고용 문헌</a>
+</h3>
+<dl>
+<dt id="Audience.Injection">[Audience.Injection]</dt>
+<dd>
+<span>Hosseyni, P.</span>, <span>Küsters, R.</span> 및 <span>T. Würtele</span>, <span>"Audience Injection Attacks: A New Class of Attacks on Web-Based Authorization and Authentication Standards"</span>, <span>Cryptology ePrint Archive, Paper 2025/629</span>, <time>2025년 4월</time>, <span>&lt;<a href="https://eprint.iacr.org/2025/629">https://eprint.iacr.org/2025/629</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.MediaTypes">[IANA.MediaTypes]</dt>
+<dd>
+<span>IANA</span>, <span>"Media Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.OAuthParameters">[IANA.OAuthParameters]</dt>
+<dd>
+<span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="OpenID.Federation">[OpenID.Federation]</dt>
+<dd>
+<span>Hedberg, R., Ed.</span>, <span>Jones, M. B.</span>, <span>Solberg, A.</span>, <span>Bradley, J.</span>, <span>Marco, G. D.</span> 및 <span>V. Dzhuvinov</span>, <span>"OpenID Federation 1.0"</span>, <time>2026년 2월 17일</time>, <span>&lt;<a href="https://openid.net/specs/openid-federation-1_0.html">https://openid.net/specs/openid-federation-1_0.html</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="private_key_jwt.Disclosure">[private_key_jwt.Disclosure]</dt>
+<dd>
+<span>OpenID Foundation</span>, <span>"OIDF Responsible Disclosure Notice on Security Vulnerability for private_key_jwt"</span>, <time>2025년 1월 24일</time>, <span>&lt;<a href="https://openid.net/wp-content/uploads/2025/01/OIDF-Responsible-Disclosure-Notice-on-Security-Vulnerability-for-private_key_jwt.pdf">https://openid.net/wp-content/uploads/2025/01/OIDF-Responsible-Disclosure-Notice-on-Security-Vulnerability-for-private_key_jwt.pdf</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC2046">[RFC2046]</dt>
+<dd>
+<span>Freed, N.</span> 및 <span>N. Borenstein</span>, <span>"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span>RFC 2046</span>, <span>DOI 10.17487/RFC2046</span>, <time>1996년 11월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046">https://www.rfc-editor.org/info/rfc2046</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC4648">[RFC4648]</dt>
+<dd>
+<span>Josefsson, S.</span>, <span>"The Base16, Base32, and Base64 Data Encodings"</span>, <span>RFC 4648</span>, <span>DOI 10.17487/RFC4648</span>, <time>2006년 10월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC6838">[RFC6838]</dt>
+<dd>
+<span>Freed, N.</span>, <span>Klensin, J.</span> 및 <span>T. Hansen</span>, <span>"Media Type Specifications and Registration Procedures"</span>, <span>BCP 13</span>, <span>RFC 6838</span>, <span>DOI 10.17487/RFC6838</span>, <time>2013년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838">https://www.rfc-editor.org/info/rfc6838</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</dt>
+<dd>
+<span>Ragget, D., Ed.</span>, <span>Hors, A., Ed.</span> 및 <span>I. Jacobs, Ed.</span>, <span>"HTML 4.01 Specification"</span>, <span>World Wide Web Consortium Recommendation REC-html401-19991224</span>, <time>1999년 12월</time>, <span>&lt;<a href="https://www.w3.org/TR/1999/REC-html401-19991224/">https://www.w3.org/TR/1999/REC-html401-19991224/</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+</section>
+<div id="Acknowledgements">
+<section id="appendix-A">
+<h2 id="name-acknowledgements">
+<a href="#name-acknowledgements">감사의 말</a>
+</h2>
+<p id="appendix-A-1">
+ 이 명세에 기여한 다음 분들께 감사드립니다:
+ <span>Brock Allen</span>,
+ <span>John Bradley</span>,
+ <span>Ralph Bragg</span>,
+ <span>Deb Cooley</span>,
+ <span>Jim Fenton</span>,
+ <span>Mahesh Jethanandani</span>,
+ <span>Joseph Heenan</span>,
+ <span>Pedram Hosseyni</span>,
+ <span>Luigi Iannone</span>,
+ <span>Pieter Kasselman</span>,
+ <span>Jamshid Khosravian</span>,
+ <span>Ralf Küsters</span>,
+ <span>Martin Lindström</span>,
+ <span>Axel Nennker</span>,
+ <span>Aaron Parecki</span>,
+ <span>Rich Salz</span>,
+ <span>Dean H. Saxe</span>,
+ <span>Arndt Schwenkschuster</span>,
+ <span>Rifaat Shekh-Yusef</span> 및
+ <span>Tim Würtele</span>.<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-1">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Michael B. Jones</span></div>
+<div dir="auto"><span>Self-Issued Consulting</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:michael_b_jones@hotmail.com">michael_b_jones@hotmail.com</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="https://self-issued.info/">https://self-issued.info/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Brian Campbell</span></div>
+<div dir="auto"><span>Ping Identity</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:bcampbell@pingidentity.com">bcampbell@pingidentity.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Chuck Mortimore</span></div>
+<div dir="auto"><span>Ticketmaster</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:charliemortimore@gmail.com">charliemortimore@gmail.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Filip Skokan</span></div>
+<div dir="auto"><span>Okta</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:panva.ip@gmail.com">panva.ip@gmail.com</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 10070</td>
+<td>JWT client 인증 업데이트</td>
+<td>2026년 11월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Jones 외</td>
+<td>표준 트랙</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents">목차</a>
+</h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>.  <a href="#name-introduction">소개</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>.  <a href="#name-notational-conventions">표기 규칙</a></p>
+</li>
+<li id="section-toc.1-1.1.2.2">
+<p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2">1.2</a>.  <a href="#name-terminology">용어</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>.  <a href="#name-updates-to-rfc-7521">RFC 7521 업데이트</a></p>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>.  <a href="#name-updates-to-rfc-7522">RFC 7522 업데이트</a></p>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>.  <a href="#name-updates-to-rfc-7523">RFC 7523 업데이트</a></p>
+<ul>
+<li id="section-toc.1-1.4.2.1">
+<p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1">4.1</a>.  <a href="#name-client-authentication-jwt-e">client 인증 JWT 예제</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>.  <a href="#name-updates-to-rfc-9126">RFC 9126 업데이트</a></p>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>.  <a href="#name-operational-considerations">운영 시 고려 사항</a></p>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#section-7">7</a>.  <a href="#name-security-considerations">보안 고려 사항</a></p>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#section-8">8</a>.  <a href="#name-iana-considerations">IANA 고려 사항</a></p>
+<ul>
+<li id="section-toc.1-1.8.2.1">
+<p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1">8.1</a>.  <a href="#name-media-type-registration">미디어 타입 등록</a></p>
+<ul>
+<li id="section-toc.1-1.8.2.1.2.1">
+<p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1">8.1.1</a>.  <a href="#name-registry-contents">레지스트리 내용</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.8.2.2">
+<p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2">8.2</a>.  <a href="#name-oauth-token-endpoint-authen">OAuth token endpoint(토큰 발급 엔드포인트) 인증 방식</a></p>
+<ul>
+<li id="section-toc.1-1.8.2.2.2.1">
+<p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1">8.2.1</a>.  <a href="#name-registry-contents-2">레지스트리 내용</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.8.2.3">
+<p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3">8.3</a>.  <a href="#name-oauth-uri-registration-upda">OAuth URI 등록 업데이트</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.9">
+<p id="section-toc.1-1.9.1"><a href="#section-9">9</a>.  <a href="#name-references">참고 문헌</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.1">
+<p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1">9.1</a>.  <a href="#name-normative-references">규범적 참고 문헌</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2">
+<p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2">9.2</a>.  <a href="#name-informative-references">참고용 문헌</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.10">
+<p id="section-toc.1-1.10.1"><a href="#appendix-A"></a><a href="#name-acknowledgements">감사의 말</a></p>
+</li>
+<li id="section-toc.1-1.11">
+<p id="section-toc.1-1.11.1"><a href="#appendix-B"></a><a href="#name-authors-addresses">저자 연락처</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc10070">공식 원문</a></footer></article></main></body></html>

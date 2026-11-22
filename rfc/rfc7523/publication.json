@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "public_html": {
     "path": "index.html",
-    "sha256": "875cfd0367b9cf6ce194dca6c3bacb498efeba4208b26371c80722cfadfe9eb4"
+    "sha256": "c893707ede48fe7321efbf3145ddc5a595b1474c08e1f805542829158d3de405"
   },
   "reviewed_html": {
     "path": "reviewed.html",

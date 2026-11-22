@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "b5b9e7b98b0e4af9b31a8811d9b95f8395e34e14855b8fedb5ada5d0040a5918",
+  "verdict": "pass",
+  "evidence": "Opened all 20 current automated reader tiles at 1440, 768 and 390 CSS px, plus all 43 overlapping manual vertical tiles at those widths, each open TOC/document metadata/source notes at all three widths, and all four 390px horizontal tails for the original SAML/JWT examples. Compared against all 28 official article captures and exact logical DOM: title and section levels, OLD/NEW quote layout and native A/B markers, registry and referencing definitions, all six exact fixed-width HTTP/JSON examples, author contacts, and no page-wide horizontal overflow or clipped content. At 390 px the last syllable of the long standalone heading can wrap; text remains intact. This is minor typography polish only, not lost content."
+}

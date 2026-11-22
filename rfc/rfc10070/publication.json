@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "public_html": {
+    "path": "index.html",
+    "sha256": "1b99ca7c4093633a110898147af55cdc3b4648d56242dfae863b57011678f135"
+  },
+  "reviewed_html": {
+    "path": "reviewed.html",
+    "sha256": "817de1031b5ee312cdaeda0528bdd17ffee87e0bc2f525dd525e448142dc45c2"
+  },
+  "article": {
+    "path": "article.html",
+    "sha256": "cc76363d5c8958a109d2ffa0c52f529cd7345f638c528f8bbdaa40f3ccc5dad1"
+  },
+  "note": "Both sites embed the unchanged checked article; each wrapper adds separately labelled source, license, and related-RFC links."
+}
