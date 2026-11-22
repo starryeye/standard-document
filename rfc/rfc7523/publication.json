@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "public_html": {
     "path": "index.html",
-    "sha256": "c4add9b517841837ebf80b4fe9338d06506767bbba260b89ef723a292f56a2d2"
+    "sha256": "875cfd0367b9cf6ce194dca6c3bacb498efeba4208b26371c80722cfadfe9eb4"
   },
   "reviewed_html": {
     "path": "reviewed.html",
@@ -12,5 +12,6 @@
     "path": "article.html",
     "sha256": "886eb310f84d266dad31931d2dbf2a0cc1358309602591f2aef1cb6f58c59024"
   },
-  "note": "Both publication wrappers add a clearly separate RFC 10070 update after the \u00a73 heading. Removing that exact note yields the approved article bytes."
+  "note": "Both public wrappers preserve the approved article and literal examples. Separated editorial annotations include the existing RFC 10070 update, pinned reference links, normalized copy samples, and width-dependent scroll hints.",
+  "editorial_article_sha256": "73b7d61d1b5b76532e31bedc939fd6cd44e929d73b02e2bdcdb234ce99740ef5"
 }
