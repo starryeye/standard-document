@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "public_html": {
     "path": "index.html",
-    "sha256": "1b99ca7c4093633a110898147af55cdc3b4648d56242dfae863b57011678f135"
+    "sha256": "d574bb06d6d7579fc98dcb93bccec4ae14bdce60c55496a3d8b702abb2a1b7f9"
   },
   "reviewed_html": {
     "path": "reviewed.html",
@@ -12,5 +12,9 @@
     "path": "article.html",
     "sha256": "cc76363d5c8958a109d2ffa0c52f529cd7345f638c528f8bbdaa40f3ccc5dad1"
   },
-  "note": "Both sites embed the unchanged checked article; each wrapper adds separately labelled source, license, and related-RFC links."
+  "note": "Both sites embed the unchanged reviewed article. A separate RFC 10070 presentation stylesheet restores the 34 original BCP 14 emphasis positions and puts an indication next to overflowing examples; any previous notes and links are unchanged.",
+  "presentation_css": {
+    "path": "assets/presentation-r2.css",
+    "sha256": "21bbdd4edcb23d4e375460215b4d765b0aec77cc6e318c39275c7e29d784114b"
+  }
 }

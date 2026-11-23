@@ -1,0 +1,91 @@
+/* RFC 10070 publication only. Select the exact 34 source-marked BCP 14 spans. */
+.st-reader [id="section-1.1-1"] > span:nth-of-type(1),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(2),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(3),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(4),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(5),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(6),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(7),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(8),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(9),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(10),
+.st-reader [id="section-1.1-1"] > span:nth-of-type(11),
+.st-reader [id="section-3-6.1"] > span:nth-of-type(1),
+.st-reader [id="section-3-9.1"] > span:nth-of-type(1),
+.st-reader [id="section-3-11.1"] > span:nth-of-type(1),
+.st-reader [id="section-3-11.1"] > span:nth-of-type(2),
+.st-reader [id="section-3-11.1"] > span:nth-of-type(4),
+.st-reader [id="section-4-4"] > span:nth-of-type(1),
+.st-reader [id="section-4-4"] > span:nth-of-type(2),
+.st-reader [id="section-4-4"] > span:nth-of-type(3),
+.st-reader [id="section-4-4"] > span:nth-of-type(4),
+.st-reader [id="section-4-6.1"] > span:nth-of-type(1),
+.st-reader [id="section-4-6.2.1.1"] > span:nth-of-type(1),
+.st-reader [id="section-4-6.2.2.1"] > span:nth-of-type(1),
+.st-reader [id="section-4-6.2.2.1"] > span:nth-of-type(3),
+.st-reader [id="section-4-6.2.2.1"] > span:nth-of-type(4),
+.st-reader [id="section-4-6.2.2.1"] > span:nth-of-type(5),
+.st-reader [id="section-4-6.2.2.1"] > span:nth-of-type(6),
+.st-reader [id="section-4-6.3"] > span:nth-of-type(1),
+.st-reader [id="section-4-8.1"] > span:nth-of-type(1),
+.st-reader [id="section-4-8.2"] > span:nth-of-type(3),
+.st-reader [id="section-5-6.1"] > span:nth-of-type(4),
+.st-reader [id="section-5-6.1"] > span:nth-of-type(5),
+.st-reader [id="section-5-6.2"] > span:nth-of-type(1),
+.st-reader [id="section-5-6.3"] > span:nth-of-type(3) { font-weight: 700; }
+
+/* Give the query container the same monospace metrics as its 14px pre.
+   Count source columns, add the pre's inline padding and borders, and
+   allow one pixel for rounded scroll geometry. The generated guide is
+   outside the pre; it does not affect literal text or copy selection. */
+.st-reader [id="section-3-4.5"],
+.st-reader [id="section-4-16.1"],
+.st-reader [id="section-4-18.1"],
+.st-reader [id="section-4.1-4"],
+.st-reader [id="section-4.1-6"],
+.st-reader [id="section-4.1-8"] {
+  container: rfc10070-example / inline-size;
+  font: 14px/1.75 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+@container rfc10070-example (inline-size < calc(39ch + 2em + .5px)) {
+  .st-reader [id="section-4.1-4"] > div:first-child::before,
+  .st-reader [id="section-4.1-6"] > div:first-child::before {
+    content: "↔ 좌우로 스크롤해 전체 예제 보기";
+    display: block;
+    font: 400 .875rem/1.45 system-ui, sans-serif;
+    margin-block: 1rem -0.75rem;
+  }
+}
+@container rfc10070-example (inline-size < calc(44ch + 2em + .5px)) {
+  .st-reader [id="section-4-18.1"] > div:first-child::before {
+    content: "↔ 좌우로 스크롤해 전체 예제 보기";
+    display: block;
+    font: 400 .875rem/1.45 system-ui, sans-serif;
+    margin-block: 1rem -0.75rem;
+  }
+}
+@container rfc10070-example (inline-size < calc(46ch + 2em + .5px)) {
+  .st-reader [id="section-4-16.1"] > div:first-child::before {
+    content: "↔ 좌우로 스크롤해 전체 예제 보기";
+    display: block;
+    font: 400 .875rem/1.45 system-ui, sans-serif;
+    margin-block: 1rem -0.75rem;
+  }
+}
+@container rfc10070-example (inline-size < calc(52ch + 2em + .5px)) {
+  .st-reader [id="section-3-4.5"] > div:first-child::before {
+    content: "↔ 좌우로 스크롤해 전체 예제 보기";
+    display: block;
+    font: 400 .875rem/1.45 system-ui, sans-serif;
+    margin-block: 1rem -0.75rem;
+  }
+}
+@container rfc10070-example (inline-size < calc(69ch + 2em + .5px)) {
+  .st-reader [id="section-4.1-8"] > div:first-child::before {
+    content: "↔ 좌우로 스크롤해 전체 예제 보기";
+    display: block;
+    font: 400 .875rem/1.45 system-ui, sans-serif;
+    margin-block: 1rem -0.75rem;
+  }
+}
