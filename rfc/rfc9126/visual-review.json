@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "81638576d9d1408c87731c0323bda6c6fb30d18efa0a947d97492904537cb974",
+  "verdict": "pass",
+  "evidence": "Direct comparison of the official source and the local reading edition at 1440, 768 and 390 CSS pixels. Viewed 34 continuous source panels, 49 continuous reader panels, 12 reader disclosure panels, 21 automated QA screenshots, and the scrolled-right edge of all ten code blocks on mobile. Checked section hierarchy, paragraphs, ordered steps, definition pairs, reference lists, author information, navigation, and footer/source notes. The reader uses 18/31.5 px body/line at 1440 and 768, and 16/28 px at 390. No whole-page overflow, missing edge, or overlap; literal code uses independent horizontal scroll without rewrapping. Several long identifiers can wrap in narrow definition labels without changing the text."
+}
