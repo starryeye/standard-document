@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "public_html": {
     "path": "index.html",
-    "sha256": "1ed30ad1a3b7276aaf92f93ef8439c5b9b91596e33ef1f1b0828352ef4132ebc"
+    "sha256": "9bf0b8cc799423c7cfa0cb74eec9a538f3805d02a2d98c7e7290351d42a03e9c"
   },
   "reviewed_html": {
     "path": "reviewed.html",
@@ -13,9 +13,25 @@
     "sha256": "04dcc9e473a640a53ba6d2302694eacf49c91844ab49c9b02d33f213b95022f8"
   },
   "editorial_article_sha256": {
-    "archive": "940c51a6c442ca1362b59cb61cf9565d8aa0fbd3a9980a190ce65070caaf1ff1",
-    "blog": "d143feb1beb866994c87b5ce544cd2f507b7b3417771e80085b208fa83b65bd3"
+    "archive": "53c5ec1988587a61d40835df2a9b01cdad55007b363e9d19ffb21ecdaf050d31",
+    "blog": "7a29a074f309e35c8195218fedb1ef6b30e34efa27602302c16fdb08ce0fdda6"
   },
   "restored_normative_emphasis": 45,
-  "note": "Both websites embed the unchanged approved 2021 translation, with its source normative emphasis restored, plus a separate 2026 guidance aside immediately before the affected original paragraph. Removing that exact insertion and the emphasis classes recovers the approved article."
+  "note": "Original approved bundle, article, reviewed reader, and their QA records are unchanged. The public revision records a separately verified editorial sentence, source dates, and scoped presentation improvements.",
+  "presentation_css": {
+    "path": "assets/presentation-r2.css",
+    "sha256": "82bda0b55ced628f488f1cde4946b3730ea9026f0580bacc74e7f8f05f64b748"
+  },
+  "revision": {
+    "number": 2,
+    "date": "2026-11-25",
+    "previous_publication_html_sha256": "1ed30ad1a3b7276aaf92f93ef8439c5b9b91596e33ef1f1b0828352ef4132ebc",
+    "previous_editorial_article_sha256": {
+      "archive": "940c51a6c442ca1362b59cb61cf9565d8aa0fbd3a9980a190ce65070caaf1ff1",
+      "blog": "d143feb1beb866994c87b5ce544cd2f507b7b3417771e80085b208fa83b65bd3"
+    },
+    "review": "publication-r2-review.md",
+    "restored_source_datetime_count": 20,
+    "clarified_paragraph": "section-7.2-1"
+  }
 }

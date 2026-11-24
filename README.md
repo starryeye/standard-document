@@ -66,7 +66,7 @@
 
 ### RFC 9126 — OAuth 2.0 Pushed Authorization Requests (PAR)
 
-[블로그 전문](https://starryeye.github.io/rfc/rfc9126/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9126/) · [직접 대조 검토 기록](rfc/rfc9126/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9126)
+[블로그 전문](https://starryeye.github.io/rfc/rfc9126/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9126/) · [직접 대조 검토 기록](rfc/rfc9126/controller-review.md) · [교정 검수](rfc/rfc9126/publication-r2-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9126)
 
 ### RFC 10070 — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants
 
