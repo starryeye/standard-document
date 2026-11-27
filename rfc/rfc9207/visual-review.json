@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "c76fa1baaed9ce2d0a7da4502b97f09c4da7c87b93478bb836fcc9b496ce36c2",
+  "verdict": "pass",
+  "evidence": "Directly opened all 13 current Chromium QA tiles (4 desktop, 4 tablet, 5 mobile) across 1440, 768 and 390 CSS px and compared them to original screenshots from the same widths. Checked headings and paragraphs, nested TOC navigation, opened metadata and original page notes and print table, references, addresses, and the exact HTTP success and error examples. Both mobile code right edges are visible when scrolled and the document does not horizontally overflow. The longest metadata name wraps without loss. The date and normative keyword text remain visible; known viewer limits are loss of source datetime / BCP14 visual emphasis and less visual space between author addresses."
+}

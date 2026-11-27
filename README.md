@@ -72,6 +72,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9101/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9101/) · [직접 대조 검토 기록](rfc/rfc9101/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9101)
 
+### RFC 9207 — OAuth 2.0 Authorization Server Issuer Identification
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc9207/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9207/) · [직접 대조 검토 기록](rfc/rfc9207/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9207)
+
 ### RFC 10070 — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc10070/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc10070/) · [직접 대조 검토 기록](rfc/rfc10070/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc10070)

@@ -1,0 +1,142 @@
+{
+  "html_sha256": "be7b6ff0562fe7988986ab4164e7960c8d87f902ab1d06d680d6cbfe3a55cda7",
+  "render_input_sha256": "c76fa1baaed9ce2d0a7da4502b97f09c4da7c87b93478bb836fcc9b496ce36c2",
+  "automated_status": "passed",
+  "visual_status": "passed",
+  "viewports": {
+    "1440": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 9673
+    },
+    "768": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 9673
+    },
+    "390": {
+      "minFont": 16,
+      "minLineRatio": 1.75,
+      "articleWidth": 390,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 12830
+    }
+  },
+  "screenshot_tiles": {
+    "1440": [
+      {
+        "path": "reader-screenshots/1440-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0004.png",
+        "y": 6673,
+        "height": 3000
+      }
+    ],
+    "768": [
+      {
+        "path": "reader-screenshots/768-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0004.png",
+        "y": 6673,
+        "height": 3000
+      }
+    ],
+    "390": [
+      {
+        "path": "reader-screenshots/390-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0004.png",
+        "y": 9000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0005.png",
+        "y": 9830,
+        "height": 3000
+      }
+    ]
+  },
+  "visual_review_sha256": "f334b925bd7c9a74970e74127d67dedba33680d26d11a212397b4d155abf9d3c"
+}

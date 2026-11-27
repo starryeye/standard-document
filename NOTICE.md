@@ -91,6 +91,10 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 
 [RFC 9101 — The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)](https://datatracker.ietf.org/doc/html/rfc9101), N. Sakimura, J. Bradley, and M. Jones, August 2021. 발행본의 영문 저작권 및 Simplified BSD License 고지는 [공식 원문](https://datatracker.ietf.org/doc/html/rfc9101#name-copyright-notice)과 번역판에 함께 보존합니다.
 
+## RFC 9207
+
+[RFC 9207 — OAuth 2.0 Authorization Server Issuer Identification](https://datatracker.ietf.org/doc/html/rfc9207), K. Meyer zu Selhausen and D. Fett, March 2022. 발행본의 영문 저작권 및 Revised BSD License 고지는 [공식 원문](https://datatracker.ietf.org/doc/html/rfc9207#name-copyright-notice)과 번역판에 함께 보존합니다.
+
 ## RFC 10070
 
 [RFC 10070 — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants](https://datatracker.ietf.org/doc/html/rfc10070), M. B. Jones, B. Campbell, C. Mortimore, and F. Skokan, November 2026.

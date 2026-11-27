@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "b87a3c06cb9ebe4fa15a90e83f73f62ab9f92c74022a33975fbde96d3fc5046a",
+  "content_selector": ".rfchtml",
+  "title": "RFC 9207 — OAuth 2.0 authorization server의 issuer identifier 확인",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "96784979d4bd0fe68f86e1f04c236bbd9d2a8fa580d3adad9b04a14ad5d07e6f",
+      "reason": "Source print running table (number, short title, date, authors, category and page label), retained intact in collapsed source notes."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

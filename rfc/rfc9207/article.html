@@ -1,0 +1,452 @@
+<article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 9207</h1><h1 class="st-document-title" id="title">OAuth 2.0 authorization server의 issuer identifier 확인</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>스트림:</dt>
+<dd>인터넷 엔지니어링 태스크포스(IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc9207">9207</a></dd>
+<dt>분류:</dt>
+<dd>표준화 트랙</dd>
+<dt>발행:</dt>
+<dd>
+<time>2022년 3월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>K. Meyer zu Selhausen</div>
+<div>Hackmanit</div>
+</div>
+<div>
+<div>D. Fett</div>
+<div>yes.com</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 상태</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 소개</a><ol><li><a href="#name-conventions-and-terminology">1.1. 표기 규칙과 용어</a></li></ol></li><li><a href="#name-response-parameter-iss">2. 응답 매개변수 iss</a><ol><li><a href="#name-example-authorization-respo">2.1. 인가 응답 예제</a></li><li><a href="#name-example-error-response">2.2. 오류 응답 예제</a></li><li><a href="#name-providing-the-issuer-identi">2.3. issuer identifier 제공</a></li><li><a href="#name-validating-the-issuer-ident">2.4. issuer identifier 검증</a></li></ol></li><li><a href="#name-authorization-server-metada">3. authorization server 메타데이터</a></li><li><a href="#name-security-considerations">4. 보안 고려사항</a></li><li><a href="#name-iana-considerations">5. IANA 고려사항</a><ol><li><a href="#name-oauth-authorization-server-">5.1. OAuth authorization server 메타데이터</a></li><li><a href="#name-oauth-parameters-registrati">5.2. OAuth 매개변수 등록</a></li></ol></li><li><a href="#name-references">6. 참고 문헌</a><ol><li><a href="#name-normative-references">6.1. 규범적 참고 문헌</a></li><li><a href="#name-informative-references">6.2. 참고용 문헌</a></li></ol></li><li><a href="#name-acknowledgements">감사의 말</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">이 문서는 <code>iss</code>라는 새 매개변수를 규정한다. 이 매개변수는 OAuth 인가 흐름의 인가 응답에 authorization server의 issuer identifier를 명시적으로 포함하는 데 쓰인다. <code>iss</code> 매개변수는 ‘mix-up attack(서버 혼동 공격)’에 대한 효과적인 대응책이다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 상태</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준화 트랙 문서이다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">이 문서는 인터넷 엔지니어링 태스크포스(IETF)에서 작성했으며, IETF 공동체의 합의를 반영한다. 공개 검토를 거쳤으며 인터넷 엔지니어링 운영 그룹(IESG)이 발행을 승인했다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 2절에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">이 문서의 현재 상태, 정오표가 있는 경우 그 내용, 의견을 제출하는 방법은 <span><a href="https://www.rfc-editor.org/info/rfc9207">https://www.rfc-editor.org/info/rfc9207</a></span>에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice">
+<a href="#name-copyright-notice">저작권 고지</a>
+</h2>
+<p id="section-boilerplate.2-1">저작권 (c) 2022 IETF Trust 및 이 문서에 저자로 명시된 사람들에게 있다. 모든 권리를 보유한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">이 문서에는 발행일에 유효한 BCP 78과 IETF Trust의 IETF 문서 관련 법률 조항(Legal Provisions Relating to IETF Documents, <span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)이 적용된다. 이 문서에 관한 독자의 권리와 제한 사항을 명시하므로 해당 문서들을 주의 깊게 검토하기 바란다. 이 문서에서 추출한 코드 구성 요소에는 Trust 법률 조항 4.e절에 명시된 대로 Revised BSD License의 전문을 포함해야 하며, 해당 라이선스에 명시된 대로 어떠한 보증도 없이 제공된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<div id="Introduction">
+<section id="section-1">
+<h2 id="name-introduction">
+<a href="#section-1">1. </a><a href="#name-introduction">소개</a>
+</h2>
+<p id="section-1-1">OAuth 2.0 인가 프레임워크 <span>[<a href="#RFC6749">RFC6749</a>]</span>를 사용하면 client(클라이언트)는 서로 다른 주체가 관리하는 여러 독립적인 authorization server와 상호작용할 수 있다. 일부 OAuth grant type(그랜트 유형)은 resource owner(리소스 소유자)의 user agent(사용자 에이전트)를 통해 authorization server의 응답을 OAuth client에 전달한다. authorization code grant(인가 코드 그랜트)의 인가 응답이 그 예다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<p id="section-1-2"><span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.1.2">4.1.2절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서 규정하는 인가 응답에는 그 응답을 발급한 authorization server의 신원을 알려 주는 정보가 전혀 없다. 따라서 resource owner의 user agent에서 응답을 받은 client는 응답과 그 안의 비밀 정보를 누가 처음 발급했는지 확신할 수 없다. 응답의 출처를 확신할 수 없다는 점 때문에 ‘mix-up attack’이라는 유형의 공격이 가능해진다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-2">¶</a></p>
+<p id="section-1-3">mix-up attack은 여러 authorization server와 상호작용하는 모든 OAuth client에 잠재적 위협이다. 그러한 authorization server 중 적어도 하나가 공격자의 통제하에 있으면 공격자는 mix-up attack을 통해 나머지 authorization server 중 어느 하나가 발급한 authorization code(인가 코드)나 access token(액세스 토큰)을 획득할 수 있다. 공격자가 client에서 지원하는 authorization server를 장악하는 데에는 여러 경로가 있다. 예를 들어 authorization server가 침해되거나, 공격자가 동적 client 등록 <span>[<a href="#RFC7591">RFC7591</a>]</span> 등을 이용해 자신이 운영하는 authorization server를 등록할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a></p>
+<p id="section-1-4">authorization server 한 곳과만 상호작용하는 OAuth client는 mix-up attack에 취약하지 않다. 하지만 이후 두 번째 authorization server를 지원하기로 하면 취약해지므로 mix-up attack에 대한 대응책을 적용해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4">¶</a></p>
+<p id="section-1-5">mix-up attack은 client를 속여 정상적인 authorization server나 resource server(리소스 서버) 대신 공격자에게 authorization code 또는 access token을 보내게 함으로써 이를 탈취하는 것을 목표로 한다. 이는 OAuth로 접근을 관리하는 리소스의 기밀성과 무결성에 심각한 위협이 된다.
+mix-up attack 유형에 대한 자세한 설명과 여러 변형은 <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics-19#section-4.4">4.4</a>절("OAuth 2.0 Security Best Current Practice" <span>[<a href="#I-D.ietf-oauth-security-topics">OAUTH-SECURITY-TOPICS</a>]</span>)과, 이 공격 유형을 처음 지적한 연구인 "On the security of modern Single Sign-On Protocols: Second-Order Vulnerabilities in OpenID Connect" <span>[<a href="#arXiv.1508.04324">arXiv.1508.04324</a>]</span> 및 "A Comprehensive Formal Security Analysis of OAuth 2.0" <span>[<a href="#arXiv.1601.01229">arXiv.1601.01229</a>]</span>에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-5">¶</a></p>
+<p id="section-1-6">이 문서는 인가 응답에 사용되는 새 매개변수 <code>iss</code>를 정의한다. authorization server는 <code>iss</code> 매개변수를 사용해 자신의 신원을 인가 응답에 명시할 수 있다. client는 <code>iss</code> 매개변수의 값을 자신이 통신 중이라고 판단한 authorization server의 issuer identifier(예를 들어 해당 서버의 메타데이터에서 얻은 값)와 비교할 수 있다. <code>iss</code> 매개변수를 통해 client는 authorization server의 신원을 확인하고 authorization code와 access token 같은 자격 증명을 의도한 수신자에게만 보낼 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-6">¶</a></p>
+<p id="section-1-7">mix-up attack에 대한 <code>iss</code> 매개변수의 방어 효과는 "A Comprehensive Formal Security Analysis of OAuth 2.0" <span>[<a href="#arXiv.1601.01229">arXiv.1601.01229</a>]</span>에서 분석하고 형식적으로 증명했다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-7">¶</a></p>
+<div id="conventions-and-terminology">
+<section id="section-1.1">
+<h3 id="name-conventions-and-terminology">
+<a href="#section-1.1">1.1. </a><a href="#name-conventions-and-terminology">표기 규칙과 용어</a>
+</h3>
+<p id="section-1.1-1">
+    이 문서의 핵심 용어 "<span>MUST</span>", "<span>MUST NOT</span>", "<span>REQUIRED</span>", "<span>SHALL</span>", "<span>SHALL NOT</span>", "<span>SHOULD</span>", "<span>SHOULD NOT</span>", "<span>RECOMMENDED</span>", "<span>NOT RECOMMENDED</span>", "<span>MAY</span>", "<span>OPTIONAL</span>"은 여기에 표시된 것처럼 모두 대문자로 표기된 경우에만 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 따라 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+<p id="section-1.1-2">이 명세에서는 OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 정의한 "access token", "authorization code", "authorization code grant", "authorization server", "resource server", "인가 응답", "grant type", "client"라는 용어를 사용한다. "issuer identifier"는 OAuth 2.0 Authorization Server Metadata <span>[<a href="#RFC8414">RFC8414</a>]</span>에서 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-2">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="iss_parameter">
+<section id="section-2">
+<h2 id="name-response-parameter-iss">
+<a href="#section-2">2. </a><a href="#name-response-parameter-iss">응답 매개변수 <code>iss</code></a>
+</h2>
+<p id="section-2-1">이 명세를 지원하는 authorization server는 client에 보내는 인가 응답에서 자신의 신원을 나타내야 한다(<span>MUST</span>). 이를 위해 오류 응답을 포함한 인가 응답에 <code>iss</code> 매개변수를 넣는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-1">¶</a></p>
+<p id="section-2-2"><code>iss</code> 매개변수의 값은 <span>[<a href="#RFC8414">RFC8414</a>]</span>에서 정의한 대로, 인가 응답을 생성한 authorization server의 issuer identifier다. 이 값은 "https" 스킴을 사용하고 쿼리나 프래그먼트 구성 요소가 없는 URL이어야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2-2">¶</a></p>
+<div id="example-authorization-response">
+<section id="section-2.1">
+<h3 id="name-example-authorization-respo">
+<a href="#section-2.1">2.1. </a><a href="#name-example-authorization-respo">인가 응답 예제</a>
+</h3>
+<p id="section-2.1-1">다음은 issuer identifier가 <code>https://honest.as.example</code>인 authorization server의 인가 응답 예제다(추가된 줄바꿈과 들여쓰기는 표시용일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-1">¶</a></p>
+<div id="section-2.1-2">
+<pre>HTTP/1.1 302 Found
+Location: https://client.example/cb?
+  code=x1848ZT64p4IirMPT0R-X3141MFPTuBX-VFL_cvaplMH58
+  &amp;state=ZWVlNDBlYzA1NjdkMDNhYjg3ZjUxZjAyNGQzMTM2NzI
+  &amp;iss=https%3A%2F%2Fhonest.as.example
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-2.1-2">¶</a>
+</div>
+</section>
+</div>
+<div id="example-error-response">
+<section id="section-2.2">
+<h3 id="name-example-error-response">
+<a href="#section-2.2">2.2. </a><a href="#name-example-error-response">오류 응답 예제</a>
+</h3>
+<p id="section-2.2-1">다음은 같은 authorization server의 오류 응답 예제다(추가된 줄바꿈과 들여쓰기는 표시용일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-1">¶</a></p>
+<div id="section-2.2-2">
+<pre>HTTP/1.1 302 Found
+Location: https://client.example/cb?
+  error=access_denied
+  &amp;state=N2JjNGJhY2JiZjRhYzA3MGJkMzNmMDE5OWJhZmJhZjA
+  &amp;iss=https%3A%2F%2Fhonest.as.example
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-2.2-2">¶</a>
+</div>
+</section>
+</div>
+<div id="providing_iss_parameter">
+<section id="section-2.3">
+<h3 id="name-providing-the-issuer-identi">
+<a href="#section-2.3">2.3. </a><a href="#name-providing-the-issuer-identi">issuer identifier 제공</a>
+</h3>
+<p id="section-2.3-1">이 명세를 지원하는 authorization server는 자신의 issuer identifier를 제공해야 한다(<span>MUST</span>). 그래야 client가 <code>iss</code> 매개변수를 제대로 검증할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-1">¶</a></p>
+<p id="section-2.3-2"><span>[<a href="#RFC8414">RFC8414</a>]</span>에 따라 메타데이터를 게시하는 authorization server에는 다음 규칙을 적용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-2">¶</a></p>
+<ul>
+<li id="section-2.3-3.1">
+<p id="section-2.3-3.1.1">서버 메타데이터의 <code>issuer</code> 값에 포함된 issuer identifier는 반드시(<span>MUST</span>) <code>iss</code> 매개변수의 값과 동일해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-3.1.1">¶</a></p>
+</li>
+<li id="section-2.3-3.2">
+<p id="section-2.3-3.2.1">서버는 다음과 같이 매개변수 지원을 표시해야 한다(<span>MUST</span>). <code>iss</code> 매개변수를 지원한다는 뜻으로 메타데이터 매개변수 <code>authorization_response_iss_parameter_supported</code>(<a href="#as_metadata">3절</a>에서 정의)를 <code>true</code>로 설정한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-3.2.1">¶</a></p>
+</li>
+</ul>
+<p id="section-2.3-4">authorization server는 다른 방법을 사용해 issuer identifier를 client에 추가로 제공할 수도 있다(<span>MAY</span>). 이러한 방법은 이 명세의 범위에 포함되지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.3-4">¶</a></p>
+</section>
+</div>
+<div id="iss_parameter_validation">
+<section id="section-2.4">
+<h3 id="name-validating-the-issuer-ident">
+<a href="#section-2.4">2.4. </a><a href="#name-validating-the-issuer-ident">issuer identifier 검증</a>
+</h3>
+<p id="section-2.4-1">이 명세를 지원하는 client는 다음 규칙에 따라 매개변수의 값을 추출해야 한다(<span>MUST</span>). 수신한 인가 응답에 <code>iss</code> 매개변수가 있으면 그 값을 추출한다. 이어서 client는 다음과 같이 값을 디코딩하고 비교해야 한다(<span>MUST</span>). <span><a href="https://www.rfc-editor.org/rfc/rfc6749#appendix-B">부록 B</a>([<a href="#RFC6749">RFC6749</a>])</span>에 따라 "application/x-www-form-urlencoded" 형식의 값을 디코딩하고, 그 결과를 인가 요청을 보낸 대상 authorization server의 issuer identifier와 비교한다. 이때는 단순 문자열 비교를 사용해야 한다(<span>MUST</span>). 이 비교 방식은 <span><a href="https://www.rfc-editor.org/rfc/rfc3986#section-6.2.1">6.2.1절</a>([<a href="#RFC3986">RFC3986</a>])</span>에서 정의한다. 값이 예상한 issuer identifier와 일치하지 않으면 client는 인가 응답을 거부해야 하며(<span>MUST</span>), authorization grant 절차를 계속 진행해서는 안 된다(<span>MUST NOT</span>). 오류 응답의 경우, client는 오류가 의도한 authorization server에서 발생했다고 가정해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-1">¶</a></p>
+<p id="section-2.4-2">더 정확히 말하면, OAuth 메타데이터 <span>[<a href="#RFC8414">RFC8414</a>]</span>를 지원하는 authorization server와 통신하는 client는 반드시(<span>MUST</span>) <code>iss</code> 매개변수의 값을 서버의 메타데이터 문서에 있는 <code>issuer</code> 값과 비교해야 한다. OAuth 메타데이터를 사용하지 않는 경우, client는 반드시(<span>MUST</span>) 반환된 <code>iss</code> 값이 현재 흐름에서 예상한 값인지 배포 환경별 방식(예: 정적 구성)으로 판단해야 한다. 이와 관련해서는 <a href="#security_considerations">4절</a>도 참조한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-2">¶</a></p>
+<p id="section-2.4-3">client가 이 명세를 지원하는 authorization server와 지원하지 않는 authorization server 양쪽 모두와 통신하는 경우, 반드시(<span>MUST</span>) 각 authorization server의 <code>iss</code> 매개변수 지원 여부를 상태로 유지해야 한다.
+
+client는 반드시(<span>MUST</span>) 자신의 구성에서 해당 매개변수를 지원한다고 되어 있는 authorization server가 <code>iss</code> 매개변수 없이 보낸 인가 응답을 거부해야 한다. client에는 다음 조치가 권고된다(<span>SHOULD</span>). 해당 매개변수를 지원한다고 표시하지 않은 authorization server가 <code>iss</code> 매개변수를 포함해 보낸 인가 응답은 폐기한다. 다만 정상적인 authorization server도 메타데이터에 지원 여부를 표시하지 않고 <code>iss</code> 매개변수를 제공할 수 있다. 이러한 응답의 수락 여부는 로컬 정책이나 구성에서 정할 수 있으며, 구체적인 지침은 이 명세의 범위에 포함되지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-3">¶</a></p>
+<p id="section-2.4-4">일반적으로 이 명세를 지원하는 client는 다음 두 방식 중 하나를 택할 수 있다(<span>MAY</span>). <code>iss</code> 매개변수가 없는 인가 응답을 수락하거나, 그러한 응답을 거부하고 인가 응답에 <code>iss</code> 매개변수를 제공하는 authorization server만 지원한다. 이러한 응답을 언제 수락할지는 로컬 정책이나 구성에서 정할 수 있으며, 구체적인 지침은 이 명세의 범위에 포함되지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-4">¶</a></p>
+<p id="section-2.4-5">인가 엔드포인트에서 ID Token(ID 토큰)을 반환하는 OpenID Connect <span>[<a href="#OIDC.Core">OIDC.Core</a>]</span> 흐름에서는 <code>iss</code> 매개변수의 값이 반드시(<span>MUST</span>) ID Token의 <code>iss</code> 클레임 값과 항상 동일해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-5">¶</a></p>
+<p id="section-2.4-6"><span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.1.2">4.1.2절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서는 이 명세를 지원하지 않는 client가 반드시(<span>MUST</span>) 인식하지 못하는 <code>iss</code> 매개변수를 무시해야 한다고 이미 규정하고 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-6">¶</a></p>
+<aside id="section-2.4-7">
+<p id="section-2.4-7.1">참고: "JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)" <span>[<a href="#JARM">JARM</a>]</span>은 모든 인가 응답 매개변수를 JSON Web Token(JWT)에 담아 전달하는 방식을 정의한다. 이 JWT에는 <code>iss</code> 클레임이 있으며, 이 클레임을 <a href="#iss_parameter_validation">2.4절</a>에 설명된 대로 검증하면 동일한 보호 효과를 얻을 수 있다. 따라서 JARM을 사용하는 경우 JWT 외부에 별도의 <code>iss</code> 매개변수를 둘 필요가 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.4-7.1">¶</a></p>
+</aside>
+</section>
+</div>
+</section>
+</div>
+<div id="as_metadata">
+<section id="section-3">
+<h2 id="name-authorization-server-metada">
+<a href="#section-3">3. </a><a href="#name-authorization-server-metada">authorization server 메타데이터</a>
+</h2>
+<p id="section-3-1">authorization server가 이 명세를 지원한다는 사실을 알릴 수 있도록 authorization server 메타데이터 <span>[<a href="#RFC8414">RFC8414</a>]</span>에 다음 매개변수를 도입한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<span></span><dl id="section-3-2">
+<dt id="section-3-2.1">
+<code>authorization_response_iss_parameter_supported</code>:</dt>
+<dd id="section-3-2.2">
+<p id="section-3-2.2.1">authorization server가 인가 응답에 <code>iss</code> 매개변수를 <a href="#iss_parameter">2절</a>에서 정의한 대로 제공하는지 나타내는 불리언 매개변수다. 생략하면 기본값은 false다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.2.1">¶</a></p>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="security_considerations">
+<section id="section-4">
+<h2 id="name-security-considerations">
+<a href="#section-4">4. </a><a href="#name-security-considerations">보안 고려사항</a>
+</h2>
+<p id="section-4-1">client는 반드시(<span>MUST</span>) <code>iss</code> 매개변수를 <a href="#iss_parameter_validation">2.4절</a>에 설명된 방식 그대로 검증해야 하며, 여러 authorization server가 같은 issuer identifier를 사용하도록 허용해서는 안 된다(<span>MUST NOT</span>). 특히 client에서 authorization server의 세부 정보를 수동으로 구성할 수 있는 경우, client는 반드시(<span>MUST</span>) 수락하는 <code>iss</code> 값이 authorization server마다 고유한지 확인해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+<p id="section-4-2">client는 <code>iss</code> 매개변수를 통해, 특정 token endpoint(토큰 엔드포인트)를 사용하고 경우에 따라 userinfo endpoint(사용자 정보 엔드포인트) <span>[<a href="#OIDC.Core">OIDC.Core</a>]</span> 같은 다른 엔드포인트도 사용하는 OAuth 흐름에 authorization server가 자신이 쓰이기를 "기대하는지" 판단할 수 있다. OAuth 메타데이터를 사용하는 경우, <code>iss</code> 매개변수로 발급자를 식별할 수 있으므로 다른 엔드포인트를 가리키는 해당 OAuth 메타데이터 문서도 식별할 수 있다. OAuth 메타데이터를 사용하지 않는 경우, client는 예를 들어 구성된 각 authorization server에 대해 예상 <code>iss</code> 값을 정적으로 설정해 사용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-2">¶</a></p>
+<p id="section-4-3">인가 응답에 포함된 issuer identifier에는 변조를 막는 암호학적 보호가 적용되지 않는다. 일반적으로 <span>[<a href="#JARM">JARM</a>]</span>에 명시된 JWT 같은 메커니즘으로 인가 응답의 무결성을 보호할 수 있다. 그러나 mix-up attack에서 client는 대개 침해되지 않은 authorization server로부터 인가 응답을 받는다. 공격자가 client가 응답을 받기 전에 그 응답을 변조할 수 있다면, authorization code에도 직접 접근할 수 있다. 따라서 authorization code를 탈취하는 데 mix-up attack을 실행할 필요가 없다. 그러므로 mix-up attack을 방어하기 위해 인가 응답의 무결성을 보호할 필요는 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-3">¶</a></p>
+<p id="section-4-4">mix-up attack에 대응하는 다른 방법도 있다. 인가 응답에 다른 수단으로 authorization server의 issuer identifier가 이미 포함되어 있고 이 식별자를 <a href="#iss_parameter_validation">2.4절</a>에 명시된 대로 확인한다면, <code>iss</code> 매개변수를 사용하고 검증할 필요가 없으며 이를 생략해도 된다(<span>MAY</span>).
+예를 들어 인가 엔드포인트에서 ID Token을 반환하는 OpenID Connect 응답 유형(예: <code>response_type=code id_token</code>)을 사용하거나 <span>[<a href="#JARM">JARM</a>]</span>을 사용하는 경우가 이에 해당한다.
+다만 client가 여러 issuer identifier를 포함한 인가 응답을 받았고 그 issuer identifier가 서로 일치하지 않는다면, client는 응답을 거부해야 한다(<span>MUST</span>). 이러한 대체 대응책의 세부 사항은 이 명세의 범위를 벗어난다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-4">¶</a></p>
+<p id="section-4-5">mix-up attack은 둘 이상의 authorization server와 상호작용하는 client에만 해당한다. 그러나 하나의 authorization server와만 상호작용하는 client도 앞으로 두 번째 authorization server를 지원하게 될 수 있다. 둘 이상의 authorization server를 지원하면 mix-up attack에 취약해지므로 대응책을 적용해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-5">¶</a></p>
+</section>
+</div>
+<div id="iana_considerations">
+<section id="section-5">
+<h2 id="name-iana-considerations">
+<a href="#section-5">5. </a><a href="#name-iana-considerations">IANA 고려사항</a>
+</h2>
+<div id="oauth-authorization-server-metadata">
+<section id="section-5.1">
+<h3 id="name-oauth-authorization-server-">
+<a href="#section-5.1">5.1. </a><a href="#name-oauth-authorization-server-">OAuth authorization server 메타데이터</a>
+</h3>
+<p id="section-5.1-1">IANA는 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>의 ‘OAuth authorization server 메타데이터’ 레지스트리에 다음 값을 등록했다. 이 레지스트리는 <span>[<a href="#RFC8414">RFC8414</a>]</span>에 따라 마련되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-1">¶</a></p>
+<span></span><dl id="section-5.1-2">
+<dt id="section-5.1-2.1">메타데이터 이름:</dt>
+<dd id="section-5.1-2.2">
+<code>authorization_response_iss_parameter_supported</code><a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.1-2.3">메타데이터 설명:</dt>
+<dd id="section-5.1-2.4">authorization server가 인가 응답에 <code>iss</code> 매개변수를 제공하는지 나타내는 불리언 값.<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.1-2.5">변경 관리 주체:</dt>
+<dd id="section-5.1-2.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.1-2.7">명세 문서:</dt>
+<dd id="section-5.1-2.8">
+RFC 9207의 <a href="#as_metadata">3절</a><a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="oauth-parameters-registration">
+<section id="section-5.2">
+<h3 id="name-oauth-parameters-registrati">
+<a href="#section-5.2">5.2. </a><a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a>
+</h3>
+<p id="section-5.2-1">IANA는 <code>iss</code> 항목을 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>의 ‘OAuth 매개변수’ 레지스트리에서 다음과 같이 갱신했다. 이 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에 따라 마련되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-1">¶</a></p>
+<span></span><dl id="section-5.2-2">
+<dt id="section-5.2-2.1">매개변수 이름:</dt>
+<dd id="section-5.2-2.2">
+<code>iss</code><a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.2-2.3">매개변수 사용 위치:</dt>
+<dd id="section-5.2-2.4">인가 요청, 인가 응답<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.2-2.5">변경 관리 주체:</dt>
+<dd id="section-5.2-2.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-5.2-2.7">명세 문서:</dt>
+<dd id="section-5.2-2.8">
+RFC 9207의 <a href="#iss_parameter">2절</a>, <span>[<a href="#RFC9101">RFC9101</a>]</span> 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.1">4.1.1절</a>([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<section id="section-6">
+<h2 id="name-references">
+<a href="#section-6">6. </a><a href="#name-references">참고 문헌</a>
+</h2>
+<section id="section-6.1">
+<h3 id="name-normative-references">
+<a href="#section-6.1">6.1. </a><a href="#name-normative-references">규범적 참고 문헌</a>
+</h3>
+<dl>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd>
+<span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time>1997년 3월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC3986">[RFC3986]</dt>
+<dd>
+<span>Berners-Lee, T.</span>, <span>Fielding, R.</span>, <span>L. Masinter</span>, <span>"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span>STD 66</span>, <span>RFC 3986</span>, <span>DOI 10.17487/RFC3986</span>, <time>2005년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd>
+<span>Hardt, D., 편집</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time>2012년 10월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd>
+<span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time>2017년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+<dd>
+<span>Jones, M.</span>, <span>Sakimura, N.</span>, <span>J. Bradley</span>, <span>"OAuth 2.0 Authorization Server Metadata"</span>, <span>RFC 8414</span>, <span>DOI 10.17487/RFC8414</span>, <time>2018년 6월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+<section id="section-6.2">
+<h3 id="name-informative-references">
+<a href="#section-6.2">6.2. </a><a href="#name-informative-references">참고용 문헌</a>
+</h3>
+<dl>
+<dt id="arXiv.1508.04324">[arXiv.1508.04324]</dt>
+<dd>
+<span>Mainka, C.</span>, <span>Mladenov, V.</span>, <span>J. Schwenk</span>, <span>"On the security of modern Single Sign-On Protocols: Second-Order Vulnerabilities in OpenID Connect"</span>, <time>2015년 8월</time>, <span>&lt;<a href="https://arxiv.org/abs/1508.04324">https://arxiv.org/abs/1508.04324</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="arXiv.1601.01229">[arXiv.1601.01229]</dt>
+<dd>
+<span>Fett, D.</span>, <span>Kuesters, R.</span>, <span>G. Schmitz</span>, <span>"A Comprehensive Formal Security Analysis of OAuth 2.0"</span>, <span>DOI 10.1145/2976749.2978385</span>, <time>2016년 1월</time>, <span>&lt;<a href="https://arxiv.org/abs/1601.01229">https://arxiv.org/abs/1601.01229</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+<dd>
+<span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="JARM">[JARM]</dt>
+<dd>
+<span>Lodderstedt, T.</span>, <span>B. Campbell</span>, <span>"Financial-grade API: JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)"</span>, <time>2018년 10월</time>, <span>&lt;<a href="https://openid.net/specs/openid-financial-api-jarm.html">https://openid.net/specs/openid-financial-api-jarm.html</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="I-D.ietf-oauth-security-topics">[OAUTH-SECURITY-TOPICS]</dt>
+<dd>
+<span>Lodderstedt, T.</span>, <span>Bradley, J.</span>, <span>Labunets, A.</span>, <span>D. Fett</span>, <span>"OAuth 2.0 Security Best Current Practice"</span>, <span>작업 진행 중</span>, <span>Internet-Draft, draft-ietf-oauth-security-topics-19</span>, <time>2021년 12월 16일</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics-19">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics-19</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="OIDC.Core">[OIDC.Core]</dt>
+<dd>
+<span>Sakimura, N.</span>, <span>Bradley, J.</span>, <span>Jones, M.</span>, <span>de Medeiros, B.</span>, <span>C. Mortimore</span>, <span>"OpenID Connect Core 1.0 incorporating errata set 1"</span>, <time>2014년 11월</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+<dd>
+<span>Jones, M.</span>, <span>Bradley, J.</span>, <span>N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC7591">[RFC7591]</dt>
+<dd>
+<span>Richer, J., 편집</span>, <span>Jones, M.</span>, <span>Bradley, J.</span>, <span>Machulak, M.</span>, <span>P. Hunt</span>, <span>"OAuth 2.0 Dynamic Client Registration Protocol"</span>, <span>RFC 7591</span>, <span>DOI 10.17487/RFC7591</span>, <time>2015년 7월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7591">https://www.rfc-editor.org/info/rfc7591</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC9101">[RFC9101]</dt>
+<dd>
+<span>Sakimura, N.</span>, <span>Bradley, J.</span>, <span>M. Jones</span>, <span>"The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)"</span>, <span>RFC 9101</span>, <span>DOI 10.17487/RFC9101</span>, <time>2021년 8월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9101">https://www.rfc-editor.org/info/rfc9101</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+</section>
+<div id="Acknowledgements">
+<section id="appendix-A">
+<h2 id="name-acknowledgements">
+<a href="#name-acknowledgements">감사의 말</a>
+</h2>
+<p id="appendix-A-1">이 문서에 귀중한 의견을 보내 준
+<span>Brian Campbell</span>,
+<span>Roman Danyliw</span>,
+<span>Vladimir Dzhuvinov</span>,
+<span>Joseph Heenan</span>,
+<span>Takahiko Kawasaki</span>,
+<span>Torsten Lodderstedt</span>,
+<span>Christian Mainka</span>,
+<span>Vladislav Mladenov</span>,
+<span>Warren Parad</span>,
+<span>Aaron Parecki</span>,
+그리고 <span>Rifaat Shekh-Yusef</span>에게 감사드린다.<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-1">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Karsten Meyer zu Selhausen</span></div>
+<div dir="auto"><span>Hackmanit</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:karsten.meyerzuselhausen@hackmanit.de">karsten.meyerzuselhausen@hackmanit.de</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Daniel Fett</span></div>
+<div dir="auto"><span>yes.com</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:mail@danielfett.de">mail@danielfett.de</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 9207</td>
+<td>OAuth 2.0 authorization server 식별</td>
+<td>2022년 3월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Meyer zu Selhausen &amp; Fett</td>
+<td>표준화 트랙</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents">목차</a>
+</h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>.  <a href="#name-introduction">소개</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>.  <a href="#name-conventions-and-terminology">표기 규칙과 용어</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>.  <a href="#name-response-parameter-iss">응답 매개변수 <code>iss</code></a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1">
+<p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1">2.1</a>.  <a href="#name-example-authorization-respo">인가 응답 예제</a></p>
+</li>
+<li id="section-toc.1-1.2.2.2">
+<p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2">2.2</a>.  <a href="#name-example-error-response">오류 응답 예제</a></p>
+</li>
+<li id="section-toc.1-1.2.2.3">
+<p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3">2.3</a>.  <a href="#name-providing-the-issuer-identi">issuer identifier 제공</a></p>
+</li>
+<li id="section-toc.1-1.2.2.4">
+<p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4">2.4</a>.  <a href="#name-validating-the-issuer-ident">issuer identifier 검증</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>.  <a href="#name-authorization-server-metada">authorization server 메타데이터</a></p>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>.  <a href="#name-security-considerations">보안 고려사항</a></p>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>.  <a href="#name-iana-considerations">IANA 고려사항</a></p>
+<ul>
+<li id="section-toc.1-1.5.2.1">
+<p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1">5.1</a>.  <a href="#name-oauth-authorization-server-">OAuth authorization server 메타데이터</a></p>
+</li>
+<li id="section-toc.1-1.5.2.2">
+<p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2">5.2</a>.  <a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>.  <a href="#name-references">참고 문헌</a></p>
+<ul>
+<li id="section-toc.1-1.6.2.1">
+<p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1">6.1</a>.  <a href="#name-normative-references">규범적 참고 문헌</a></p>
+</li>
+<li id="section-toc.1-1.6.2.2">
+<p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2">6.2</a>.  <a href="#name-informative-references">참고용 문헌</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#appendix-A"></a><a href="#name-acknowledgements">감사의 말</a></p>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#appendix-B"></a><a href="#name-authors-addresses">저자 연락처</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc9207">공식 원문</a></footer></article>
