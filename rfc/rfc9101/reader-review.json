@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "0b9d6b6cf5e1c017703a711844eaa11bfd5a9104c4532b3872e35aa9f92f6252",
+  "content_selector": ".rfchtml",
+  "title": "RFC 9101 — OAuth 2.0 인가 프레임워크: JWT로 보호하는 인가 요청(JAR)",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "0058a683280e64678f64306130ce3605223dc8bfb2c4e3c3c5dd2cda878e2063",
+      "reason": "Source print running table (number, short title, date, authors, category and page label), retained intact in collapsed source notes."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

@@ -87,6 +87,10 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 >
 > This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.
 
+## RFC 9101
+
+[RFC 9101 — The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)](https://datatracker.ietf.org/doc/html/rfc9101), N. Sakimura, J. Bradley, and M. Jones, August 2021. 발행본의 영문 저작권 및 Simplified BSD License 고지는 [공식 원문](https://datatracker.ietf.org/doc/html/rfc9101#name-copyright-notice)과 번역판에 함께 보존합니다.
+
 ## RFC 10070
 
 [RFC 10070 — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants](https://datatracker.ietf.org/doc/html/rfc10070), M. B. Jones, B. Campbell, C. Mortimore, and F. Skokan, November 2026.

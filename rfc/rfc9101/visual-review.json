@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "4e6f73ff3db7c7711818a7a2c9e333b4641b363f4b2c02d274e1420a3ee21af8",
+  "verdict": "pass",
+  "evidence": "Opened contact sheets covering every current Chromium QA tile end to end (1440px: 10, 768px: 10, 390px: 13) and compared with the corresponding original source screenshots. Checked title and hierarchy, Korean text and spacing, lists and references, opened TOC, document information and source notes at each width, and the right scroll edge of all 11 mobile literal blocks. All 11 blocks retain exact text and line breaks. No page-wide horizontal overflow or visually missing required content. Known reading edition differences: date text and normative keywords are visible, but the reader omits the source datetime attributes and BCP 14 emphasis styling; the source-layout translation retains both."
+}

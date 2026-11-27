@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-26",
+  "source_url": "https://datatracker.ietf.org/doc/html/rfc9101",
+  "public_html": {
+    "path": "index.html",
+    "sha256": "cad601f296dbb13632a1ae6172c2bf39c5a1dd89b69bc6a904eb403f59c0ca89"
+  },
+  "reviewed_html": {
+    "path": "reviewed.html",
+    "sha256": "086f52ac64f06d1334dc6935b9ea6010fdeb103968ee61c74f9153e3d7c1ba2f"
+  },
+  "article": {
+    "path": "article.html",
+    "sha256": "893346a817149036b916cbe6aeb5da11ce4eba3d6189aa358e99520b881a259b"
+  },
+  "editorial_article_sha256": {
+    "archive": "344b828c77a8eacc1dc03d8a5c66902f436f339e5f6ce6ac8fb5e98350a62a58",
+    "blog": "344b828c77a8eacc1dc03d8a5c66902f436f339e5f6ce6ac8fb5e98350a62a58"
+  },
+  "presentation_css": {
+    "path": "assets/presentation.css",
+    "sha256": "e58152153351e4bdadb38e69091ba248520d9651c08fd6521d459d32cde5f342"
+  },
+  "corrected_heading": "name-authorization-server-fetche",
+  "restored_normative_emphasis": 83,
+  "restored_source_datetime_count": 27,
+  "review": "controller-review.md",
+  "note": "The reviewed reader and its evidence are byte-identical to the approved artifacts. The two public editions have the same separate, reviewed editorial article."
+}

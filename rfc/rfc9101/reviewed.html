@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RFC 9101 — OAuth 2.0 인가 프레임워크: JWT로 보호하는 인가 요청(JAR)</title><link href="assets/reader.css" rel="stylesheet"/><meta content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; child-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' data:" http-equiv="Content-Security-Policy"/></head><body class="st-reader-page"><main><article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 9101</h1><h1 class="st-document-title" id="title">OAuth 2.0 인가 프레임워크: JWT로 보호하는 인가 요청(JAR)</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>스트림:</dt>
+<dd>Internet Engineering Task Force (IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc9101">9101</a></dd>
+<dt>분류:</dt>
+<dd>표준 트랙</dd>
+<dt>발행:</dt>
+<dd>
+<time>2021년 8월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>N. Sakimura</div>
+<div>NAT.Consulting</div>
+</div>
+<div>
+<div>J. Bradley</div>
+<div>Yubico</div>
+</div>
+<div>
+<div>M. Jones</div>
+<div>Microsoft</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 상태</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 소개</a><ol><li><a href="#name-requirements-language">1.1. 요구사항 표현</a></li></ol></li><li><a href="#name-terminology">2. 용어</a><ol><li><a href="#name-request-object">2.1. Request Object</a></li><li><a href="#name-request-object-uri">2.2. Request Object URI</a></li></ol></li><li><a href="#name-symbols-and-abbreviated-ter">3. 기호 및 약어</a></li><li><a href="#name-request-object-2">4. Request Object</a></li><li><a href="#name-authorization-request">5. 인가 요청</a><ol><li><a href="#name-passing-a-request-object-by">5.1. Request Object를 값으로 전달</a></li><li><a href="#name-passing-a-request-object-by-">5.2. Request Object를 참조로 전달</a><ol><li><a href="#name-uri-referencing-the-request">5.2.1. Request Object를 가리키는 URI</a></li><li><a href="#name-request-using-the-request_u">5.2.2. "request_uri" 요청 매개변수를 사용하는 요청</a></li><li><a href="#name-authorization-server-fetche">5.2.3. authorization server의 Request Object 가져오기</a></li></ol></li></ol></li><li><a href="#name-validating-jwt-based-reques">6. JWT 기반 요청 검증</a><ol><li><a href="#name-jwe-encrypted-request-objec">6.1. JWE로 암호화한 Request Object</a></li><li><a href="#name-jws-signed-request-object">6.2. JWS로 서명한 Request Object</a></li><li><a href="#name-request-parameter-assembly-">6.3. 요청 매개변수 구성 및 검증</a></li></ol></li><li><a href="#name-authorization-server-respon">7. authorization server의 응답</a></li><li><a href="#name-tls-requirements">8. TLS 요구사항</a></li><li><a href="#name-iana-considerations">9. IANA 고려사항</a><ol><li><a href="#name-oauth-parameters-registrati">9.1. OAuth 매개변수 등록</a></li><li><a href="#name-oauth-authorization-server-">9.2. OAuth authorization server 메타데이터 레지스트리</a></li><li><a href="#name-oauth-dynamic-client-regist">9.3. OAuth 동적 client 등록 메타데이터 레지스트리</a></li><li><a href="#name-media-type-registration">9.4. 미디어 유형 등록</a><ol><li><a href="#name-registry-contents">9.4.1. 레지스트리 내용</a></li></ol></li></ol></li><li><a href="#name-security-considerations">10. 보안 고려사항</a><ol><li><a href="#name-choice-of-algorithms">10.1. 알고리즘 선택</a></li><li><a href="#name-request-source-authenticati">10.2. 요청 출처 인증</a></li><li><a href="#name-explicit-endpoints">10.3. 명시적 엔드포인트</a></li><li><a href="#name-risks-associated-with-reque">10.4. request_uri 관련 위험</a><ol><li><a href="#name-ddos-attack-on-the-authoriz">10.4.1. authorization server에 대한 DDoS 공격</a></li><li><a href="#name-request-uri-rewrite">10.4.2. 요청 URI 재작성</a></li></ol></li><li><a href="#name-downgrade-attack">10.5. 다운그레이드 공격</a></li><li><a href="#name-tls-security-considerations">10.6. TLS 보안 고려사항</a></li><li><a href="#name-parameter-mismatches">10.7. 매개변수 불일치</a></li><li><a href="#name-cross-jwt-confusion">10.8. Cross-JWT Confusion</a></li></ol></li><li><a href="#name-privacy-considerations">11. 개인정보 보호 고려사항</a><ol><li><a href="#name-collection-limitation">11.1. 수집 제한</a></li><li><a href="#name-disclosure-limitation">11.2. 공개 제한</a><ol><li><a href="#name-request-disclosure">11.2.1. 요청 공개</a></li><li><a href="#name-tracking-using-request-obje">11.2.2. Request Object URI를 이용한 추적</a></li></ol></li></ol></li><li><a href="#name-references">12. 참고 문헌</a><ol><li><a href="#name-normative-references">12.1. 규범적 참고 문헌</a></li><li><a href="#name-informative-references">12.2. 참고용 문헌</a></li></ol></li><li><a href="#name-acknowledgements">감사의 말</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">RFC 6749에서 설명하는 OAuth 2.0 인가 요청은 쿼리 매개변수 직렬화를 사용한다. 즉, 인가 요청 매개변수를 요청 URI에 인코딩한 뒤 웹 브라우저와 같은 user agent(사용자 에이전트)를 통해 전송한다. 구현하기는 쉽지만, a) user agent를 거치는 통신의 무결성이 보호되지 않아 매개변수가 변조될 수 있고, b) 통신 출처가 인증되지 않으며, c) user agent를 거치는 통신이 감시될 수 있다. 이러한 약점 때문에 이 프로토콜에 대한 여러 공격이 제기되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+<p id="section-abstract-2">이 문서는 그 대신 요청 매개변수를 JSON Web Token(JSON 웹 토큰) (JWT)에 담아 전송하는 방식을 도입한다. 요청에 JSON Web Signature(JSON 웹 서명) (JWS)로 서명하고 JSON Web Encryption(JSON 웹 암호화) (JWE)으로 암호화할 수 있으므로 인가 요청의 무결성, 출처 인증 및 기밀성을 확보할 수 있다. 요청은 값으로 전달하거나 참조로 전달할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-2">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 상태</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준 트랙 문서다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">
+            이 문서는 Internet Engineering Task Force (IETF)의 결과물이며 IETF 커뮤니티의 합의를 나타낸다. 공개 검토를 거쳤으며 Internet Engineering Steering Group (IESG)이 발행을 승인했다. 인터넷 표준에 관한 자세한 내용은 RFC 7841의 제2절을 참조한다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">
+            이 문서의 현재 상태, 정오표 및 의견을 보내는 방법은 <span><a href="https://www.rfc-editor.org/info/rfc9101">https://www.rfc-editor.org/info/rfc9101</a></span>에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice">
+<a href="#name-copyright-notice">저작권 고지</a>
+</h2>
+<p id="section-boilerplate.2-1">
+            저작권 (c) 2021 IETF Trust 및 이 문서의 저자로 명시된 사람들에게 있다. 모든 권리는 유보된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">
+            이 문서에는 발행일 현재 유효한 BCP 78과 IETF Trust의 IETF 문서 관련 법적 조항(<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)이 적용된다. 이들 문서에는 이 문서에 관한 독자의 권리와 제한 사항이 명시되어 있으므로 주의 깊게 검토하기 바란다. 이 문서에서 추출한 코드 구성요소에는 Trust 법적 조항 제4.e절에 명시된 대로 Simplified BSD License 전문을 포함해야 하며, 해당 라이선스에 명시된 대로 어떠한 보증도 없이 제공된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<section id="section-1">
+<h2 id="name-introduction">
+<a href="#section-1">1. </a><a href="#name-introduction">소개</a>
+</h2>
+<p id="section-1-1"><span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span>의 인가 요청은 쿼리 매개변수를 직렬화하는 방식을 사용하며, 일반적으로 웹 브라우저와 같은 user agent를 통해 전송된다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<p id="section-1-2">예를 들어 <code>response_type</code>, <code>client_id</code>, <code>state</code> 및 <code>redirect_uri</code> 매개변수는 다음과 같이 요청 URI에 인코딩된다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-2">¶</a></p>
+<div id="section-1-3">
+<pre>
+    GET /authorize?response_type=code&amp;client_id=s6BhdRkqt3&amp;state=xyz
+    &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
+    Host: server.example.com
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a>
+</div>
+<p id="section-1-4">URI에 인코딩하는 방식은 구현하기 쉽지만, 기밀성과 무결성을 보장하기 위해 애플리케이션 계층 보안을 적용할 수는 없다. TLS는 client와 user agent 사이, 그리고 user agent와 authorization server 사이의 통신을 보호하지만, TLS 세션은 user agent에서 종단된다. 또한 일부 중간 장비(예: 로드 밸런서)에서 TLS 세션이 더 일찍 종단될 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-4">¶</a></p>
+<p id="section-1-5">그 결과 <span>[<a href="#RFC6749">RFC6749</a>]</span>의 인가 요청에는 다음과 같은 한계가 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-5">¶</a></p>
+<span></span><dl id="section-1-6">
+<dt>(a)</dt>
+<dd id="section-1-6.1">user agent를 거치는 통신은 무결성이 보호되지 않아 매개변수가 변조될 수 있다(무결성 보호 실패).<a aria-label="문단 링크" class="st-permalink" href="#section-1-6.1">¶</a>
+</dd>
+<dd></dd>
+<dt>(b)</dt>
+<dd id="section-1-6.2">통신의 출처가 인증되지 않는다(출처 인증 실패).<a aria-label="문단 링크" class="st-permalink" href="#section-1-6.2">¶</a>
+</dd>
+<dd></dd>
+<dt>(c)</dt>
+<dd id="section-1-6.3">user agent를 거치는 통신은 감시될 수 있다(노출 방지 및 기밀성 보호 실패).<a aria-label="문단 링크" class="st-permalink" href="#section-1-6.3">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<p id="section-1-7">이러한 구조적 약점으로 인해 redirect URI(리디렉션 URI) 재작성 등 프로토콜을 대상으로 하는 여러 공격이 확인되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-7">¶</a></p>
+<p id="section-1-8">애플리케이션 계층 보안을 적용하면 이러한 문제를 완화할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-8">¶</a></p>
+<p id="section-1-9">애플리케이션 계층 보안을 적용하면 신뢰할 수 있는 제3자가 요청을 준비하여, client 애플리케이션이 사전에 합의한 범위를 넘어서는 권한을 요청하지 못하도록 할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-9">¶</a></p>
+<p id="section-1-10">또한 요청을 참조로 전달하면 네트워크 전송 오버헤드를 줄일 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-10">¶</a></p>
+<p id="section-1-11"><span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span> 인코딩을 선택한 이유는 다음과 같다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-11">¶</a></p>
+<span></span><dl id="section-1-12">
+<dt>(1)</dt>
+<dd id="section-1-12.1">OAuth 응답 형식으로 쓰이는 JSON과 밀접하게 연관되어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-12.1">¶</a>
+</dd>
+<dd></dd>
+<dt>(2)</dt>
+<dd id="section-1-12.2">텍스트 기반이므로 개발자가 다루기 쉽다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-12.2">¶</a>
+</dd>
+<dd></dd>
+<dt>(3)</dt>
+<dd id="section-1-12.3">XML보다 상대적으로 간결하다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-12.3">¶</a>
+</dd>
+<dd></dd>
+<dt>(4)</dt>
+<dd id="section-1-12.4">관련 서명 및 암호화 방식과 함께 Proposed Standard(제안 표준) 단계에 있다. <span>[<a href="#RFC7515">RFC7515</a>]</span> <span>[<a href="#RFC7516">RFC7516</a>]</span><a aria-label="문단 링크" class="st-permalink" href="#section-1-12.4">¶</a>
+</dd>
+<dd></dd>
+<dt>(5)</dt>
+<dd id="section-1-12.5">JWS와 JWE는 XML 서명 및 암호화 방식보다 상대적으로 사용하기 쉽다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-12.5">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<p id="section-1-13"><code>request</code>와 <code>request_uri</code>는 <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span> 흐름에 인가 요청 매개변수로 추가된다. <code>request</code> 매개변수는 <span><a href="#RFC7519">JSON Web Token (JWT)</a> [<a href="#RFC7519">RFC7519</a>]</span>이며, 그 JWT Claims Set(JWT 클레임 집합)에는 JSON으로 인코딩된 OAuth 2.0 인가 요청 매개변수가 담긴다. RFC 7519와 달리, 이 JWT Claims Set의 요소는 인코딩된 OAuth 요청 매개변수 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 IANA가 관리하는 JSON Web Token 클레임 <span>[<a href="#IANA.JWT.Claims">IANA.JWT.Claims</a>]</span> 중 몇 가지(특히 <code>iss</code>와 <code>aud</code>)만 보탠 것이다. JWS를 사용해 <code>request</code> 매개변수에 담긴 JWT의 무결성을 보호하고 출처를 인증한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-13">¶</a></p>
+<p id="section-1-14"><span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span>를 authorization endpoint(인가 엔드포인트)에 참조로 전달할 수도 있다. 이 경우에는 <code>request_uri</code> 매개변수를 사용하며 <code>request</code> 매개변수는 사용하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-14">¶</a></p>
+<p id="section-1-15">쿼리 매개변수 대신 <span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span>로 요청을 인코딩하면 다음과 같은 이점이 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-15">¶</a></p>
+<span></span><dl id="section-1-16">
+<dt>(a)</dt>
+<dd id="section-1-16.1">무결성 보호. 요청에 서명하여 요청의 무결성을 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-16.1">¶</a>
+</dd>
+<dd></dd>
+<dt>(b)</dt>
+<dd id="section-1-16.2">출처 인증. 요청에 서명하여 서명자를 인증할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-16.2">¶</a>
+</dd>
+<dd></dd>
+<dt>(c)</dt>
+<dd id="section-1-16.3">기밀성 보호. 요청을 암호화하면 TLS 연결이 경로상의 어느 지점에서 종단되더라도(user agent나 그에 이르기 전의 지점을 포함) 종단 간 기밀성을 보장할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-16.3">¶</a>
+</dd>
+<dd></dd>
+<dt>(d)</dt>
+<dd id="section-1-16.4">수집 최소화. 신뢰할 수 있는 제3자가 요청에 서명하여 인가 요청이 특정 정책을 준수한다는 사실을 증명할 수 있다. 예를 들어, 신뢰할 수 있는 제3자가 요청을 사전에 검토해 요청된 모든 개인정보가 최종 사용자가 요청한 절차를 수행하는 데 반드시 필요한지 확인한 뒤 해당 요청에 서명할 수 있다. 그러면 authorization server가 서명을 검증하고 정책 준수 여부를 최종 사용자에게 표시한다. 최종 사용자는 이를 통해 요청을 인가할 때 그 정당성에 대해 어느 정도 확신할 수 있다. 상황에 따라서는 이 경우 인가 대화 상자를 아예 생략하는 것이 바람직할 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-16.4">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<p id="section-1-17">다음과 같은 경우에는 요청을 참조로 전달하는 방식이 유용하다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-17">¶</a></p>
+<ol id="section-1-18" start="1" type="1">
+<li id="section-1-18.1">전송할 요청의 크기를 줄이는 것이 바람직한 경우. 애플리케이션 계층 보안을 적용하면 요청이 커지며, 공개 키 암호 기술을 사용할 때 특히 그렇다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-18.1">¶</a>
+</li>
+<li id="section-1-18.2">client가 애플리케이션 계층의 암호 처리를 직접 수행하고 싶지 않은 경우. 이 경우 authorization server는 client와 직접 통신하여 인가 요청을 받는 엔드포인트를 제공할 수 있다. 이렇게 하면 client는 인증되고 통신 채널은 TLS로 보호된다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-18.2">¶</a>
+</li>
+</ol>
+<p id="section-1-19">OpenID Connect <span>[<a href="#OpenID.Core">OpenID.Core</a>]</span>에서 이 기능을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-19">¶</a></p>
+<section id="section-1.1">
+<h3 id="name-requirements-language">
+<a href="#section-1.1">1.1. </a><a href="#name-requirements-language">요구사항 표현</a>
+</h3>
+<p id="section-1.1-1">이 문서에서 "<span>MUST</span>", "<span>MUST NOT</span>", "<span>REQUIRED</span>", "<span>SHALL</span>", "<span>SHALL NOT</span>", "<span>SHOULD</span>", "<span>SHOULD NOT</span>", "<span>RECOMMENDED</span>", "<span>NOT RECOMMENDED</span>", "<span>MAY</span>" 및 "<span>OPTIONAL</span>"이라는 키워드들은 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 명시된 대로 해석하되, 여기서처럼 모두 대문자로 표기된 경우에만 그렇게 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+</section>
+</section>
+<div id="Terminology">
+<section id="section-2">
+<h2 id="name-terminology">
+<a href="#section-2">2. </a><a href="#name-terminology">용어</a>
+</h2>
+<p id="section-2-1">이 명세에서는 <span><a href="#RFC6749">OAuth 2.0 프레임워크</a> [<a href="#RFC6749">RFC6749</a>]</span>, <span><a href="#RFC7515">JSON Web Signature</a> [<a href="#RFC7515">RFC7515</a>]</span> 및 <span><a href="#RFC7516">JSON Web Encryption</a> [<a href="#RFC7516">RFC7516</a>]</span>에 정의된 내용에 더해 다음 용어와 정의를 적용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-1">¶</a></p>
+<div id="request_object">
+<section id="section-2.1">
+<h3 id="name-request-object">
+<a href="#section-2.1">2.1. </a><a href="#name-request-object">Request Object</a>
+</h3>
+<p id="section-2.1-1">Request Object는 <span><a href="#RFC7519">JSON Web Token (JWT)</a> [<a href="#RFC7519">RFC7519</a>]</span>이며, 그 JWT Claims Set에는 JSON으로 인코딩된 OAuth 2.0 인가 요청 매개변수가 담긴다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-1">¶</a></p>
+</section>
+</div>
+<div id="request_uri">
+<section id="section-2.2">
+<h3 id="name-request-object-uri">
+<a href="#section-2.2">2.2. </a><a href="#name-request-object-uri">Request Object URI</a>
+</h3>
+<p id="section-2.2-1">Request Object URI는 OAuth 2.0 인가 요청을 구성하는 매개변수 집합을 참조하는 절대 URI이다. 이 URI가 참조하는 리소스의 내용은 <span><a href="#request_object">Request Object</a>(<a href="#request_object">2.1절</a>)</span>이다. 다만 그 URI를 소비하는 authorization server가 client에 해당 URI를 직접 제공했다면, 그 내용은 해당 authorization server가 재량에 따라 정할 구현 세부사항이다. 내용을 Request Object로 정한 것은 <code>request_uri</code>의 제공자와 소비자가 서로 다른 주체일 때 상호운용성을 보장하기 위해서다. 예를 들어 client가 자신의 백엔드 서비스에 저장해 HTTPS로 접근할 수 있게 한 Request Object를 가리키는 URI를 제공하는 경우가 이에 해당한다. 반대로 authorization server가 Request Object를 받아 그 대가로 URI를 발급하는 엔드포인트를 제공하는 등 URI의 제공자이자 소비자라면, 이러한 상호운용성 문제는 적용되지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="abbreviation">
+<section id="section-3">
+<h2 id="name-symbols-and-abbreviated-ter">
+<a href="#section-3">3. </a><a href="#name-symbols-and-abbreviated-ter">기호 및 약어</a>
+</h2>
+<p id="section-3-1">이 명세에서는 다음 약어를 공통으로 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<span></span><dl id="section-3-2">
+<dt id="section-3-2.1">JSON:</dt>
+<dd id="section-3-2.2">JavaScript Object Notation<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-3-2.3">JWT:</dt>
+<dd id="section-3-2.4">JSON Web Token<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-3-2.5">JWS:</dt>
+<dd id="section-3-2.6">JSON Web Signature<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-3-2.7">JWE:</dt>
+<dd id="section-3-2.8">JSON Web Encryption<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.8">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-3-2.9">URI:</dt>
+<dd id="section-3-2.10">Uniform Resource Identifier<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.10">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-3-2.11">URL:</dt>
+<dd id="section-3-2.12">Uniform Resource Locator<a aria-label="문단 링크" class="st-permalink" href="#section-3-2.12">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="authorization_request_object">
+<section id="section-4">
+<h2 id="name-request-object-2">
+<a href="#section-4">4. </a><a href="#name-request-object-2">Request Object</a>
+</h2>
+<p id="section-4-1"><span><a href="#request_object">Request Object</a>(<a href="#request_object">2.1절</a>)</span>는 OAuth 2.0 인가 요청에 필요한 인가 요청 매개변수를 제공하는 데 사용된다. 이 객체에 적용되는 필수 요건(<span>MUST</span>)은 <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span> 인가 요청을 처리하는 데 쓰이는 모든 매개변수(확장 매개변수 포함)를 담되, 이 문서에서 정의하는 <code>request</code>와 <code>request_uri</code> 매개변수는 제외하는 것이다. 각 매개변수는 객체의 JWT 클레임으로 표현된다. 매개변수 이름과 문자열 값은 JSON 문자열로 포함해야 한다(<span>MUST</span>). Request Object는 여러 도메인에 걸쳐 처리되며 폐쇄된 생태계 바깥에서도 처리될 수 있으므로, <span><a href="https://www.rfc-editor.org/rfc/rfc8259#section-8.1">8.1절</a>([<a href="#RFC8259">RFC8259</a>])</span>에 따라 이 JSON 문자열은 반드시(<span>MUST</span>) UTF-8 <span>[<a href="#RFC3629">RFC3629</a>]</span>로 인코딩해야 한다. 수치는 JSON 숫자로 포함해야 한다(<span>MUST</span>). Request Object에는 어떤 확장 매개변수든 포함할 수 있다(<span>MAY</span>).
+
+이 <span><a href="#RFC8259">JSON</a> [<a href="#RFC8259">RFC8259</a>]</span> 객체는 <span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span>에 정의된 JWT Claims Set을 이룬다. 그런 다음 JWT Claims Set에 서명하거나, 서명한 뒤 암호화한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+<p id="section-4-2">서명에는 <span><a href="#RFC7515">JSON Web Signature (JWS)</a> [<a href="#RFC7515">RFC7515</a>]</span>를 사용한다. 그 결과는 JWS로 서명된 <span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span>다. 인가 요청의 Request Object에 서명하는 경우, 권장 사항(<span>SHOULD</span>)은 그 멤버로 <code>iss</code>(issuer(발급자))와 <code>aud</code>(audience(의도된 수신자)) 클레임을 포함하는 것이다. 두 클레임의 의미는 <span><a href="#RFC7519">JWT</a> [<a href="#RFC7519">RFC7519</a>]</span> 명세에서 정의하는 의미와 같다. <code>aud</code>의 값은 authorization server(AS)의 <code>issuer</code> 값으로 하는 것이 바람직하다. 이 값은 <span><a href="#RFC8414">RFC 8414</a> [<a href="#RFC8414">RFC8414</a>]</span>에서 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-2">¶</a></p>
+<p id="section-4-3">암호화에는 <span><a href="#RFC7516">JWE</a> [<a href="#RFC7516">RFC7516</a>]</span>를 사용한다. 서명과 암호화를 모두 적용할 경우 JWT를 반드시(<span>MUST</span>) 먼저 서명한 뒤 암호화해야 한다. 이 절차는 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-11.2">11.2절</a>([<a href="#RFC7519">RFC7519</a>])</span>에 설명되어 있다. 그 결과는 Nested JWT이며, 이는 <span>[<a href="#RFC7519">RFC7519</a>]</span>에서 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-3">¶</a></p>
+<p id="section-4-4">client는 Request Object를 서명하고 암호화하는 데 사용할 알고리즘을 결정한다. 선택한 알고리즘은 client와 authorization server가 모두 지원해야 한다. client는 동적 client 등록 메타데이터 <span>[<a href="#RFC7591">RFC7591</a>]</span>, 구체적으로 <code>request_object_signing_alg</code>, <code>request_object_encryption_alg</code>, <code>request_object_encryption_enc</code> 메타데이터 값을 통해 자신이 지원하는 알고리즘을 authorization server에 알릴 수 있다. 마찬가지로 authorization server는 authorization server 메타데이터 <span>[<a href="#RFC8414">RFC8414</a>]</span>, 구체적으로 <code>request_object_signing_alg_values_supported</code>, <code>request_object_encryption_alg_values_supported</code>, <code>request_object_encryption_enc_values_supported</code> 메타데이터 값을 통해 자신이 지원하는 알고리즘을 client에 알릴 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-4">¶</a></p>
+<p id="section-4-5">Request Object는 두 방식으로 보낼 수 있다(<span>MAY</span>). <a href="#RequestParameter">5.1절</a>에서 설명하는 것처럼 값으로 전달하거나, <a href="#RequestUriParameter">5.2절</a>에서 설명하는 것처럼 참조로 전달한다. <code>request</code>와 <code>request_uri</code> 매개변수는 Request Object에 포함해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-4-5">¶</a></p>
+<p id="section-4-6"><span><a href="#request_object">Request Object</a>(<a href="#request_object">2.1절</a>)</span>의 미디어 유형 <span>[<a href="#RFC2046">RFC2046</a>]</span>은 <code>application/oauth-authz-req+jwt</code>이다. 다만 일부 기존 배포 환경에서는 그 대신 <code>application/jwt</code> 유형을 사용하고 있을 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-6">¶</a></p>
+<p id="section-4-7">다음은 base64url <span>[<a href="#RFC7515">RFC7515</a>]</span> 인코딩과 서명을 하기 전의 Request Object에 들어 있는 클레임의 예다. 확장 매개변수 <code>nonce</code>와 <code>max_age</code>가 포함되어 있음에 유의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-7">¶</a></p>
+<div id="section-4-8">
+<pre>
+  {
+   "iss": "s6BhdRkqt3",
+   "aud": "https://server.example.com",
+   "response_type": "code id_token",
+   "client_id": "s6BhdRkqt3",
+   "redirect_uri": "https://client.example.org/cb",
+   "scope": "openid",
+   "state": "af0ifjsldkj",
+   "nonce": "n-0S6_WzA2Mj",
+   "max_age": 86400
+  }
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-4-8">¶</a>
+</div>
+<p id="section-4-9">이를 <code>RS256</code> 알고리즘 <span>[<a href="#RFC7518">RFC7518</a>]</span>으로 서명하면 다음과 같은 Request Object 값을 얻는다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-4-9">¶</a></p>
+<div id="section-4-10">
+<pre>
+  eyJhbGciOiJSUzI1NiIsImtpZCI6ImsyYmRjIn0.ewogICAgImlzcyI6ICJzNkJoZF
+  JrcXQzIiwKICAgICJhdWQiOiAiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBsZS5jb20iLAog
+  ICAgInJlc3BvbnNlX3R5cGUiOiAiY29kZSBpZF90b2tlbiIsCiAgICAiY2xpZW50X2
+  lkIjogInM2QmhkUmtxdDMiLAogICAgInJlZGlyZWN0X3VyaSI6ICJodHRwczovL2Ns
+  aWVudC5leGFtcGxlLm9yZy9jYiIsCiAgICAic2NvcGUiOiAib3BlbmlkIiwKICAgIC
+  JzdGF0ZSI6ICJhZjBpZmpzbGRraiIsCiAgICAibm9uY2UiOiAibi0wUzZfV3pBMk1q
+  IiwKICAgICJtYXhfYWdlIjogODY0MDAKfQ.Nsxa_18VUElVaPjqW_ToI1yrEJ67BgK
+  b5xsuZRVqzGkfKrOIX7BCx0biSxYGmjK9KJPctH1OC0iQJwXu5YVY-vnW0_PLJb1C2
+  HG-ztVzcnKZC2gE4i0vgQcpkUOCpW3SEYXnyWnKzuKzqSb1wAZALo5f89B_p6QA6j6
+  JwBSRvdVsDPdulW8lKxGTbH82czCaQ50rLAg3EYLYaCb4ik4I1zGXE4fvim9FIMs8O
+  CMmzwIB5S-ujFfzwFjoyuPEV4hJnoVUmXR_W9typPf846lGwA8h9G9oNTIuX8Ft2jf
+  pnZdFmLg3_wr3Wa5q3a-lfbgF3S9H_8nN3j1i7tLR_5Nz-g
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-4-10">¶</a>
+</div>
+<p id="section-4-11">다음은 JSON Web Key (JWK) 형식으로 표현한 RSA 공개 키다. 이 예와 이후의 Request Object 예에서 Request Object의 서명을 검증하는 데 사용할 수 있다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-4-11">¶</a></p>
+<div id="section-4-12">
+<pre>
+  {
+   "kty":"RSA",
+   "kid":"k2bdc",
+   "n":"x5RbkAZkmpRxia65qRQ1wwSMSxQUnS7gcpVTV_cdHmfmG2ltd2yabEO9XadD8
+        pJNZubINPpmgHh3J1aD9WRwS05ucmFq3CfFsluLt13_7oX5yDRSKX7poXmT_5
+        ko8k4NJZPMAO8fPToDTH7kHYbONSE2FYa5GZ60CUsFhSonI-dcMDJ0Ary9lxI
+        w5k2z4TAdARVWcS7sD07VhlMMshrwsPHBQgTatlkxyIHXbYdtak8fqvNAwr7O
+        lVEvM_Ipf5OfmdB8Sd-wjzaBsyP4VhJKoi_qdgSzpC694XZeYPq45Sw-q51iF
+        UlcOlTCI7z6jltUtnR6ySn6XDGFnzH5Fe5ypw",
+   "e":"AQAB"
+  }
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-4-12">¶</a>
+</div>
+</section>
+</div>
+<div id="authreq">
+<section id="section-5">
+<h2 id="name-authorization-request"><a href="#section-5">5. </a><a href="#name-authorization-request">인가 요청</a></h2>
+<p id="section-5-1">client는 authorization endpoint URI의 쿼리 구성 요소에 다음 매개변수를 <code>application/x-www-form-urlencoded</code> 형식으로 추가해 인가 요청 URI를 구성한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-1">¶</a></p>
+<span></span><dl id="section-5-2">
+<dt id="section-5-2.1">request</dt>
+<dd id="section-5-2.2">필수(<span>REQUIRED</span>) 매개변수다. 단, <code>request_uri</code>를 지정한 경우는 예외다. 이 매개변수의 값은 <span><a href="#request_object">Request Object</a>(<a href="#request_object">2.1절</a>)</span>이며, <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4">4절</a>([<a href="#RFC6749">RFC6749</a>])</span>(OAuth 2.0)에 명시된 인가 요청 매개변수를 담는다. 인가 요청에 이 매개변수가 있으면 <code>request_uri</code>는 포함해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-5-2.2">¶</a></dd>
+<dd></dd>
+<dt id="section-5-2.3">request_uri</dt>
+<dd id="section-5-2.4">필수(<span>REQUIRED</span>) 매개변수다. 단, <code>request</code>를 지정한 경우는 예외다. 이 값은 <span><a href="#RFC3986">RFC 3986</a> [<a href="#RFC3986">RFC3986</a>]</span>에서 정의하는 절대 URI로, <span><a href="#request_uri">Request Object URI</a>(<a href="#request_uri">2.2절</a>)</span>에 해당한다. 이 URI는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4">4절</a>([<a href="#RFC6749">RFC6749</a>])</span>(OAuth 2.0)에 명시된 인가 요청 매개변수를 참조한다. 인가 요청에 이 매개변수가 있으면 <code>request</code>는 포함해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-5-2.4">¶</a></dd>
+<dd></dd>
+<dt id="section-5-2.5">client_id</dt>
+<dd id="section-5-2.6">필수(<span>REQUIRED</span>) 매개변수다. <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span>의 <code>client_id</code>다. 이 값은 반드시(<span>MUST</span>) <code>request</code> 또는 <code>request_uri</code>에 해당하는 <span><a href="#request_object">Request Object</a>(<a href="#request_object">2.1절</a>)</span>의 <code>client_id</code> 값과 일치해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-2.6">¶</a></dd>
+<dd></dd>
+</dl>
+<p id="section-5-3">client는 HTTP 리디렉션 응답이나 user agent를 통해 이용할 수 있는 다른 수단을 사용해, 앞서 구성한 URI로 resource owner(리소스 소유자)를 안내한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-3">¶</a></p>
+<p id="section-5-4">예를 들어 client는 최종 사용자의 user agent가 다음 HTTPS 요청을 보내도록 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-4">¶</a></p>
+<div id="section-5-5">
+<pre>
+GET /authz?client_id=s6BhdRkqt3&amp;request=eyJhbG..AlMGzw HTTP/1.1
+Host: server.example.com
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5-5">¶</a>
+</div>
+<p id="section-5-6">간결하게 보여 주기 위해 request 매개변수의 값은 줄여 표시했다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-6">¶</a></p>
+<p id="section-5-7">인가 요청의 Request Object는 반드시(<span>MUST</span>) 다음 중 하나여야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-7">¶</a></p>
+<span></span><dl id="section-5-8">
+<dt>(a)</dt>
+<dd id="section-5-8.1">JWS로 서명됨<a aria-label="문단 링크" class="st-permalink" href="#section-5-8.1">¶</a></dd>
+<dd></dd>
+<dt>(b)</dt>
+<dd id="section-5-8.2">JWS로 서명되고 JWE로 암호화됨<a aria-label="문단 링크" class="st-permalink" href="#section-5-8.2">¶</a></dd>
+<dd></dd>
+</dl>
+<p id="section-5-9">client는 하위 호환성 등을 위해 Request Object에 포함된 매개변수를 쿼리 매개변수에도 중복해서 보낼 수 있다(<span>MAY</span>). 그러나 이 명세를 지원하는 authorization server는 반드시(<span>MUST</span>) Request Object에 포함된 매개변수만 사용해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5-9">¶</a></p>
+<div id="RequestParameter">
+<section id="section-5.1">
+<h3 id="name-passing-a-request-object-by"><a href="#section-5.1">5.1. </a><a href="#name-passing-a-request-object-by">Request Object를 값으로 전달</a></h3>
+<p id="section-5.1-1">client는 인가 요청을 Request Object 형태로 구성하여 <code>request</code> 매개변수의 값으로 authorization endpoint에 보낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-1">¶</a></p>
+<p id="section-5.1-2">다음은 <code>request</code> 매개변수를 사용하는 인가 요청의 예다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2">¶</a></p>
+<div id="section-5.1-3">
+<pre>
+  https://server.example.com/authorize?client_id=s6BhdRkqt3&amp;
+    request=eyJhbGciOiJSUzI1NiIsImtpZCI6ImsyYmRjIn0.ewogICAgImlzcyI6
+    ICJzNkJoZFJrcXQzIiwKICAgICJhdWQiOiAiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBs
+    ZS5jb20iLAogICAgInJlc3BvbnNlX3R5cGUiOiAiY29kZSBpZF90b2tlbiIsCiAg
+    ICAiY2xpZW50X2lkIjogInM2QmhkUmtxdDMiLAogICAgInJlZGlyZWN0X3VyaSI6
+    ICJodHRwczovL2NsaWVudC5leGFtcGxlLm9yZy9jYiIsCiAgICAic2NvcGUiOiAi
+    b3BlbmlkIiwKICAgICJzdGF0ZSI6ICJhZjBpZmpzbGRraiIsCiAgICAibm9uY2Ui
+    OiAibi0wUzZfV3pBMk1qIiwKICAgICJtYXhfYWdlIjogODY0MDAKfQ.Nsxa_18VU
+    ElVaPjqW_ToI1yrEJ67BgKb5xsuZRVqzGkfKrOIX7BCx0biSxYGmjK9KJPctH1OC
+    0iQJwXu5YVY-vnW0_PLJb1C2HG-ztVzcnKZC2gE4i0vgQcpkUOCpW3SEYXnyWnKz
+    uKzqSb1wAZALo5f89B_p6QA6j6JwBSRvdVsDPdulW8lKxGTbH82czCaQ50rLAg3E
+    YLYaCb4ik4I1zGXE4fvim9FIMs8OCMmzwIB5S-ujFfzwFjoyuPEV4hJnoVUmXR_W
+    9typPf846lGwA8h9G9oNTIuX8Ft2jfpnZdFmLg3_wr3Wa5q3a-lfbgF3S9H_8nN3
+    j1i7tLR_5Nz-g
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.1-3">¶</a>
+</div>
+</section>
+</div>
+<div id="RequestUriParameter">
+<section id="section-5.2">
+<h3 id="name-passing-a-request-object-by-"><a href="#section-5.2">5.2. </a><a href="#name-passing-a-request-object-by-">Request Object를 참조로 전달</a></h3>
+<p id="section-5.2-1">인가 요청 매개변수 <code>request_uri</code>를 사용하면 OAuth 인가 요청을 값이 아닌 참조로 전달할 수 있다. 사용 방식은 <code>request</code> 매개변수와 같지만, Request Object 값을 직접 전달하는 대신 지정된 URI가 식별하는 리소스에서 그 값을 가져온다는 점이 다르다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-1">¶</a></p>
+<p id="section-5.2-2">전체 요청 URI에 적용되는 권고(<span>SHOULD NOT</span>)는 ASCII 문자 512자를 넘기지 않는 것이다. 이 제한에는 두 가지 이유가 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2">¶</a></p>
+<ol id="section-5.2-3" start="1" type="1">
+<li id="section-5.2-3.1">이 문서 작성 시점에 시판되는 휴대전화 중 상당수는 여전히 큰 페이로드를 받지 못한다. 한도는 일반적으로 ASCII 문자 512자 또는 1024자다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-3.1">¶</a></li>
+<li id="section-5.2-3.2">2G 모바일 연결처럼 느린 연결에서는 긴 URL 때문에 응답이 늦어질 수 있으므로, 사용자 경험 측면에서 긴 URL을 사용하는 것은 바람직하지 않다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-3.2">¶</a></li>
+</ol>
+<p id="section-5.2-4">authorization server가 해당 URI를 client에 제공한 경우가 아니라면, <code>request_uri</code>가 참조하는 리소스의 내용은 반드시(<span>MUST</span>) Request Object여야 하며, authorization server는 그 리소스에 반드시(<span>MUST</span>) 접근할 수 있어야 한다. 이처럼 authorization server가 해당 URI를 제공하지 않은 경우 <code>request_uri</code>는 반드시(<span>MUST</span>) <code>https</code> URI여야 한다. 이는 <span><a href="https://www.rfc-editor.org/rfc/rfc7230#section-2.7.2">2.7.2절</a>([<a href="#RFC7230">RFC7230</a>])</span>에 명시되어 있다. 반대로 authorization server가 해당 URI를 제공한 경우에는 반드시(<span>MUST</span>) URN이어야 한다. 이는 <span>[<a href="#RFC8141">RFC8141</a>]</span>에 명시되어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-4">¶</a></p>
+<p id="section-5.2-5">다음은 <code>request_uri</code>로 참조할 수 있는 Request Object 리소스의 내용 예다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-5">¶</a></p>
+<div id="section-5.2-6">
+<pre>
+  eyJhbGciOiJSUzI1NiIsImtpZCI6ImsyYmRjIn0.ewogICAgImlzcyI6ICJzNkJoZF
+  JrcXQzIiwKICAgICJhdWQiOiAiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBsZS5jb20iLAog
+  ICAgInJlc3BvbnNlX3R5cGUiOiAiY29kZSBpZF90b2tlbiIsCiAgICAiY2xpZW50X2
+  lkIjogInM2QmhkUmtxdDMiLAogICAgInJlZGlyZWN0X3VyaSI6ICJodHRwczovL2Ns
+  aWVudC5leGFtcGxlLm9yZy9jYiIsCiAgICAic2NvcGUiOiAib3BlbmlkIiwKICAgIC
+  JzdGF0ZSI6ICJhZjBpZmpzbGRraiIsCiAgICAibm9uY2UiOiAibi0wUzZfV3pBMk1q
+  IiwKICAgICJtYXhfYWdlIjogODY0MDAKfQ.Nsxa_18VUElVaPjqW_ToI1yrEJ67BgK
+  b5xsuZRVqzGkfKrOIX7BCx0biSxYGmjK9KJPctH1OC0iQJwXu5YVY-vnW0_PLJb1C2
+  HG-ztVzcnKZC2gE4i0vgQcpkUOCpW3SEYXnyWnKzuKzqSb1wAZALo5f89B_p6QA6j6
+  JwBSRvdVsDPdulW8lKxGTbH82czCaQ50rLAg3EYLYaCb4ik4I1zGXE4fvim9FIMs8O
+  CMmzwIB5S-ujFfzwFjoyuPEV4hJnoVUmXR_W9typPf846lGwA8h9G9oNTIuX8Ft2jf
+  pnZdFmLg3_wr3Wa5q3a-lfbgF3S9H_8nN3j1i7tLR_5Nz-g
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.2-6">¶</a>
+</div>
+<div id="CreateRequestUri">
+<section id="section-5.2.1">
+<h4 id="name-uri-referencing-the-request"><a href="#section-5.2.1">5.2.1. </a><a href="#name-uri-referencing-the-request">Request Object를 가리키는 URI</a></h4>
+<p id="section-5.2.1-1">client는 authorization server가 접근할 수 있는 URI에 Request Object 리소스를 로컬 또는 원격으로 저장한다. 이 기능은 authorization server나 신뢰할 수 있는 제3자가 제공할 수 있다. 예를 들어 authorization server는 client가 Request Object를 POST하고 요청 URI를 받을 수 있는 URL을 제공할 수 있다. 이렇게 받은 URI가 Request Object URI, 즉 <code>request_uri</code>다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.1-1">¶</a></p>
+<p id="section-5.2.1-2">Request Object에는 authorization server에만 공개할 값이 들어 있을 수 있다. 따라서 <code>request_uri</code>는 공개적으로 조회할 수 있는 URI라도 유효 기간 동안 그 URI를 추측할 수 없도록 반드시(<span>MUST</span>) 적절한 엔트로피를 갖추어야 한다. 관련 지침은 <span><a href="https://www.rfc-editor.org/rfc/rfc6819#section-5.1.4.2.2">5.1.4.2.2절</a>([<a href="#RFC6819">RFC6819</a>])</span>과 "<a href="#CapURLs">Good Practices for Capability URLs</a>" <span>[<a href="#CapURLs">CapURLs</a>]</span>을 참조한다. 권장 사항(<span>RECOMMENDED</span>)은 <code>request_uri</code>를 합리적인 제한 시간이 지난 뒤 제거하는 것이다. 단, 접근 제어 조치를 취한 경우는 예외다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.1-2">¶</a></p>
+<p id="section-5.2.1-3">다음은 Request Object URI 값의 예다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다). 이 예에서는 신뢰할 수 있는 제3자 서비스가 Request Object를 호스팅한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.1-3">¶</a></p>
+<div id="section-5.2.1-4">
+<pre>
+  https://tfp.example.org/request.jwt/
+    GkurKxf5T0Y-mnPFCHqWOMiZi4VS138cQO_V7PZHAdM
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.2.1-4">¶</a>
+</div>
+</section>
+</div>
+<div id="UseRequestUri">
+<section id="section-5.2.2">
+<h4 id="name-request-using-the-request_u"><a href="#section-5.2.2">5.2.2. </a><a href="#name-request-using-the-request_u">"request_uri" 요청 매개변수를 사용하는 요청</a></h4>
+<p id="section-5.2.2-1">client는 인가 요청을 authorization endpoint에 보낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.2-1">¶</a></p>
+<p id="section-5.2.2-2">다음은 <code>request_uri</code> 매개변수를 사용하는 인가 요청의 예다(값 안의 줄바꿈은 표시를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.2-2">¶</a></p>
+<div id="section-5.2.2-3">
+<pre>
+  https://server.example.com/authorize?
+    client_id=s6BhdRkqt3
+    &amp;request_uri=https%3A%2F%2Ftfp.example.org%2Frequest.jwt
+    %2FGkurKxf5T0Y-mnPFCHqWOMiZi4VS138cQO_V7PZHAdM
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.2.2-3">¶</a>
+</div>
+</section>
+</div>
+<div id="GetRequestUri">
+<section id="section-5.2.3">
+<h4 id="name-authorization-server-fetche"><a href="#section-5.2.3">5.2.3. </a><a href="#name-authorization-server-fetche">authorization server의 Request Object 가져오기</a></h4>
+<p id="section-5.2.3-1">요청을 받은 authorization server는 참조된 Request Object를 가져오기 위해 반드시(<span>MUST</span>) HTTP <code>GET</code> 요청을 <code>request_uri</code>로 보내야 한다. 단, Request Object가 다른 방식으로 저장되어 authorization server가 다른 수단을 통해 안전하게 가져온 뒤 이를 파싱하여 인가 요청 매개변수를 재구성할 수 있다면 예외다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.3-1">¶</a></p>
+<p id="section-5.2.3-2">다음은 이렇게 가져오는 절차의 예다. 이 예에서는 신뢰할 수 있는 제3자 서비스가 Request Object를 호스팅한다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.3-2">¶</a></p>
+<div id="section-5.2.3-3">
+<pre>
+GET /request.jwt/GkurKxf5T0Y-mnPFCHqWOMiZi4VS138cQO_V7PZHAdM HTTP/1.1
+Host: tfp.example.org
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.2.3-3">¶</a>
+</div>
+<p id="section-5.2.3-4">다음은 가져오기 요청에 대한 응답의 예다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2.3-4">¶</a></p>
+<div id="section-5.2.3-5">
+<pre>
+  HTTP/1.1 200 OK
+  Date: Thu, 20 Aug 2020 23:52:39 GMT
+  Server: Apache/2.4.43 (tfp.example.org)
+  Content-type: application/oauth-authz-req+jwt
+  Content-Length: 797
+  Last-Modified: Wed, 19 Aug 2020 23:52:32 GMT
+
+  eyJhbGciOiJSUzI1NiIsImtpZCI6ImsyYmRjIn0.ewogICAgImlzcyI6ICJzNkJoZF
+  JrcXQzIiwKICAgICJhdWQiOiAiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBsZS5jb20iLAog
+  ICAgInJlc3BvbnNlX3R5cGUiOiAiY29kZSBpZF90b2tlbiIsCiAgICAiY2xpZW50X2
+  lkIjogInM2QmhkUmtxdDMiLAogICAgInJlZGlyZWN0X3VyaSI6ICJodHRwczovL2Ns
+  aWVudC5leGFtcGxlLm9yZy9jYiIsCiAgICAic2NvcGUiOiAib3BlbmlkIiwKICAgIC
+  JzdGF0ZSI6ICJhZjBpZmpzbGRraiIsCiAgICAibm9uY2UiOiAibi0wUzZfV3pBMk1q
+  IiwKICAgICJtYXhfYWdlIjogODY0MDAKfQ.Nsxa_18VUElVaPjqW_ToI1yrEJ67BgK
+  b5xsuZRVqzGkfKrOIX7BCx0biSxYGmjK9KJPctH1OC0iQJwXu5YVY-vnW0_PLJb1C2
+  HG-ztVzcnKZC2gE4i0vgQcpkUOCpW3SEYXnyWnKzuKzqSb1wAZALo5f89B_p6QA6j6
+  JwBSRvdVsDPdulW8lKxGTbH82czCaQ50rLAg3EYLYaCb4ik4I1zGXE4fvim9FIMs8O
+  CMmzwIB5S-ujFfzwFjoyuPEV4hJnoVUmXR_W9typPf846lGwA8h9G9oNTIuX8Ft2jf
+  pnZdFmLg3_wr3Wa5q3a-lfbgF3S9H_8nN3j1i7tLR_5Nz-g
+</pre><a aria-label="문단 링크" class="st-permalink" href="#section-5.2.3-5">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="JWTRequestValidation">
+<section id="section-6">
+<h2 id="name-validating-jwt-based-reques"><a href="#section-6">6. </a><a href="#name-validating-jwt-based-reques">JWT 기반 요청 검증</a></h2>
+<div id="EncryptedRequestObject">
+<section id="section-6.1">
+<h3 id="name-jwe-encrypted-request-objec"><a href="#section-6.1">6.1. </a><a href="#name-jwe-encrypted-request-objec">JWE로 암호화한 Request Object</a></h3>
+<p id="section-6.1-1">Request Object가 암호화되어 있다면 authorization server는 반드시(<span>MUST</span>) <span><a href="#RFC7516">JSON Web Encryption</a> [<a href="#RFC7516">RFC7516</a>]</span> 명세에 따라 JWT를 복호화해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-1">¶</a></p>
+<p id="section-6.1-2">그 결과는 서명된 Request Object다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-2">¶</a></p>
+<p id="section-6.1-3">복호화에 실패하면 authorization server는 반드시(<span>MUST</span>) 인가 요청에 대한 응답으로 <code>invalid_request_object</code> 오류를 client에 반환해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.1-3">¶</a></p>
+</section>
+</div>
+<div id="SignedRequestObject">
+<section id="section-6.2">
+<h3 id="name-jws-signed-request-object">
+<a href="#section-6.2">6.2. </a><a href="#name-jws-signed-request-object">JWS로 서명한 Request Object</a>
+</h3>
+<p id="section-6.2-1">authorization server는 반드시(<span>MUST</span>) JWS로 서명한 <span>[<a href="#RFC7515">RFC7515</a>]</span> Request Object의 서명을 검증해야 한다. <code>kid</code> 헤더 매개변수가 있으면, 이 매개변수가 가리키는 키를 반드시(<span>MUST</span>) 사용해야 하며 그 키는 반드시(<span>MUST</span>) client와 연결된 키여야 한다. 서명은 반드시(<span>MUST</span>) client와 연결된 키와 <code>alg</code> 헤더 매개변수에 지정된 알고리즘을 사용해 검증해야 한다. 알고리즘도 반드시(<span>MUST</span>) <a href="https://www.rfc-editor.org/rfc/rfc8725#section-3.1">제3.1절</a> 및 <a href="https://www.rfc-editor.org/rfc/rfc8725#section-3.2">제3.2절</a>(<span>[<a href="#RFC8725">RFC8725</a>]</span>)의 규정에 따라 검증해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.2-1">¶</a></p>
+<p id="section-6.2-2">키가 client와 연결되어 있지 않거나 서명 검증에 실패하면, authorization server는 인가 요청에 대한 응답으로 반드시(<span>MUST</span>) client에 <code>invalid_request_object</code> 오류를 반환해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.2-2">¶</a></p>
+</section>
+</div>
+<div id="RequestParameterValidation">
+<section id="section-6.3">
+<h3 id="name-request-parameter-assembly-">
+<a href="#section-6.3">6.3. </a><a href="#name-request-parameter-assembly-">요청 매개변수 구성 및 검증</a>
+</h3>
+<p id="section-6.3-1">authorization server는 반드시(<span>MUST</span>) Request Object 값에서 인가 요청 매개변수의 집합을 추출해야 한다. 쿼리 매개변수로 같은 매개변수가 제공되더라도 authorization server는 반드시(<span>MUST</span>) Request Object의 매개변수만 사용해야 한다. <code>client_id</code> 요청 매개변수와 Request Object의 <code>client_id</code> 클레임에 담긴 client ID 값은 반드시(<span>MUST</span>) 일치해야 한다. 그런 다음 authorization server는 <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span>의 규정에 따라 요청을 검증한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.3-1">¶</a></p>
+<p id="section-6.3-2">client ID 확인이나 요청 검증에 실패하면, authorization server는 반드시(<span>MUST</span>) <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.2">제5.2절</a> ([<a href="#RFC6749">RFC6749</a>])</span>(OAuth 2.0)의 규정에 따라 인가 요청에 대한 응답으로 client에 오류를 반환해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-6.3-2">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<section id="section-7">
+<h2 id="name-authorization-server-respon">
+<a href="#section-7">7. </a><a href="#name-authorization-server-respon">authorization server의 응답</a>
+</h2>
+<p id="section-7-1">authorization server는 <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4">제4절</a> ([<a href="#RFC6749">RFC6749</a>])</span>(OAuth 2.0)의 절차에 따라 응답을 생성하여 client에 보낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-1">¶</a></p>
+<p id="section-7-2">이 문서는 다음 오류 값도 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-2">¶</a></p>
+<span></span><dl id="section-7-3">
+<dt id="section-7-3.1">invalid_request_uri</dt>
+<dd id="section-7-3.2">인가 요청의 <code>request_uri</code>가 오류를 반환하거나 유효하지 않은 데이터를 담고 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-3.2">¶</a></dd>
+<dd></dd>
+<dt id="section-7-3.3">invalid_request_object</dt>
+<dd id="section-7-3.4">request 매개변수에 유효하지 않은 Request Object가 들어 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-3.4">¶</a></dd>
+<dd></dd>
+<dt id="section-7-3.5">request_not_supported</dt>
+<dd id="section-7-3.6">authorization server가 <code>request</code> 매개변수 사용을 지원하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-3.6">¶</a></dd>
+<dd></dd>
+<dt id="section-7-3.7">request_uri_not_supported</dt>
+<dd id="section-7-3.8">authorization server가 <code>request_uri</code> 매개변수 사용을 지원하지 않는다.<a aria-label="문단 링크" class="st-permalink" href="#section-7-3.8">¶</a></dd>
+<dd></dd>
+</dl>
+</section>
+<div id="tlsreq">
+<section id="section-8">
+<h2 id="name-tls-requirements">
+<a href="#section-8">8. </a><a href="#name-tls-requirements">TLS 요구사항</a>
+</h2>
+<p id="section-8-1">Request Object URI 방식을 지원하는 client 구현은 반드시(<span>MUST</span>) <span><a href="#RFC7525">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</a> [<a href="#RFC7525">RFC7525</a>]</span>의 권고에 따라 TLS를 지원해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-1">¶</a></p>
+<p id="section-8-2">정보 노출과 변조를 막으려면 반드시(<span>MUST</span>) 기밀성과 무결성을 보호하는 암호 스위트를 갖춘 TLS를 사용해 기밀성을 보호해야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-2">¶</a></p>
+<p id="section-8-3">HTTP client는 중간자 공격을 방지하기 위해 반드시(<span>MUST</span>) DNS-ID <span>[<a href="#RFC6125">RFC6125</a>]</span>를 사용해 TLS 서버 인증서도 검증해야 한다. 여기에는 <span>[<a href="#RFC6125">RFC6125</a>]</span>에 정의된 규칙과 지침이 적용되며, 다음 사항을 고려한다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-3">¶</a></p>
+<ul>
+<li id="section-8-4.1">DNS-ID 식별자 유형(즉, subjectAltName 확장의 dNSName 식별자)은 반드시 지원해야 한다(<span>REQUIRED</span>). 서버 인증서를 발급하는 인증 기관은 반드시(<span>MUST</span>) DNS-ID 식별자 유형을 지원해야 하며, 서버 인증서에는 반드시(<span>MUST</span>) DNS-ID 식별자 유형이 포함되어야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-4.1">¶</a></li>
+<li id="section-8-4.2">서버 인증서의 DNS 이름에는 다음 와일드카드 문자가 포함될 수 있다(<span>MAY</span>): <code>*</code>.<a aria-label="문단 링크" class="st-permalink" href="#section-8-4.2">¶</a></li>
+<li id="section-8-4.3">client는 CN-ID 식별자를 사용해서는 안 된다(<span>MUST NOT</span>). 서버 인증서의 주체 이름에 Common Name 필드(CN 필드)가 있을 수 있지만, 인증에는 이 필드를 사용해서는 안 된다(<span>MUST NOT</span>). 이는 <span>[<a href="#RFC7525">RFC7525</a>]</span>에 기술된 규칙의 범위에서 적용된다.<a aria-label="문단 링크" class="st-permalink" href="#section-8-4.3">¶</a></li>
+<li id="section-8-4.4"><span><a href="https://www.rfc-editor.org/rfc/rfc6125#section-6.5">제6.5절</a> ([<a href="#RFC6125">RFC6125</a>])</span>에 기술된 SRV-ID와 URI-ID는 비교에 사용해서는 안 된다(<span>MUST NOT</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-8-4.4">¶</a></li>
+</ul>
+</section>
+</div>
+<div id="IANA">
+<section id="section-9">
+<h2 id="name-iana-considerations">
+<a href="#section-9">9. </a><a href="#name-iana-considerations">IANA 고려사항</a>
+</h2>
+<div id="OAuthParametersRegistry">
+<section id="section-9.1">
+<h3 id="name-oauth-parameters-registrati">
+<a href="#section-9.1">9.1. </a><a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a>
+</h3>
+<p id="section-9.1-1">Request Object는 JWT이므로, JWT의 핵심 클레임은 Request Object에서 JWT가 정한 용도에만 사용할 수 있다. 따라서 향후 OAuth 확장이 이 클레임들을 다른 의미로 사용하지 않도록 이를 OAuth 인가 요청 매개변수로 등록했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-1">¶</a></p>
+<p id="section-9.1-2">이 규격은 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 다음 값을 추가한다. 이 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 제정했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-2">¶</a></p>
+<span></span><dl id="section-9.1-3">
+<dt id="section-9.1-3.1">이름:</dt>
+<dd id="section-9.1-3.2">
+<code>iss</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-3.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-3.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-3.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-3.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-3.5">변경 관리 주체:</dt>
+<dd id="section-9.1-3.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-3.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-3.7">규격 문서:</dt>
+<dd id="section-9.1-3.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.1">제4.1.1절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-3.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-4">
+<dt id="section-9.1-4.1">이름:</dt>
+<dd id="section-9.1-4.2">
+<code>sub</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-4.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-4.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-4.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-4.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-4.5">변경 관리 주체:</dt>
+<dd id="section-9.1-4.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-4.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-4.7">규격 문서:</dt>
+<dd id="section-9.1-4.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.2">제4.1.2절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-4.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-5">
+<dt id="section-9.1-5.1">이름:</dt>
+<dd id="section-9.1-5.2">
+<code>aud</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-5.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-5.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-5.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-5.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-5.5">변경 관리 주체:</dt>
+<dd id="section-9.1-5.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-5.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-5.7">규격 문서:</dt>
+<dd id="section-9.1-5.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.3">제4.1.3절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-5.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-6">
+<dt id="section-9.1-6.1">이름:</dt>
+<dd id="section-9.1-6.2">
+<code>exp</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-6.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-6.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-6.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-6.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-6.5">변경 관리 주체:</dt>
+<dd id="section-9.1-6.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-6.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-6.7">규격 문서:</dt>
+<dd id="section-9.1-6.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.4">제4.1.4절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-6.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-7">
+<dt id="section-9.1-7.1">이름:</dt>
+<dd id="section-9.1-7.2">
+<code>nbf</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-7.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-7.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-7.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-7.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-7.5">변경 관리 주체:</dt>
+<dd id="section-9.1-7.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-7.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-7.7">규격 문서:</dt>
+<dd id="section-9.1-7.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.5">제4.1.5절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-7.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-8">
+<dt id="section-9.1-8.1">이름:</dt>
+<dd id="section-9.1-8.2">
+<code>iat</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-8.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-8.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-8.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-8.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-8.5">변경 관리 주체:</dt>
+<dd id="section-9.1-8.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-8.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-8.7">규격 문서:</dt>
+<dd id="section-9.1-8.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.6">제4.1.6절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-8.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<span></span><dl id="section-9.1-9">
+<dt id="section-9.1-9.1">이름:</dt>
+<dd id="section-9.1-9.2">
+<code>jti</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.1-9.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-9.3">매개변수 사용 위치:</dt>
+<dd id="section-9.1-9.4">인가 요청<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-9.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-9.5">변경 관리 주체:</dt>
+<dd id="section-9.1-9.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-9.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.1-9.7">규격 문서:</dt>
+<dd id="section-9.1-9.8">이 문서 및 <span><a href="https://www.rfc-editor.org/rfc/rfc7519#section-4.1.7">제4.1.7절</a> ([<a href="#RFC7519">RFC7519</a>])</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.1-9.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="OAuthAuthorizationServerMetadataRegistry">
+<section id="section-9.2">
+<h3 id="name-oauth-authorization-server-">
+<a href="#section-9.2">9.2. </a><a href="#name-oauth-authorization-server-">OAuth authorization server 메타데이터 레지스트리</a>
+</h3>
+<p id="section-9.2-1">이 규격은 "OAuth Authorization Server Metadata" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 다음 값을 추가한다. 이 레지스트리는 <span>[<a href="#RFC8414">RFC8414</a>]</span>에서 제정했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-1">¶</a></p>
+<span></span><dl id="section-9.2-2">
+<dt id="section-9.2-2.1">메타데이터 이름:</dt>
+<dd id="section-9.2-2.2">
+<code>require_signed_request_object</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.2-2.3">메타데이터 설명:</dt>
+<dd id="section-9.2-2.4">인가 요청을 Request Object로 보호하고 <code>request</code> 또는 <code>request_uri parameter</code> 중 하나를 통해 제공해야 하는 경우를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.4">¶</a></dd>
+<dd></dd>
+<dt id="section-9.2-2.5">변경 관리 주체:</dt>
+<dd id="section-9.2-2.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.2-2.7">규격 문서:</dt>
+<dd id="section-9.2-2.8">
+이 문서의 <a href="#require_signed_request_object">제10.5절</a>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.2-2.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="OAuthDynamicClientRegistrationMetadataRegistry">
+<section id="section-9.3">
+<h3 id="name-oauth-dynamic-client-regist">
+<a href="#section-9.3">9.3. </a><a href="#name-oauth-dynamic-client-regist">OAuth 동적 client 등록 메타데이터 레지스트리</a>
+</h3>
+<p id="section-9.3-1">이 규격은 "OAuth Dynamic Client Registration Metadata" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 다음 값을 추가한다. 이 레지스트리는 <span>[<a href="#RFC7591">RFC7591</a>]</span>에서 제정했다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-1">¶</a></p>
+<span></span><dl id="section-9.3-2">
+<dt id="section-9.3-2.1">메타데이터 이름:</dt>
+<dd id="section-9.3-2.2">
+<code>require_signed_request_object</code><a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.3-2.3">메타데이터 설명:</dt>
+<dd id="section-9.3-2.4">인가 요청을 Request Object로 보호하고 <code>request</code> 또는 <code>request_uri parameter</code> 중 하나를 통해 제공해야 하는 경우를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.4">¶</a></dd>
+<dd></dd>
+<dt id="section-9.3-2.5">변경 관리 주체:</dt>
+<dd id="section-9.3-2.6">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.3-2.7">규격 문서:</dt>
+<dd id="section-9.3-2.8">
+이 문서의 <a href="#require_signed_request_object">제10.5절</a>.<a aria-label="문단 링크" class="st-permalink" href="#section-9.3-2.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="MediaReg">
+<section id="section-9.4">
+<h3 id="name-media-type-registration">
+<a href="#section-9.4">9.4. </a><a href="#name-media-type-registration">미디어 유형 등록</a>
+</h3>
+<div id="MediaContents">
+<section id="section-9.4.1">
+<h4 id="name-registry-contents">
+<a href="#section-9.4.1">9.4.1. </a><a href="#name-registry-contents">레지스트리 내용</a>
+</h4>
+<p id="section-9.4.1-1">이 절에서는 <code>application/oauth-authz-req+jwt</code> 미디어 유형 <span>[<a href="#RFC2046">RFC2046</a>]</span>을 "Media Types" 레지스트리 <span>[<a href="#IANA.MediaTypes">IANA.MediaTypes</a>]</span>에 <span>[<a href="#RFC6838">RFC6838</a>]</span>에서 설명한 방식으로 등록한다. 이 미디어 유형은 콘텐츠가 Request Object 클레임을 담은 JWT임을 나타내는 데 사용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-1">¶</a></p>
+<span></span><dl id="section-9.4.1-2">
+<dt id="section-9.4.1-2.1">유형 이름:</dt>
+<dd id="section-9.4.1-2.2">application<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.3">하위 유형 이름:</dt>
+<dd id="section-9.4.1-2.4">oauth-authz-req+jwt<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.5">필수 매개변수:</dt>
+<dd id="section-9.4.1-2.6">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.7">선택 매개변수:</dt>
+<dd id="section-9.4.1-2.8">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.8">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.9">인코딩 고려사항:</dt>
+<dd id="section-9.4.1-2.10">바이너리. Request Object는 JWT다. JWT 값은 base64url로 인코딩한 여러 값(일부는 빈 문자열일 수 있음)을 마침표(<code>.</code>) 문자로 구분한 형태로 인코딩한다.<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.10">¶</a></dd>
+<dd></dd>
+<dt id="section-9.4.1-2.11">보안 고려사항:</dt>
+<dd id="section-9.4.1-2.12"><a href="#Security">제10절</a>(RFC 9101) 참조<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.12">¶</a></dd>
+<dd></dd>
+<dt id="section-9.4.1-2.13">상호운용성 고려사항:</dt>
+<dd id="section-9.4.1-2.14">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.14">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.15">공개 규격:</dt>
+<dd id="section-9.4.1-2.16"><a href="#authorization_request_object">제4절</a>(RFC 9101)<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.16">¶</a></dd>
+<dd></dd>
+<dt id="section-9.4.1-2.17">이 미디어 유형을 사용하는 애플리케이션:</dt>
+<dd id="section-9.4.1-2.18">Request Object를 사용해 OAuth 2.0 인가 요청을 보내는 애플리케이션<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.18">¶</a></dd>
+<dd></dd>
+<dt id="section-9.4.1-2.19">프래그먼트 식별자 고려사항:</dt>
+<dd id="section-9.4.1-2.20">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.20">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.21">추가 정보:</dt>
+<dd id="section-9.4.1-2.22">
+<p id="section-9.4.1-2.22.1"><br/></p>
+<span></span><dl id="section-9.4.1-2.22.2">
+<dt id="section-9.4.1-2.22.2.1">이 유형에서 사용 중단된 별칭:</dt>
+<dd id="section-9.4.1-2.22.2.2">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.22.2.2">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.22.2.3">매직 넘버:</dt>
+<dd id="section-9.4.1-2.22.2.4">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.22.2.4">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.22.2.5">파일 확장자:</dt>
+<dd id="section-9.4.1-2.22.2.6">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.22.2.6">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.22.2.7">Macintosh 파일 유형 코드:</dt>
+<dd id="section-9.4.1-2.22.2.8">N/A<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.22.2.8">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.23">추가 정보 문의 담당자 및 이메일 주소:</dt>
+<dd id="section-9.4.1-2.24">
+<br/>Nat Sakimura &lt;nat@nat.consulting&gt;<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.24">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.25">사용 범주:</dt>
+<dd id="section-9.4.1-2.26">COMMON<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.26">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.27">사용 제한:</dt>
+<dd id="section-9.4.1-2.28">없음<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.28">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.29">작성자:</dt>
+<dd id="section-9.4.1-2.30">Nat Sakimura &lt;nat@nat.consulting&gt;<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.30">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.31">변경 관리 주체:</dt>
+<dd id="section-9.4.1-2.32">IETF<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.32">¶</a>
+</dd>
+<dd></dd>
+<dt id="section-9.4.1-2.33">임시 등록 여부?</dt>
+<dd id="section-9.4.1-2.34">아니요<a aria-label="문단 링크" class="st-permalink" href="#section-9.4.1-2.34">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="Security">
+<section id="section-10">
+<h2 id="name-security-considerations">
+<a href="#section-10">10. </a><a href="#name-security-considerations">보안 고려사항</a>
+</h2>
+<p id="section-10-1"><span><a href="#RFC6819">OAuth 2.0에서 논의한 보안 고려사항</a> [<a href="#RFC6819">RFC6819</a>]</span>을 모두 검토하고, <span>[<a href="#RFC7515">RFC7515</a>]</span>, <span>[<a href="#RFC7516">RFC7516</a>]</span>, <span>[<a href="#RFC7518">RFC7518</a>]</span>, <span>[<a href="#RFC8725">RFC8725</a>]</span>의 보안 고려사항도 검토해야 한다. 또한 <span>[<a href="#BASIN">BASIN</a>]</span> 등 여러 학술 논문은 OAuth와 같은 프로토콜의 보안 특성을 이해하는 데 유용한 통찰을 제공한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10-1">¶</a></p>
+<p id="section-10-2">이상을 바탕으로 이 문서는 다음과 같은 보안 고려사항을 검토할 것을 권고한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10-2">¶</a></p>
+<div id="alg_choice">
+<section id="section-10.1">
+<h3 id="name-choice-of-algorithms">
+<a href="#section-10.1">10.1. </a><a href="#name-choice-of-algorithms">알고리즘 선택</a>
+</h3>
+<p id="section-10.1-1"><code>request</code> 매개변수로 Request Object를 보낼 때는 다음 두 방식 중 하나를 반드시 적용해야 한다(<span>MUST</span>). <span><a href="#RFC7515">JWS</a> [<a href="#RFC7515">RFC7515</a>]</span>로 서명하거나, <span><a href="#RFC7515">JWS</a> [<a href="#RFC7515">RFC7515</a>]</span>로 서명한 뒤 <span><a href="#RFC7516">JWE</a> [<a href="#RFC7516">RFC7516</a>]</span>로 암호화한다. 이때 각 작업에는 당시 적절하다고 여겨지는 알고리즘을 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.1-1">¶</a></p>
+</section>
+</div>
+<div id="src_authn">
+<section id="section-10.2">
+<h3 id="name-request-source-authenticati">
+<a href="#section-10.2">10.2. </a><a href="#name-request-source-authenticati">요청 출처 인증</a>
+</h3>
+<p id="section-10.2-1">인가 요청의 출처는 항상 검증해야 한다(<span>MUST</span>). 검증하는 방법은 여러 가지다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-1">¶</a></p>
+<span></span><dl id="section-10.2-2">
+<dt>(a)</dt>
+<dd id="section-10.2-2.1">Request Object의 JWS 서명을 검증한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-2.1">¶</a>
+</dd>
+<dd></dd>
+<dt>(b)</dt>
+<dd id="section-10.2-2.2">JWE가 대칭키 암호화를 사용한다면 JWE 암호화에 쓰인 대칭키가 올바른지 검증한다. 다만 공개 키 암호화를 사용하는 경우에는 누구나 공개 키로 암호화할 수 있으므로 암호화만으로는 출처를 인증할 수 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt>(c)</dt>
+<dd id="section-10.2-2.3">Request Object URI에 해당하는 TLS 서버의 신원을 검증한다. 이 경우 authorization server는 client가 해당 Request Object URI를 사용하며 그 TLS 인증서가 해당 client에만 적용된다는 사실을 별도 경로로 알고 있어야 한다(<span>MUST</span>). 일반적으로 이 방법은 신뢰하기 어렵다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-2.3">¶</a>
+</dd>
+<dd></dd>
+<dt>(d)</dt>
+<dd id="section-10.2-2.4">authorization server가 Request Object를 받아 그 대가로 Request Object URI를 반환하는 서비스를 구현하는 경우, Request Object를 수락하려면 client authentication(클라이언트 인증)을 수행하고 제공하는 Request Object URI에 client 식별자를 연결해야 한다(<span>MUST</span>). 또한 (a)에 따라 서명을 검증해야 한다(<span>MUST</span>). Request Object URI는 재사용될 수 있으므로 유효 기간을 짧게 해야 하며(<span>MUST</span>), 가급적 한 번만 사용할 수 있게 한다. Request Object URI의 엔트로피는 충분히 커야 한다(<span>MUST</span>). 유효 기간을 얼마나 짧게 해야 하는지와 Request Object URI에 필요한 엔트로피는 보호할 리소스의 가치를 바탕으로 산정한 위험도에 따라 달라진다. 일반적으로 유효 기간은 1분 미만으로 하고, 이 명세를 작성하는 시점의 기준으로 Request Object URI에는 128비트 이상의 암호학적 난수를 포함한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-2.4">¶</a>
+</dd>
+<dd></dd>
+<dt>(e)</dt>
+<dd id="section-10.2-2.5">신뢰할 수 있는 제3자 서비스가 Request Object를 받아 그 대가로 Request Object URI를 반환하는 경우, 이 서비스는 (a)에 따라 서명을 검증해야 한다(<span>MUST</span>). 또한 authorization server는 해당 제3자 서비스의 신뢰를 받아야 하며(<span>MUST</span>), 그 서비스가 client 역시 신뢰한다는 사실을 별도 경로로 알고 있어야 한다(<span>MUST</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-10.2-2.5">¶</a>
+</dd>
+<dd></dd>
+</dl>
+</section>
+</div>
+<div id="explicit_endpoints">
+<section id="section-10.3">
+<h3 id="name-explicit-endpoints">
+<a href="#section-10.3">10.3. </a><a href="#name-explicit-endpoints">명시적 엔드포인트</a>
+</h3>
+<p id="section-10.3-1">이 명세에서 요구하는 것은 아니지만, <span>[<a href="#BASIN">BASIN</a>]</span> 등의 연구는 상호작용에 사용할 엔드포인트와 교환 순서에서 메시지가 차지하는 위치를 변조 여부를 알아낼 수 있는 방식으로 명시하면, 상호작용을 시작한 주체의 의도를 모호하지 않게 전달할 수 있다고 지적한다. 이 명세는 이 관행을 적용할 것을 권고한다(<span>RECOMMENDED</span>). 그 대상은 <span>[<a href="#RFC6749">RFC6749</a>]</span>, <span>[<a href="#RFC6750">RFC6750</a>]</span>, <span>[<a href="#RFC8414">RFC8414</a>]</span>에 정의된 다음 엔드포인트다:<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-1">¶</a></p>
+<span></span><dl id="section-10.3-2">
+<dt>(a)</dt>
+<dd id="section-10.3-2.1">보호된 리소스(<code>protected_resources</code>)<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-2.1">¶</a>
+</dd>
+<dd></dd>
+<dt>(b)</dt>
+<dd id="section-10.3-2.2">authorization endpoint(<code>authorization_endpoint</code>)<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-2.2">¶</a>
+</dd>
+<dd></dd>
+<dt>(c)</dt>
+<dd id="section-10.3-2.3">redirect URI(<code>redirect_uri</code>)<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-2.3">¶</a>
+</dd>
+<dd></dd>
+<dt>(d)</dt>
+<dd id="section-10.3-2.4">token endpoint(토큰 엔드포인트)(<code>token_endpoint</code>)<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-2.4">¶</a>
+</dd>
+<dd></dd>
+</dl>
+<p id="section-10.3-3">또한 동적 검색을 사용하는 경우 이 관행은 검색 관련 엔드포인트에도 적용된다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-3">¶</a></p>
+<p id="section-10.3-4"><span>[<a href="#RFC6749">RFC6749</a>]</span>에서는 redirect URI가 인가 요청에 포함되지만 다른 엔드포인트는 포함되지 않는다. 따라서 Request Object에도 동일하게 적용된다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.3-4">¶</a></p>
+</section>
+</div>
+<div id="request_uri_threats">
+<section id="section-10.4">
+<h3 id="name-risks-associated-with-reque">
+<a href="#section-10.4">10.4. </a><a href="#name-risks-associated-with-reque">request_uri 관련 위험</a>
+</h3>
+<p id="section-10.4-1"><code>request_uri</code>를 도입하면 여러 유형의 공격이 가능해진다. URI 관련 위험을 자세히 알아보려면 <span><a href="https://www.rfc-editor.org/rfc/rfc3986#section-7">7절</a>([<a href="#RFC3986">RFC3986</a>])</span>의 보안 고려사항을 참조한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4-1">¶</a></p>
+<div id="ddos_on_authz_server">
+<section id="section-10.4.1">
+<h4 id="name-ddos-attack-on-the-authoriz">
+<a href="#section-10.4.1">10.4.1. </a><a href="#name-ddos-attack-on-the-authoriz">authorization server에 대한 DDoS 공격</a>
+</h4>
+<p id="section-10.4.1-1">여러 악성 client가 <code>request_uri</code>가 매우 큰 콘텐츠를 반환하거나 응답이 매우 느린 URI를 가리키도록 하여 authorization server에 DoS 공격을 가할 수 있다. 이런 공격을 받으면 서버 리소스가 고갈되어 장애가 발생하기 시작할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4.1-1">¶</a></p>
+<p id="section-10.4.1-2">이와 비슷하게 악성 client는 <code>request_uri</code> 값이 다시 <code>request_uri</code>를 사용하는 인가 요청 URI를 가리키도록 지정하여 재귀 조회를 일으킬 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4.1-2">¶</a></p>
+<p id="section-10.4.1-3">이러한 공격을 막으려면 서버는 a) <code>request_uri</code> 매개변수의 값이 예상하지 않은 위치를 가리키지 않는지 확인하고, b) 응답의 미디어 유형이 <code>application/oauth-authz-req+jwt</code>인지 확인하며, c) <code>request_uri</code>의 콘텐츠를 가져오는 작업에 시간 제한을 두고, d) <code>request_uri</code>에 대해 재귀적으로 GET을 수행하지 않는 것이 좋다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4.1-3">¶</a></p>
+</section>
+</div>
+<div id="request_uri_rewrite">
+<section id="section-10.4.2">
+<h4 id="name-request-uri-rewrite">
+<a href="#section-10.4.2">10.4.2. </a><a href="#name-request-uri-rewrite">요청 URI 재작성</a>
+</h4>
+<p id="section-10.4.2-1"><code>request_uri</code> 값은 서명되지 않으므로 브라우저 내부에서 개입하는 공격자(man-in-the-browser)가 이를 변조할 수 있다. 이 때문에 여러 유형의 공격이 가능하다. 예를 들어, a) 공격자는 재작성된 URI가 가리키는 다른 파일을 만들어 추가 범위(scope)를 요청할 수 있게 하거나, b) <code>request_uri</code> 값에 피해 사이트의 URI를 설정하여 그 사이트에 DoS 공격을 가할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4.2-1">¶</a></p>
+<p id="section-10.4.2-2">이러한 공격을 막으려면 서버는 a) <code>request_uri</code> 매개변수의 값이 예상하지 않은 위치를 가리키지 않는지 확인하고, b) 응답의 미디어 유형이 <code>application/oauth-authz-req+jwt</code>인지 확인하며, c) <code>request_uri</code>의 콘텐츠를 가져오는 작업에 시간 제한을 두는 것이 좋다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.4.2-2">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="require_signed_request_object">
+<section id="section-10.5">
+<h3 id="name-downgrade-attack">
+<a href="#section-10.5">10.5. </a><a href="#name-downgrade-attack">다운그레이드 공격</a>
+</h3>
+<p id="section-10.5-1">client와 서버가 사용하는 프로토콜에서 OAuth의 JWT로 보호하는 인가 요청(JAR)만 사용하도록 제한하지 않으면, 공격자는 RFC 6749 요청을 사용해 이 명세가 제공하는 모든 보호 조치를 우회할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.5-1">¶</a></p>
+<p id="section-10.5-2">이러한 유형의 공격을 방지하기 위해 이 명세는 client와 서버의 메타데이터에 각각 새 항목을 정의한다. 두 항목 모두 이름은 <code>require_signed_request_object</code>이고, 값은 불리언이다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.5-2">¶</a></p>
+<p id="section-10.5-3">client 메타데이터에 이 값이 <code>true</code>로 설정되어 있으면, 해당 client가 보낸 인가 요청이 이 명세를 준수하지 않을 때 서버는 이를 거부해야 한다(<span>MUST</span>). 다음 경우에도 서버는 요청을 거부해야 한다(<span>MUST</span>). Request Object의 <code>alg</code> 값이 <code>none</code>이고 이 서버 메타데이터 값이 <code>true</code>인 경우다. 생략 시 기본값은 <code>false</code>다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.5-3">¶</a></p>
+<p id="section-10.5-4">서버 메타데이터에 이 값이 <code>true</code>로 설정되어 있으면, 어느 client가 보냈든 이 명세를 준수하지 않는 인가 요청을 서버는 거부해야 한다(<span>MUST</span>). 이 설정에서는 다음 경우에도 서버가 요청을 거부해야 한다(<span>MUST</span>). Request Object의 <code>alg</code> 값이 <code>none</code>인 경우다. 생략 시 기본값은 <code>false</code>다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.5-4">¶</a></p>
+<p id="section-10.5-5"><code>require_signed_request_object</code> 메타데이터 값이 없어도, client와 서버가 공통으로 지원하는 서명 알고리즘이 있다면 client는 서명된 Request Object를 사용할 수 있다(<span>MAY</span>). 서명 알고리즘 메타데이터의 사용 방법은 <a href="#authorization_request_object">4절</a>에서 설명한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.5-5">¶</a></p>
+</section>
+</div>
+<div id="tls_sec">
+<section id="section-10.6">
+<h3 id="name-tls-security-considerations">
+<a href="#section-10.6">10.6. </a><a href="#name-tls-security-considerations">TLS 보안 고려사항</a>
+</h3>
+<p id="section-10.6-1">현재의 보안 고려사항은 ‘<a href="#RFC7525">Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)</a>’ <span>[<a href="#RFC7525">RFC7525</a>]</span>에서 확인할 수 있다. 이 문서는 <span><a href="#RFC6749">OAuth 2.0</a> [<a href="#RFC6749">RFC6749</a>]</span>의 TLS 버전 권고를 대체한다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.6-1">¶</a></p>
+</section>
+</div>
+<div id="ParameterMismatches">
+<section id="section-10.7">
+<h3 id="name-parameter-mismatches">
+<a href="#section-10.7">10.7. </a><a href="#name-parameter-mismatches">매개변수 불일치</a>
+</h3>
+<p id="section-10.7-1">OAuth 매개변수 값은 일반 OAuth 매개변수와 Request Object의 클레임이라는 두 곳에서 전송되므로, 구현에서는 서로 일치하지 않는 매개변수 값을 이용해 의도하지 않은 결과를 얻으려는 공격을 막아야 한다. 따라서 두 client ID 값은 일치해야 하고(<span>MUST</span>), Request Object의 매개변수 값만 사용해야 하며, <code>request</code>와 <code>request_uri</code>는 모두 Request Object에 나타날 수 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.7-1">¶</a></p>
+</section>
+</div>
+<div id="CrossJWT">
+<section id="section-10.8">
+<h3 id="name-cross-jwt-confusion">
+<a href="#section-10.8">10.8. </a><a href="#name-cross-jwt-confusion">Cross-JWT Confusion</a>
+</h3>
+<p id="section-10.8-1"><span><a href="https://www.rfc-editor.org/rfc/rfc8725#section-2.8">2.8절</a>([<a href="#RFC8725">RFC8725</a>])</span>에서 설명하듯, 공격자는 특정 목적으로 발급된 JWT를 원래 의도하지 않은 맥락에서 사용하려 할 수 있다. 이 공격에 대해 제시된 완화책은 Request Object에도 적용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.8-1">¶</a></p>
+<p id="section-10.8-2">공격자가 Request Object를 다른 용도로 전용하는 한 가지 방법은 이를 client authentication JWT로 사용해 보는 것이다. client authentication JWT는 <span><a href="https://www.rfc-editor.org/rfc/rfc7523#section-2.2">2.2절</a>([<a href="#RFC7523">RFC7523</a>])</span>에서 설명한다. 이를 막는 간단한 방법은 client ID를 Request Object의 <code>sub</code> 값으로 절대 사용하지 않는 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.8-2">¶</a></p>
+<p id="section-10.8-3">Cross-JWT Confusion을 방지하는 또 다른 방법은 <span><a href="https://www.rfc-editor.org/rfc/rfc8725#section-3.11">3.11절</a>([<a href="#RFC8725">RFC8725</a>])</span>에서 설명하는 것처럼 타입을 명시하는 것이다. Request Object의 타입을 명시하려면 <code>typ</code> 헤더 매개변수를 포함하고 그 값을 <code>oauth-authz-req+jwt</code>(<a href="#MediaContents">9.4.1절</a>에서 등록한 값)로 설정한다. 다만 기존 authorization server에서 Request Object의 타입 명시를 의무화하면 기존 배포 환경 대부분이 제대로 작동하지 않게 된다. 특히 OpenID Connect <span>[<a href="#OpenID.Core">OpenID.Core</a>]</span>를 사용하는 경우, 기존 client는 이미 타입을 명시하지 않은 Request Object를 널리 사용하고 있기 때문이다. 반면 기존 배포 환경과의 호환성을 고려할 필요가 없는 새로운 OAuth 배포 프로파일에서는 타입 명시를 의무화하는 편이 좋다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.8-3">¶</a></p>
+<p id="section-10.8-4">마지막으로 Cross-JWT Confusion을 방지하는 또 다른 방법은 Request Object에 서명하는 키를 다른 용도의 키와 명확히 구별할 수 있는 키 관리 체계를 사용하는 것이다. 그러면 공격자가 Request Object를 다른 맥락에서 다른 용도로 사용하려 하더라도 키가 일치하지 않아 공격을 막을 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-10.8-4">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="Privacy">
+<section id="section-11">
+<h2 id="name-privacy-considerations"><a href="#section-11">11. </a><a href="#name-privacy-considerations">개인정보 보호 고려사항</a></h2>
+<p id="section-11-1">client에 개인정보가 포함된 보호 리소스에 대한 접근 권한을 부여할 때는 client와 authorization server 모두 개인정보 보호 원칙을 준수해야 한다. "<a href="#RFC6973">Privacy Considerations for Internet Protocols</a>" <span>[<a href="#RFC6973">RFC6973</a>]</span>는 프로토콜의 설계와 구현을 개선하는 데 유용한 지침을 제공한다. 그 문서에 열거된 규정을 따르는 것이 바람직하다.<a aria-label="문단 링크" class="st-permalink" href="#section-11-1">¶</a></p>
+<p id="section-11-2">이들 규정의 대부분은 "<a href="#RFC6749">The OAuth 2.0 Authorization Framework</a>" <span>[<a href="#RFC6749">RFC6749</a>]</span>와 "<a href="#RFC6750">The OAuth 2.0 Authorization Framework: Bearer Token Usage</a>" <span>[<a href="#RFC6750">RFC6750</a>]</span>에도 적용되며, 이 명세에만 해당하지는 않는다. 이하에서는 이 명세에만 해당하는 규정만 다룬다.<a aria-label="문단 링크" class="st-permalink" href="#section-11-2">¶</a></p>
+<div id="collection_limitation">
+<section id="section-11.1">
+<h3 id="name-collection-limitation"><a href="#section-11.1">11.1. </a><a href="#name-collection-limitation">수집 제한</a></h3>
+<p id="section-11.1-1">client에 개인정보가 포함된 보호 리소스에 대한 접근 권한을 부여할 때, client는 적용 법률이 허용하는 범위에서 명시된 목적을 달성하는 데 반드시 필요한 개인정보만 수집하는 것이 바람직하다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-1">¶</a></p>
+<p id="section-11.1-2">사용자는 요청받은 개인정보가 반드시 필요한지 알아내기 어려운 경우가 많다. 신뢰할 수 있는 제3자 서비스는 client의 요청을 검토하고, 이 요청을 client가 제안한 처리 방식과 대조한 뒤 요청을 인증함으로써 사용자를 도울 수 있다. 인증 후 client는 인가 요청을 할 때 신뢰할 수 있는 제3자 서비스에 인가 요청을 제출하여 Request Object URI를 받을 수 있다. 이 과정은 두 단계로 이루어진다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-2">¶</a></p>
+<span></span><dl id="section-11.1-3">
+<dt>(1)</dt>
+<dd id="section-11.1-3.1">(인증 절차) 신뢰할 수 있는 제3자 서비스는 client의 업무 절차를 검토하여 client에게 어떤 클레임이 필요한지 판단한다. 이것이 인증 절차다. 인증을 마친 client에게는 client 자격 증명이 발급된다. client는 이 자격 증명으로 신뢰할 수 있는 제3자 서비스에 자신의 신원을 증명하여 Request Object를 제출하고 <code>request_uri</code>를 받을 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-3.1">¶</a></dd>
+<dd></dd>
+<dt>(2)</dt>
+<dd id="section-11.1-3.2">(변환 절차) client는 발급받은 client 자격 증명을 사용해 신뢰할 수 있는 제3자 서비스에 Request Object를 제출하여 <code>request_uri</code>를 받는다. 신뢰할 수 있는 제3자 서비스는 또한 Request Object가 앞 단계에서 해당 client에 허용된 클레임과 일치하는지 검증한다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-3.2">¶</a></dd>
+<dd></dd>
+</dl>
+<p id="section-11.1-4">인가 요청에 포함된 이러한 Request Object URI를 받으면 authorization server는 먼저 Request Object URI의 authority 부분이 신뢰할 수 있는 제3자 서비스에 정당하게 속하는지 검증한다. 그런 다음 authorization server는 Request Object URI로 HTTP GET 요청을 보낸다. 연결이 수립되면 authorization server는 TLS 인증서에 표시된 서버 신원이 Request Object URI에 대해 유효한지 반드시 검증해야 한다(<span>MUST</span>). 그러면 authorization server는 client를 나타내는 <code>client_id</code>가 포함된 Request Object를 얻을 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-4">¶</a></p>
+<p id="section-11.1-5">동의 화면에는 client를 반드시 표시해야 한다(<span>MUST</span>). 또한 신뢰할 수 있는 제3자 서비스가 수집 제한 원칙의 준수 여부를 확인하기 위해 요청을 심사했다는 사실을 표시하는 것이 바람직하다(<span>SHOULD</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-11.1-5">¶</a></p>
+</section>
+</div>
+<div id="disclosure_limitation">
+<section id="section-11.2">
+<h3 id="name-disclosure-limitation"><a href="#section-11.2">11.2. </a><a href="#name-disclosure-limitation">공개 제한</a></h3>
+<div id="request_disclosure">
+<section id="section-11.2.1">
+<h4 id="name-request-disclosure"><a href="#section-11.2.1">11.2.1. </a><a href="#name-request-disclosure">요청 공개</a></h4>
+<p id="section-11.2.1-1">이 명세는 확장 매개변수를 허용한다. 이러한 매개변수에는 민감할 수 있는 정보가 포함될 수 있다. URI 쿼리 매개변수는 여러 경로로, 특히 referrer와 브라우저 방문 기록을 통해 유출될 수 있다. 따라서 인가 요청에 민감할 수 있는 매개변수가 포함되어 있다면 client가 Request Object를 암호화하는 것이 바람직하며(<span>SHOULD</span>), 암호화에는 <span><a href="#RFC7516">JWE</a> [<a href="#RFC7516">RFC7516</a>]</span>를 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.2.1-1">¶</a></p>
+<p id="section-11.2.1-2">Request Object URI 방식에서 Request Object에 개인을 식별할 수 있는 정보나 민감한 정보가 포함되어 있다면, <code>request_uri</code>는 한 번만 사용하고 유효 기간을 짧게 두는 것이 바람직하다(<span>SHOULD</span>). 또한 적용되는 보안 정책을 충족할 만큼 충분한 엔트로피를 반드시 갖추어야 한다(<span>MUST</span>). 이 엔트로피 요구사항은 Request Object 자체를 <span><a href="#RFC7516">JWE</a> [<a href="#RFC7516">RFC7516</a>]</span>로 암호화한 경우에는 적용되지 않는다. Request Object URI의 유효 기간이 얼마나 짧아야 하고 엔트로피가 얼마나 커야 하는지는 보호 대상 리소스의 가치에 따라 산정한 위험에 달려 있다. 일반적인 지침으로는 유효 기간을 1분 미만으로 두는 것이 좋으며, 이 명세를 작성하는 시점의 기준으로 Request Object URI에는 128비트 이상의 암호학적 난수 값을 포함한다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.2.1-2">¶</a></p>
+</section>
+</div>
+<div id="tracking">
+<section id="section-11.2.2">
+<h4 id="name-tracking-using-request-obje"><a href="#section-11.2.2">11.2.2. </a><a href="#name-tracking-using-request-obje">Request Object URI를 이용한 추적</a></h4>
+<p id="section-11.2.2-1">보호 리소스에 개인을 식별할 수 있는 정보가 없더라도, 사용자별로 고정된 Request Object URI를 지속적으로 사용하면 이를 통해 사용자를 식별할 수 있는 경우가 있다. 제3자는 브라우저 방문 기록 등을 통해 해당 URI를 알아내고, 이를 이용해 사용자의 활동 내역을 서로 연결하기 시작할 수 있다. 이 역시 일종의 데이터 공개이므로 피하는 것이 바람직하다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.2.2-1">¶</a></p>
+<p id="section-11.2.2-2">따라서 사용자별로 동일한 Request Object URI를 지속적으로 사용하는 것은 피하는 것이 바람직하다. 한 가지 대안은 일회용 Request Object URI를 사용하는 것이다.<a aria-label="문단 링크" class="st-permalink" href="#section-11.2.2-2">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<section id="section-12">
+<h2 id="name-references"><a href="#section-12">12. </a><a href="#name-references">참고 문헌</a></h2>
+<section id="section-12.1">
+<h3 id="name-normative-references"><a href="#section-12.1">12.1. </a><a href="#name-normative-references">규범적 참고 문헌</a></h3>
+<dl>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd><span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time>1997년 3월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC3629">[RFC3629]</dt>
+<dd><span>Yergeau, F.</span>, <span>"UTF-8, a transformation format of ISO 10646"</span>, <span>STD 63</span>, <span>RFC 3629</span>, <span>DOI 10.17487/RFC3629</span>, <time>2003년 11월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629">https://www.rfc-editor.org/info/rfc3629</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC3986">[RFC3986]</dt>
+<dd><span>Berners-Lee, T.</span>, <span>Fielding, R.</span>, and <span>L. Masinter</span>, <span>"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span>STD 66</span>, <span>RFC 3986</span>, <span>DOI 10.17487/RFC3986</span>, <time>2005년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC6125">[RFC6125]</dt>
+<dd><span>Saint-Andre, P.</span> and <span>J. Hodges</span>, <span>"Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)"</span>, <span>RFC 6125</span>, <span>DOI 10.17487/RFC6125</span>, <time>2011년 3월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6125">https://www.rfc-editor.org/info/rfc6125</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd><span>Hardt, D., Ed.</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time>2012년 10월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC6750">[RFC6750]</dt>
+<dd><span>Jones, M.</span> and <span>D. Hardt</span>, <span>"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span>RFC 6750</span>, <span>DOI 10.17487/RFC6750</span>, <time>2012년 10월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7230">[RFC7230]</dt>
+<dd><span>Fielding, R., Ed.</span> and <span>J. Reschke, Ed.</span>, <span>"Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing"</span>, <span>RFC 7230</span>, <span>DOI 10.17487/RFC7230</span>, <time>2014년 6월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7230">https://www.rfc-editor.org/info/rfc7230</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7515">[RFC7515]</dt>
+<dd><span>Jones, M.</span>, <span>Bradley, J.</span>, and <span>N. Sakimura</span>, <span>"JSON Web Signature (JWS)"</span>, <span>RFC 7515</span>, <span>DOI 10.17487/RFC7515</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7516">[RFC7516]</dt>
+<dd><span>Jones, M.</span> and <span>J. Hildebrand</span>, <span>"JSON Web Encryption (JWE)"</span>, <span>RFC 7516</span>, <span>DOI 10.17487/RFC7516</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7516">https://www.rfc-editor.org/info/rfc7516</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7518">[RFC7518]</dt>
+<dd><span>Jones, M.</span>, <span>"JSON Web Algorithms (JWA)"</span>, <span>RFC 7518</span>, <span>DOI 10.17487/RFC7518</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+<dd><span>Jones, M.</span>, <span>Bradley, J.</span>, and <span>N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC7525">[RFC7525]</dt>
+<dd><span>Sheffer, Y.</span>, <span>Holz, R.</span>, and <span>P. Saint-Andre</span>, <span>"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span>BCP 195</span>, <span>RFC 7525</span>, <span>DOI 10.17487/RFC7525</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7525">https://www.rfc-editor.org/info/rfc7525</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC8141">[RFC8141]</dt>
+<dd><span>Saint-Andre, P.</span> and <span>J. Klensin</span>, <span>"Uniform Resource Names (URNs)"</span>, <span>RFC 8141</span>, <span>DOI 10.17487/RFC8141</span>, <time>2017년 4월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8141">https://www.rfc-editor.org/info/rfc8141</a>&gt;</span>.</dd>
+<dd></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd>
+<span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time>2017년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC8259">[RFC8259]</dt>
+<dd>
+<span>Bray, T., Ed.</span>, <span>"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span>STD 90</span>, <span>RFC 8259</span>, <span>DOI 10.17487/RFC8259</span>, <time>2017년 12월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+<dd>
+<span>Jones, M.</span>, <span>Sakimura, N.</span>, and <span>J. Bradley</span>, <span>"OAuth 2.0 Authorization Server Metadata"</span>, <span>RFC 8414</span>, <span>DOI 10.17487/RFC8414</span>, <time>2018년 6월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+<section id="section-12.2">
+<h3 id="name-informative-references">
+<a href="#section-12.2">12.2. </a><a href="#name-informative-references">참고용 문헌</a>
+</h3>
+<dl>
+<dt id="BASIN">[BASIN]</dt>
+<dd>
+<span>Basin, D.</span>, <span>Cremers, C.</span>, and <span>S. Meier</span>, <span>"Provably Repairing the ISO/IEC 9798 Standard for Entity Authentication"</span>, <span>Journal of Computer Security - Security and Trust Principles, 제21권 제6호, 817–846쪽</span>, <time>2013년 11월</time>, <span>&lt;<a href="https://www.cs.ox.ac.uk/people/cas.cremers/downloads/papers/BCM2012-iso9798.pdf">https://www.cs.ox.ac.uk/people/cas.cremers/downloads/papers/BCM2012-iso9798.pdf</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="CapURLs">[CapURLs]</dt>
+<dd>
+<span>Tennison, J., Ed.</span>, <span>"Good Practices for Capability URLs"</span>, <span>W3C 최초 공개 작업 초안</span>, <time>2014년 2월 18일</time>, <span>&lt;<a href="https://www.w3.org/TR/capability-urls/">https://www.w3.org/TR/capability-urls/</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.JWT.Claims">[IANA.JWT.Claims]</dt>
+<dd>
+<span>IANA</span>, <span>"JSON Web Token (JWT)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jwt">https://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.MediaTypes">[IANA.MediaTypes]</dt>
+<dd>
+<span>IANA</span>, <span>"Media Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+<dd>
+<span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="OpenID.Core">[OpenID.Core]</dt>
+<dd>
+<span>Sakimura, N.</span>, <span>Bradley, J.</span>, <span>Jones, M.B.</span>, <span>de Medeiros, B.</span>, and <span>C. Mortimore</span>, <span>"OpenID Connect Core 1.0 incorporating errata set 1"</span>, <span>OpenID Foundation 표준</span>, <time>2014년 11월 8일</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html">http://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC2046">[RFC2046]</dt>
+<dd>
+<span>Freed, N.</span> and <span>N. Borenstein</span>, <span>"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span>RFC 2046</span>, <span>DOI 10.17487/RFC2046</span>, <time>1996년 11월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046">https://www.rfc-editor.org/info/rfc2046</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC6819">[RFC6819]</dt>
+<dd>
+<span>Lodderstedt, T., Ed.</span>, <span>McGloin, M.</span>, and <span>P. Hunt</span>, <span>"OAuth 2.0 Threat Model and Security Considerations"</span>, <span>RFC 6819</span>, <span>DOI 10.17487/RFC6819</span>, <time>2013년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6819">https://www.rfc-editor.org/info/rfc6819</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC6838">[RFC6838]</dt>
+<dd>
+<span>Freed, N.</span>, <span>Klensin, J.</span>, and <span>T. Hansen</span>, <span>"Media Type Specifications and Registration Procedures"</span>, <span>BCP 13</span>, <span>RFC 6838</span>, <span>DOI 10.17487/RFC6838</span>, <time>2013년 1월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838">https://www.rfc-editor.org/info/rfc6838</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC6973">[RFC6973]</dt>
+<dd>
+<span>Cooper, A.</span>, <span>Tschofenig, H.</span>, <span>Aboba, B.</span>, <span>Peterson, J.</span>, <span>Morris, J.</span>, <span>Hansen, M.</span>, and <span>R. Smith</span>, <span>"Privacy Considerations for Internet Protocols"</span>, <span>RFC 6973</span>, <span>DOI 10.17487/RFC6973</span>, <time>2013년 7월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6973">https://www.rfc-editor.org/info/rfc6973</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC7523">[RFC7523]</dt>
+<dd>
+<span>Jones, M.</span>, <span>Campbell, B.</span>, and <span>C. Mortimore</span>, <span>"JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span>RFC 7523</span>, <span>DOI 10.17487/RFC7523</span>, <time>2015년 5월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7523">https://www.rfc-editor.org/info/rfc7523</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC7591">[RFC7591]</dt>
+<dd>
+<span>Richer, J., Ed.</span>, <span>Jones, M.</span>, <span>Bradley, J.</span>, <span>Machulak, M.</span>, and <span>P. Hunt</span>, <span>"OAuth 2.0 Dynamic Client Registration Protocol"</span>, <span>RFC 7591</span>, <span>DOI 10.17487/RFC7591</span>, <time>2015년 7월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7591">https://www.rfc-editor.org/info/rfc7591</a>&gt;</span>. </dd>
+<dd></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+<dd>
+<span>Sheffer, Y.</span>, <span>Hardt, D.</span>, and <span>M. Jones</span>, <span>"JSON Web Token Best Current Practices"</span>, <span>BCP 225</span>, <span>RFC 8725</span>, <span>DOI 10.17487/RFC8725</span>, <time>2020년 2월</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8725">https://www.rfc-editor.org/info/rfc8725</a>&gt;</span>. </dd>
+<dd></dd>
+</dl>
+</section>
+</section>
+<div id="Acknowledgements">
+<section id="appendix-A">
+<h2 id="name-acknowledgements">
+<a href="#name-acknowledgements">감사의 말</a>
+</h2>
+<p id="appendix-A-1">
+     다음 사람들은 OAuth 작업반 또는 IETF의 다른 역할에서 이 문서 작성에 기여했다. (소속은 기여 당시를 기준으로 표기했다.)<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-1">¶</a></p>
+<p id="appendix-A-2">
+<span>Annabelle Backman</span> (Amazon),
+     <span>Dirk Balfanz</span> (Google),
+     <span>Sergey Beryozkin</span>, 
+     <span>Ben Campbell</span> (AD 자격으로),
+     <span>Brian Campbell</span> (Ping Identity),
+     <span>Roman Danyliw</span> (AD 자격으로),
+     <span>Martin Duke</span> (AD 자격으로),
+     <span>Vladimir Dzhuvinov</span> (Connect2id),
+     <span>Lars Eggert</span> (AD 자격으로),
+     <span>Joel Halpern</span> (GENART 자격으로),
+     <span>Benjamin Kaduk</span> (AD 자격으로),
+     <span>Stephen Kent</span> (SECDIR 자격으로),
+     <span>Murray Kucherawy</span> (AD 자격으로),
+     <span>Warren Kumari</span> (OPSDIR 자격으로),
+     <span>Watson Ladd</span> (SECDIR 자격으로),
+     <span>Torsten Lodderstedt</span> (yes.com),
+     <span>Jim Manico</span>,
+     <span>James H. Manger</span> (Telstra),
+     <span>Kathleen Moriarty</span> (AD 자격으로),
+     <span>Axel Nennker</span> (Deutsche Telecom),
+     <span>John Panzer</span> (Google),
+     <span>Francesca Palombini</span> (AD 자격으로),
+     <span>David Recordon</span> (Facebook),
+     <span>Marius Scurtescu</span> (Google),
+     <span>Luke Shepard</span> (Facebook),
+     <span>Filip Skokan</span> (Auth0),
+     <span>Hannes Tschofenig</span> (ARM),
+     <span>Éric Vyncke</span> (AD 자격으로),
+     <span>Robert Wilton</span> (AD 자격으로).<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-2">¶</a></p>
+<p id="appendix-A-3">다음 사람들은 <span><a href="#OpenID.Core">OpenID Connect Core 1.0</a> [<a href="#OpenID.Core">OpenID.Core</a>]</span>을 통해 이 문서 작성에 기여했다.<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-3">¶</a></p>
+<p id="appendix-A-4">
+<span>Brian Campbell</span> (Ping Identity), <span>George Fletcher</span> (AOL), <span>Ryo Itou</span>
+   (Mixi), <span>Edmund Jay</span> (Illumila), <span>Breno de Medeiros</span> (Google), <span>Hideki    Nara</span> (TACT), <span>Justin Richer</span> (MITRE).<a aria-label="문단 링크" class="st-permalink" href="#appendix-A-4">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Nat Sakimura</span></div>
+<div dir="auto"><span>NAT.Consulting</span></div>
+<div dir="auto"><span>2-22-17 Naka</span></div>
+<div dir="auto">
+<span>Kunitachi</span>, <span>Tokyo 186-0004</span>
+</div>
+<div dir="auto"><span>Japan</span></div>
+<div>
+<span>전화:</span>
+<a href="tel:+81-42-580-7401">+81-42-580-7401</a>
+</div>
+<div>
+<span>이메일:</span>
+<a href="mailto:nat@nat.consulting">nat@nat.consulting</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="https://nat.sakimura.org/">https://nat.sakimura.org/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>John Bradley</span></div>
+<div dir="auto"><span>Yubico</span></div>
+<div dir="auto"><span>Sucursal Talagante</span></div>
+<div dir="auto"><span>Casilla 177</span></div>
+<div dir="auto"><span>Talagante</span></div>
+<div dir="auto"><span>RM</span></div>
+<div dir="auto"><span>Chile</span></div>
+<div>
+<span>전화:</span>
+<a href="tel:+1.202.630.5272">+1.202.630.5272</a>
+</div>
+<div>
+<span>이메일:</span>
+<a href="mailto:rfc9101@ve7jtb.com">rfc9101@ve7jtb.com</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="http://www.thread-safe.com/">http://www.thread-safe.com/</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Michael B. Jones</span></div>
+<div dir="auto"><span>Microsoft</span></div>
+<div dir="auto"><span>One Microsoft Way</span></div>
+<div dir="auto">
+<span>Redmond</span>, <span>Washington</span> <span>98052</span>
+</div>
+<div dir="auto"><span>United States of America</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:mbj@microsoft.com">mbj@microsoft.com</a>
+</div>
+<div>
+<span>URI:</span>
+<a href="https://self-issued.info/">https://self-issued.info/</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 9101</td>
+<td>OAuth JAR</td>
+<td>2021년 8월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Sakimura 외</td>
+<td>표준 트랙</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents">목차</a>
+</h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>.  <a href="#name-introduction">소개</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>.  <a href="#name-requirements-language">요구사항 표현</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>.  <a href="#name-terminology">용어</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1">
+<p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1">2.1</a>.  <a href="#name-request-object">Request Object</a>(요청 객체)</p>
+</li>
+<li id="section-toc.1-1.2.2.2">
+<p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2">2.2</a>.  <a href="#name-request-object-uri">Request Object URI</a>(요청 객체 URI)</p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>.  <a href="#name-symbols-and-abbreviated-ter">기호 및 약어</a></p>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>.  <a href="#name-request-object-2">Request Object</a></p>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>.  <a href="#name-authorization-request">인가 요청</a></p>
+<ul>
+<li id="section-toc.1-1.5.2.1">
+<p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1">5.1</a>.  <a href="#name-passing-a-request-object-by">Request Object를 값으로 전달</a></p>
+</li>
+<li id="section-toc.1-1.5.2.2">
+<p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2">5.2</a>.  <a href="#name-passing-a-request-object-by-">Request Object를 참조로 전달</a></p>
+<ul>
+<li id="section-toc.1-1.5.2.2.2.1">
+<p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1">5.2.1</a>.  <a href="#name-uri-referencing-the-request">Request Object를 가리키는 URI</a></p>
+</li>
+<li id="section-toc.1-1.5.2.2.2.2">
+<p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2">5.2.2</a>.  <a href="#name-request-using-the-request_u">"request_uri" 요청 매개변수를 사용하는 요청</a></p>
+</li>
+<li id="section-toc.1-1.5.2.2.2.3">
+<p id="section-toc.1-1.5.2.2.2.3.1"><a href="#section-5.2.3">5.2.3</a>.  <a href="#name-authorization-server-fetche">authorization server(인가 서버)의 Request Object 가져오기</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>.  <a href="#name-validating-jwt-based-reques">JWT 기반 요청 검증</a></p>
+<ul>
+<li id="section-toc.1-1.6.2.1">
+<p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1">6.1</a>.  <a href="#name-jwe-encrypted-request-objec">JWE로 암호화한 Request Object</a></p>
+</li>
+<li id="section-toc.1-1.6.2.2">
+<p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2">6.2</a>.  <a href="#name-jws-signed-request-object">JWS로 서명한 Request Object</a></p>
+</li>
+<li id="section-toc.1-1.6.2.3">
+<p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3">6.3</a>.  <a href="#name-request-parameter-assembly-">요청 매개변수 구성 및 검증</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#section-7">7</a>.  <a href="#name-authorization-server-respon">authorization server의 응답</a></p>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#section-8">8</a>.  <a href="#name-tls-requirements">TLS 요구사항</a></p>
+</li>
+<li id="section-toc.1-1.9">
+<p id="section-toc.1-1.9.1"><a href="#section-9">9</a>.  <a href="#name-iana-considerations">IANA 고려사항</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.1">
+<p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1">9.1</a>.  <a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a></p>
+</li>
+<li id="section-toc.1-1.9.2.2">
+<p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2">9.2</a>.  <a href="#name-oauth-authorization-server-">OAuth authorization server 메타데이터 레지스트리</a></p>
+</li>
+<li id="section-toc.1-1.9.2.3">
+<p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3">9.3</a>.  <a href="#name-oauth-dynamic-client-regist">OAuth 동적 client(클라이언트) 등록 메타데이터 레지스트리</a></p>
+</li>
+<li id="section-toc.1-1.9.2.4">
+<p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4">9.4</a>.  <a href="#name-media-type-registration">미디어 유형 등록</a></p>
+<ul>
+<li id="section-toc.1-1.9.2.4.2.1">
+<p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1">9.4.1</a>.  <a href="#name-registry-contents">레지스트리 내용</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.10">
+<p id="section-toc.1-1.10.1"><a href="#section-10">10</a>. <a href="#name-security-considerations">보안 고려사항</a></p>
+<ul>
+<li id="section-toc.1-1.10.2.1">
+<p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1">10.1</a>.  <a href="#name-choice-of-algorithms">알고리즘 선택</a></p>
+</li>
+<li id="section-toc.1-1.10.2.2">
+<p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2">10.2</a>.  <a href="#name-request-source-authenticati">요청 출처 인증</a></p>
+</li>
+<li id="section-toc.1-1.10.2.3">
+<p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3">10.3</a>.  <a href="#name-explicit-endpoints">명시적 엔드포인트</a></p>
+</li>
+<li id="section-toc.1-1.10.2.4">
+<p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4">10.4</a>.  <a href="#name-risks-associated-with-reque">request_uri 관련 위험</a></p>
+<ul>
+<li id="section-toc.1-1.10.2.4.2.1">
+<p id="section-toc.1-1.10.2.4.2.1.1"><a href="#section-10.4.1">10.4.1</a>.  <a href="#name-ddos-attack-on-the-authoriz">authorization server에 대한 DDoS 공격</a></p>
+</li>
+<li id="section-toc.1-1.10.2.4.2.2">
+<p id="section-toc.1-1.10.2.4.2.2.1"><a href="#section-10.4.2">10.4.2</a>.  <a href="#name-request-uri-rewrite">요청 URI 재작성</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.10.2.5">
+<p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5">10.5</a>.  <a href="#name-downgrade-attack">다운그레이드 공격</a></p>
+</li>
+<li id="section-toc.1-1.10.2.6">
+<p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6">10.6</a>.  <a href="#name-tls-security-considerations">TLS 보안 고려사항</a></p>
+</li>
+<li id="section-toc.1-1.10.2.7">
+<p id="section-toc.1-1.10.2.7.1"><a href="#section-10.7">10.7</a>.  <a href="#name-parameter-mismatches">매개변수 불일치</a></p>
+</li>
+<li id="section-toc.1-1.10.2.8">
+<p id="section-toc.1-1.10.2.8.1"><a href="#section-10.8">10.8</a>.  <a href="#name-cross-jwt-confusion">Cross-JWT Confusion</a>(서로 다른 목적의 JWT 혼동)</p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.11">
+<p id="section-toc.1-1.11.1"><a href="#section-11">11</a>. <a href="#name-privacy-considerations">개인정보 보호 고려사항</a></p>
+<ul>
+<li id="section-toc.1-1.11.2.1">
+<p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1">11.1</a>.  <a href="#name-collection-limitation">수집 제한</a></p>
+</li>
+<li id="section-toc.1-1.11.2.2">
+<p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2">11.2</a>.  <a href="#name-disclosure-limitation">공개 제한</a></p>
+<ul>
+<li id="section-toc.1-1.11.2.2.2.1">
+<p id="section-toc.1-1.11.2.2.2.1.1"><a href="#section-11.2.1">11.2.1</a>.  <a href="#name-request-disclosure">요청 공개</a></p>
+</li>
+<li id="section-toc.1-1.11.2.2.2.2">
+<p id="section-toc.1-1.11.2.2.2.2.1"><a href="#section-11.2.2">11.2.2</a>.  <a href="#name-tracking-using-request-obje">Request Object URI를 이용한 추적</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.12">
+<p id="section-toc.1-1.12.1"><a href="#section-12">12</a>. <a href="#name-references">참고 문헌</a></p>
+<ul>
+<li id="section-toc.1-1.12.2.1">
+<p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1">12.1</a>.  <a href="#name-normative-references">규범적 참고 문헌</a></p>
+</li>
+<li id="section-toc.1-1.12.2.2">
+<p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2">12.2</a>.  <a href="#name-informative-references">참고용 문헌</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.13">
+<p id="section-toc.1-1.13.1"><a href="#appendix-A"></a><a href="#name-acknowledgements">감사의 말</a></p>
+</li>
+<li id="section-toc.1-1.14">
+<p id="section-toc.1-1.14.1"><a href="#appendix-B"></a><a href="#name-authors-addresses">저자 연락처</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc9101">공식 원문</a></footer></article></main></body></html>
