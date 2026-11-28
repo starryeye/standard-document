@@ -1,0 +1,207 @@
+{
+  "html_sha256": "da8eed2430120b9a20782a642122b455171ed9d7ef57f2af3ace350212ba2a19",
+  "render_input_sha256": "5531ec373c851a7797001e0a706a5027cca3ae7bbf3a65fa7211c5f31ce8cb70",
+  "automated_status": "passed",
+  "visual_status": "passed",
+  "viewports": {
+    "1440": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 11600
+    },
+    "768": {
+      "minFont": 18,
+      "minLineRatio": 1.75,
+      "articleWidth": 768,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 11600
+    },
+    "390": {
+      "minFont": 16,
+      "minLineRatio": 1.75,
+      "articleWidth": 390,
+      "documentOverflow": false,
+      "brokenImages": 0,
+      "literals": [
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        },
+        {
+          "font": 14,
+          "whiteSpace": "pre",
+          "overflow": "auto"
+        }
+      ],
+      "documentHeight": 15175
+    }
+  },
+  "screenshot_tiles": {
+    "1440": [
+      {
+        "path": "reader-screenshots/1440-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/1440-0004.png",
+        "y": 8600,
+        "height": 3000
+      }
+    ],
+    "768": [
+      {
+        "path": "reader-screenshots/768-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/768-0004.png",
+        "y": 8600,
+        "height": 3000
+      }
+    ],
+    "390": [
+      {
+        "path": "reader-screenshots/390-0001.png",
+        "y": 0,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0002.png",
+        "y": 3000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0003.png",
+        "y": 6000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0004.png",
+        "y": 9000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0005.png",
+        "y": 12000,
+        "height": 3000
+      },
+      {
+        "path": "reader-screenshots/390-0006.png",
+        "y": 12175,
+        "height": 3000
+      }
+    ]
+  },
+  "visual_review_sha256": "63ac953c5fbd4326e33c0dd139fb9490d0abce1e04a48e41342cebf9fc6d92e6"
+}

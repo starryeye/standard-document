@@ -95,6 +95,10 @@ IETF 문서의 권리와 조건은 해당 문서 발행일에 적용되는 [IETF
 
 [RFC 9207 — OAuth 2.0 Authorization Server Issuer Identification](https://datatracker.ietf.org/doc/html/rfc9207), K. Meyer zu Selhausen and D. Fett, March 2022. 발행본의 영문 저작권 및 Revised BSD License 고지는 [공식 원문](https://datatracker.ietf.org/doc/html/rfc9207#name-copyright-notice)과 번역판에 함께 보존합니다.
 
+## RFC 8707
+
+[RFC 8707 — Resource Indicators for OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc8707), B. Campbell, J. Bradley, and H. Tschofenig, February 2020. 발행본의 [영문 저작권 및 Simplified BSD License 고지](https://datatracker.ietf.org/doc/html/rfc8707#name-copyright-notice)를 번역판에 함께 보존합니다.
+
 ## RFC 9396
 
 [RFC 9396 — OAuth 2.0 Rich Authorization Requests](https://datatracker.ietf.org/doc/html/rfc9396), T. Lodderstedt, J. Richer, and B. Campbell, May 2023. 발행본의 [영문 저작권 및 Revised BSD License 고지](https://datatracker.ietf.org/doc/html/rfc9396#name-copyright-notice)를 번역판에 함께 보존합니다.

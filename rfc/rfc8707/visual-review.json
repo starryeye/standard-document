@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "5531ec373c851a7797001e0a706a5027cca3ae7bbf3a65fa7211c5f31ce8cb70",
+  "verdict": "pass",
+  "evidence": "Directly inspected all 14 current Chromium screenshot tiles at 1440px (4), 768px (4), and 390px (6), covering title through the last author and source notes. Compared the frozen official layout with the rendered Korean introduction and §2.2 to check headings, line heights, paragraph spacing, code/caption grouping and responsive width. Opened and visually checked the TOC, metadata, and original page notes at all three widths; tested §2.2 navigation. All six text examples were intact and locally scrollable to their end on mobile without document-wide overflow; directly viewed scroll-end captures for figures 2, 4 and 6. The basic reader preserves visible uppercase normative terms and dates but omits original BCP 14 styling and datetime attributes; compact author grouping is still legible. These differences and the source-layout alternative are documented."
+}

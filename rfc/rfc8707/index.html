@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RFC 8707 — OAuth 2.0 리소스 식별자</title><link href="assets/reader.css" rel="stylesheet"/><meta content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; child-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' data:" http-equiv="Content-Security-Policy"/><link rel="stylesheet" href="assets/presentation.css"/></head><body class="st-reader-page"><main><aside class="rfc8707-publication-note" aria-label="번역 안내"><p><strong>RFC 8707 · 2020년 2월 발행본</strong> · 비공식 AI 한국어 번역<br><a href="https://datatracker.ietf.org/doc/html/rfc8707">공식 영문</a> · <a href="https://errata.rfc-editor.org/search/?rfc_number=8707">RFC Editor 정오표</a> · <a href="https://starryeye.github.io/rfc/rfc8707/">블로그에서 읽기</a></p><p>화면보다 넓은 예제는 코드 상자 안에서 가로로 스크롤할 수 있습니다.</p><details><summary>원문 영문 저작권 고지</summary><p lang="en">Copyright (c) 2020 IETF Trust and the persons identified as the document authors. All rights reserved.</p><p lang="en">This document is subject to BCP 78 and the IETF Trust&#x27;s Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document. Please review these documents carefully, as they describe your rights and restrictions with respect to this document. Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p></details></aside><article class="st-reader" lang="ko"><header class="st-title-block"><h1 class="st-document-title" id="rfcnum">RFC 8707</h1><h1 class="st-document-title" id="title">OAuth 2.0 리소스 식별자</h1></header><details class="st-document-info"><summary>문서 정보</summary><div id="internal-metadata">
+<dl id="identifiers">
+<dt>스트림:</dt>
+<dd>인터넷 엔지니어링 태스크포스(IETF)</dd>
+<dt>RFC:</dt>
+<dd><a href="https://www.rfc-editor.org/rfc/rfc8707">8707</a></dd>
+<dt>분류:</dt>
+<dd>표준화 트랙</dd>
+<dt>발행일:</dt>
+<dd>
+<time datetime="2020-02">2020년 2월</time>
+</dd>
+<dt>ISSN:</dt>
+<dd>2070-1721</dd>
+<dt>저자:</dt>
+<dd>
+<div>
+<div>B. Campbell</div>
+<div>Ping Identity</div>
+</div>
+<div>
+<div>J. Bradley</div>
+<div>Yubico</div>
+</div>
+<div>
+<div>H. Tschofenig</div>
+<div>Arm Limited</div>
+</div>
+</dd>
+</dl>
+</div></details><details class="st-toc"><summary>목차</summary><nav aria-label="문서 목차"><ol><li><a href="#abstract">초록</a></li><li><a href="#name-status-of-this-memo">이 문서의 상태</a></li><li><a href="#name-copyright-notice">저작권 고지</a></li><li><a href="#name-introduction">1. 서론</a><ol><li><a href="#name-requirements-notation-and-c">1.1. 요구 사항 표기와 규칙</a></li><li><a href="#name-terminology">1.2. 용어</a></li></ol></li><li><a href="#name-resource-parameter">2. 리소스 매개변수</a><ol><li><a href="#name-authorization-request">2.1. 인가 요청</a></li><li><a href="#name-access-token-request">2.2. access token 요청</a></li></ol></li><li><a href="#name-security-considerations">3. 보안 고려 사항</a></li><li><a href="#name-privacy-considerations">4. 개인정보 보호 고려 사항</a></li><li><a href="#name-iana-considerations">5. IANA 고려 사항</a><ol><li><a href="#name-oauth-parameters-registrati">5.1. OAuth 매개변수 등록</a></li><li><a href="#name-oauth-extensions-error-regi">5.2. OAuth 확장 오류 등록</a></li></ol></li><li><a href="#name-references">6. 참고 문헌</a><ol><li><a href="#name-normative-references">6.1. 규범적 참고 문헌</a></li><li><a href="#name-informative-references">6.2. 참고용 문헌</a></li></ol></li><li><a href="#name-acknowledgements">감사의 글</a></li><li><a href="#name-authors-addresses">저자 연락처</a></li></ol></nav></details><div>
+<br/>
+<div>
+
+<div id="external-metadata"></div>
+
+
+
+<section id="section-abstract">
+<h2 id="abstract"><a href="#abstract">초록</a></h2>
+<p id="section-abstract-1">
+        이 문서는 OAuth 2.0 인가 프레임워크의 확장을 명세한다. 이 확장은 client(클라이언트)가 접근을 요청하는 보호된 리소스가 무엇인지 authorization server(인가 서버)에 명시적으로 알릴 수 있도록 요청 매개변수를 정의한다.<a aria-label="문단 링크" class="st-permalink" href="#section-abstract-1">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+<h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo">이 문서의 상태</a>
+</h2>
+<p id="section-boilerplate.1-1">
+            이 문서는 인터넷 표준화 트랙 문서이다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-1">¶</a></p>
+<p id="section-boilerplate.1-2">
+            이 문서는 인터넷 엔지니어링 태스크포스(IETF)가 작성했으며, IETF 커뮤니티의 합의를 나타낸다. 공개 검토를 거쳤으며 인터넷 엔지니어링 운영 그룹(IESG)이 발행을 승인했다. 인터넷 표준에 관한 자세한 정보는 RFC 7841의 2절에서 확인할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-2">¶</a></p>
+<p id="section-boilerplate.1-3">
+            이 문서의 현재 상태, 정오표, 의견을 전달하는 방법에 관한 정보는 다음 주소에서 확인할 수 있다. <span><a href="https://www.rfc-editor.org/info/rfc8707">https://www.rfc-editor.org/info/rfc8707</a></span>.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.1-3">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+<h2 id="name-copyright-notice">
+<a href="#name-copyright-notice">저작권 고지</a>
+</h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2020 IETF Trust 및 이 문서의 저자로 명시된 사람들. 모든 권리는 유보된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-1">¶</a></p>
+<p id="section-boilerplate.2-2">
+            이 문서에는 BCP 78과 문서 발행일에 유효한 IETF Trust의 IETF 문서 관련 법적 조항(<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>)이 적용된다. 이 문서에 관한 독자의 권리와 제한 사항이 이러한 문서에 설명되어 있으므로, 이를 주의 깊게 검토하기 바란다. 이 문서에서 발췌한 코드 구성 요소에는 IETF Trust의 법적 조항 4.e절에 명시된 대로 Simplified BSD License 문구를 포함해야 하며, Simplified BSD License에 명시된 대로 아무런 보증 없이 제공된다.<a aria-label="문단 링크" class="st-permalink" href="#section-boilerplate.2-2">¶</a></p>
+</section>
+</div>
+
+<div id="Introduction">
+<section id="section-1">
+<h2 id="name-introduction">
+<a href="#section-1">1. </a><a href="#name-introduction">서론</a>
+</h2>
+<p id="section-1-1">
+  OAuth 2.0 인가 프레임워크 <span>[<a href="#RFC6749">RFC6749</a>]</span>를 수년에 걸쳐 배포하고 구현한 경험을 통해, 특정 상황에서는 client가 요청 중인 access token(액세스 토큰)을 어디에서 사용하려는지 authorization server에 명시적으로 알려야 할 필요가 있음이 드러났다. authorization server가 상당수의 다양한 리소스를 지원하는 경우가 그 예이다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-1">¶</a></p>
+<p id="section-1-2">access token을 처리할 보호된 리소스(resource server(리소스 서버), 애플리케이션, API 등)를 알면 authorization server는 해당 리소스에 필요한 형태로 토큰을 구성할 수 있다. 예를 들어 특정 리소스에 맞게 토큰이나 그 내부의 내용을 암호화하려면 어느 리소스가 토큰을 받아 복호화할지 알아야 한다. 또한 토큰에 들어 있거나 토큰이 참조하는 데이터에 대한 요구 사항은 리소스마다 다른 경우가 많다. 따라서 client가 어느 리소스에서 토큰을 사용하려는지 알면 authorization server는 그에 맞춰 토큰을 발급할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-2">¶</a></p>
+<p id="section-1-3">access token의 수신 대상이 누구인지 구체적으로 알면 토큰 자체의 보안도 강화할 수 있다. 현재 가장 널리 쓰이는 OAuth access token 유형인 Bearer token은 토큰을 가진 주체라면 누구나 관련 리소스에 접근할 수 있게 한다. 오용을 방지하려면 몇 가지 중요한 보안 전제가 충족되어야 한다. 그중 하나는 access token이 특정 보호된 리소스에서 특정 접근 범위 내에서만 유효해야 한다는 것이다. 예를 들어 <span><a href="https://www.rfc-editor.org/rfc/rfc6750#section-5.2">5.2절</a>([<a href="#RFC6750">RFC6750</a>])</span>에서는 토큰 리디렉션을 방지하기 위해 토큰에 수신 대상을 포함하도록 규정한다. access token을 처리할 리소스가 어느 것인지 전달받으면 authorization server는 해당 토큰의 audience(토큰 대상)를 그 리소스로 제한하여 다른 리소스에서는 토큰을 사용하지 못하게 할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-3">¶</a></p>
+<p id="section-1-4"><span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-3.3">3.3절</a>([<a href="#RFC6749">RFC6749</a>])</span>에 정의된 OAuth scope에 보호된 리소스의 위치나 식별 정보까지 전달하는 역할을 맡기기도 한다. 하지만 이 방식이 항상 가능하거나 바람직한 것은 아니다. scope는 보통 접근 권한을 어디에서 행사할지를 나타내기보다 어떤 접근 권한을 요청하는지를 나타낸다(예를 들어 <code>email</code>, <code>admin:org</code>, <code>user_photos</code>, <code>channels:read</code>, <code>channels:write</code>은 실제로 쓰이는 scope 값 중 일부로, 접근 유형만 나타낼 뿐 위치나 식별 정보는 나타내지 않는다).<a aria-label="문단 링크" class="st-permalink" href="#section-1-4">¶</a></p>
+<p id="section-1-5">상황이나 배포 환경에 따라서는 client가 요청하는 access token을 어디에서 사용하려는지 authorization server에 알릴 수단이 중요하고 유용하다. 여러 OAuth 2.0 구현 및 배포 환경에서 이미 이 목적으로 자체 매개변수를 사용한다. 이 명세는 앞으로 이러한 독자적 방식 대신 사용할 수 있는 표준화된 상호운용 가능 방식을 제시하고자 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1-5">¶</a></p>
+<div id="RNC">
+<section id="section-1.1">
+<h3 id="name-requirements-notation-and-c"><a href="#section-1.1">1.1. </a><a href="#name-requirements-notation-and-c">요구 사항 표기와 규칙</a></h3>
+<p id="section-1.1-1">이 문서의 키워드 "<span class="rfc8707-bcp14">MUST</span>", "<span class="rfc8707-bcp14">MUST NOT</span>", "<span class="rfc8707-bcp14">REQUIRED</span>", "<span class="rfc8707-bcp14">SHALL</span>", "<span class="rfc8707-bcp14">SHALL NOT</span>", "<span class="rfc8707-bcp14">SHOULD</span>", "<span class="rfc8707-bcp14">SHOULD NOT</span>", "<span class="rfc8707-bcp14">RECOMMENDED</span>", "<span class="rfc8707-bcp14">NOT RECOMMENDED</span>", "<span class="rfc8707-bcp14">MAY</span>", "<span class="rfc8707-bcp14">OPTIONAL</span>"은 여기에 표시한 것처럼 모두 대문자로 표기된 경우에만 BCP 14 <span>[<a href="#RFC2119">RFC2119</a>]</span> <span>[<a href="#RFC8174">RFC8174</a>]</span>에 명시된 의미로 해석한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.1-1">¶</a></p>
+</section>
+</div>
+<div id="Terminology">
+<section id="section-1.2">
+<h3 id="name-terminology"><a href="#section-1.2">1.2. </a><a href="#name-terminology">용어</a></h3>
+<p id="section-1.2-1">이 명세에서는 The OAuth 2.0 Authorization Framework <span>[<a href="#RFC6749">RFC6749</a>]</span>에 정의된 "access token", "refresh token(리프레시 토큰)", "authorization server", "resource server", "authorization endpoint(인가 엔드포인트)", "authorization request", "authorization response", "token endpoint(토큰 엔드포인트)", "grant type(그랜트 유형)", "access token request", "access token response", "client"라는 용어를 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-1.2-1">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="ResourceParameter">
+<section id="section-2">
+<h2 id="name-resource-parameter"><a href="#section-2">2. </a><a href="#name-resource-parameter">리소스 매개변수</a></h2>
+<p id="section-2-1">client는 authorization server에 보내는 요청에 다음 매개변수를 포함하여 접근을 요청하는 보호된 리소스(resource server, 애플리케이션, API 등)를 나타낼 수 있다(<span class="rfc8707-bcp14">MAY</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2-1">¶</a></p>
+<dl id="section-2-2">
+<dt id="section-2-2.1">resource</dt>
+<dd id="section-2-2.2">접근을 요청하는 대상 서비스나 리소스를 나타낸다. 이 값은 반드시 절대 URI여야 한다(<span class="rfc8707-bcp14">MUST</span>). 절대 URI는 <span><a href="https://www.rfc-editor.org/rfc/rfc3986#section-4.3">4.3절</a>([<a href="#RFC3986">RFC3986</a>])</span>에서 규정한다. 이 URI에는 프래그먼트 구성요소를 포함해서는 안 된다(<span class="rfc8707-bcp14">MUST NOT</span>). 쿼리 구성요소는 포함하지 않는 것이 바람직하다(<span class="rfc8707-bcp14">SHOULD NOT</span>). 다만 하나 이상의 쿼리 매개변수로 애플리케이션에 대한 요청 범위를 한정하는 경우와 같이, 쿼리 구성요소가 리소스 매개변수의 일부로서 유용하고 필요한 경우도 있다. <code>resource</code> 매개변수의 URI 값은 리소스가 무엇인지 나타내는 식별자이다. 이 식별자는 대상 리소스를 호스팅하는, 네트워크로 접근할 수 있는 위치에 대응하는 로케이터일 수 있다(<span class="rfc8707-bcp14">MAY</span>). 여러 <code>resource</code> 매개변수를 사용하여 요청하는 토큰을 여러 리소스에서 사용하려는 것임을 나타낼 수 있다(<span class="rfc8707-bcp14">MAY</span>).<a aria-label="문단 링크" class="st-permalink" href="#section-2-2.2">¶</a></dd>
+</dl>
+<p id="section-2-3">이 매개변수의 값은 client가 접근을 요청하는 리소스를 식별한다. 이 매개변수는 보호된 리소스의 위치를 전달할 수 있으며, 일반적으로 https URL이나 더 추상적인 식별자를 사용한다. 이를 통해 authorization server는 해당 리소스에 맞는 정책을 적용할 수 있다. 예를 들어 발급할 토큰의 유형과 내용, 암호화 여부와 방식을 결정하고 적절한 audience 제한을 적용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-3">¶</a></p>
+<p id="section-2-4">client는 접근하려는 API 전체 또는 리소스 집합을 나타내는 URI 중 제공할 수 있는 가장 구체적인 URI를 제시하는 것이 바람직하다(<span class="rfc8707-bcp14">SHOULD</span>). 실제로 client는 자신이 상호작용하는 애플리케이션이나 리소스의 기본 URI를 알고 있으며, 이 URI를 <code>resource</code> 매개변수 값으로 쓰기에 적합하다. 리소스에 대해 알고 있는 정보에 비추어 다른 값이 필요한 경우가 아니라면, client는 API의 기본 URI를 <code>resource</code> 매개변수 값으로 사용하는 것이 바람직하다(<span class="rfc8707-bcp14">SHOULD</span>). 예를 들어 그 리소스가 해당 호스트의 유일한 애플리케이션이라면 <code>https://api.example.com/</code> 값을 사용한다. 반면 그 호스트에 있는 여러 애플리케이션 중 하나라면 <code>https://api.example.com/app/</code>처럼 더 구체적인 값을 사용한다.
+
+API에 여러 엔드포인트가 있는 경우도 한 예이다. 가령 System for Cross-domain Identity Management(SCIM) <span>[<a href="#RFC7644">RFC7644</a>]</span>에 <code>https://apps.example.com/scim/Users</code>, <code>https://apps.example.com/scim/Groups</code>, <code>https://apps.example.com/scim/Schemas</code> 같은 엔드포인트가 있다면, client는 발급받는 access token이 SCIM API의 모든 엔드포인트에서 유효하도록 리소스로 <code>https://apps.example.com/scim/</code>를 사용한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-4">¶</a></p>
+<p id="section-2-5">다음 오류 코드를 사용하면 authorization server가 인가 요청이나 access token 요청에 응답할 때 요청된 리소스에 문제가 있음을 나타낼 수 있다. 또한 client가 유효하지 않은 리소스와 scope의 조합을 요청했음을 알리는 데에도 사용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-5">¶</a></p>
+<dl id="section-2-6">
+<dt id="section-2-6.1">invalid_target</dt>
+<dd id="section-2-6.2">요청된 리소스가 유효하지 않거나, 누락되었거나, 알려지지 않았거나, 형식이 잘못되었다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-6.2">¶</a></dd>
+</dl>
+<p id="section-2-7">authorization server는 발급하는 access token의 audience를 다음과 같이 제한하는 것이 바람직하다(<span class="rfc8707-bcp14">SHOULD</span>). <code>resource</code> 매개변수가 가리키는 리소스만 audience에 포함한다. JSON Web Token <span>[<a href="#RFC7519">RFC7519</a>]</span>에서는 <code>aud</code> 클레임으로 audience 제한을 전달할 수 있고, token introspection(토큰 인트로스펙션) <span>[<a href="#RFC7662">RFC7662</a>]</span> 응답에서는 이름이 같은 최상위 멤버가 audience 제한 정보를 제공한다. authorization server는 <code>resource</code> 값을 그대로 audience로 사용하거나, 그 값을 해당 리소스를 나타내는 더 일반적인 URI 또는 추상 식별자에 매핑할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2-7">¶</a></p>
+<div id="authz-req">
+<section id="section-2.1">
+<h3 id="name-authorization-request"><a href="#section-2.1">2.1. </a><a href="#name-authorization-request">인가 요청</a></h3>
+<p id="section-2.1-1">authorization endpoint로 보내는 인가 요청에 <code>resource</code> 매개변수를 사용하면, 접근을 요청하는 보호된 리소스가 무엇인지 나타낸다. 암시적 흐름(<span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.2">4.2절</a>, OAuth 2.0 [<a href="#RFC6749">RFC6749</a>]</span>)을 통해 authorization endpoint가 access token을 직접 반환하는 경우, 요청된 리소스는 해당 access token에 적용된다. 코드 흐름(<span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-4.1">4.1절</a>, OAuth 2.0 [<a href="#RFC6749">RFC6749</a>]</span>)에서는 authorization endpoint가 authorization grant(인가 부여)의 중간 표현인 authorization code(인가 코드)를 반환하므로, 요청된 리소스는 authorization grant 전체에 적용된다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-1">¶</a></p>
+<p id="section-2.1-2">JWT Secured Authorization Request <span>[<a href="#I-D.ietf-oauth-jwsreq">JWT-SAR</a>]</span>를 사용하는 경우처럼 인가 요청을 JSON Web Token(JWT)으로 보내는 경우, <code>resource</code> 매개변수의 값이 하나면 JSON 문자열로, 여러 개면 문자열 배열로 표현한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-2">¶</a></p>
+<p id="section-2.1-3">client가 인가를 요청하면서 <code>resource</code> 매개변수를 생략하면 authorization server는 특정 리소스 없이 요청을 처리하거나 미리 정의된 기본 리소스 값을 사용하여 요청을 처리할 수 있다(<span class="rfc8707-bcp14">MAY</span>). 그 대신 authorization server는 client에게 접근하려는 리소스를 명시하도록 요구할 수 있고(<span class="rfc8707-bcp14">MAY</span>), 매개변수를 생략한 요청은 다음과 같이 거부할 수 있다(<span class="rfc8707-bcp14">MAY</span>). 거부 시에는 <code>invalid_target</code> 오류를 반환한다. authorization server는 이 데이터를 이용해 client가 사용자를 대신하여 접근하려는 리소스를 사용자에게 알리거나, 정책을 적용하거나(예: 알려지지 않은 리소스 때문에 요청을 거부함), 이후 access token 요청에 사용할 수 있는 리소스 집합을 결정할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-3">¶</a></p>
+<p id="section-2.1-4">authorization server가 전달받은 값을 파싱하지 못하거나 해당 리소스를 허용할 수 없다고 판단하면, 오류 코드 <code>invalid_target</code>를 <code>error</code> 매개변수 값으로 담은 오류 응답으로 요청을 거부하는 것이 바람직하다. 오류의 원인에 관한 추가 정보는 <code>error_description</code>을 사용해 제공할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-4">¶</a></p>
+<p id="section-2.1-5">client가 authorization server에 <code>https://api.example.com/app/</code>에서 사용할 access token을 원한다고 알리는 인가 요청의 예를 아래 <a href="#authz-endpoint-example-token">그림 1</a>에 제시한다(추가 줄바꿈과 들여쓰기는 보기 쉽게 하기 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-5">¶</a></p>
+<span id="name-implicit-flow-authorization"></span><div id="authz-endpoint-example-token">
+<figure id="figure-1">
+<div id="section-2.1-6.1">
+<div><pre>
+  GET /as/authorization.oauth2?response_type=token
+     &amp;client_id=example-client
+     &amp;state=XzZaJlcwYew1u0QBrRv_Gw
+     &amp;redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+     &amp;resource=https%3A%2F%2Fapi.example.com%2Fapp%2F HTTP/1.1
+  Host: authorization-server.example.com
+</pre></div>
+</div>
+<figcaption><a href="#figure-1">그림 1</a>: <a href="#name-implicit-flow-authorization">암시적 흐름의 인가 요청</a></figcaption></figure>
+</div>
+<p id="section-2.1-7">아래 <a href="#authz-endpoint-example-code">그림 2</a>는 <code>code</code> 응답 유형을 사용하는 인가 요청의 예이다. 이 예에서 client는 resource owner(리소스 소유자)의 연락처 및 캘린더 데이터에 대한 접근을 요청하며, 대상 리소스는 <code>https://cal.example.com/</code> 및 <code>https://contacts.example.com/</code>이다(추가 줄바꿈과 들여쓰기는 보기 쉽게 하기 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.1-7">¶</a></p>
+<span id="name-code-flow-authorization-req"></span><div id="authz-endpoint-example-code">
+<figure id="figure-2">
+<div id="section-2.1-8.1">
+<div><pre>
+  GET /as/authorization.oauth2?response_type=code
+     &amp;client_id=s6BhdRkqt3
+     &amp;state=tNwzQ87pC6llebpmac_IDeeq-mCR2wLDYljHUZUAWuI
+     &amp;redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+     &amp;scope=calendar%20contacts
+     &amp;resource=https%3A%2F%2Fcal.example.com%2F
+     &amp;resource=https%3A%2F%2Fcontacts.example.com%2F HTTP/1.1
+  Host: authorization-server.example.com
+</pre></div>
+</div>
+<figcaption><a href="#figure-2">그림 2</a>: <a href="#name-code-flow-authorization-req">코드 흐름의 인가 요청</a></figcaption></figure>
+</div>
+</section>
+</div>
+<div id="token-req">
+<section id="section-2.2">
+<h3 id="name-access-token-request"><a href="#section-2.2">2.2. </a><a href="#name-access-token-request">access token 요청</a></h3>
+<p id="section-2.2-1">어떤 grant type이든 token endpoint에 보내는 access token 요청에 <code>resource</code> 매개변수를 사용하면, 이 매개변수는 client가 요청한 access token을 사용하려는 대상 서비스 또는 보호된 리소스를 나타낸다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-1">¶</a></p>
+<p id="section-2.2-2">access token 요청을 처리할 때 어떤 리소스 값을 허용할지는 authorization server가 로컬 정책이나 설정에 따라 전적으로 자체 재량으로 결정한다. <code>refresh_token</code> 또는 <code>authorization_code</code> grant type의 요청에서는 이 정책에 따라 허용하는 리소스를 resource owner가 최초에 인가한 리소스 전체 또는 그 일부로 제한할 수 있다. <code>authorization_code</code> 방식으로 요청된 리소스가 최초에 인가된 리소스 집합의 부분집합이면, authorization server는 요청된 그 부분집합을 기준으로 access token을 발급한다. 반면 refresh token이 반환되는 경우에는 그 토큰이 최초 authorization grant 전체에 결부된다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-2">¶</a></p>
+<p id="section-2.2-3">토큰을 요청할 때 client는 <code>resource</code> 매개변수로 토큰을 사용하려는 대상 서비스를 지정하고, <code>scope</code> 매개변수로 요청하는 토큰에 원하는 scope를 지정할 수 있다. 이는 요청된 scope를 가지며 요청한 모든 대상 서비스에서 사용할 수 있는 토큰을 달라는 뜻이다. 결과적으로 토큰에 요청하는 접근 권한은 모든 대상 서비스와 모든 scope의 데카르트 곱이다. access token을 발급할 때 authorization server는 가능한 한 그 토큰의 scope 값을 해당 리소스가 처리할 수 있고 알 필요가 있는 값으로 축소하는 것이 바람직하다. (여기서 "downscope"란 resource owner가 최초에 인가한 것보다 적은 권한을 부여한다는 뜻이다.) scope 값 목록은 resource owner가 목록에 나열된 여러 서비스를 이용한다는 단서가 된다. 토큰의 scope를 특정 서비스에 필요한 만큼만 줄이면 이 정보가 다른 서비스에 드러나는 정도를 제한할 수 있으므로 개인정보 보호가 한층 강화된다. <span><a href="https://www.rfc-editor.org/rfc/rfc6749#section-5.1">5.1절</a>([<a href="#RFC6749">RFC6749</a>])</span>에서 규정한 대로, access token의 실제 scope가 client가 요청한 scope와 다르면 authorization server는 <code>scope</code> 응답 매개변수 값으로 그 실제 scope를 client에 알려야 한다.<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-3">¶</a></p>
+<p id="section-2.2-4"><a href="#authz-endpoint-example-code">그림 2</a>의 코드 흐름 인가 요청에 이어, 아래 예시는 <code>authorization_code</code> grant type의 access token 요청(<a href="#token-endpoint-example-ac">그림 3</a>)과 응답(<a href="#response-example-ac">그림 4</a>)을 보여 준다. 이 예시에서 client는 authorization server에 <code>https://cal.example.com/</code>에서 사용할 access token을 원한다고 알린다(추가 줄바꿈과 들여쓰기는 표시 편의를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-4">¶</a></p>
+<span id="name-access-token-request-2"></span><div id="token-endpoint-example-ac">
+<figure id="figure-3">
+<div id="section-2.2-5.1">
+<div><pre>
+  POST /as/token.oauth2 HTTP/1.1
+  Host: authorization-server.example.com
+  Authorization: Basic czZCaGRSa3F0Mzpoc3FFelFsVW9IQUU5cHg0RlNyNHlJ
+  Content-Type: application/x-www-form-urlencoded
+
+  grant_type=authorization_code
+  &amp;redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+  &amp;code=10esc29BWC2qZB0acc9v8zAv9ltc2pko105tQauZ
+  &amp;resource=https%3A%2F%2Fcal.example.com%2F</pre></div>
+</div>
+<figcaption><a href="#figure-3">그림 3</a>:
+<a href="#name-access-token-request-2">access token 요청</a></figcaption></figure>
+</div>
+<span id="name-access-token-response"></span><div id="response-example-ac">
+<figure id="figure-4">
+<div id="section-2.2-6.1">
+<div><pre>
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Cache-Control: no-cache, no-store
+
+   {
+      "access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6Ijc3In0.eyJpc3MiOi
+       JodHRwOi8vYXV0aG9yaXphdGlvbi1zZXJ2ZXIuZXhhbXBsZS5jb20iLCJzdWI
+       iOiJfX2JfYyIsImV4cCI6MTU4ODQyMDgwMCwic2NvcGUiOiJjYWxlbmRhciIs
+       ImF1ZCI6Imh0dHBzOi8vY2FsLmV4YW1wbGUuY29tLyJ9.nNWJ2dXSxaDRdMUK
+       lzs-cYIj8MDoM6Gy7pf_sKrLGsAFf1C2bDhB60DQfW1DZL5npdko1_Mmk5sUf
+       zkiQNVpYw",
+      "token_type":"Bearer",
+      "expires_in":3600,
+      "refresh_token":"4LTC8lb0acc6Oy4esc1Nk9BWC0imAwH7kic16BDC2",
+      "scope":"calendar"
+   }</pre></div>
+</div>
+<figcaption><a href="#figure-4">그림 4</a>:
+<a href="#name-access-token-response">access token 응답</a></figcaption></figure>
+</div>
+<p id="section-2.2-7">이후 client가 refresh token을 사용해 authorization server에 <code>https://contacts.example.com/</code>에서 사용할 access token을 요청하는 예시는 아래 <a href="#token-endpoint-example-rt">그림 5</a>에, 그 응답은 <a href="#response-example-rt">그림 6</a>에 나와 있다(추가 줄바꿈과 들여쓰기는 표시 편의를 위한 것일 뿐이다).<a aria-label="문단 링크" class="st-permalink" href="#section-2.2-7">¶</a></p>
+<span id="name-access-token-request-3"></span><div id="token-endpoint-example-rt">
+<figure id="figure-5">
+<div id="section-2.2-8.1">
+<div><pre>
+  POST /as/token.oauth2 HTTP/1.1
+  Host: authorization-server.example.com
+  Authorization: Basic czZCaGRSa3F0Mzpoc3FFelFsVW9IQUU5cHg0RlNyNHlJ
+  Content-Type: application/x-www-form-urlencoded
+
+  grant_type=refresh_token
+  &amp;refresh_token=4LTC8lb0acc6Oy4esc1Nk9BWC0imAwH7kic16BDC2
+  &amp;resource=https%3A%2F%2Fcontacts.example.com%2F
+</pre></div>
+</div>
+<figcaption><a href="#figure-5">그림 5</a>:
+<a href="#name-access-token-request-3">access token 요청</a></figcaption></figure>
+</div>
+<span id="name-access-token-response-2"></span><div id="response-example-rt">
+<figure id="figure-6">
+<div id="section-2.2-9.1">
+<div><pre>
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Cache-Control: no-cache, no-store
+
+   {
+      "access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6Ijc3In0.eyJpc3MiOi
+       JodHRwOi8vYXV0aG9yaXphdGlvbi1zZXJ2ZXIuZXhhbXBsZS5jb20iLCJzdWI
+       iOiJfX2JfYyIsImV4cCI6MTU4ODQyMDgyNiwic2NvcGUiOiJjb250YWN0cyIs
+       ImF1ZCI6Imh0dHBzOi8vY29udGFjdHMuZXhhbXBsZS5jb20vIn0.5f4yhqazc
+       OSlJw4y94KPeWNEFQqj2cfeO8x4hr3YbHtIl3nQXnBMw5wREY5O1YbZED-GfH
+       UowfmtNaA5EikYAw",
+      "token_type":"Bearer",
+      "expires_in":3600,
+      "scope":"contacts"
+   }</pre></div>
+</div>
+<figcaption><a href="#figure-6">그림 6</a>:
+<a href="#name-access-token-response-2">access token 응답</a></figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="Security">
+<section id="section-3">
+<h2 id="name-security-considerations"><a href="#section-3">3. </a><a href="#name-security-considerations">보안 고려 사항</a></h2>
+<p id="section-3-1">어떤 리소스에 정당하게 제시된 access token의 audience가 제한되어 있으면, 그 리소스는 해당 토큰을 가져다가 다른 곳에 제시해 다른 리소스에 부당하게 접근할 수 없다. <code>resource</code> 매개변수를 사용하면 client는 요청한 access token을 사용할 보호된 리소스를 나타낼 수 있고, 이를 바탕으로 authorization server는 토큰에 적절한 audience 제한을 적용할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-1">¶</a></p>
+<p id="section-3-2">일부 서버는 사용자 콘텐츠를 호스팅하거나 여러 테넌트를 지원할 수 있다. 한 테넌트가 access token을 사용해 다른 테넌트 소유의 리소스에 부당하게 접근하는 공격을 막으려면, 경로 구성 요소처럼 테넌트를 식별하는 URI 부분을 모두 포함한 구체적인 리소스 URI를 사용하는 것이 중요하다. 그러면 테넌트를 식별할 수 있도록 access token의 audience를 제한할 수 있으며, 다른 테넌트 소유의 리소스에서는 audience가 유효하지 않아 그 토큰을 사용할 수 없다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-2">¶</a></p>
+<p id="section-3-3">토큰 요청에 <code>resource</code> 매개변수를 여러 번 포함할 수 있지만, <code>resource</code> 매개변수는 하나만 사용하는 것이 권장된다. Bearer 토큰의 의도된 수신자(audience)가 여럿이면 토큰은 둘 이상의 보호된 리소스에서 유효하므로, 그중 어느 리소스든 이 토큰으로 나머지 리소스 중 어느 곳에든 접근할 수 있다. 따라서 audience가 여럿인 access token을 사용하려면 관련 당사자들 사이에 높은 수준의 신뢰가 필요하다. 또한 authorization server는 여러 리소스가 지정된 토큰 요청을 처리하지 않으려 할 수도 있고, 처리할 수 없을 수도 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-3">¶</a></p>
+<p id="section-3-4">가능하면 <code>resource</code> 매개변수는 네트워크 주소로 접근할 수 있는 보호된 리소스의 위치에 대응하는 것이 바람직하다. 그러면 client는 요청 대상 리소스가 해당 네트워크 위치를 제어하는지 검증할 수 있으므로, 악의적인 엔드포인트가 다른 리소스용 토큰을 확보할 위험이 줄어든다. <code>resource</code> 매개변수에 추상 식별자가 들어 있으면, 토큰을 전송하는 모든 네트워크 엔드포인트가 그 식별자의 의도된 audience인지 별도의 경로로 검증할 책임은 client에 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-3-4">¶</a></p>
+</section>
+</div>
+<div id="Privacy">
+<section id="section-4">
+<h2 id="name-privacy-considerations"><a href="#section-4">4. </a><a href="#name-privacy-considerations">개인정보 보호 고려 사항</a></h2>
+<p id="section-4-1">일반적인 OAuth 배포 환경에서 authorization server는 사용자와 client의 행동을 상당 부분 관찰하고 추적할 수 있는 위치에 있다. 이는 대체로 OAuth의 본질에서 비롯되며, 이 문서는 그 점에 거의 영향을 미치지 않는다. 다만 access token에 token introspection을 사용하지 않는 경우처럼 일부 상황에서는, 여기에서 정의한 resource 매개변수를 사용하면 이를 사용하지 않을 때보다 행동을 다소 더 세밀하고 구체적으로 추적할 수 있다.<a aria-label="문단 링크" class="st-permalink" href="#section-4-1">¶</a></p>
+</section>
+</div>
+<div id="IANA">
+<section id="section-5">
+<h2 id="name-iana-considerations"><a href="#section-5">5. </a><a href="#name-iana-considerations">IANA 고려 사항</a></h2>
+<section id="section-5.1">
+<h3 id="name-oauth-parameters-registrati"><a href="#section-5.1">5.1. </a><a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a></h3>
+<p id="section-5.1-1">이 명세는 IANA의 "OAuth Parameters" 레지스트리 <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 있는 아래 값을 갱신한다. 이 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 신설했다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-1">¶</a></p>
+<dl id="section-5.1-2">
+<dt id="section-5.1-2.1">매개변수 이름:</dt>
+<dd id="section-5.1-2.2">resource<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.2">¶</a></dd>
+<dt id="section-5.1-2.3">매개변수 사용 위치:</dt>
+<dd id="section-5.1-2.4">인가 요청, 토큰 요청<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.4">¶</a></dd>
+<dt id="section-5.1-2.5">변경 관리 주체:</dt>
+<dd id="section-5.1-2.6">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.6">¶</a></dd>
+<dt id="section-5.1-2.7">명세 문서:</dt>
+<dd id="section-5.1-2.8">RFC 8707<a aria-label="문단 링크" class="st-permalink" href="#section-5.1-2.8">¶</a></dd>
+</dl>
+</section>
+<section id="section-5.2">
+<h3 id="name-oauth-extensions-error-regi"><a href="#section-5.2">5.2. </a><a href="#name-oauth-extensions-error-regi">OAuth 확장 오류 등록</a></h3>
+<p id="section-5.2-1">이 명세는 IANA의 "OAuth Extensions Error Registry" <span>[<a href="#IANA.OAuth.Parameters">IANA.OAuth.Parameters</a>]</span>에 있는 아래 오류 항목을 갱신한다. 이 레지스트리는 <span>[<a href="#RFC6749">RFC6749</a>]</span>에서 신설했다.<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-1">¶</a></p>
+<dl id="section-5.2-2">
+<dt id="section-5.2-2.1">오류 이름:</dt>
+<dd id="section-5.2-2.2">invalid_target<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.2">¶</a></dd>
+<dt id="section-5.2-2.3">오류 사용 위치:</dt>
+<dd id="section-5.2-2.4">암시적 grant 오류 응답, 토큰 오류 응답<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.4">¶</a></dd>
+<dt id="section-5.2-2.5">관련 프로토콜 확장:</dt>
+<dd id="section-5.2-2.6">resource 매개변수<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.6">¶</a></dd>
+<dt id="section-5.2-2.7">변경 관리 주체:</dt>
+<dd id="section-5.2-2.8">IESG<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.8">¶</a></dd>
+<dt id="section-5.2-2.9">명세 문서:</dt>
+<dd id="section-5.2-2.10">RFC 8707<a aria-label="문단 링크" class="st-permalink" href="#section-5.2-2.10">¶</a></dd>
+</dl>
+</section>
+</section>
+</div>
+<section id="section-6">
+<h2 id="name-references"><a href="#section-6">6. </a><a href="#name-references">참고 문헌</a></h2>
+<section id="section-6.1">
+<h3 id="name-normative-references"><a href="#section-6.1">6.1. </a><a href="#name-normative-references">규범적 참고 문헌</a></h3>
+<dl>
+<dt id="IANA.OAuth.Parameters">[IANA.OAuth.Parameters]</dt>
+<dd><span>IANA</span>, <span>"OAuth Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/oauth-parameters">https://www.iana.org/assignments/oauth-parameters</a>&gt;</span>.</dd>
+<dt id="RFC2119">[RFC2119]</dt>
+<dd><span>Bradner, S.</span>, <span>"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span>BCP 14</span>, <span>RFC 2119</span>, <span>DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>.</dd>
+<dt id="RFC3986">[RFC3986]</dt>
+<dd><span>Berners-Lee, T.</span><span>, Fielding, R.</span><span>, and L. Masinter</span>, <span>"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span>STD 66</span>, <span>RFC 3986</span>, <span>DOI 10.17487/RFC3986</span>, <time datetime="2005-01">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>.</dd>
+<dt id="RFC6749">[RFC6749]</dt>
+<dd><span>Hardt, D., Ed.</span>, <span>"The OAuth 2.0 Authorization Framework"</span>, <span>RFC 6749</span>, <span>DOI 10.17487/RFC6749</span>, <time datetime="2012-10">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>.</dd>
+<dt id="RFC8174">[RFC8174]</dt>
+<dd><span>Leiba, B.</span>, <span>"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span>BCP 14</span>, <span>RFC 8174</span>, <span>DOI 10.17487/RFC8174</span>, <time datetime="2017-05">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>.</dd>
+</dl>
+</section>
+<section id="section-6.2">
+<h3 id="name-informative-references"><a href="#section-6.2">6.2. </a><a href="#name-informative-references">참고용 문헌</a></h3>
+<dl>
+<dt id="I-D.ietf-oauth-jwsreq">[JWT-SAR]</dt>
+<dd><span>Sakimura, N.</span><span> and J. Bradley</span>, <span>"The OAuth 2.0 Authorization Framework: JWT Secured Authorization Request (JAR)"</span>, <span>Work in Progress</span>, <span>Internet-Draft, draft-ietf-oauth-jwsreq-20</span>, <time datetime="2019-10-21">21 October 2019</time>, <span>&lt;<a href="https://tools.ietf.org/html/draft-ietf-oauth-jwsreq-20">https://tools.ietf.org/html/draft-ietf-oauth-jwsreq-20</a>&gt;</span>.</dd>
+<dt id="RFC6750">[RFC6750]</dt>
+<dd><span>Jones, M.</span><span> and D. Hardt</span>, <span>"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span>RFC 6750</span>, <span>DOI 10.17487/RFC6750</span>, <time datetime="2012-10">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>.</dd>
+<dt id="RFC7519">[RFC7519]</dt>
+<dd><span>Jones, M.</span><span>, Bradley, J.</span><span>, and N. Sakimura</span>, <span>"JSON Web Token (JWT)"</span>, <span>RFC 7519</span>, <span>DOI 10.17487/RFC7519</span>, <time datetime="2015-05">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>.</dd>
+<dt id="RFC7644">[RFC7644]</dt>
+<dd><span>Hunt, P., Ed.</span><span>, Grizzle, K.</span><span>, Ansari, M.</span><span>, Wahlstroem, E.</span><span>, and C. Mortimore</span>, <span>"System for Cross-domain Identity Management: Protocol"</span>, <span>RFC 7644</span>, <span>DOI 10.17487/RFC7644</span>, <time datetime="2015-09">September 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7644">https://www.rfc-editor.org/info/rfc7644</a>&gt;</span>.</dd>
+<dt id="RFC7662">[RFC7662]</dt>
+<dd><span>Richer, J., Ed.</span>, <span>"OAuth 2.0 Token Introspection"</span>, <span>RFC 7662</span>, <span>DOI 10.17487/RFC7662</span>, <time datetime="2015-10">October 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7662">https://www.rfc-editor.org/info/rfc7662</a>&gt;</span>.</dd>
+</dl>
+</section>
+</section>
+<div id="Acknowledgements">
+<section id="section-appendix.a">
+<h2 id="name-acknowledgements"><a href="#name-acknowledgements">감사의 글</a></h2>
+<p id="section-appendix.a-1">
+        이 명세는 <span>Hannes Tschofenig</span>와 <span>Rifaat Shekh-Yusef</span>가 공동 의장을 맡은 OAuth 작업반에서 개발되었다. 당시 <span>Eric  Rescorla</span>, <span>Benjamin Kaduk</span>, <span>Roman Danyliw</span>가 보안 영역 책임자를 맡았다. 또한 다음 사람들은 아이디어와 의견, 문구를 제안해 이 명세를 다듬는 데 기여했다.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.a-1">¶</a></p>
+<p id="section-appendix.a-2">
+<span>Vittorio Bertocci</span>,
+        <span>Sergey Beryozkin</span>,
+        <span>Roman Danyliw</span>,
+        <span>William Denniss</span>,
+        <span>Vladimir Dzhuvinov</span>,
+        <span>George Fletcher</span>,
+        <span>Dick Hardt</span>,
+        <span>Phil Hunt</span>,
+        <span>Michael Jones</span>,
+        <span>Benjamin Kaduk</span>,
+        <span>Barry Leiba</span>,
+        <span>Torsten Lodderstedt</span>,
+        <span>Anthony Nadalin</span>,
+        <span>Justin Richer</span>,
+        <span>Adam Roach</span>,
+        <span>Nat Sakimura</span>,
+        <span>Rifaat Shekh-Yusef</span>,
+        <span>Filip Skokan</span>,
+        <span>Éric Vyncke</span>,
+        <span>Hans Zandbelt</span>.<a aria-label="문단 링크" class="st-permalink" href="#section-appendix.a-2">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="section-appendix.b">
+<h2 id="name-authors-addresses">
+<a href="#name-authors-addresses">저자 연락처</a>
+</h2>
+<address>
+<div dir="auto"><span>Brian Campbell</span></div>
+<div dir="auto"><span>Ping Identity</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:brian.d.campbell@gmail.com">brian.d.campbell@gmail.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>John Bradley</span></div>
+<div dir="auto"><span>Yubico</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:ve7jtb@ve7jtb.com">ve7jtb@ve7jtb.com</a>
+</div>
+</address>
+<address>
+<div dir="auto"><span>Hannes Tschofenig</span></div>
+<div dir="auto"><span>Arm Limited</span></div>
+<div>
+<span>이메일:</span>
+<a href="mailto:hannes.tschofenig@gmx.net">hannes.tschofenig@gmx.net</a>
+</div>
+</address>
+</section>
+</div>
+</div>
+</div><details class="st-source-notes"><summary>원문 페이지 표기</summary><table>
+<thead><tr>
+<td>RFC 8707</td>
+<td>OAuth 리소스 식별자</td>
+<td>2020년 2월</td>
+</tr></thead>
+<tfoot><tr>
+<td>Campbell 외</td>
+<td>표준화 트랙</td>
+<td>[페이지]</td>
+</tr></tfoot>
+</table><div id="toc">
+<section id="section-toc.1">
+<a href="#">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents">목차</a>
+</h2>
+<nav><ul>
+<li id="section-toc.1-1.1">
+<p id="section-toc.1-1.1.1"><a href="#section-1">1</a>.  <a href="#name-introduction">서론</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.1.2.1">
+<p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1">1.1</a>.  <a href="#name-requirements-notation-and-c">요구 사항 표기와 규칙</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.1.2.2">
+<p id="section-toc.1-1.1.2.2.1"><a href="#section-1.2">1.2</a>.  <a href="#name-terminology">용어</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.1.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.2">
+<p id="section-toc.1-1.2.1"><a href="#section-2">2</a>.  <a href="#name-resource-parameter">리소스 매개변수</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.2.2.1">
+<p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1">2.1</a>.  <a href="#name-authorization-request">인가 요청</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.2.2.2">
+<p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2">2.2</a>.  <a href="#name-access-token-request">access token 요청</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.2.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.3">
+<p id="section-toc.1-1.3.1"><a href="#section-3">3</a>.  <a href="#name-security-considerations">보안 고려 사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.3.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.4">
+<p id="section-toc.1-1.4.1"><a href="#section-4">4</a>.  <a href="#name-privacy-considerations">개인정보 보호 고려 사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.4.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.5">
+<p id="section-toc.1-1.5.1"><a href="#section-5">5</a>.  <a href="#name-iana-considerations">IANA 고려 사항</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.5.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.5.2.1">
+<p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1">5.1</a>.  <a href="#name-oauth-parameters-registrati">OAuth 매개변수 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.5.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.5.2.2">
+<p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2">5.2</a>.  <a href="#name-oauth-extensions-error-regi">OAuth 확장 오류 등록</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.5.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.6">
+<p id="section-toc.1-1.6.1"><a href="#section-6">6</a>.  <a href="#name-references">참고 문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.1">¶</a></p>
+<ul>
+<li id="section-toc.1-1.6.2.1">
+<p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1">6.1</a>.  <a href="#name-normative-references">규범적 참고 문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.1.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.6.2.2">
+<p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2">6.2</a>.  <a href="#name-informative-references">참고용 문헌</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.6.2.2.1">¶</a></p>
+</li>
+</ul>
+</li>
+<li id="section-toc.1-1.7">
+<p id="section-toc.1-1.7.1"><a href="#section-appendix.a"></a><a href="#name-acknowledgements">감사의 글</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.7.1">¶</a></p>
+</li>
+<li id="section-toc.1-1.8">
+<p id="section-toc.1-1.8.1"><a href="#section-appendix.b"></a><a href="#name-authors-addresses">저자 연락처</a><a aria-label="문단 링크" class="st-permalink" href="#section-toc.1-1.8.1">¶</a></p>
+</li>
+</ul>
+</nav>
+</section>
+</div></details><footer class="st-attribution">비공식 AI 한국어 번역 · <a href="https://datatracker.ietf.org/doc/html/rfc8707">공식 원문</a></footer></article></main></body></html>

@@ -76,6 +76,10 @@
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9207/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9207/) · [직접 대조 검토 기록](rfc/rfc9207/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9207)
 
+### RFC 8707 — Resource Indicators for OAuth 2.0
+
+[블로그 전문](https://starryeye.github.io/rfc/rfc8707/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc8707/) · [직접 대조 검토 기록](rfc/rfc8707/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc8707)
+
 ### RFC 9396 — OAuth 2.0 Rich Authorization Requests
 
 [블로그 전문](https://starryeye.github.io/rfc/rfc9396/) · [보관본](https://starryeye.github.io/standard-document/rfc/rfc9396/) · [직접 대조 검토 기록](rfc/rfc9396/controller-review.md) · [공식 영문](https://datatracker.ietf.org/doc/html/rfc9396)

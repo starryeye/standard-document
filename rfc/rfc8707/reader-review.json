@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "00a4f3a6d62ce0f4b9c00e55484a245ab0591cd1b95fb22539d1ac5edc3dbff7",
+  "content_selector": ".rfchtml",
+  "title": "RFC 8707 — OAuth 2.0 리소스 식별자",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "9bb02dd60e0a949613720812add8ecd56ec576e2c2b74f17cdb8e0d6256a40ea",
+      "reason": "Source print running table (number, title, date, authors, category and page label), retained in collapsed source notes."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}
