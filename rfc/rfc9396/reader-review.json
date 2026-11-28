@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "input_html_sha256": "a95b3b655096e7e9a0e76e2c0fdeaf2b67c085c98f36212daed53c49c2488721",
+  "content_selector": ".rfchtml",
+  "title": "RFC 9396 — OAuth 2.0 상세 인가 요청",
+  "removals": [
+    {
+      "selector": "table.ears",
+      "text_sha256": "22d50054cceff9e02c452805e61c9cc0a71f2b04b58bb7f173783be2ca4319f9",
+      "reason": "Source print running table (number, title, date, authors, category and page label), retained in collapsed source notes."
+    }
+  ],
+  "joins": [],
+  "heading_levels": {},
+  "list_items": [],
+  "presentation": {
+    "toc_selectors": [
+      "#toc"
+    ],
+    "metadata_selectors": [
+      "#internal-metadata"
+    ],
+    "title_selectors": [
+      "#rfcnum",
+      "#title"
+    ],
+    "navigation": true
+  },
+  "structure": {
+    "definitions": [],
+    "lists": []
+  }
+}

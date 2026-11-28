@@ -1,0 +1,5 @@
+{
+  "render_input_sha256": "bffe510ab8fadbd2f9dc2975b5e59b429b8e1835fb71b1a5d9009784b4e412c4",
+  "verdict": "pass",
+  "evidence": "Directly inspected all 42 Chromium captures: 13 at 1440px, 13 at 768px and 16 at 390px, covering all content through the 30th example, bibliography and author addresses. Compared frozen Datatracker source and final reader for §1 and §7. Checked Korean hierarchy, typography, line wrapping, labels and field definitions, 30 captions/examples, and the rendered open TOC, doc metadata and original page notes at all three widths. Confirmed section jump and tested local horizontal scrolling to end for all 23 overflowing example blocks at 390px; directly viewed final scroll positions in figures 8, 24 and 30. No document-wide clipping. Basic reader intentionally lacks source BCP 14 emphasis, native datetime attributes and extra author spacing; tokens, readable dates and all contact text remain. These presentation differences are recorded separately without modifying the approved bytes."
+}

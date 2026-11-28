@@ -1,0 +1,17 @@
+/* Scoped to the public RFC 9396 reading edition. */
+.rfc9396-publication-note {
+  box-sizing: border-box;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.15rem 2rem 0;
+  font: 1rem/1.6 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+.rfc9396-publication-note p { margin: 0 0 .3em; }
+.rfc9396-publication-note a { color: inherit; text-decoration: underline; }
+.rfc9396-publication-note details { margin: .55em 0; font-size: .88em; }
+.st-reader .rfc9396-bcp14 { font-weight: 700; }
+.st-reader [id="appendix-C"] > address + address { margin-block-start: 1.1em; }
+@media (max-width: 600px) {
+  .rfc9396-publication-note { padding-inline: 1rem; }
+}
